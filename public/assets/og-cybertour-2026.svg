@@ -1,0 +1,51 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#02023B"/>
+      <stop offset="50%" style="stop-color:#0a0a2e"/>
+      <stop offset="100%" style="stop-color:#02023B"/>
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4b84a"/>
+      <stop offset="100%" style="stop-color:#FFDE59"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(0,0,145,0.15)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Glow orb -->
+  <circle cx="900" cy="200" r="200" fill="#000091" opacity="0.3" filter="url(#blur)"/>
+  <circle cx="300" cy="500" r="150" fill="#FFDE59" opacity="0.08"/>
+
+  <!-- Gold accent line top -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#gold-grad)"/>
+
+  <!-- Badge -->
+  <rect x="80" y="160" width="260" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="100" cy="178" r="4" fill="#FFDE59"/>
+  <text x="115" y="184" font-family="monospace" font-size="12" fill="rgba(255,255,255,0.5)" letter-spacing="3">CYBERMOIS 2026</text>
+
+  <!-- Title -->
+  <text x="80" y="280" font-family="system-ui, sans-serif" font-weight="800" font-size="100" fill="white" letter-spacing="-2">CYBER</text>
+  <text x="80" y="380" font-family="system-ui, sans-serif" font-weight="800" font-size="100" fill="#FFDE59" letter-spacing="-2">TOUR</text>
+  <text x="460" y="380" font-family="system-ui, sans-serif" font-weight="800" font-size="100" fill="rgba(255,255,255,0.15)" letter-spacing="-2">//</text>
+  <text x="80" y="440" font-family="system-ui, sans-serif" font-weight="800" font-size="48" fill="rgba(255,255,255,0.25)" letter-spacing="12">REUNION</text>
+
+  <!-- Date & Location -->
+  <rect x="80" y="480" width="2" height="50" fill="#FFDE59" rx="1"/>
+  <text x="96" y="502" font-family="system-ui, sans-serif" font-weight="600" font-size="22" fill="white">22 OCTOBRE 2026</text>
+  <text x="96" y="528" font-family="system-ui, sans-serif" font-weight="400" font-size="18" fill="rgba(255,255,255,0.5)">IUT / ESIROI — Sud Reunion</text>
+
+  <!-- Right side decorative shield -->
+  <g transform="translate(920, 220)" opacity="0.12">
+    <path d="M120 0L0 60v72c0 66.6 46.08 128.88 108 144 61.92-15.12 108-77.4 108-144V60L120 0z" fill="#FFDE59"/>
+  </g>
+
+  <!-- Bottom gold line -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#gold-grad)"/>
+</svg>

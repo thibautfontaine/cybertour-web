@@ -1,0 +1,152 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Cyber Tour Reunion 2026 - Organise par le CLUSIR Reunion Ocean Indien. 22 Octobre 2026, IUT/ESIROI." } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f1a30" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="CLUSIR Reunion Ocean Indien" />
+    <meta name="keywords" content="cybersecurite, La Reunion, conference, cybermois, CLUSIR, securite informatique, SOC, IA, souverainete numerique" />
+
+    <!-- Fonts (JetBrains Mono only — ITC Avant Garde & Ambroise loaded via @font-face) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- OG Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Cyber Tour Reunion" />
+    <meta property="og:image" content="https://cybertour.re/assets/og-cybertour-2026.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Cyber Tour Reunion 2026 - 22 Octobre - IUT/ESIROI" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://cybertour.re/assets/og-cybertour-2026.png" />
+
+    <title>{title}</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Cyber Tour Reunion 2026",
+      "description": "L'evenement cybersecurite de reference a La Reunion, organise par le CLUSIR Reunion Ocean Indien.",
+      "startDate": "2026-10-22T08:00:00+04:00",
+      "endDate": "2026-10-22T18:00:00+04:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "IUT / ESIROI",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Saint-Pierre",
+          "addressRegion": "La Reunion",
+          "addressCountry": "FR"
+        }
+      },
+      "image": "https://cybertour.re/assets/og-cybertour-2026.png",
+      "organizer": {
+        "@type": "Organization",
+        "name": "CLUSIR Reunion Ocean Indien",
+        "url": "https://clusir-roi.org"
+      },
+      "isAccessibleForFree": true,
+      "inLanguage": "fr"
+    })} />
+  </head>
+  <body class="font-body antialiased overflow-x-hidden">
+    <slot />
+
+    <script>
+      // Scroll reveal observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Navbar scroll effect
+      const nav = document.getElementById('main-nav');
+      if (nav) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 80) {
+            nav.classList.add('bg-navy-dark/95', 'backdrop-blur-lg', 'shadow-lg');
+            nav.classList.remove('bg-transparent');
+          } else {
+            nav.classList.remove('bg-navy-dark/95', 'backdrop-blur-lg', 'shadow-lg');
+            nav.classList.add('bg-transparent');
+          }
+        });
+      }
+
+      // Mobile menu toggle
+      const menuBtn = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      }
+
+      // Countdown timer
+      const targetDate = new Date('2026-10-22T08:00:00+04:00').getTime();
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = targetDate - now;
+        if (diff <= 0) return;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const dEl = document.getElementById('cd-days');
+        const hEl = document.getElementById('cd-hours');
+        const mEl = document.getElementById('cd-mins');
+        const sEl = document.getElementById('cd-secs');
+        if (dEl) dEl.textContent = String(days).padStart(3, '0');
+        if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+        if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+        if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>

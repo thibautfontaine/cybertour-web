@@ -1,0 +1,46 @@
+# Cyber Tour Reunion 2026
+
+> L'evenement cybersecurite de reference a La Reunion. Organise dans le cadre du Cybermois, octobre 2026.
+
+## Informations cles
+
+- **Nom** : Cyber Tour Reunion 2026
+- **Date** : 22 octobre 2026
+- **Lieu** : IUT / ESIROI — Sud de La Reunion (ile de La Reunion, France)
+- **Format** : Presentiel (150 places) + streaming YouTube
+- **Tarif** : Gratuit, inscription obligatoire
+- **Contact** : evenements@rt-iut.re
+- **Site web** : https://cybertour.re
+
+## Programme — 4 thematiques
+
+1. **Souverainete Numerique** : Cloud de confiance, cadre reglementaire europeen, strategies pour les territoires ultramarins, SecNumCloud.
+2. **Securite des Systemes IA** : OWASP Top 10 GenAI, injection de prompts, exfiltration de donnees, empoisonnement de modeles.
+3. **SOC & Defense en Profondeur** : Outils de supervision, architectures Zero Trust, securisation du code source, SIEM/SOAR, DevSecOps.
+4. **RETEX & Table Ronde** : Retours d'experience d'incidents cyber reels, gestion de crise, echanges entre professionnels.
+
+## Edition 2025 — Chiffres
+
+- 220+ participants (150 sur place + streaming)
+- 8 conferences
+- 600+ vues sur la rediffusion YouTube
+- 2 articles de presse dans Le Quotidien de La Reunion
+
+## Partenaires
+
+- CLUSIR Reunion Ocean Indien
+- Universite de La Reunion
+- IUT de La Reunion
+- ESIROI — Ecole d'Ingenieurs
+- Cyber Reunion
+
+## Sponsoring
+
+Trois niveaux de partenariat :
+- **Bronze** (a partir de 1 000 €) : Logo site + supports + reseaux sociaux
+- **Silver** (a partir de 3 000 €) : Bronze + goodies + 2 kakemonos
+- **Gold** (a partir de 5 000 €) : Silver + stand + mot d'introduction + logo en tete d'affiche
+
+## Replay edition 2025
+
+Disponible sur YouTube : https://www.youtube.com/watch?v=uk-gSyaxyWA
