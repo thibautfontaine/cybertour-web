@@ -39,26 +39,6 @@ const positions: Record<string, { top: number; left: number }> = {
       />
     </div>
 
-    <!-- SVG shield-shaped dashed path connecting stages -->
-    <svg
-      class="absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Simple dashed lines connecting stages in order: N → O → S → E */}
-      <polyline
-        points="48,12 8,35 42,87 85,30 48,12"
-        stroke="var(--color-gold)"
-        stroke-width="0.4"
-        stroke-dasharray="2 1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        fill="none"
-        opacity="0.4"
-      />
-    </svg>
 
     <!-- Stage points -->
     {stages.map((stage, i) => {
