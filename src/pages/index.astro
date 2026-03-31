@@ -15,6 +15,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="hidden md:flex items-center gap-8">
         <a href="#about" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors tracking-wider uppercase">A propos</a>
         <a href="#programme" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors tracking-wider uppercase">Programme</a>
+        <a href="#agenda" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors tracking-wider uppercase">Agenda</a>
         <a href="#speakers" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors tracking-wider uppercase">Speakers</a>
         <a href="#sponsors" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors tracking-wider uppercase">Sponsors</a>
         <a href="#inscription" class="btn-outline text-xs py-2 px-5">S'inscrire</a>
@@ -33,6 +34,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="px-6 py-4 flex flex-col gap-4">
         <a href="#about" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors uppercase">A propos</a>
         <a href="#programme" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors uppercase">Programme</a>
+        <a href="#agenda" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors uppercase">Agenda</a>
         <a href="#speakers" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors uppercase">Speakers</a>
         <a href="#sponsors" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors uppercase">Sponsors</a>
         <a href="#inscription" class="text-sm font-medium text-white/70 hover:text-clusir-red-bright transition-colors uppercase">S'inscrire</a>
@@ -70,7 +72,7 @@ import Layout from '../layouts/Layout.astro';
       <!-- Event badge -->
       <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-8" style="animation: slide-up 0.8s ease-out both;">
         <span class="w-2 h-2 bg-clusir-red rounded-full animate-pulse"></span>
-        <span class="text-sm font-mono text-white/60 tracking-widest uppercase">Edition speciale &mdash; Cybermois 2026</span>
+        <span class="text-sm font-mono text-white/60 tracking-widest uppercase">Cybermois 2026 &mdash; La Reunion</span>
       </div>
 
       <!-- Main title -->
@@ -84,11 +86,6 @@ import Layout from '../layouts/Layout.astro';
         </span>
         <span class="block text-3xl sm:text-4xl md:text-5xl tracking-[0.2em] mt-4 reunion-outline">REUNION</span>
       </h1>
-
-      <!-- Investigation tagline -->
-      <p class="font-serif text-xl sm:text-2xl text-white/50 italic mb-8 max-w-2xl mx-auto" style="animation: slide-up 0.8s ease-out 0.22s both;">
-        L'enquete commence ici.
-      </p>
 
       <!-- Date & location -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-10" style="animation: slide-up 0.8s ease-out 0.3s both;">
@@ -111,8 +108,8 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- CTA buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="animation: slide-up 0.8s ease-out 0.45s both;">
-        <a href="#inscription" class="btn-primary rounded-lg font-display">Obtenir mon acces</a>
-        <a href="#programme" class="btn-outline rounded-lg font-display text-sm">Consulter le dossier</a>
+        <a href="#inscription" class="btn-primary rounded-lg font-display">S'inscrire</a>
+        <a href="#programme" class="btn-outline rounded-lg font-display text-sm">Voir le programme</a>
       </div>
 
       <!-- Countdown -->
@@ -141,7 +138,7 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
-      <span class="text-xs tracking-widest uppercase">Enqueter</span>
+      <span class="text-xs tracking-widest uppercase">Scroll</span>
       <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
     </div>
   </section>
@@ -153,9 +150,9 @@ import Layout from '../layouts/Layout.astro';
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <!-- Section header -->
       <div class="reveal mb-20">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier 01 // Contexte</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">01 // A propos</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Ce que la presse<br/><span class="text-clusir-red-bright">ne vous dit pas</span>
+          L'evenement cyber<br/><span class="text-clusir-red-bright">de reference</span> a La Reunion
         </h2>
 
       </div>
@@ -164,17 +161,17 @@ import Layout from '../layouts/Layout.astro';
         <!-- Text block -->
         <div class="space-y-8">
           <p class="reveal delay-1 text-lg text-white/70 leading-relaxed">
-            Chaque annee, les cyberattaques se multiplient sur les territoires ultramarins.
-            Pourtant, <strong class="text-white font-semibold">personne n'en parle</strong>. Le
-            <strong class="text-white font-semibold">Cyber Tour Reunion</strong> brise le silence.
-            Organise dans le cadre du <strong class="text-clusir-red-bright font-semibold">Cybermois</strong>,
-            il rassemble ceux qui savent, ceux qui protegent et ceux qui veulent comprendre.
+            Le <strong class="text-white font-semibold">Cyber Tour Reunion</strong> est l'evenement annuel
+            dedie a la cybersecurite sur l'ile de La Reunion. Organise dans le cadre du
+            <strong class="text-clusir-red-bright font-semibold">Cybermois</strong>, il rassemble professionnels,
+            etudiants et passionnes autour des enjeux de securite numerique.
           </p>
           <p class="reveal delay-2 text-lg text-white/70 leading-relaxed">
-            En 2025, <strong class="text-white font-semibold">220 participants</strong> ont
-            repondu a l'appel. <strong class="text-white font-semibold">600 vues</strong> sur
-            la rediffusion. <strong class="text-white font-semibold">2 articles de presse</strong>.
-            L'enquete continue en 2026. Plus grande. Plus profonde.
+            En 2025, plus de <strong class="text-white font-semibold">220 participants</strong> ont
+            assiste a l'evenement (150 sur place + streaming), et la rediffusion YouTube
+            a cumule plus de <strong class="text-white font-semibold">600 vues</strong>.
+            L'evenement a egalement beneficie de <strong class="text-white font-semibold">2 articles de presse</strong>
+            dans Le Quotidien de La Reunion.
           </p>
 
           <!-- Stats -->
@@ -222,7 +219,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <!-- Section header -->
       <div class="reveal mb-20 text-center">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier 02 // Investigation</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">02 // Programme</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
           4 enquetes au coeur <span class="text-clusir-red-bright">du cyber</span>
         </h2>
@@ -320,18 +317,162 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- ===== AGENDA ===== -->
+  <section id="agenda" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier // Agenda</span>
+        <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
+          Fil de la <span class="text-clusir-red-bright">journee</span>
+        </h2>
+        <p class="text-white/50 mt-4 max-w-xl mx-auto text-lg">
+          Le programme complet du 22 octobre 2026. Sujet a evolution.
+        </p>
+      </div>
+
+      <!-- Timeline table -->
+      <div class="reveal delay-1 overflow-hidden rounded-2xl border border-white/[0.06]">
+        <!-- Header -->
+        <div class="hidden md:grid md:grid-cols-[160px_1fr] bg-navy/60 border-b border-white/[0.06]">
+          <div class="px-6 py-4 font-mono text-xs text-clusir-red-bright uppercase tracking-widest">Heure</div>
+          <div class="px-6 py-4 font-mono text-xs text-clusir-red-bright uppercase tracking-widest">Programme</div>
+        </div>
+
+        <!-- 09h00 -->
+        <div class="agenda-row grid md:grid-cols-[160px_1fr] border-b border-white/[0.06] hover:bg-white/[0.02] transition-colors">
+          <div class="px-6 py-5 font-mono text-sm text-white/60">09h00 - 09h30</div>
+          <div class="px-6 py-5">
+            <span class="font-display font-semibold text-white">Introduction et accueil</span>
+          </div>
+        </div>
+
+        <!-- 09h30 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">09h30 - 10h00</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 1</span>
+          </div>
+        </div>
+
+        <!-- 10h00 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">10h00 - 10h30</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 2</span>
+          </div>
+        </div>
+
+        <!-- 10h30 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">10h30 - 11h00</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 3</span>
+          </div>
+        </div>
+
+        <!-- 11h00 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">11h00 - 11h30</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 4</span>
+          </div>
+        </div>
+
+        <!-- 11h30 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">11h30 - 12h00</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 5</span>
+          </div>
+        </div>
+
+        <!-- 12h00 — Dejeuner -->
+        <div class="agenda-row grid md:grid-cols-[160px_1fr] border-b border-white/[0.06] bg-white/[0.02]">
+          <div class="px-6 py-5 font-mono text-sm text-white/60">12h00 - 13h45</div>
+          <div class="px-6 py-5">
+            <span class="font-display font-semibold text-white/70">Dejeuner & Reseautage</span>
+          </div>
+        </div>
+
+        <!-- 14h00 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">14h00 - 14h30</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 6</span>
+          </div>
+        </div>
+
+        <!-- 14h30 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">14h30 - 15h00</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 7</span>
+          </div>
+        </div>
+
+        <!-- 15h00 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">15h00 - 15h30</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 8</span>
+          </div>
+        </div>
+
+        <!-- 15h30 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">15h30 - 16h00</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Table ronde</span>
+          </div>
+        </div>
+
+        <!-- 16h00 -->
+        <div class="agenda-row agenda-tbd grid md:grid-cols-[160px_1fr] border-b border-white/[0.06]">
+          <div class="px-6 py-5 font-mono text-sm text-white/40">16h00 - 16h30</div>
+          <div class="px-6 py-5">
+            <span class="agenda-badge-tbd">A confirmer</span>
+            <span class="font-display font-semibold text-white/30 mt-2 block">Conference 9</span>
+          </div>
+        </div>
+
+        <!-- 16h30 — Cloture -->
+        <div class="agenda-row grid md:grid-cols-[160px_1fr] bg-white/[0.02]">
+          <div class="px-6 py-5 font-mono text-sm text-white/60">16h30 - 17h00</div>
+          <div class="px-6 py-5">
+            <span class="font-display font-semibold text-white/70">Cloture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal delay-2 text-center mt-8">
+        <p class="text-white/30 font-mono text-xs">Programme previsionnel &mdash; Sujet a modifications</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== SPEAKERS ===== -->
   <section id="speakers" class="relative py-32 overflow-hidden">
     <div class="absolute inset-0 noise-overlay"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <div class="reveal mb-20 text-center">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier 03 // Sources</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">03 // Speakers</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Nos <span class="text-clusir-red-bright">informateurs</span>
+          Experts <span class="text-clusir-red-bright">confirmes</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          Ils connaissent les coulisses. Ils acceptent de temoigner.
+          Des specialistes reconnus en cybersecurite partagent leur expertise et leurs retours d'experience.
         </p>
       </div>
 
@@ -386,11 +527,11 @@ import Layout from '../layouts/Layout.astro';
               <span class="ml-3 text-white/30 text-xs">speakers.decrypt</span>
             </div>
             <div class="space-y-2">
-              <p class="text-emerald-400/80"><span class="text-clusir-red-bright/60">$</span> cat /sources/2026.conf</p>
-              <p class="text-red/80">ERROR: Access denied. Sources protegees.</p>
-              <p class="text-white/50"><span class="text-clusir-red-bright/60">$</span> decrypt --force informateurs.list</p>
-              <p class="text-clusir-red-bright terminal-typing">Declassification en cours<span class="terminal-dots">...</span></p>
-              <p class="text-white/30 mt-2 text-xs">// Identites bientot revelees.</p>
+              <p class="text-emerald-400/80"><span class="text-clusir-red-bright/60">$</span> cat /speakers/2026.conf</p>
+              <p class="text-red/80">ERROR: Access denied. File encrypted.</p>
+              <p class="text-white/50"><span class="text-clusir-red-bright/60">$</span> decrypt --force speakers.list</p>
+              <p class="text-clusir-red-bright terminal-typing">Decrypting<span class="terminal-dots">...</span></p>
+              <p class="text-white/30 mt-2 text-xs">// Annonce imminente. Stay tuned.</p>
             </div>
           </div>
         </div>
@@ -405,12 +546,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
       <div class="reveal text-center mb-14">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Archives // 2025</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">// Replay</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Les pieces a <span class="text-clusir-red-bright">conviction</span>
+          Edition <span class="text-clusir-red-bright">2025</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          L'integralite de l'edition 2025. Jugez par vous-meme.
+          Revivez les conferences de l'edition precedente en integralite.
         </p>
       </div>
 
@@ -435,12 +576,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
       <div class="reveal text-center mb-14">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">// Coupures de presse</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">// Ils en parlent</span>
         <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl mt-4 leading-snug">
-          Ce qu'ils ont <span class="text-clusir-red-bright">publie</span>
+          Revue de <span class="text-clusir-red-bright">presse</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-xl mx-auto">
-          Quand les medias s'emparent du sujet.
+          L'edition 2025 dans les medias reunionnais.
         </p>
       </div>
 
@@ -494,12 +635,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <div class="reveal mb-20 text-center">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier 04 // Financement</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">04 // Devenir Sponsor</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Qui finance <span class="text-clusir-red-bright">l'enquete ?</span>
+          Soutenez <span class="text-clusir-red-bright">l'evenement</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          Trois niveaux d'engagement pour rendre l'investigation possible.
+          Trois niveaux de partenariat pour accompagner la cybersecurite a La Reunion.
         </p>
       </div>
 
@@ -617,7 +758,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="relative py-20 border-t border-white/[0.06]">
     <div class="max-w-7xl mx-auto px-6">
       <div class="reveal text-center mb-12">
-        <span class="font-mono text-white/30 text-sm tracking-widest uppercase">Nos allies sur le terrain</span>
+        <span class="font-mono text-white/30 text-sm tracking-widest uppercase">Partenaires & Soutiens</span>
       </div>
       <div class="reveal delay-1 flex flex-wrap items-center justify-center gap-6 sm:gap-8">
         <div class="partner-bubble"><img src="/assets/logo-clusir.png" alt="CLUSIR Reunion Ocean Indien" class="h-8 sm:h-10 w-auto object-contain" loading="lazy" /></div>
@@ -636,12 +777,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-4xl mx-auto px-6">
       <div class="reveal text-center mb-12">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier 05 // Acces</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">05 // Inscription</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Obtenez votre <span class="text-clusir-red-bright">accreditation</span>
+          Reservez votre <span class="text-clusir-red-bright">place</span>
         </h2>
         <p class="text-white/50 mt-6 max-w-xl mx-auto text-lg leading-relaxed">
-          Acces gratuit mais restreint. Les places sont comptees. Reservez la votre avant la cloture du dossier.
+          L'evenement est gratuit mais les places sont limitees. Inscrivez-vous des maintenant pour garantir votre participation.
         </p>
       </div>
 
@@ -688,13 +829,13 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
       <div class="reveal">
-        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">Dossier 06 // Redaction</span>
+        <span class="font-mono text-clusir-red-bright/60 text-sm tracking-widest uppercase">06 // Contact</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Contactez la <span class="text-clusir-red-bright">redaction</span>
+          Rejoignez <span class="text-clusir-red-bright">l'aventure</span>
         </h2>
         <p class="text-white/50 mt-6 max-w-xl mx-auto text-lg leading-relaxed">
-          Temoin, expert, sponsor ? Vous avez une info, un temoignage ou une proposition ?
-          La redaction est a l'ecoute.
+          Que vous soyez participant, speaker ou sponsor, contactez-nous
+          pour faire partie du Cyber Tour Reunion 2026.
         </p>
       </div>
 
@@ -728,14 +869,14 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="reveal delay-3 mt-12">
-        <a href="mailto:evenements@rt-iut.re?subject=Cyber%20Tour%20Reunion%202026" class="btn-primary inline-block rounded-lg font-display">Ecrire a la redaction</a>
+        <a href="mailto:evenements@rt-iut.re?subject=Cyber%20Tour%20Reunion%202026" class="btn-primary inline-block rounded-lg font-display">Nous contacter</a>
       </div>
 
       <!-- Streaming note -->
       <div class="reveal delay-4 mt-10">
         <p class="text-white/30 text-sm font-mono">
           <svg class="inline w-4 h-4 mr-1 -mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418A2.477 2.477 0 002.418 6.186C2 7.746 2 12 2 12s0 4.254.418 5.814a2.477 2.477 0 001.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814z"/><path fill="#02023B" d="M10 15.5l5.5-3.5L10 8.5v7z"/></svg>
-          Diffusion en direct sur YouTube pour les sources a distance
+          Egalement accessible en streaming YouTube
         </p>
       </div>
     </div>

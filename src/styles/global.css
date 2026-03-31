@@ -353,6 +353,37 @@ body {
   100% { content: "..."; }
 }
 
+/* Agenda badges */
+.agenda-badge-red {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(206, 70, 58, 0.15);
+  color: var(--color-clusir-red-bright);
+  border: 1px solid rgba(206, 70, 58, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.375rem;
+}
+
+.agenda-badge-tbd {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.375rem;
+}
+
+.agenda-tbd {
+  opacity: 0.5;
+}
+
 /* Weezevent section */
 .weezevent-frame {
   border-radius: 1rem;
