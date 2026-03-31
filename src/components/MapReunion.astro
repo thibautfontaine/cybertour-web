@@ -9,7 +9,7 @@ const positions: Record<string, { top: number; left: number }> = {
   nord:  { top: 12, left: 48 },   // Saint-Denis — haut centre
   ouest: { top: 35, left: 8 },    // Le Port — gauche
   est:   { top: 30, left: 85 },   // Saint-Andre — droite
-  sud:   { top: 82, left: 42 },   // Saint-Pierre — bas centre
+  sud:   { top: 87, left: 42 },   // Saint-Pierre — pointe basse du bouclier
 };
 
 /** Shield path is drawn directly in SVG using bezier curves through the 4 stage positions */
@@ -47,16 +47,16 @@ const positions: Record<string, { top: number; left: number }> = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Shield path: flat top, sides bulge out, converge to point at bottom
-          Points: Nord(48,12) Ouest(8,35) Sud(42,82) Est(85,30)
-          C = cubic bezier for precise control of the shield curves
+      {/* Shield path: flat top, vertical sides, sharp point at bottom
+          Points: Nord(48,12) Ouest(8,35) Sud(42,85) Est(85,30)
+          Control points pushed extreme to compensate 4:3 aspect ratio distortion
       */}
       <path
         d={`
           M 48,12
           L 8,35
-          C 2,52 20,76 42,82
-          C 65,76 90,52 85,30
+          C -6,58 18,95 42,87
+          C 67,95 100,58 85,30
           L 48,12
           Z
         `}
