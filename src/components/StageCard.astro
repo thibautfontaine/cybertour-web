@@ -1,0 +1,103 @@
+---
+import type { Stage } from "../data/stages";
+
+interface Props {
+  stage: Stage;
+}
+
+const { stage } = Astro.props;
+
+const trackClassMap: Record<string, string> = {
+  gold: "bento-track--gold",
+  cyan: "bento-track--cyan",
+  emerald: "bento-track--emerald",
+  red: "bento-track--red",
+};
+
+const trackClass = trackClassMap[stage.accent] ?? "bento-track--gold";
+---
+
+<a
+  href={stage.href}
+  class:list={[
+    "group topic-card bento-track",
+    trackClass,
+    "relative block overflow-hidden rounded-2xl border border-white/[0.08] hover:border-white/[0.15] transition-all duration-400",
+  ]}
+>
+  <!-- Gradient accent top bar -->
+  <div
+    class="h-1.5 w-full"
+    style={`background: linear-gradient(90deg, ${stage.accentHex}, ${stage.accentHex}60);`}
+  ></div>
+
+  <!-- Background glow -->
+  <div
+    class="absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+    style={`background: ${stage.accentHex};`}
+  ></div>
+
+  <div class="relative p-6 sm:p-8">
+    <!-- Header row: number + direction + capacity -->
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg font-mono text-sm font-bold"
+          style={`background: ${stage.accentHex}15; color: ${stage.accentHex}; border: 1px solid ${stage.accentHex}30;`}
+        >{stage.trackNumber}</span>
+        <div>
+          <h3 class="font-display font-bold text-xl sm:text-2xl text-white leading-tight">
+            {stage.direction}
+          </h3>
+          <p class="font-mono text-[11px] tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
+            {stage.dateShort}
+          </p>
+        </div>
+      </div>
+      <span
+        class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-mono font-bold"
+        style={`background: ${stage.accentHex}18; color: ${stage.accentHex}; border: 1px solid ${stage.accentHex}25;`}
+      >
+        {stage.capacity} places
+      </span>
+    </div>
+
+    <!-- Theme -->
+    <p class="text-white/80 text-base font-semibold mb-2">{stage.theme}</p>
+
+    <!-- Lieu -->
+    <div class="flex items-center gap-2 text-white/55 text-sm mb-5">
+      <svg class="w-4 h-4 shrink-0" style={`color: ${stage.accentHex}80;`} fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>{stage.lieu}</span>
+    </div>
+
+    <!-- Separator -->
+    <div class="h-px w-full mb-5" style={`background: linear-gradient(90deg, ${stage.accentHex}30, transparent);`}></div>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      {stage.highlights.map((tag) => (
+        <span
+          class="px-2.5 py-1 rounded-md text-xs font-mono"
+          style={`background: ${stage.accentHex}10; color: ${stage.accentHex}CC;`}
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="flex items-center justify-between">
+      <span
+        class="inline-flex items-center gap-2 text-sm font-bold tracking-wide uppercase group-hover:gap-3 transition-all duration-300"
+        style={`color: ${stage.accentHex}`}
+      >
+        Decouvrir l'etape
+        <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+      </span>
+    </div>
+  </div>
+</a>

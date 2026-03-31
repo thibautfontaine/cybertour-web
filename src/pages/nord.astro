@@ -1,0 +1,36 @@
+---
+import StageLayout from '../layouts/StageLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { stages } from '../data/stages';
+const stage = stages.find(s => s.id === 'nord')!;
+---
+
+<StageLayout stage={stage}>
+  <Navbar slot="navbar" currentPage="nord" />
+
+  <!-- Programme section -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="reveal">
+        <span class="font-mono text-gold/80 text-sm tracking-widest uppercase">Programme</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Journee institutionnelle</h2>
+        <p class="text-white/50 mt-4 text-lg">Programme en cours de finalisation.</p>
+      </div>
+
+      <!-- Institutional partners logos -->
+      <div class="reveal delay-2 mt-12">
+        <h3 class="font-display font-semibold text-xl mb-8">Acteurs institutionnels attendus</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {['Region Reunion', 'Prefecture', 'ANSSI', 'Viginum', 'DINUM', 'SGDSN', 'Renater', 'CCI Reunion', 'Cyber Reunion', 'Universite de La Reunion'].map(name => (
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-gold/20 transition-colors">
+              <span class="font-display font-semibold text-sm text-white/70">{name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</StageLayout>

@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Cyber Tour Reunion 2026 - Organise par le CLUSIR Reunion Ocean Indien. 22 Octobre 2026, IUT/ESIROI." } = Astro.props;
+const { title, description = "Cyber Tour Reunion 2026 - 4 etapes, 19-24 Octobre 2026. Organise par le CLUSIR Reunion Ocean Indien." } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -38,7 +38,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image" content="https://cybertour.re/assets/og-cybertour-2026.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Cyber Tour Reunion 2026 - 22 Octobre - IUT/ESIROI" />
+    <meta property="og:image:alt" content="Cyber Tour Reunion 2026 - 19-24 Octobre - 4 etapes" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -52,8 +52,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "@type": "Event",
       "name": "Cyber Tour Reunion 2026",
       "description": "L'evenement cybersecurite de reference a La Reunion, organise par le CLUSIR Reunion Ocean Indien.",
-      "startDate": "2026-10-22T08:00:00+04:00",
-      "endDate": "2026-10-22T18:00:00+04:00",
+      "startDate": "2026-10-19T08:00:00+04:00",
+      "endDate": "2026-10-23T18:00:00+04:00",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
       "location": {
@@ -77,7 +77,182 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     })} />
   </head>
   <body class="font-body antialiased overflow-x-hidden">
+    <!-- Beta access gate — Cryptolocker terminal style -->
+    <div id="beta-gate" class="fixed inset-0 z-[100] bg-navy-dark flex items-center justify-center">
+      <!-- Scanline effect -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div class="absolute left-0 right-0 h-px bg-red/40 animate-scan"></div>
+      </div>
+      <!-- CRT noise -->
+      <div class="absolute inset-0 noise-overlay pointer-events-none"></div>
+
+      <div class="relative max-w-lg w-full mx-6">
+        <!-- Logos -->
+        <div class="flex items-center justify-center gap-6 mb-8">
+          <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR" class="h-16 sm:h-20" />
+          <span class="text-white/20 font-mono text-lg">x</span>
+          <img src="/assets/cybertour-2026.png" alt="Cyber Tour Reunion 2026" class="h-16 sm:h-20" />
+        </div>
+
+        <!-- Terminal window -->
+        <div class="terminal-window bg-slate-deep/90 border border-white/[0.1] rounded-xl overflow-hidden">
+          <!-- Title bar -->
+          <div class="flex items-center gap-2 px-4 py-3 bg-white/[0.03] border-b border-white/[0.08]">
+            <span class="w-3 h-3 rounded-full bg-clusir-red/80"></span>
+            <span class="w-3 h-3 rounded-full bg-gold/60"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-400/60"></span>
+            <span class="ml-3 font-mono text-xs text-white/40">cybertour.re // acces restreint</span>
+          </div>
+
+          <div class="p-6 sm:p-10 font-mono text-base">
+            <!-- Warning header -->
+            <div class="text-center mb-6">
+              <p class="text-gold font-bold text-xl sm:text-2xl tracking-wider uppercase">&#128274; SITE VERROUILLE</p>
+              <p class="text-white/50 text-sm mt-3">Le contenu de ce site est chiffre. Cle d'acces requise.</p>
+            </div>
+
+            <!-- Countdown -->
+            <div class="bg-white/[0.02] border border-white/[0.08] rounded-lg p-4 mb-6">
+              <p class="text-gold/70 text-xs uppercase tracking-widest text-center mb-3">Temps avant dechiffrement public</p>
+              <div class="flex items-center justify-center gap-4">
+                <div class="text-center">
+                  <span id="lock-days" class="block text-2xl font-bold text-gold tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">jours</span>
+                </div>
+                <span class="text-white/20 text-xl">:</span>
+                <div class="text-center">
+                  <span id="lock-hours" class="block text-2xl font-bold text-white/80 tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">heures</span>
+                </div>
+                <span class="text-white/20 text-xl">:</span>
+                <div class="text-center">
+                  <span id="lock-mins" class="block text-2xl font-bold text-white/80 tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">min</span>
+                </div>
+                <span class="text-white/20 text-xl">:</span>
+                <div class="text-center">
+                  <span id="lock-secs" class="block text-2xl font-bold text-white/40 tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">sec</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal lines -->
+            <div class="space-y-2 mb-6 text-sm">
+              <p><span class="text-gold/60">root@cybertour:~$</span> <span class="text-white/60">cat /var/www/cybertour.re/status</span></p>
+              <p class="text-clusir-red/80">ERROR 403: Content encrypted. Authorization required.</p>
+              <p><span class="text-gold/60">root@cybertour:~$</span> <span class="text-white/60">decrypt --key ████████████</span></p>
+              <p class="text-gold terminal-typing">Waiting for decryption key<span class="terminal-dots"></span></p>
+            </div>
+
+            <!-- Password input -->
+            <div class="border-t border-white/10 pt-5">
+              <div class="flex items-center gap-2">
+                <span class="text-gold/60 text-sm shrink-0">key&gt;</span>
+                <input
+                  id="beta-password"
+                  type="password"
+                  placeholder="Entrez la cle de dechiffrement..."
+                  class="flex-1 bg-transparent border-none text-gold text-sm focus:outline-none font-mono placeholder-white/20"
+                  autocomplete="off"
+                />
+              </div>
+              <p id="beta-error" class="hidden text-clusir-red text-sm mt-3">&#9888; Cle invalide. Tentative enregistree.</p>
+              <button
+                id="beta-submit"
+                class="w-full mt-5 bg-gold/20 border border-gold/40 text-gold font-bold text-sm tracking-widest uppercase rounded-lg py-3.5 hover:bg-gold/30 transition-colors"
+              >&#9654; DECHIFFRER</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-5 mt-6">
+          <a href="https://www.linkedin.com/company/clusir-roi/" target="_blank" rel="noopener" class="flex items-center gap-2 text-white/40 hover:text-gold transition-colors text-xs font-mono">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            CLUSIR ROI
+          </a>
+          <span class="text-white/15">|</span>
+          <a href="https://www.linkedin.com/company/cyber-reunion/" target="_blank" rel="noopener" class="flex items-center gap-2 text-white/40 hover:text-gold transition-colors text-xs font-mono">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Cyber Reunion
+          </a>
+        </div>
+        <p class="text-white/20 text-[10px] font-mono text-center mt-3">CLUSIR Reunion Ocean Indien // Cyber Tour Reunion 2026</p>
+      </div>
+    </div>
+
+    <!-- Beta banner (visible after auth) -->
+    <div id="beta-banner" class="hidden fixed bottom-0 left-0 right-0 z-[60] bg-gold text-navy-dark text-center py-2 px-4 font-mono text-xs tracking-wider uppercase font-bold">
+      Version beta — Site en cours de construction
+    </div>
+
     <slot />
+
+    <script>
+      // Beta gate — cryptolocker style
+      const BETA_HASH = 'b167a884452a93783022d2c228882a7578e2f6d278bc03da4f90103ba29f6de3';
+      const gate = document.getElementById('beta-gate');
+      const banner = document.getElementById('beta-banner');
+      const input = document.getElementById('beta-password') as HTMLInputElement;
+      const btn = document.getElementById('beta-submit');
+      const err = document.getElementById('beta-error');
+
+      async function hashPassword(pwd: string): Promise<string> {
+        const data = new TextEncoder().encode(pwd);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      function unlock() {
+        if (gate) gate.style.display = 'none';
+        if (banner) banner.classList.remove('hidden');
+        document.body.style.overflow = '';
+      }
+
+      // Check if already authenticated
+      if (localStorage.getItem('cybertour-beta') === 'granted') {
+        unlock();
+      } else {
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Countdown — 10 days from now (resets each visit for demo)
+      const lockTarget = Date.now() + 10 * 24 * 60 * 60 * 1000;
+      function updateLockCountdown() {
+        const diff = lockTarget - Date.now();
+        if (diff <= 0) return;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        const dEl = document.getElementById('lock-days');
+        const hEl = document.getElementById('lock-hours');
+        const mEl = document.getElementById('lock-mins');
+        const sEl = document.getElementById('lock-secs');
+        if (dEl) dEl.textContent = String(d).padStart(2, '0');
+        if (hEl) hEl.textContent = String(h).padStart(2, '0');
+        if (mEl) mEl.textContent = String(m).padStart(2, '0');
+        if (sEl) sEl.textContent = String(s).padStart(2, '0');
+      }
+      updateLockCountdown();
+      setInterval(updateLockCountdown, 1000);
+
+      async function tryAccess() {
+        if (!input) return;
+        const hash = await hashPassword(input.value);
+        if (hash === BETA_HASH) {
+          localStorage.setItem('cybertour-beta', 'granted');
+          unlock();
+        } else {
+          if (err) err.classList.remove('hidden');
+          input.value = '';
+          input.placeholder = 'Cle incorrecte...';
+        }
+      }
+
+      btn?.addEventListener('click', tryAccess);
+      input?.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryAccess(); });
+    </script>
 
     <script>
       // Scroll reveal observer
@@ -125,7 +300,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       }
 
       // Countdown timer
-      const targetDate = new Date('2026-10-22T08:00:00+04:00').getTime();
+      const targetDate = new Date('2026-10-19T08:00:00+04:00').getTime();
       function updateCountdown() {
         const now = Date.now();
         const diff = targetDate - now;

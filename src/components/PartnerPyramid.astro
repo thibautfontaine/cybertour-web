@@ -1,0 +1,144 @@
+---
+/**
+ * PartnerPyramid — pyramid layout of partners and sponsors,
+ * narrowest at top (organisateur) widening to bronze tier at bottom.
+ */
+
+interface SponsorEntry {
+  name: string;
+}
+
+const sponsorsGold: SponsorEntry[] = [
+  { name: "CyberShield Corp" },
+  { name: "SecureIsland" },
+];
+
+const sponsorsSilver: SponsorEntry[] = [
+  { name: "DataFortress" },
+  { name: "NetGuard Pro" },
+  { name: "IslandSec" },
+];
+
+const sponsorsBronze: SponsorEntry[] = [
+  { name: "CyberLab 974" },
+  { name: "SecuRun" },
+  { name: "DigiSafe" },
+  { name: "TechShield IO" },
+];
+---
+
+<section class="relative py-32 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col items-center gap-12">
+
+      <!-- Level 1 — Organisateur -->
+      <div class="reveal flex flex-col items-center gap-6 max-w-md w-full">
+        <span class="font-mono text-sm tracking-widest uppercase text-gold">
+          Organisateur
+        </span>
+        <div class="flex justify-center">
+          <div class="partner-bubble px-8 py-4">
+            <img
+              src="/assets/logo-clusir.png"
+              alt="CLUSIR Reunion Ocean Indien"
+              class="h-20 sm:h-24 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <!-- Connecting line -->
+        <div class="w-px h-8 bg-white/10"></div>
+      </div>
+
+      <!-- Level 2 — Partenaires -->
+      <div class="reveal delay-1 flex flex-col items-center gap-6 max-w-2xl w-full">
+        <span class="font-mono text-sm tracking-widest uppercase text-white/50">
+          Partenaires
+        </span>
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          <div class="partner-bubble px-6 py-3">
+            <img
+              src="/assets/logo-univ-reunion.png"
+              alt="Universite de La Reunion"
+              class="h-14 sm:h-16 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+          <div class="partner-bubble px-6 py-3">
+            <img
+              src="/assets/logo-iut.png"
+              alt="IUT de La Reunion"
+              class="h-14 sm:h-16 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+          <div class="partner-bubble px-6 py-3">
+            <img
+              src="/assets/logo-esiroi.jpg"
+              alt="ESIROI - Ecole d'Ingenieurs"
+              class="h-14 sm:h-16 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+          <div class="partner-bubble px-6 py-3">
+            <img
+              src="/assets/logo-cyber-reunion.jpg"
+              alt="Cyber Reunion"
+              class="h-14 sm:h-16 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <!-- Connecting line -->
+        <div class="w-px h-8 bg-white/10"></div>
+      </div>
+
+      <!-- Level 3 — Sponsors Gold (large) -->
+      <div class="reveal delay-2 flex flex-col items-center gap-4 max-w-3xl w-full">
+        <span class="font-mono text-sm tracking-widest uppercase text-gold">
+          Sponsors Gold
+        </span>
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          {sponsorsGold.map((s) => (
+            <div class="bg-white/[0.03] border border-gold/40 rounded-xl px-10 py-5 font-display font-bold text-lg text-gold/90 sponsor-card cursor-default">
+              {s.name}
+            </div>
+          ))}
+        </div>
+        <!-- Connecting line -->
+        <div class="w-px h-8 bg-white/10"></div>
+      </div>
+
+      <!-- Level 4 — Sponsors Silver (medium) -->
+      <div class="reveal delay-3 flex flex-col items-center gap-4 max-w-4xl w-full">
+        <span class="font-mono text-xs tracking-widest uppercase text-gray-300">
+          Sponsors Silver
+        </span>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          {sponsorsSilver.map((s) => (
+            <div class="bg-white/[0.03] border border-gray-400/40 rounded-xl px-7 py-3.5 font-display font-semibold text-base text-gray-300 sponsor-card cursor-default">
+              {s.name}
+            </div>
+          ))}
+        </div>
+        <!-- Connecting line -->
+        <div class="w-px h-8 bg-white/10"></div>
+      </div>
+
+      <!-- Level 5 — Sponsors Bronze (small) -->
+      <div class="reveal delay-4 flex flex-col items-center gap-4 max-w-5xl w-full">
+        <span class="font-mono text-xs tracking-widest uppercase text-amber-600">
+          Sponsors Bronze
+        </span>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          {sponsorsBronze.map((s) => (
+            <div class="bg-white/[0.03] border border-amber-600/40 rounded-xl px-5 py-2.5 font-display font-medium text-sm text-amber-600/90 sponsor-card cursor-default">
+              {s.name}
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
