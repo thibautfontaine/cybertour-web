@@ -40,8 +40,8 @@ const polylinePoints = pathOrder
         src="/assets/reunion-silhouette.png"
         alt=""
         aria-hidden="true"
-        class="w-full h-full object-contain opacity-15"
-        style="filter: drop-shadow(0 0 40px rgba(255, 222, 89, 0.15)) drop-shadow(0 0 80px rgba(255, 222, 89, 0.08));"
+        class="w-full h-full object-contain opacity-30"
+        style="filter: drop-shadow(0 0 60px rgba(255, 222, 89, 0.25)) drop-shadow(0 0 120px rgba(255, 222, 89, 0.15));"
       />
     </div>
 
@@ -56,12 +56,12 @@ const polylinePoints = pathOrder
       <polyline
         points={polylinePoints}
         stroke="var(--color-gold)"
-        stroke-width="0.3"
-        stroke-dasharray="1.5 1"
+        stroke-width="0.5"
+        stroke-dasharray="2 1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
         fill="none"
-        opacity="0.35"
+        opacity="0.5"
       />
     </svg>
 
@@ -78,7 +78,7 @@ const polylinePoints = pathOrder
           data-stage={stage.id}
         >
           {/* Pulsing dot */}
-          <span class="relative flex h-3.5 w-3.5 md:h-4 md:w-4">
+          <span class="relative flex h-4 w-4 md:h-5 md:w-5">
             <span
               class="absolute inset-0 rounded-full animate-ping opacity-50"
               style={`background-color: ${stage.accentHex};`}
@@ -91,13 +91,13 @@ const polylinePoints = pathOrder
 
           {/* Label */}
           <span
-            class="mt-1.5 md:mt-2 whitespace-nowrap rounded-md bg-navy-dark/80 backdrop-blur-sm px-2 py-0.5 md:px-2.5 md:py-1 border transition-all duration-300 group-hover:border-opacity-40"
-            style={`border-color: ${stage.accentHex}33;`}
+            class="mt-2 md:mt-3 whitespace-nowrap rounded-lg bg-navy-dark/90 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border transition-all duration-300 group-hover:border-opacity-60"
+            style={`border-color: ${stage.accentHex}50;`}
           >
-            <span class="font-mono text-[10px] md:text-xs tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
+            <span class="font-mono text-xs md:text-sm font-bold tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
               {stage.dateShort}
             </span>
-            <span class="block font-mono text-[9px] md:text-[10px] text-white/60 leading-tight">
+            <span class="block font-body text-[11px] md:text-xs text-white/80 leading-tight mt-0.5">
               {stage.lieu}
             </span>
           </span>
