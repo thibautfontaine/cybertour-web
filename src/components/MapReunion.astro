@@ -47,17 +47,17 @@ const positions: Record<string, { top: number; left: number }> = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Shield path: Saint-Denis → Le Port → Saint-Pierre → Saint-Andre → back
-          Using quadratic bezier curves (Q) for rounded shield shape
+      {/* Shield path: flat top, sides bulge out, converge to point at bottom
           Points: Nord(48,12) Ouest(8,35) Sud(42,82) Est(85,30)
+          C = cubic bezier for precise control of the shield curves
       */}
       <path
         d={`
           M 48,12
-          Q 20,18 8,35
-          Q 2,58 42,82
-          Q 82,58 85,30
-          Q 72,16 48,12
+          L 8,35
+          C 2,52 20,76 42,82
+          C 65,76 90,52 85,30
+          L 48,12
           Z
         `}
         stroke="var(--color-gold)"
@@ -66,7 +66,7 @@ const positions: Record<string, { top: number; left: number }> = {
         stroke-linecap="round"
         stroke-linejoin="round"
         fill="rgba(255, 222, 89, 0.03)"
-        opacity="0.6"
+        opacity="0.7"
       />
     </svg>
 
