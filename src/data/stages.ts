@@ -25,7 +25,7 @@ export const stages: Stage[] = [
     date: "Lundi 19 Octobre 2026",
     dateShort: "Lundi 19 Oct",
     day: "Jour 1",
-    lieu: "Campus Moufia",
+    lieu: "Campus Moufia - Universite de La Reunion",
     lieuFull:
       "Campus du Moufia, Allee des Aigues-Marines, 97490 Sainte-Clotilde",
     capacity: 500,
@@ -37,12 +37,9 @@ export const stages: Stage[] = [
     trackNumber: "01",
     href: "/nord",
     highlights: [
-      "Region Reunion",
-      "ANSSI",
-      "Viginum",
-      "DINUM",
-      "SGDSN",
-      "CCI",
+      "Acteurs institutionnels",
+      "Table ronde",
+      "Networking VIP",
     ],
   },
   {
@@ -62,7 +59,7 @@ export const stages: Stage[] = [
     accentHex: "#5b8cc9",
     trackNumber: "02",
     href: "/ouest",
-    highlights: ["Solutions cyber", "Tables rondes B2B", "Networking"],
+    highlights: ["Solutions cyber", "Rencontres B2B"],
   },
   {
     id: "est",
@@ -81,7 +78,7 @@ export const stages: Stage[] = [
     accentHex: "#4db6ac",
     trackNumber: "03",
     href: "/est",
-    highlights: ["Ecoles IT", "Speed dating stages", "Alternances"],
+    highlights: ["Formations cyber", "Speed dating", "Alternances"],
   },
   {
     id: "sud",
@@ -90,7 +87,7 @@ export const stages: Stage[] = [
     date: "Jeudi 22 - Vendredi 23 Octobre 2026",
     dateShort: "Jeu 22 - Ven 23 Oct",
     day: "Jours 4-5",
-    lieu: "Campus IUT / ESIROI",
+    lieu: "Campus IUT / ESIROI - Universite de La Reunion",
     lieuFull:
       "IUT de La Reunion / ESIROI, 40 avenue de Soweto, 97410 Saint-Pierre",
     capacity: 150,
@@ -102,10 +99,8 @@ export const stages: Stage[] = [
     trackNumber: "04",
     href: "/sud",
     highlights: [
-      "Conferences",
-      "CTF",
-      "Escape Game",
-      "OSINT",
+      "Conferences techniques",
+      "CTF & Ateliers",
       "Gestion de crise",
     ],
   },
