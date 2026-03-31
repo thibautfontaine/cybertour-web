@@ -77,12 +77,171 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     })} />
   </head>
   <body class="font-body antialiased overflow-x-hidden">
-    <!-- Beta banner -->
-    <div class="fixed bottom-0 left-0 right-0 z-[60] bg-gold text-navy-dark text-center py-2 px-4 font-mono text-xs tracking-wider uppercase font-bold">
+    <!-- Beta access gate — Cryptolocker terminal style -->
+    <div id="beta-gate" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+      <!-- Scanline effect -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div class="absolute left-0 right-0 h-px bg-red/40 animate-scan"></div>
+      </div>
+      <!-- CRT noise -->
+      <div class="absolute inset-0 noise-overlay pointer-events-none"></div>
+
+      <div class="relative max-w-lg w-full mx-6">
+        <!-- Logos -->
+        <div class="flex items-center justify-center gap-6 mb-8">
+          <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR" class="h-10 opacity-60" />
+          <span class="text-white/20 font-mono">x</span>
+          <img src="/assets/cybertour-2026.png" alt="Cyber Tour Reunion 2026" class="h-10 opacity-60" />
+        </div>
+
+        <!-- Terminal window -->
+        <div class="terminal-window bg-black/90 border border-red/30 rounded-xl overflow-hidden">
+          <!-- Title bar -->
+          <div class="flex items-center gap-2 px-4 py-3 bg-red/10 border-b border-red/20">
+            <span class="w-3 h-3 rounded-full bg-red/80"></span>
+            <span class="w-3 h-3 rounded-full bg-gold/60"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-400/60"></span>
+            <span class="ml-3 font-mono text-xs text-red/60">ALERTE // cybertour.re — acces restreint</span>
+          </div>
+
+          <div class="p-6 sm:p-8 font-mono text-sm">
+            <!-- Warning header -->
+            <div class="text-center mb-6">
+              <p class="text-red font-bold text-lg tracking-wider uppercase">&#9888; SITE VERROUILLE &#9888;</p>
+              <p class="text-white/40 text-xs mt-2">Le contenu de ce site est chiffre. Authentification requise.</p>
+            </div>
+
+            <!-- Countdown -->
+            <div class="bg-red/5 border border-red/20 rounded-lg p-4 mb-6">
+              <p class="text-red/60 text-xs uppercase tracking-widest text-center mb-3">Temps avant dechiffrement public</p>
+              <div class="flex items-center justify-center gap-4">
+                <div class="text-center">
+                  <span id="lock-days" class="block text-2xl font-bold text-red tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">jours</span>
+                </div>
+                <span class="text-red/30 text-xl">:</span>
+                <div class="text-center">
+                  <span id="lock-hours" class="block text-2xl font-bold text-white/80 tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">heures</span>
+                </div>
+                <span class="text-red/30 text-xl">:</span>
+                <div class="text-center">
+                  <span id="lock-mins" class="block text-2xl font-bold text-white/80 tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">min</span>
+                </div>
+                <span class="text-red/30 text-xl">:</span>
+                <div class="text-center">
+                  <span id="lock-secs" class="block text-2xl font-bold text-white/40 tabular-nums">--</span>
+                  <span class="text-[10px] text-white/30 uppercase">sec</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal lines -->
+            <div class="space-y-1.5 mb-6 text-xs">
+              <p><span class="text-red/60">root@cybertour:~$</span> <span class="text-white/60">cat /var/www/cybertour.re/status</span></p>
+              <p class="text-red/80">ERROR 403: Content encrypted. Authorization required.</p>
+              <p><span class="text-red/60">root@cybertour:~$</span> <span class="text-white/60">decrypt --key ████████████</span></p>
+              <p class="text-gold terminal-typing">Waiting for decryption key<span class="terminal-dots"></span></p>
+            </div>
+
+            <!-- Password input -->
+            <div class="border-t border-white/10 pt-5">
+              <div class="flex items-center gap-2">
+                <span class="text-red/60 text-xs shrink-0">key&gt;</span>
+                <input
+                  id="beta-password"
+                  type="password"
+                  placeholder="Entrez la cle de dechiffrement..."
+                  class="flex-1 bg-transparent border-none text-gold text-sm focus:outline-none font-mono placeholder-white/20"
+                  autocomplete="off"
+                />
+              </div>
+              <p id="beta-error" class="hidden text-red text-xs mt-2">&#9888; Cle invalide. Tentative enregistree.</p>
+              <button
+                id="beta-submit"
+                class="w-full mt-4 bg-red/20 border border-red/40 text-red font-bold text-xs tracking-widest uppercase rounded-lg py-3 hover:bg-red/30 transition-colors"
+              >&#9654; DECHIFFRER</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-white/20 text-[10px] font-mono text-center mt-4">CLUSIR Reunion Ocean Indien // Cyber Tour Reunion 2026</p>
+      </div>
+    </div>
+
+    <!-- Beta banner (visible after auth) -->
+    <div id="beta-banner" class="hidden fixed bottom-0 left-0 right-0 z-[60] bg-gold text-navy-dark text-center py-2 px-4 font-mono text-xs tracking-wider uppercase font-bold">
       Version beta — Site en cours de construction
     </div>
 
     <slot />
+
+    <script>
+      // Beta gate — cryptolocker style
+      const BETA_HASH = 'b167a884452a93783022d2c228882a7578e2f6d278bc03da4f90103ba29f6de3';
+      const gate = document.getElementById('beta-gate');
+      const banner = document.getElementById('beta-banner');
+      const input = document.getElementById('beta-password') as HTMLInputElement;
+      const btn = document.getElementById('beta-submit');
+      const err = document.getElementById('beta-error');
+
+      async function hashPassword(pwd: string): Promise<string> {
+        const data = new TextEncoder().encode(pwd);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      function unlock() {
+        if (gate) gate.style.display = 'none';
+        if (banner) banner.classList.remove('hidden');
+        document.body.style.overflow = '';
+      }
+
+      // Check if already authenticated
+      if (localStorage.getItem('cybertour-beta') === 'granted') {
+        unlock();
+      } else {
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Countdown — 10 days from now (resets each visit for demo)
+      const lockTarget = Date.now() + 10 * 24 * 60 * 60 * 1000;
+      function updateLockCountdown() {
+        const diff = lockTarget - Date.now();
+        if (diff <= 0) return;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        const dEl = document.getElementById('lock-days');
+        const hEl = document.getElementById('lock-hours');
+        const mEl = document.getElementById('lock-mins');
+        const sEl = document.getElementById('lock-secs');
+        if (dEl) dEl.textContent = String(d).padStart(2, '0');
+        if (hEl) hEl.textContent = String(h).padStart(2, '0');
+        if (mEl) mEl.textContent = String(m).padStart(2, '0');
+        if (sEl) sEl.textContent = String(s).padStart(2, '0');
+      }
+      updateLockCountdown();
+      setInterval(updateLockCountdown, 1000);
+
+      async function tryAccess() {
+        if (!input) return;
+        const hash = await hashPassword(input.value);
+        if (hash === BETA_HASH) {
+          localStorage.setItem('cybertour-beta', 'granted');
+          unlock();
+        } else {
+          if (err) err.classList.remove('hidden');
+          input.value = '';
+          input.placeholder = 'Cle incorrecte...';
+        }
+      }
+
+      btn?.addEventListener('click', tryAccess);
+      input?.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryAccess(); });
+    </script>
 
     <script>
       // Scroll reveal observer
