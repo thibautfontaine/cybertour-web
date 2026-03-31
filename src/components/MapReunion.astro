@@ -27,7 +27,7 @@ const positions: Record<string, { top: number; left: number }> = {
   </div>
 
   <!-- Map container -->
-  <div class="relative mx-auto max-w-2xl aspect-[3/4] px-4">
+  <div class="relative mx-auto max-w-4xl aspect-square md:aspect-[4/3] px-4">
     <!-- Island silhouette background -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
       <img
@@ -47,26 +47,16 @@ const positions: Record<string, { top: number; left: number }> = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Shield path: flat top, vertical sides, sharp point at bottom
-          Points: Nord(48,12) Ouest(8,35) Sud(42,85) Est(85,30)
-          Control points pushed extreme to compensate 4:3 aspect ratio distortion
-      */}
-      <path
-        d={`
-          M 48,12
-          L 8,35
-          C -6,58 18,95 42,87
-          C 67,95 100,58 85,30
-          L 48,12
-          Z
-        `}
+      {/* Simple dashed lines connecting stages in order: N → O → S → E */}
+      <polyline
+        points="48,12 8,35 42,87 85,30 48,12"
         stroke="var(--color-gold)"
-        stroke-width="0.6"
-        stroke-dasharray="2.5 1.5"
+        stroke-width="0.4"
+        stroke-dasharray="2 1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
-        fill="rgba(255, 222, 89, 0.03)"
-        opacity="0.7"
+        fill="none"
+        opacity="0.4"
       />
     </svg>
 
