@@ -113,27 +113,32 @@ const polylinePoints = pathOrder
   </div>
 
   <!-- Timeline bar -->
-  <div class="relative mt-12 md:mt-16 mx-auto max-w-3xl px-4">
+  <div class="relative mt-14 md:mt-20 mx-auto max-w-4xl px-6">
     {/* Connecting line */}
-    <div class="absolute top-3 left-[10%] right-[10%] h-px bg-white/10" aria-hidden="true" />
+    <div class="absolute top-5 left-[8%] right-[8%] h-0.5 bg-white/15 rounded-full" aria-hidden="true" />
 
     <div class="flex justify-between items-start">
       {stages.map((stage) => (
-        <a href={stage.href} class="group relative flex flex-col items-center text-center flex-1">
+        <a href={stage.href} class="group relative flex flex-col items-center text-center flex-1 py-2">
           {/* Dot */}
           <span
-            class="relative z-10 h-2 w-2 md:h-2.5 md:w-2.5 rounded-full border border-navy-dark transition-transform duration-300 group-hover:scale-150"
-            style={`background-color: ${stage.accentHex}; box-shadow: 0 0 8px ${stage.accentHex}60;`}
+            class="relative z-10 h-3 w-3 md:h-4 md:w-4 rounded-full border-2 border-navy-dark transition-transform duration-300 group-hover:scale-150"
+            style={`background-color: ${stage.accentHex}; box-shadow: 0 0 12px ${stage.accentHex}80;`}
           />
 
           {/* Date */}
-          <span class="mt-2 font-mono text-[10px] md:text-xs tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
+          <span class="mt-3 font-mono text-xs md:text-sm font-bold tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
             {stage.dateShort}
           </span>
 
           {/* Direction */}
-          <span class="font-mono text-[9px] md:text-[10px] text-white/50 uppercase tracking-widest">
+          <span class="font-display text-xs md:text-sm text-white font-semibold uppercase tracking-wide mt-0.5">
             {stage.direction}
+          </span>
+
+          {/* Lieu */}
+          <span class="font-body text-[10px] md:text-xs text-white/60 mt-0.5">
+            {stage.lieu}
           </span>
         </a>
       ))}

@@ -6,3 +6,4 @@ CLAUDE.md
 todo.md
 *.md
 src-backup.nova-tracer/
+.nova-tracer/
