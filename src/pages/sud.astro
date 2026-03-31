@@ -1,0 +1,191 @@
+---
+import StageLayout from '../layouts/StageLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { stages } from '../data/stages';
+const stage = stages.find(s => s.id === 'sud')!;
+
+const ateliers = [
+  {
+    icon: '\u{1F3F4}',
+    title: 'CTF (Capture The Flag)',
+    desc: 'Competition de hacking ethique : resolvez des challenges de securite en equipe.',
+  },
+  {
+    icon: '\u{1F510}',
+    title: 'Escape Game Cyber Reunion',
+    desc: 'Escape game immersif sur le theme de la cybersecurite, concu par Cyber Reunion.',
+  },
+  {
+    icon: '\u{1F50D}',
+    title: 'OSINT',
+    desc: 'Atelier de recherche en sources ouvertes : techniques d\'investigation numerique.',
+  },
+  {
+    icon: '\u{1F6A8}',
+    title: 'Gestion de crise',
+    desc: 'Simulation de gestion d\'incident cyber en conditions reelles, en equipe.',
+  },
+];
+---
+
+<StageLayout stage={stage}>
+  <Navbar slot="navbar" currentPage="sud" />
+
+  <!-- Two-day programme -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+
+      <!-- Tab navigation -->
+      <div class="reveal flex gap-2 mb-12" id="day-tabs">
+        <button
+          class="day-tab active font-display font-semibold text-sm px-5 py-2.5 rounded-lg border transition-colors"
+          data-day="1"
+          aria-pressed="true"
+        >
+          Jour 1 — Jeudi 22
+        </button>
+        <button
+          class="day-tab font-display font-semibold text-sm px-5 py-2.5 rounded-lg border transition-colors"
+          data-day="2"
+          aria-pressed="false"
+        >
+          Jour 2 — Vendredi 23
+        </button>
+      </div>
+
+      <!-- Jour 1: Conferences techniques -->
+      <div class="day-panel" id="day-1">
+        <div class="reveal">
+          <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">Jour 1</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Conferences techniques</h2>
+          <p class="text-white/50 mt-4 text-lg max-w-3xl">
+            Une journee de conferences animees par des experts en cybersecurite. Retours d'experience,
+            presentations techniques et echanges avec la communaute.
+          </p>
+        </div>
+
+        <!-- Audience note -->
+        <div class="reveal delay-2 mt-8">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-5 flex items-start gap-4">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">Public</h4>
+              <p class="text-white/50 text-sm font-body">Etudiants et professionnels de l'IT</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Programme timeline placeholder -->
+        <div class="reveal delay-3 mt-10 space-y-4">
+          <h3 class="font-display font-semibold text-xl mb-6">Programme</h3>
+          {[
+            { time: '09:00', label: 'Accueil & cafe' },
+            { time: '09:30', label: 'Keynote d\'ouverture' },
+            { time: '10:30', label: 'Conference technique #1' },
+            { time: '11:30', label: 'Conference technique #2' },
+            { time: '12:30', label: 'Dejeuner networking' },
+            { time: '14:00', label: 'Conference technique #3' },
+            { time: '15:00', label: 'Conference technique #4' },
+            { time: '16:00', label: 'Table ronde & cloture' },
+          ].map(item => (
+            <div class="flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] rounded-xl px-5 py-3 hover:border-red-400/20 transition-colors">
+              <span class="font-mono text-sm text-red-400 shrink-0 w-14">{item.time}</span>
+              <span class="w-px h-5 bg-white/10"></span>
+              <span class="font-body text-white/70 text-sm">{item.label}</span>
+            </div>
+          ))}
+          <p class="text-white/45 text-xs font-mono mt-4">Programme provisoire — sous reserve de modifications.</p>
+        </div>
+      </div>
+
+      <!-- Jour 2: Ateliers pratiques -->
+      <div class="day-panel hidden" id="day-2">
+        <div class="reveal">
+          <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">Jour 2</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Ateliers pratiques</h2>
+          <p class="text-white/50 mt-4 text-lg max-w-3xl">
+            Une journee les mains dans le clavier. Quatre ateliers en parallele pour experimenter
+            la cybersecurite de maniere concrete et ludique.
+          </p>
+        </div>
+
+        <!-- Groups note -->
+        <div class="reveal delay-2 mt-8">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-5 flex items-start gap-4">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">Organisation</h4>
+              <p class="text-white/50 text-sm font-body">Sessions en groupes de 4 a 6, matin et apres-midi</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atelier cards -->
+        <div class="reveal delay-3 mt-10">
+          <div class="grid sm:grid-cols-2 gap-6">
+            {ateliers.map(atelier => (
+              <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">
+                <div class="text-3xl mb-4">{atelier.icon}</div>
+                <h3 class="font-display font-semibold text-lg mb-2">{atelier.title}</h3>
+                <p class="text-white/50 text-sm font-body">{atelier.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</StageLayout>
+
+<style>
+  .day-tab {
+    color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .day-tab:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  .day-tab.active {
+    color: #DF3C37;
+    border-color: rgba(223, 60, 55, 0.4);
+    background: rgba(223, 60, 55, 0.08);
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.day-tab');
+    const panels = document.querySelectorAll<HTMLDivElement>('.day-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const day = tab.dataset.day;
+
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-pressed', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-pressed', 'true');
+
+        panels.forEach(panel => {
+          panel.classList.toggle('hidden', panel.id !== `day-${day}`);
+        });
+      });
+    });
+  });
+</script>

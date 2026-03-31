@@ -1,0 +1,240 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const emerald = '#4db6ac';
+const mailto = 'mailto:team@cybertour.re?subject=Cyber%20Tour%202026%20-%20Speed%20Dating%20Stages%20%26%20Alternances';
+
+const steps = [
+  {
+    number: '1',
+    title: 'Inscrivez-vous',
+    description: 'Entreprises, deposez vos offres. Etudiants, creez votre profil. On s\'occupe du matching en amont pour que chaque rencontre compte.',
+  },
+  {
+    number: '2',
+    title: '8 minutes chrono',
+    description: 'Face a face, sans filtre. Vous presentez votre besoin ou votre parcours, vous echangez, vous evaluez. Puis on tourne.',
+  },
+  {
+    number: '3',
+    title: 'Connectez-vous',
+    description: 'Apres les rotations, retrouvez vos coups de coeur en zone libre. Les meilleures collaborations commencent souvent autour d\'un cafe.',
+  },
+];
+
+const studentTips = [
+  {
+    title: 'Soignez votre pitch',
+    description: 'Vous avez 8 minutes, pas 8 heures. Preparez une presentation claire de votre parcours, vos competences cles et ce que vous recherchez. Allez droit au but.',
+  },
+  {
+    title: 'Montrez ce que vous savez faire',
+    description: 'Un projet perso, un CTF, une certification, un depot GitHub — tout ce qui prouve votre curiosite et votre pratique vaut plus qu\'une ligne sur un CV.',
+  },
+  {
+    title: 'Venez avec le bon materiel',
+    description: 'CV a jour en plusieurs exemplaires, portfolio ou lien vers vos realisations, et surtout : de l\'energie. Les recruteurs se souviennent des candidats qui ont de l\'enthousiasme.',
+  },
+];
+---
+
+<Layout title="Speed Dating Stages & Alternances | Cyber Tour Reunion 2026" description="Speed dating stages et alternances cybersecurite au CyberTour Reunion 2026. Entreprises et etudiants, inscrivez-vous pour le 21 octobre a Epitech Saint-Denis.">
+
+  <Navbar currentPage="jobs" />
+
+  <!-- ===== HERO ===== -->
+  <section class="relative overflow-hidden pt-32 pb-20">
+    <!-- Background gradient -->
+    <div
+      class="absolute inset-0"
+      style={`background: linear-gradient(135deg, #0f1a30 0%, ${emerald}12 50%, #0f1a30 100%);`}
+    ></div>
+    <div class="absolute inset-0 cyber-grid"></div>
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <!-- Breadcrumb -->
+      <nav class="reveal mb-8" aria-label="Fil d'Ariane">
+        <ol class="flex items-center justify-center gap-2 font-mono text-sm tracking-wide" style="color: var(--text-muted);">
+          <li><a href="/" class="hover:text-white transition-colors">Accueil</a></li>
+          <li class="select-none">&gt;</li>
+          <li><a href="/est" class="hover:text-white transition-colors">Etape Est</a></li>
+          <li class="select-none">&gt;</li>
+          <li style={`color: ${emerald};`}>Speed Dating</li>
+        </ol>
+      </nav>
+
+      <!-- Badge -->
+      <div class="reveal delay-1 mb-6">
+        <span
+          class="inline-block font-mono text-xs tracking-widest uppercase px-4 py-1.5 rounded-full border"
+          style={`color: ${emerald}; border-color: ${emerald}40; background: ${emerald}10;`}
+        >
+          Etape Est &middot; Mercredi 21 Octobre
+        </span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="reveal delay-2 font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+        Votre prochain talent cyber<br />
+        <span style={`color: ${emerald};`}>est peut-etre dans la salle</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="reveal delay-3 text-lg md:text-xl max-w-2xl mx-auto mb-10" style="color: var(--text-secondary);">
+        Speed dating stages & alternances — 8 minutes pour convaincre, une carriere pour commencer.
+        Mercredi 21 octobre, Epitech Saint-Denis.
+      </p>
+
+      <!-- CTAs -->
+      <div class="reveal delay-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href={mailto}
+          class="inline-block font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5"
+          style={`background: ${emerald}; color: #0f1a30; box-shadow: 0 4px 20px ${emerald}40;`}
+        >
+          S'inscrire
+        </a>
+        <a
+          href="/est"
+          class="inline-block font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-lg border-2 transition-all duration-300 hover:-translate-y-0.5"
+          style={`border-color: ${emerald}; color: ${emerald};`}
+        >
+          Retour a l'etape Est
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMENT CA MARCHE ===== -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="reveal font-mono text-xs tracking-widest uppercase" style={`color: ${emerald};`}>
+          Le format
+        </span>
+        <h2 class="reveal delay-1 font-display text-3xl md:text-4xl font-bold mt-3">
+          Comment ca marche
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {steps.map((step, i) => (
+          <div class={`reveal delay-${i + 1} bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 text-center`}>
+            <div
+              class="inline-flex items-center justify-center w-14 h-14 rounded-full font-display text-2xl font-bold mb-6"
+              style={`background: ${emerald}15; color: ${emerald}; border: 1px solid ${emerald}30;`}
+            >
+              {step.number}
+            </div>
+            <h3 class="font-display text-xl font-semibold mb-3">{step.title}</h3>
+            <p style="color: var(--text-secondary);">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ENTREPRISES ===== -->
+  <section class="py-20" style="background: var(--bg-secondary);">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="reveal font-mono text-xs tracking-widest uppercase" style={`color: ${emerald};`}>
+          Recruteurs
+        </span>
+        <h2 class="reveal delay-1 font-display text-3xl md:text-4xl font-bold mt-3">
+          Recruteurs : trouvez vos futurs talents cyber a La Reunion
+        </h2>
+        <p class="reveal delay-2 mt-4 max-w-2xl mx-auto text-lg" style="color: var(--text-secondary);">
+          Les competences cyber sont rares. A La Reunion, elles se forment chaque annee
+          dans nos ecoles et universites. Le speed dating du CyberTour vous donne un acces
+          direct a des etudiants motives, formes aux enjeux actuels, et ancres sur le territoire.
+          Pas de tri de CV a l'aveugle : des echanges concrets, en face a face, pour identifier
+          le profil qui renforcera votre equipe.
+        </p>
+      </div>
+
+      <!-- Company slots grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            class={`reveal delay-${(i % 3) + 1} bg-white/[0.03] border border-dashed border-white/[0.1] rounded-2xl p-8 flex flex-col items-center justify-center min-h-[160px] transition-all duration-300 hover:border-solid group`}
+            style={`hover:border-color: ${emerald}40;`}
+          >
+            <div class="w-12 h-12 rounded-full bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6" style={`color: ${emerald};`} fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </div>
+            <span class="font-mono text-sm" style="color: var(--text-muted);">Votre entreprise ici ?</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="reveal text-center">
+        <a
+          href="mailto:team@cybertour.re?subject=Inscription%20Entreprise%20-%20Speed%20Dating%20Cyber%20Tour%202026"
+          class="inline-block font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5"
+          style={`background: ${emerald}; color: #0f1a30; box-shadow: 0 4px 20px ${emerald}40;`}
+        >
+          Inscrire mon entreprise
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ETUDIANTS ===== -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Left: text content -->
+        <div>
+          <span class="reveal font-mono text-xs tracking-widest uppercase" style={`color: ${emerald};`}>
+            Candidats
+          </span>
+          <h2 class="reveal delay-1 font-display text-3xl md:text-4xl font-bold mt-3 mb-6">
+            Etudiants : lancez votre carriere cyber le 21 octobre
+          </h2>
+          <p class="reveal delay-2 text-lg mb-10" style="color: var(--text-secondary);">
+            Stage, alternance, premier emploi — les entreprises reunionnaises et de l'Ocean Indien
+            cherchent des profils comme le votre. Quel que soit votre niveau (Bac+2 a Bac+5) ou votre
+            specialite (securite offensive, GRC, developpement securise, administration systeme),
+            vous aurez 8 minutes pour faire la difference face a des recruteurs qui embauchent vraiment.
+          </p>
+
+          <a
+            href={mailto}
+            class="reveal delay-3 inline-block font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-lg border-2 transition-all duration-300 hover:-translate-y-0.5"
+            style={`border-color: ${emerald}; color: ${emerald};`}
+          >
+            S'inscrire comme etudiant
+          </a>
+        </div>
+
+        <!-- Right: tips cards -->
+        <div class="space-y-6">
+          {studentTips.map((tip, i) => (
+            <div class={`reveal delay-${i + 1} bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 flex gap-6 items-start`}>
+              <div
+                class="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold"
+                style={`background: ${emerald}15; color: ${emerald};`}
+              >
+                {i + 1}
+              </div>
+              <div>
+                <h3 class="font-display text-lg font-semibold mb-2">{tip.title}</h3>
+                <p class="text-sm" style="color: var(--text-secondary);">{tip.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+</Layout>

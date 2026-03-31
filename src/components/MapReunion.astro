@@ -1,0 +1,150 @@
+---
+import { stages } from "../data/stages";
+
+/**
+ * Geographic positions (%) for each stage on the island silhouette.
+ * Keys match the stage `id` field.
+ */
+const positions: Record<string, { top: number; left: number }> = {
+  nord:  { top: 18, left: 45 },
+  ouest: { top: 42, left: 12 },
+  est:   { top: 35, left: 82 },
+  sud:   { top: 72, left: 28 },
+};
+
+/** Order of the path connecting the stages */
+const pathOrder = ["nord", "ouest", "est", "sud"] as const;
+
+/** Build SVG polyline points string from positions (as percentages) */
+const polylinePoints = pathOrder
+  .map((id) => `${positions[id].left},${positions[id].top}`)
+  .join(" ");
+---
+
+<section id="carte" class="reveal relative py-20 md:py-28 overflow-hidden">
+  <!-- Section heading -->
+  <div class="text-center mb-12 md:mb-16 px-4">
+    <p class="font-mono text-xs tracking-widest uppercase text-gold-dim mb-3">
+      // ITINERAIRE
+    </p>
+    <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+      4 etapes a travers l'ile
+    </h2>
+  </div>
+
+  <!-- Map container -->
+  <div class="relative mx-auto max-w-4xl aspect-square md:aspect-[4/3] px-4">
+    <!-- Island silhouette background -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <img
+        src="/assets/reunion-silhouette.png"
+        alt=""
+        aria-hidden="true"
+        class="w-full h-full object-contain opacity-15"
+        style="filter: drop-shadow(0 0 40px rgba(255, 222, 89, 0.15)) drop-shadow(0 0 80px rgba(255, 222, 89, 0.08));"
+      />
+    </div>
+
+    <!-- SVG dashed path connecting stages -->
+    <svg
+      class="absolute inset-0 w-full h-full pointer-events-none"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points={polylinePoints}
+        stroke="var(--color-gold)"
+        stroke-width="0.3"
+        stroke-dasharray="1.5 1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+        opacity="0.35"
+      />
+    </svg>
+
+    <!-- Stage points -->
+    {stages.map((stage, i) => {
+      const pos = positions[stage.id];
+      if (!pos) return null;
+
+      return (
+        <a
+          href={stage.href}
+          class="map-point group absolute z-10 flex flex-col items-center -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 hover:scale-110"
+          style={`top: ${pos.top}%; left: ${pos.left}%;`}
+          data-stage={stage.id}
+        >
+          {/* Pulsing dot */}
+          <span class="relative flex h-3.5 w-3.5 md:h-4 md:w-4">
+            <span
+              class="absolute inset-0 rounded-full animate-ping opacity-50"
+              style={`background-color: ${stage.accentHex};`}
+            />
+            <span
+              class="relative inline-flex h-full w-full rounded-full border-2 border-navy-dark"
+              style={`background-color: ${stage.accentHex}; box-shadow: 0 0 12px ${stage.accentHex}80;`}
+            />
+          </span>
+
+          {/* Label */}
+          <span
+            class="mt-1.5 md:mt-2 whitespace-nowrap rounded-md bg-navy-dark/80 backdrop-blur-sm px-2 py-0.5 md:px-2.5 md:py-1 border transition-all duration-300 group-hover:border-opacity-40"
+            style={`border-color: ${stage.accentHex}33;`}
+          >
+            <span class="font-mono text-[10px] md:text-xs tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
+              {stage.dateShort}
+            </span>
+            <span class="block font-mono text-[9px] md:text-[10px] text-white/60 leading-tight">
+              {stage.lieu}
+            </span>
+          </span>
+
+          {/* Hover glow */}
+          <span
+            class="absolute -inset-3 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl pointer-events-none"
+            style={`background-color: ${stage.accentHex};`}
+          />
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- Timeline bar -->
+  <div class="relative mt-12 md:mt-16 mx-auto max-w-3xl px-4">
+    {/* Connecting line */}
+    <div class="absolute top-3 left-[10%] right-[10%] h-px bg-white/10" aria-hidden="true" />
+
+    <div class="flex justify-between items-start">
+      {stages.map((stage) => (
+        <a href={stage.href} class="group relative flex flex-col items-center text-center flex-1">
+          {/* Dot */}
+          <span
+            class="relative z-10 h-2 w-2 md:h-2.5 md:w-2.5 rounded-full border border-navy-dark transition-transform duration-300 group-hover:scale-150"
+            style={`background-color: ${stage.accentHex}; box-shadow: 0 0 8px ${stage.accentHex}60;`}
+          />
+
+          {/* Date */}
+          <span class="mt-2 font-mono text-[10px] md:text-xs tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
+            {stage.dateShort}
+          </span>
+
+          {/* Direction */}
+          <span class="font-mono text-[9px] md:text-[10px] text-white/50 uppercase tracking-widest">
+            {stage.direction}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .map-point:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+</style>

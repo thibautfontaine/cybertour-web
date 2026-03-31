@@ -38,8 +38,8 @@
   --color-navy-dark: #0f1a30;
   --color-clusir-red: #ce463a;
   --color-clusir-red-bright: #d9564a;
-  --color-gold: #ce463a;
-  --color-gold-dim: #b03d32;
+  --color-gold: #FFDE59;
+  --color-gold-dim: #d4b84a;
   --color-red: #ce463a;
   --color-slate-deep: #192842;
   --color-slate-mid: #21314e;
@@ -60,15 +60,15 @@ html {
   --bg-card: rgba(255, 255, 255, 0.03);
   --border-card: rgba(255, 255, 255, 0.06);
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.5);
-  --text-faint: rgba(255, 255, 255, 0.4);
-  --text-ghost: rgba(255, 255, 255, 0.3);
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-faint: rgba(255, 255, 255, 0.55);
+  --text-ghost: rgba(255, 255, 255, 0.45);
   --nav-scrolled: rgba(15, 26, 48, 0.95);
   --scrollbar-track: #0f1a30;
   --scrollbar-thumb: #2c3e6b;
   --grid-color: rgba(44, 62, 107, 0.12);
-  --sponsor-hover-shadow: rgba(192, 81, 60, 0.3);
+  --sponsor-hover-shadow: rgba(255, 222, 89, 0.3);
   --footer-yt-fill: #0f1a30;
 }
 

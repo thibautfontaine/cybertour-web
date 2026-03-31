@@ -1,0 +1,53 @@
+---
+import StageLayout from '../layouts/StageLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { stages } from '../data/stages';
+const stage = stages.find(s => s.id === 'est')!;
+---
+
+<StageLayout stage={stage}>
+  <Navbar slot="navbar" currentPage="est" />
+
+  <!-- Programme section -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="reveal">
+        <span class="font-mono text-emerald-400/60 text-sm tracking-widest uppercase">Programme</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Formations Cyber a La Reunion</h2>
+        <p class="text-white/50 mt-4 text-lg max-w-3xl">
+          Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Les ecoles presentent leurs cursus et parcours
+          de formation, suivis de rencontres directes entre etudiants et entreprises.
+        </p>
+      </div>
+
+      <!-- School cards -->
+      <div class="reveal delay-2 mt-12">
+        <h3 class="font-display font-semibold text-xl mb-8">Ecoles et formations presentes</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {['Epitech Reunion', 'ESIROI', 'IUT de La Reunion', 'Universite de La Reunion', 'CNAM Reunion', 'Lycee Lislet Geoffroy', 'ESIEA', 'Sup de Vinci'].map(name => (
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-emerald-400/20 transition-colors">
+              <span class="font-display font-semibold text-sm text-white/70">{name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Speed Dating CTA -->
+      <div class="reveal delay-3 mt-12 text-center">
+        <div class="bg-emerald-400/[0.06] border border-emerald-400/[0.15] rounded-2xl p-8">
+          <h3 class="font-display font-bold text-2xl mb-3">Speed Dating Stages & Alternances</h3>
+          <p class="text-white/50 text-sm font-body max-w-xl mx-auto mb-6">
+            Rencontrez directement les entreprises qui recrutent en cybersecurite a La Reunion.
+            Apportez votre CV et venez echanger en face-a-face avec les recruteurs.
+          </p>
+          <a href="/jobs" class="btn-primary inline-block rounded-lg font-display mt-2">
+            Speed Dating Stages & Alternances &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</StageLayout>

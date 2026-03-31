@@ -1,0 +1,204 @@
+---
+import Layout from './Layout.astro';
+import { stages } from '../data/stages';
+import type { Stage } from '../data/stages';
+
+interface Props {
+  stage: Stage;
+}
+
+const { stage } = Astro.props;
+const pageTitle = `${stage.name} | Cyber Tour Reunion 2026`;
+
+const currentIndex = stages.findIndex((s) => s.id === stage.id);
+const prev = currentIndex > 0 ? stages[currentIndex - 1] : null;
+const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
+---
+
+<Layout title={pageTitle} description={stage.description}>
+  <slot name="navbar" />
+  <div style={`--stage-accent: ${stage.accentHex};`}>
+
+    <!-- Hero Banner -->
+    <section class="relative min-h-[40vh] flex items-end overflow-hidden">
+      <!-- Background gradient with stage accent -->
+      <div
+        class="absolute inset-0"
+        style={`background: linear-gradient(135deg, #0f1a30 0%, ${stage.accentHex}12 50%, #0f1a30 100%);`}
+      ></div>
+
+      <!-- Cyber grid overlay -->
+      <div class="absolute inset-0 cyber-grid"></div>
+
+      <!-- Noise overlay -->
+      <div class="absolute inset-0 noise-overlay"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 w-full max-w-6xl mx-auto px-6 pb-12 pt-32">
+
+        <!-- Breadcrumb -->
+        <nav class="reveal mb-8" aria-label="Fil d'Ariane">
+          <ol class="flex items-center gap-2 font-mono text-sm tracking-wide" style="color: var(--text-muted);">
+            <li><a href="/" class="hover:text-white transition-colors">Accueil</a></li>
+            <li class="select-none">&gt;</li>
+            <li><a href="/#etapes" class="hover:text-white transition-colors">Les Etapes</a></li>
+            <li class="select-none">&gt;</li>
+            <li style={`color: ${stage.accentHex};`}>{stage.direction}</li>
+          </ol>
+        </nav>
+
+        <!-- Stage badge -->
+        <div class="reveal delay-1 mb-4">
+          <span
+            class="inline-block font-mono text-xs tracking-widest uppercase px-3 py-1 rounded-full border"
+            style={`color: ${stage.accentHex}; border-color: ${stage.accentHex}40; background: ${stage.accentHex}10;`}
+          >
+            Etape {stage.trackNumber}
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="reveal delay-2 font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          {stage.name}
+        </h1>
+
+        <!-- Theme subtitle -->
+        <p class="reveal delay-3 text-lg md:text-xl font-body" style="color: var(--text-secondary);">
+          {stage.theme}
+        </p>
+
+        <!-- Info bar -->
+        <div class="reveal delay-4 flex flex-wrap items-center gap-4 mt-8">
+          <!-- Date -->
+          <div class="flex items-center gap-2 font-mono text-sm" style="color: var(--text-secondary);">
+            <svg class="w-4 h-4 shrink-0" style={`color: ${stage.accentHex};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>{stage.date}</span>
+          </div>
+
+          <span class="hidden sm:block w-px h-4 bg-white/20"></span>
+
+          <!-- Lieu -->
+          <div class="flex items-center gap-2 font-mono text-sm" style="color: var(--text-secondary);">
+            <svg class="w-4 h-4 shrink-0" style={`color: ${stage.accentHex};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>{stage.lieu}</span>
+          </div>
+
+          <span class="hidden sm:block w-px h-4 bg-white/20"></span>
+
+          <!-- Capacity badge -->
+          <div
+            class="flex items-center gap-2 font-mono text-xs tracking-widest uppercase px-3 py-1 rounded-full"
+            style={`background: ${stage.accentHex}15; color: ${stage.accentHex}; border: 1px solid ${stage.accentHex}30;`}
+          >
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>{stage.capacity} places</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page-specific content -->
+    <slot />
+
+    <!-- Navigation entre etapes -->
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <div class="flex items-center justify-between">
+        {prev && (
+          <a href={prev.href} class="group flex items-center gap-3 text-white/60 hover:text-white transition-colors">
+            <span aria-hidden="true">&larr;</span>
+            <div>
+              <span class="block text-xs font-mono uppercase tracking-wider" style={`color: ${prev.accentHex}`}>Etape precedente</span>
+              <span class="font-display font-semibold">{prev.direction}</span>
+            </div>
+          </a>
+        )}
+        {!prev && <div></div>}
+        {next && (
+          <a href={next.href} class="group flex items-center gap-3 text-right text-white/60 hover:text-white transition-colors">
+            <div>
+              <span class="block text-xs font-mono uppercase tracking-wider" style={`color: ${next.accentHex}`}>Etape suivante</span>
+              <span class="font-display font-semibold">{next.direction}</span>
+            </div>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- Infos Pratiques -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="reveal font-display text-2xl md:text-3xl font-bold mb-10 text-center">
+          Infos Pratiques
+        </h2>
+
+        <div class="reveal delay-1 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <!-- Location icon -->
+            <div
+              class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+              style={`background: ${stage.accentHex}15;`}
+            >
+              <svg class="w-6 h-6" style={`color: ${stage.accentHex};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+
+            <div>
+              <h3 class="font-display text-lg font-semibold mb-1">Adresse</h3>
+              <p class="font-body" style="color: var(--text-secondary);">{stage.lieuFull}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inscription placeholder -->
+    <section class="py-20 px-6" style="background: var(--bg-secondary);">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="reveal bg-white/[0.03] border border-white/[0.06] rounded-2xl p-12">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
+            style={`background: ${stage.accentHex}15;`}
+          >
+            <svg class="w-8 h-8" style={`color: ${stage.accentHex};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+            </svg>
+          </div>
+
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-4">
+            Inscription bientot disponible
+          </h2>
+
+          <p class="font-body mb-8 max-w-lg mx-auto" style="color: var(--text-secondary);">
+            Les inscriptions pour cette etape ouvriront prochainement. Contactez-nous pour etre informe des qu'elles seront disponibles.
+          </p>
+
+          <a
+            href="mailto:team@cybertour.re"
+            class="btn-primary inline-flex items-center gap-3 rounded-xl"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Nous contacter
+          </a>
+
+          <p class="mt-4 font-mono text-xs tracking-wide" style="color: var(--text-muted);">
+            team@cybertour.re
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <slot name="footer" />
+</Layout>
