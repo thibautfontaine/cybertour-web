@@ -6,16 +6,16 @@ import { stages } from "../data/stages";
  * Keys match the stage `id` field.
  */
 const positions: Record<string, { top: number; left: number }> = {
-  nord:  { top: 18, left: 45 },
-  ouest: { top: 42, left: 12 },
-  est:   { top: 35, left: 82 },
-  sud:   { top: 72, left: 28 },
+  nord:  { top: 12, left: 48 },   // Saint-Denis — haut centre
+  ouest: { top: 35, left: 8 },    // Le Port — gauche
+  est:   { top: 30, left: 85 },   // Saint-Andre — droite
+  sud:   { top: 82, left: 42 },   // Saint-Pierre — bas centre
 };
 
-/** Order of the path connecting the stages */
-const pathOrder = ["nord", "ouest", "est", "sud"] as const;
+/** Order of the path connecting the stages — shield shape: N → O → S → E → back to N */
+const pathOrder = ["nord", "ouest", "sud", "est", "nord"] as const;
 
-/** Build SVG polyline points string from positions (as percentages) */
+/** Build SVG polygon points string from positions (as percentages) — closed shape */
 const polylinePoints = pathOrder
   .map((id) => `${positions[id].left},${positions[id].top}`)
   .join(" ");

@@ -23,7 +23,7 @@ export const stages: Stage[] = [
     name: "Etape Nord",
     direction: "NORD",
     date: "Lundi 19 Octobre 2026",
-    dateShort: "Lun 19",
+    dateShort: "Lundi 19 Oct",
     day: "Jour 1",
     lieu: "Campus Moufia",
     lieuFull:
@@ -50,10 +50,10 @@ export const stages: Stage[] = [
     name: "Etape Ouest",
     direction: "OUEST",
     date: "Mardi 20 Octobre 2026",
-    dateShort: "Mar 20",
+    dateShort: "Mardi 20 Oct",
     day: "Jour 2",
     lieu: "Office de l'Eau",
-    lieuFull: "Office de l'Eau Reunion, Saint-Paul",
+    lieuFull: "Office de l'Eau Reunion, Le Port",
     capacity: 50,
     theme: "Rencontre Offreurs & Entreprises",
     description:
@@ -69,10 +69,10 @@ export const stages: Stage[] = [
     name: "Etape Est",
     direction: "EST",
     date: "Mercredi 21 Octobre 2026",
-    dateShort: "Mer 21",
+    dateShort: "Mercredi 21 Oct",
     day: "Jour 3",
     lieu: "Epitech Reunion",
-    lieuFull: "Epitech Reunion, Saint-Denis",
+    lieuFull: "Epitech Reunion, Saint-Andre",
     capacity: 50,
     theme: "Formations Cyber a La Reunion",
     description:
@@ -88,7 +88,7 @@ export const stages: Stage[] = [
     name: "Etape Sud",
     direction: "SUD",
     date: "Jeudi 22 - Vendredi 23 Octobre 2026",
-    dateShort: "Jeu 22 - Ven 23",
+    dateShort: "Jeu 22 - Ven 23 Oct",
     day: "Jours 4-5",
     lieu: "Campus IUT / ESIROI",
     lieuFull:
