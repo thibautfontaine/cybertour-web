@@ -12,13 +12,7 @@ const positions: Record<string, { top: number; left: number }> = {
   sud:   { top: 82, left: 42 },   // Saint-Pierre — bas centre
 };
 
-/** Order of the path connecting the stages — shield shape: N → O → S → E → back to N */
-const pathOrder = ["nord", "ouest", "sud", "est", "nord"] as const;
-
-/** Build SVG polygon points string from positions (as percentages) — closed shape */
-const polylinePoints = pathOrder
-  .map((id) => `${positions[id].left},${positions[id].top}`)
-  .join(" ");
+/** Shield path is drawn directly in SVG using bezier curves through the 4 stage positions */
 ---
 
 <section id="carte" class="reveal relative py-20 md:py-28 overflow-hidden">
@@ -45,7 +39,7 @@ const polylinePoints = pathOrder
       />
     </div>
 
-    <!-- SVG dashed path connecting stages -->
+    <!-- SVG shield-shaped dashed path connecting stages -->
     <svg
       class="absolute inset-0 w-full h-full pointer-events-none"
       viewBox="0 0 100 100"
@@ -53,15 +47,26 @@ const polylinePoints = pathOrder
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <polyline
-        points={polylinePoints}
+      {/* Shield path: Saint-Denis → Le Port → Saint-Pierre → Saint-Andre → back
+          Using quadratic bezier curves (Q) for rounded shield shape
+          Points: Nord(48,12) Ouest(8,35) Sud(42,82) Est(85,30)
+      */}
+      <path
+        d={`
+          M 48,12
+          Q 20,18 8,35
+          Q 2,58 42,82
+          Q 82,58 85,30
+          Q 72,16 48,12
+          Z
+        `}
         stroke="var(--color-gold)"
-        stroke-width="0.5"
-        stroke-dasharray="2 1.5"
+        stroke-width="0.6"
+        stroke-dasharray="2.5 1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
-        fill="none"
-        opacity="0.5"
+        fill="rgba(255, 222, 89, 0.03)"
+        opacity="0.6"
       />
     </svg>
 
