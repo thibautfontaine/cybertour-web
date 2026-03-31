@@ -25,7 +25,7 @@ export const stages: Stage[] = [
     date: "Lundi 19 Octobre 2026",
     dateShort: "Lun 19",
     day: "Jour 1",
-    lieu: "Universite Moufia",
+    lieu: "Campus Moufia",
     lieuFull:
       "Campus du Moufia, Allee des Aigues-Marines, 97490 Sainte-Clotilde",
     capacity: 500,
@@ -90,7 +90,7 @@ export const stages: Stage[] = [
     date: "Jeudi 22 - Vendredi 23 Octobre 2026",
     dateShort: "Jeu 22 - Ven 23",
     day: "Jours 4-5",
-    lieu: "IUT / ESIROI",
+    lieu: "Campus IUT / ESIROI",
     lieuFull:
       "IUT de La Reunion / ESIROI, 40 avenue de Soweto, 97410 Saint-Pierre",
     capacity: 150,

@@ -91,13 +91,13 @@ const polylinePoints = pathOrder
 
           {/* Label */}
           <span
-            class="mt-2 md:mt-3 whitespace-nowrap rounded-lg bg-navy-dark/90 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border transition-all duration-300 group-hover:border-opacity-60"
-            style={`border-color: ${stage.accentHex}50;`}
+            class="mt-2 md:mt-3 whitespace-nowrap rounded-lg bg-navy-dark backdrop-blur-md px-3 py-2 md:px-4 md:py-2.5 border-2 shadow-lg transition-all duration-300 group-hover:border-opacity-80"
+            style={`border-color: ${stage.accentHex}60; box-shadow: 0 4px 20px rgba(0,0,0,0.4);`}
           >
             <span class="font-mono text-xs md:text-sm font-bold tracking-wider uppercase" style={`color: ${stage.accentHex};`}>
               {stage.dateShort}
             </span>
-            <span class="block font-body text-[11px] md:text-xs text-white/80 leading-tight mt-0.5">
+            <span class="block font-body text-xs md:text-sm text-white font-medium leading-tight mt-0.5">
               {stage.lieu}
             </span>
           </span>
