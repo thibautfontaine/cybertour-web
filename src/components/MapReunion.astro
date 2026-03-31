@@ -6,10 +6,10 @@ import { stages } from "../data/stages";
  * Keys match the stage `id` field.
  */
 const positions: Record<string, { top: number; left: number }> = {
-  nord:  { top: 15, left: 45 },   // Saint-Denis — cote nord
+  nord:  { top: 8, left: 42 },    // Saint-Denis — bord nord
   ouest: { top: 28, left: 18 },   // Le Port — cote nord-ouest
   est:   { top: 25, left: 72 },   // Saint-Andre — cote nord-est
-  sud:   { top: 75, left: 32 },   // Saint-Pierre — cote sud-ouest
+  sud:   { top: 90, left: 42 },   // Saint-Pierre — bord sud
 };
 
 /** Shield path is drawn directly in SVG using bezier curves through the 4 stage positions */
