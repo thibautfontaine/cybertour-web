@@ -1,7 +1,5 @@
 # Cyber Tour Reunion 2026
 
-![Logo Membre CLUSIR](public/assets/logo-membre-clusir.png)
-
 Site web officiel du **Cyber Tour Reunion 2026**, evenement cybersecurite organise par le [CLUSIR Reunion Ocean Indien](https://www.linkedin.com/company/clusir-roi/) dans le cadre du Cybermois.
 
 **19 — 24 Octobre 2026 | 4 etapes a La Reunion**
@@ -54,6 +52,7 @@ Push sur `main` → GitHub Actions build + deploy sur GitHub Pages.
 ## Auteur
 
 Developpe par [Thibaut Fontaine](https://www.linkedin.com/in/thibaut-fontaine) — Membre du bureau du CLUSIR Reunion Ocean Indien, charge de mission communication & evenements.
+![Logo Membre CLUSIR](public/assets/logo-membre-clusir.png)
 
 ## Licence
 
