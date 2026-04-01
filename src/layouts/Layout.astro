@@ -23,11 +23,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="author" content="CLUSIR Reunion Ocean Indien" />
     <meta name="keywords" content="cybersecurite, La Reunion, conference, cybermois, CLUSIR, securite informatique, SOC, IA, souverainete numerique" />
 
-    <!-- Fonts (JetBrains Mono only — ITC Avant Garde & Ambroise loaded via @font-face) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
     <!-- OG Tags -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -76,7 +71,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "inLanguage": "fr"
     })} />
   </head>
-  <body class="font-body antialiased overflow-x-hidden">
+  <body class="font-body antialiased overflow-x-hidden pb-10">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-gold focus:text-navy-dark focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
+      Aller au contenu principal
+    </a>
     <!-- Beta access gate — Cryptolocker terminal style -->
     <div id="beta-gate" class="fixed inset-0 z-[100] bg-navy-dark flex items-center justify-center">
       <!-- Scanline effect -->
@@ -291,6 +289,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       if (menuBtn && mobileMenu) {
         menuBtn.addEventListener('click', () => {
           mobileMenu.classList.toggle('hidden');
+          menuBtn.setAttribute('aria-expanded', mobileMenu.classList.contains('hidden') ? 'false' : 'true');
         });
         mobileMenu.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
