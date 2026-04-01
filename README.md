@@ -4,15 +4,6 @@ Site web officiel du **Cyber Tour Reunion 2026**, evenement cybersecurite organi
 
 **19 — 24 Octobre 2026 | 4 etapes a La Reunion**
 
-## Le Tour
-
-| Jour | Etape | Lieu | Theme |
-|------|-------|------|-------|
-| Lun 19 | NORD | Campus Moufia | Institutionnel & Table Ronde |
-| Mar 20 | OUEST | Office de l'Eau, Le Port | Rencontre Offreurs & Entreprises |
-| Mer 21 | EST | Epitech, Saint-Andre | Formations Cyber & Speed Dating |
-| Jeu-Ven 22-23 | SUD | Campus IUT/ESIROI, Saint-Pierre | Conferences & Ateliers Techniques |
-
 ## Stack
 
 - **Framework** : Astro 6 (SSG)
@@ -28,13 +19,6 @@ Site web officiel du **Cyber Tour Reunion 2026**, evenement cybersecurite organi
 npm install
 npm run dev      # http://localhost:4321
 npm run build    # Build statique dans dist/
-```
-
-## Docker
-
-```bash
-docker build -t cybertour-web .
-docker run -p 8080:8080 cybertour-web
 ```
 
 ## Deploy
