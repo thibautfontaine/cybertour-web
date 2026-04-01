@@ -2,8 +2,25 @@
 import StageLayout from '../layouts/StageLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Timeline, { type TimelineItem } from '../components/Timeline.astro';
 import { stages } from '../data/stages';
 const stage = stages.find(s => s.id === 'nord')!;
+
+const programme: TimelineItem[] = [
+  { time: '08:30 - 09:00', title: 'Accueil des participants et cafe' },
+  { time: '09:00 - 09:30', title: 'Ouverture officielle du CyberTour Reunion 2026', speaker: 'CLUSIR Reunion Ocean Indien' },
+  { isSection: true, title: 'Rencontres institutionnelles' },
+  { time: '09:30 - 10:00', title: 'Mot de la Presidente de Region', org: 'REGION REUNION' },
+  { time: '10:00 - 10:30', title: 'La strategie nationale de cybersecurite dans les Outre-mer', org: 'ANSSI' },
+  { time: '10:30 - 11:00', title: 'Lutte contre les manipulations de l\'information', org: 'VIGINUM' },
+  { time: '11:00 - 11:30', title: 'Transformation numerique de l\'Etat', org: 'DINUM' },
+  { time: '11:30 - 12:00', title: 'Securisation des reseaux de l\'enseignement et de la recherche', org: 'RENATER' },
+  { time: '12:00 - 13:30', title: 'Cocktail dejeunatoire et networking', isPause: true },
+  { isSection: true, title: 'Table ronde' },
+  { time: '13:30 - 15:00', title: 'Table ronde : Souverainete numerique et cybersecurite dans les territoires ultramarins', speaker: 'Region, ANSSI, Viginum, DINUM, SGDSN, CCI, Cyber Reunion' },
+  { time: '15:00 - 15:30', title: 'Presentation du parcours CyberTour 2026 — Les 4 etapes', speaker: 'CLUSIR ROI' },
+  { time: '15:30 - 16:00', title: 'Echanges avec la salle et cloture de l\'etape Nord' },
+];
 ---
 
 <StageLayout stage={stage}>
@@ -12,14 +29,16 @@ const stage = stages.find(s => s.id === 'nord')!;
   <!-- Programme section -->
   <section class="py-20">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="reveal">
-        <span class="font-mono text-gold/80 text-sm tracking-widest uppercase">Programme</span>
+      <div class="reveal mb-12">
+        <span class="font-mono text-sm tracking-widest uppercase" style={`color: ${stage.accentHex}CC;`}>Programme</span>
         <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Journee institutionnelle</h2>
-        <p class="text-white/50 mt-4 text-lg">Programme en cours de finalisation.</p>
+        <p class="text-white/50 mt-4 text-lg">Lundi 19 Octobre — Campus Moufia, Saint-Denis</p>
       </div>
 
+      <Timeline accentHex={stage.accentHex} items={programme} />
+
       <!-- Institutional partners logos -->
-      <div class="reveal delay-2 mt-12">
+      <div class="reveal delay-2 mt-16">
         <h3 class="font-display font-semibold text-xl mb-8">Acteurs institutionnels attendus</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {['Region Reunion', 'Prefecture', 'ANSSI', 'Viginum', 'DINUM', 'SGDSN', 'Renater', 'CCI Reunion', 'Cyber Reunion', 'Universite de La Reunion'].map(name => (
