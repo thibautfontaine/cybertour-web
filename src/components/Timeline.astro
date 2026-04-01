@@ -1,0 +1,84 @@
+---
+/**
+ * Timeline component — vertical schedule with dots, times, and section headers.
+ *
+ * Props:
+ *   accentHex: string — color for dots, section titles, and the vertical line
+ *   items: TimelineItem[] — ordered list of schedule entries
+ */
+
+export interface TimelineItem {
+  time: string;           // e.g. "08:00 - 08:45"
+  title: string;          // e.g. "Accueil des participants"
+  speaker?: string;       // e.g. "Thomas Roccia"
+  org?: string;           // e.g. "Microsoft"
+  isSection?: boolean;    // true = section header (no dot, accent title)
+  isPause?: boolean;      // true = dashed separator style
+}
+
+interface Props {
+  accentHex: string;
+  items: TimelineItem[];
+}
+
+const { accentHex, items } = Astro.props;
+---
+
+<div class="relative pl-8 sm:pl-0">
+  {items.map((item, i) => {
+    if (item.isSection) {
+      return (
+        <div class="reveal mb-6 mt-10 first:mt-0 sm:ml-[200px] pl-8 sm:pl-10">
+          <div class="h-px w-full mb-4" style={`background: linear-gradient(90deg, ${accentHex}40, transparent);`}></div>
+          <h3
+            class="font-display font-bold text-lg sm:text-xl uppercase tracking-wide"
+            style={`color: ${accentHex};`}
+          >
+            {item.title}
+          </h3>
+        </div>
+      );
+    }
+
+    return (
+      <div class={`reveal relative flex items-start gap-6 sm:gap-0 ${item.isPause ? 'my-6' : 'mb-5'}`}>
+        {/* Time */}
+        <div class="shrink-0 w-[130px] sm:w-[180px] text-right pr-6 sm:pr-8">
+          <span
+            class={`font-mono text-sm sm:text-base font-medium ${item.isPause ? 'opacity-60' : ''}`}
+            style={`color: ${accentHex};`}
+          >
+            {item.time}
+          </span>
+        </div>
+
+        {/* Dot + line */}
+        <div class="relative flex flex-col items-center shrink-0">
+          <span
+            class="relative z-10 w-3 h-3 rounded-full border-2 mt-1.5"
+            style={`background: ${accentHex}; border-color: ${accentHex}60; box-shadow: 0 0 8px ${accentHex}40;`}
+          ></span>
+          {i < items.length - 1 && !item.isSection && (
+            <div
+              class="w-px flex-1 min-h-[24px]"
+              style={`background: ${item.isPause ? `repeating-linear-gradient(to bottom, ${accentHex}30 0px, ${accentHex}30 4px, transparent 4px, transparent 8px)` : `${accentHex}20`};`}
+            ></div>
+          )}
+        </div>
+
+        {/* Content */}
+        <div class={`flex-1 pl-4 sm:pl-6 pb-2 ${item.isPause ? 'italic' : ''}`}>
+          <p class={`text-sm sm:text-base leading-relaxed ${item.isPause ? 'text-white/50' : 'text-white/80'}`}>
+            {item.title}
+            {item.speaker && (
+              <span class="text-white/50">, {item.speaker}</span>
+            )}
+            {item.org && (
+              <span class="font-mono text-xs ml-1 italic" style={`color: ${accentHex}CC;`}>{item.org}</span>
+            )}
+          </p>
+        </div>
+      </div>
+    );
+  })}
+</div>
