@@ -2,8 +2,7 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+.nova-tracer/
 CLAUDE.md
 todo.md
-*.md
-src-backup.nova-tracer/
-.nova-tracer/Logo-membre.png
+Logo-membre.png
