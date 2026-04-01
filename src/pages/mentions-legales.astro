@@ -17,29 +17,39 @@ import Footer from '../components/Footer.astro';
       <!-- Editeur du site -->
       <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">Editeur du site</h2>
-        <p class="text-white/70 leading-relaxed">
-          CLUSIR Reunion Ocean Indien
-        </p>
-        <p class="text-white/70 leading-relaxed mt-2">
-          Contact : <a href="mailto:team@cybertour.re" class="text-gold hover:underline">team@cybertour.re</a>
-        </p>
+        <div class="text-white/70 leading-relaxed space-y-1">
+          <p><strong class="text-white">CLUSIR ROI</strong> — Club de la Securite de l'Information en Reseau — Reunion et Ocean Indien</p>
+          <p>Association loi 1901</p>
+          <p>SIREN : 539 437 426 | SIRET : 539 437 426 00023</p>
+          <p>RNA : W9R1003737</p>
+          <p>Siege social : Immeuble Altea, 41 rue de la Pepiniere, 97438 Sainte-Marie, La Reunion</p>
+          <p>Comite d'organisation : <a href="mailto:team@cybertour.re" class="text-gold hover:underline">team@cybertour.re</a></p>
+        </div>
       </section>
 
       <!-- Directeur de la publication -->
       <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">Directeur de la publication</h2>
         <p class="text-white/70 leading-relaxed">
-          A definir.
+          Le directeur de la publication est le President du CLUSIR Reunion Ocean Indien.
         </p>
       </section>
 
       <!-- Hebergement -->
       <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">Hebergement</h2>
+        <div class="text-white/70 leading-relaxed space-y-1">
+          <p><strong class="text-white">GitHub Pages</strong> — GitHub, Inc.</p>
+          <p>88 Colin P. Kelly Jr St, San Francisco, CA 94107, United States</p>
+          <p>Code source : <a href="https://github.com/thibautfontaine/cybertour-web" target="_blank" rel="noopener" class="text-gold hover:underline">github.com/thibautfontaine/cybertour-web</a></p>
+        </div>
+      </section>
+
+      <!-- Conception et developpement -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">Conception et developpement</h2>
         <p class="text-white/70 leading-relaxed">
-          Ce site est heberge par <strong class="text-white">GitHub Pages</strong> (GitHub, Inc.).<br/>
-          Adresse : 88 Colin P Kelly Jr St, San Francisco, CA 94107, United States.<br/>
-          Code source : <a href="https://github.com/thibautfontaine/cybertour-web" target="_blank" rel="noopener" class="text-gold hover:underline">github.com/thibautfontaine/cybertour-web</a>
+          <a href="https://www.linkedin.com/in/thibaut-fontaine" target="_blank" rel="noopener" class="text-gold hover:underline">Thibaut Fontaine</a> — Membre du bureau du CLUSIR Reunion Ocean Indien.
         </p>
       </section>
 
@@ -47,35 +57,41 @@ import Footer from '../components/Footer.astro';
       <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">Propriete intellectuelle</h2>
         <p class="text-white/70 leading-relaxed">
-          L'ensemble des contenus (textes, images, logos, elements graphiques, videos) figurant sur ce site
-          est protege par les dispositions du Code de la propriete intellectuelle. Toute reproduction,
-          representation, modification, publication, adaptation de tout ou partie des elements du site,
-          quel que soit le moyen ou le procede utilise, est interdite sans l'autorisation ecrite prealable
-          du CLUSIR Reunion Ocean Indien.
-        </p>
-        <p class="text-white/70 leading-relaxed mt-4">
-          Toute exploitation non autorisee du site ou de l'un quelconque des elements qu'il contient
-          sera consideree comme constitutive d'une contrefacon et poursuivie conformement aux dispositions
-          des articles L.335-2 et suivants du Code de la propriete intellectuelle.
+          L'ensemble des contenus de ce site (textes, images, logos, elements graphiques, videos)
+          est protege par le Code de la propriete intellectuelle. Toute reproduction ou representation,
+          totale ou partielle, est interdite sans autorisation ecrite du CLUSIR Reunion Ocean Indien.
         </p>
       </section>
 
       <!-- Donnees personnelles et cookies -->
       <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">Donnees personnelles et cookies</h2>
-        <ul class="text-white/70 leading-relaxed space-y-3">
-          <li>Ce site ne collecte aucune donnee personnelle.</li>
-          <li>Ce site n'utilise aucun cookie ni traceur.</li>
-          <li>Aucun outil de suivi ou d'analyse n'est utilise.</li>
+        <p class="text-white/70 leading-relaxed mb-4">
+          Conformement au Reglement General sur la Protection des Donnees (RGPD) et a la loi Informatique et Libertes :
+        </p>
+        <ul class="text-white/70 leading-relaxed space-y-2 list-disc list-inside">
+          <li>Ce site <strong class="text-white">ne collecte aucune donnee personnelle</strong>.</li>
+          <li>Ce site <strong class="text-white">n'utilise aucun cookie</strong> ni traceur.</li>
+          <li>Aucun outil de suivi, d'analyse ou de profilage n'est deploye.</li>
+          <li>Aucune donnee n'est transmise a des tiers.</li>
         </ul>
+      </section>
+
+      <!-- Liens externes -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">Liens externes</h2>
+        <p class="text-white/70 leading-relaxed">
+          Ce site peut contenir des liens vers des sites tiers. Le CLUSIR Reunion Ocean Indien
+          ne saurait etre tenu responsable du contenu de ces sites externes ni de leur politique
+          de protection des donnees personnelles.
+        </p>
       </section>
 
       <!-- Contact -->
       <section class="reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">Contact</h2>
         <p class="text-white/70 leading-relaxed">
-          Pour toute question relative au site ou a l'evenement Cyber Tour Reunion 2026, vous pouvez
-          nous contacter a l'adresse suivante :
+          Pour toute question relative au site ou a l'evenement :
           <a href="mailto:team@cybertour.re" class="text-gold hover:underline">team@cybertour.re</a>
         </p>
       </section>

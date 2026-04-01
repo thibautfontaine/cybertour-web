@@ -2,8 +2,26 @@
 import StageLayout from '../layouts/StageLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Timeline, { type TimelineItem } from '../components/Timeline.astro';
 import { stages } from '../data/stages';
 const stage = stages.find(s => s.id === 'ouest')!;
+
+const programme: TimelineItem[] = [
+  { time: '08:30 - 09:00', title: 'Accueil des participants' },
+  { time: '09:00 - 09:15', title: 'Introduction et mot de bienvenue', speaker: 'CLUSIR ROI' },
+  { isSection: true, title: 'Presentations solutions cyber' },
+  { time: '09:15 - 09:45', title: 'Presentation offreur 1', org: 'A CONFIRMER' },
+  { time: '09:45 - 10:15', title: 'Presentation offreur 2', org: 'A CONFIRMER' },
+  { time: '10:15 - 10:45', title: 'Pause cafe et networking', isPause: true },
+  { time: '10:45 - 11:15', title: 'Presentation offreur 3', org: 'A CONFIRMER' },
+  { time: '11:15 - 11:45', title: 'Presentation offreur 4', org: 'A CONFIRMER' },
+  { isSection: true, title: 'Tables rondes thematiques' },
+  { time: '11:45 - 12:30', title: 'Table ronde : Securiser le tissu economique reunionnais' },
+  { time: '12:30 - 14:00', title: 'Dejeuner et rencontres B2B', isPause: true },
+  { isSection: true, title: 'Gestion de crise' },
+  { time: '14:00 - 15:30', title: 'Atelier pratique : simulation d\'incident cyber en conditions reelles', speaker: 'Anime par le CLUSIR Reunion Ocean Indien', org: 'CLUSIR ROI' },
+  { time: '15:30 - 16:00', title: 'Retour d\'experience et cloture' },
+];
 ---
 
 <StageLayout stage={stage}>
@@ -19,6 +37,11 @@ const stage = stages.find(s => s.id === 'ouest')!;
           Une journee au format B2B dediee aux rencontres entre offreurs de solutions cyber et entreprises reunionnaises.
           Presentations de solutions, tables rondes thematiques et networking pour repondre aux enjeux de securite du tissu economique local.
         </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="reveal delay-1 mt-14">
+        <Timeline accentHex={stage.accentHex} items={programme} />
       </div>
 
       <!-- Programme cards -->

@@ -2,8 +2,43 @@
 import StageLayout from '../layouts/StageLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Timeline from '../components/Timeline.astro';
+import type { TimelineItem } from '../components/Timeline.astro';
 import { stages } from '../data/stages';
 const stage = stages.find(s => s.id === 'sud')!;
+
+const programmeJ1: TimelineItem[] = [
+  { time: '08:00 - 08:45', title: 'Accueil des participants et petit-dejeuner' },
+  { time: '09:00 - 09:30', title: 'Discours de bienvenue' },
+  { isSection: true, title: 'Souverainete numerique' },
+  { time: '09:30 - 10:00', title: 'Enjeux locaux et nationaux de la souverainete numerique', org: 'A CONFIRMER' },
+  { time: '10:00 - 10:30', title: 'Cloud de confiance et cadre reglementaire europeen', org: 'A CONFIRMER' },
+  { time: '10:30 - 11:00', title: 'Table ronde, questions/reponses avec la salle' },
+  { isSection: true, title: 'Securite des systemes IA' },
+  { time: '11:00 - 11:30', title: 'OWASP Top 10 GenAI : les risques de l\'IA generative', org: 'A CONFIRMER' },
+  { time: '11:30 - 12:00', title: 'Protection des modeles et exfiltration de donnees', org: 'A CONFIRMER' },
+  { time: '12:00 - 13:45', title: 'Cocktail dejeunatoire, reseautage et rencontres professionnels - etudiants', isPause: true },
+  { isSection: true, title: 'SOC, defense proactive & Zero Trust' },
+  { time: '14:00 - 14:30', title: 'Architectures Zero Trust : retour d\'experience', org: 'A CONFIRMER' },
+  { time: '14:30 - 15:00', title: 'SOC et defense proactive : detecter avant l\'impact', org: 'A CONFIRMER' },
+  { time: '15:00 - 15:30', title: 'Chiffrement et securisation du code source', org: 'A CONFIRMER' },
+  { isSection: true, title: 'RETEX Cyber' },
+  { time: '15:30 - 16:00', title: 'Retour d\'experience : gestion d\'une crise cyber', org: 'A CONFIRMER' },
+  { time: '16:00 - 17:00', title: 'Table ronde et cloture de la journee' },
+];
+
+const programmeJ2: TimelineItem[] = [
+  { time: '08:30 - 09:00', title: 'Accueil des participants' },
+  { time: '09:00 - 09:15', title: 'Briefing de la journee ateliers' },
+  { isSection: true, title: 'Ateliers du matin (2 sessions paralleles)' },
+  { time: '09:15 - 12:00', title: 'CTF (Capture The Flag) — Competition de hacking ethique en equipe' },
+  { time: '09:15 - 12:00', title: 'Gestion de crise — Simulation d\'incident cyber (groupes de 4-6)' },
+  { time: '12:00 - 13:30', title: 'Dejeuner', isPause: true },
+  { isSection: true, title: 'Ateliers de l\'apres-midi (2 sessions paralleles)' },
+  { time: '13:30 - 16:30', title: 'Escape Game Cyber Reunion — Escape game immersif cybersecurite' },
+  { time: '13:30 - 16:30', title: 'OSINT — Atelier de recherche en sources ouvertes' },
+  { time: '16:30 - 17:00', title: 'Remise des prix CTF et cloture du CyberTour 2026' },
+];
 
 const ateliers = [
   {
@@ -80,26 +115,11 @@ const ateliers = [
           </div>
         </div>
 
-        <!-- Programme timeline placeholder -->
-        <div class="reveal delay-3 mt-10 space-y-4">
+        <!-- Programme timeline J1 -->
+        <div class="reveal delay-3 mt-10">
           <h3 class="font-display font-semibold text-xl mb-6">Programme</h3>
-          {[
-            { time: '09:00', label: 'Accueil & cafe' },
-            { time: '09:30', label: 'Keynote d\'ouverture' },
-            { time: '10:30', label: 'Conference technique #1' },
-            { time: '11:30', label: 'Conference technique #2' },
-            { time: '12:30', label: 'Dejeuner networking' },
-            { time: '14:00', label: 'Conference technique #3' },
-            { time: '15:00', label: 'Conference technique #4' },
-            { time: '16:00', label: 'Table ronde & cloture' },
-          ].map(item => (
-            <div class="flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] rounded-xl px-5 py-3 hover:border-red-400/20 transition-colors">
-              <span class="font-mono text-sm text-red-400 shrink-0 w-14">{item.time}</span>
-              <span class="w-px h-5 bg-white/10"></span>
-              <span class="font-body text-white/70 text-sm">{item.label}</span>
-            </div>
-          ))}
-          <p class="text-white/45 text-xs font-mono mt-4">Programme provisoire — sous reserve de modifications.</p>
+          <Timeline accentHex={stage.accentHex} items={programmeJ1} />
+          <p class="text-white/45 text-xs font-mono mt-6">Programme provisoire — sous reserve de modifications.</p>
         </div>
       </div>
 
@@ -129,8 +149,16 @@ const ateliers = [
           </div>
         </div>
 
+        <!-- Programme timeline J2 -->
+        <div class="reveal delay-3 mt-10">
+          <h3 class="font-display font-semibold text-xl mb-6">Programme</h3>
+          <Timeline accentHex={stage.accentHex} items={programmeJ2} />
+          <p class="text-white/45 text-xs font-mono mt-6">Programme provisoire — sous reserve de modifications.</p>
+        </div>
+
         <!-- Atelier cards -->
         <div class="reveal delay-3 mt-10">
+          <h3 class="font-display font-semibold text-xl mb-6">Les ateliers en detail</h3>
           <div class="grid sm:grid-cols-2 gap-6">
             {ateliers.map(atelier => (
               <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">

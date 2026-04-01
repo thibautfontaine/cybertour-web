@@ -8,16 +8,16 @@ import PartnerPyramid from '../components/PartnerPyramid.astro';
 import { stages } from '../data/stages';
 ---
 
-<Layout title="Cyber Tour Reunion 2026 | 19-24 Octobre - 4 Etapes">
+<Layout title="Cyber Tour Reunion 2026 | 19-23 Octobre - 4 Etapes">
 
   <!-- ===== NAVBAR ===== -->
   <Navbar />
 
   <!-- ===== HERO ===== -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <section id="main-content" class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background image with overlay -->
     <div class="absolute inset-0">
-      <img src="/assets/hero-bg.jpg" alt="" class="w-full h-full object-cover" loading="eager" />
+      <img src="/assets/hero-bg.jpg" alt="" width="1920" height="1080" class="w-full h-full object-cover" loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/70 to-navy-dark"></div>
     </div>
 
@@ -65,7 +65,7 @@ import { stages } from '../data/stages';
             <rect x="3" y="4" width="18" height="18" rx="2"/>
             <path d="M16 2v4M8 2v4M3 10h18"/>
           </svg>
-          <span class="font-display font-semibold text-lg tracking-wide">19 &mdash; 24 OCTOBRE 2026</span>
+          <span class="font-display font-semibold text-lg tracking-wide">19 &mdash; 23 OCTOBRE 2026</span>
         </div>
         <span class="hidden sm:block w-1 h-1 bg-gold rounded-full"></span>
         <div class="flex items-center gap-2">
@@ -194,7 +194,7 @@ import { stages } from '../data/stages';
           4 etapes a travers <span class="text-gold">toute l'ile</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          Du lundi au vendredi, 4 lieux, 4 publics. Chaque etape a sa thematique.
+          Chaque jour, un lieu. Chaque lieu, un enjeu. De Saint-Denis a Saint-Pierre, la cybersecurite fait le tour de l'ile.
         </p>
       </div>
       <MapReunion />
@@ -299,6 +299,22 @@ import { stages } from '../data/stages';
         </p>
       </div>
 
+      <!-- Stats 2025 -->
+      <div class="reveal delay-1 grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+        <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+          <span class="block font-display font-extrabold text-3xl text-gold">220</span>
+          <span class="text-sm text-white/50 mt-1">Participants</span>
+        </div>
+        <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+          <span class="block font-display font-extrabold text-3xl text-gold">150</span>
+          <span class="text-sm text-white/50 mt-1">En presentiel</span>
+        </div>
+        <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+          <span class="block font-display font-extrabold text-3xl text-gold">600+</span>
+          <span class="text-sm text-white/50 mt-1">Vues replay</span>
+        </div>
+      </div>
+
       <div class="reveal delay-2">
         <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-navy/50 aspect-video">
           <iframe
@@ -321,7 +337,7 @@ import { stages } from '../data/stages';
       <div class="reveal mb-12 text-center px-6">
         <span class="font-mono text-gold/80 text-sm tracking-widest uppercase">05 // Partenaires</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Ils soutiennent <span class="text-gold">l'evenement</span>
+          L'ecosysteme <span class="text-gold">CyberTour</span>
         </h2>
       </div>
       <PartnerPyramid />
@@ -336,10 +352,10 @@ import { stages } from '../data/stages';
       <div class="reveal mb-20 text-center">
         <span class="font-mono text-gold/80 text-sm tracking-widest uppercase">06 // Devenir Sponsor</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
-          Soutenez <span class="text-gold">l'evenement</span>
+          Devenez <span class="text-gold">partenaire</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          Trois niveaux de partenariat pour accompagner la cybersecurite a La Reunion.
+          Trois niveaux de sponsoring pour accompagner la cybersecurite a La Reunion.
         </p>
       </div>
 
@@ -355,7 +371,7 @@ import { stages } from '../data/stages';
               </svg>
             </div>
             <h3 class="font-display font-bold text-2xl">Bronze</h3>
-            <p class="font-mono text-gold text-xl font-bold mt-2">1 000 &euro;</p>
+            <p class="font-mono text-clusir-red text-xl font-bold mt-2">1 000 &euro;</p>
             <p class="text-white/55 text-sm mt-1">A partir de</p>
           </div>
           <ul class="space-y-3">
@@ -387,7 +403,7 @@ import { stages } from '../data/stages';
               </svg>
             </div>
             <h3 class="font-display font-bold text-2xl">Silver</h3>
-            <p class="font-mono text-gold text-xl font-bold mt-2">3 000 &euro;</p>
+            <p class="font-mono text-clusir-red text-xl font-bold mt-2">3 000 &euro;</p>
             <p class="text-white/55 text-sm mt-1">A partir de</p>
           </div>
           <ul class="space-y-3">
@@ -420,7 +436,7 @@ import { stages } from '../data/stages';
               </svg>
             </div>
             <h3 class="font-display font-bold text-2xl text-gold">Gold</h3>
-            <p class="font-mono text-gold text-xl font-bold mt-2">5 000 &euro;</p>
+            <p class="font-mono text-clusir-red text-xl font-bold mt-2">5 000 &euro;</p>
             <p class="text-white/55 text-sm mt-1">A partir de</p>
           </div>
           <ul class="space-y-3">
@@ -442,7 +458,7 @@ import { stages } from '../data/stages';
             </li>
             <li class="flex items-start gap-3 text-white/70 text-sm">
               <svg class="w-5 h-5 text-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-              Mot d'introduction (2 min)
+              Mot d'introduction (5 min)
             </li>
           </ul>
           <div class="mt-8">
