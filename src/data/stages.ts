@@ -28,18 +28,18 @@ export const stages: Stage[] = [
     lieu: "Campus Moufia - Universite de La Reunion",
     lieuFull:
       "Campus du Moufia, Allee des Aigues-Marines, 97490 Sainte-Clotilde",
-    capacity: 500,
-    theme: "Institutionnel & Table Ronde",
+    capacity: 150,
+    theme: "Institutionnel & Tables Rondes",
     description:
-      "Ouverture officielle du CyberTour Reunion avec les acteurs institutionnels de la cybersecurite. Tables rondes strategiques reunissant les decideurs publics et prives autour des enjeux de souverainete numerique. Une journee pour poser le cadre et les ambitions de la cybersecurite a La Reunion.",
+      "Matinee d'ouverture officielle du CyberTour Reunion (8h-12h). Rencontres institutionnelles, interventions des personnalites publiques et tables rondes strategiques autour de la souverainete numerique. Presentation du parcours CyberTour 2026.",
     accent: "gold",
     accentHex: "#ce463a",
     trackNumber: "01",
     href: "/nord",
     highlights: [
       "Acteurs institutionnels",
-      "Table ronde",
-      "Networking VIP",
+      "Tables rondes",
+      "Personnalites publiques",
     ],
   },
   {
@@ -52,14 +52,14 @@ export const stages: Stage[] = [
     lieu: "Office de l'Eau",
     lieuFull: "Office de l'Eau Reunion, Le Port",
     capacity: 50,
-    theme: "Rencontre Offreurs & Entreprises",
+    theme: "Offreurs Cyber a La Reunion",
     description:
-      "Journee dediee aux rencontres entre offreurs de solutions cyber et entreprises reunionnaises. Un format B2B privilegie pour decouvrir les solutions adaptees au tissu economique local. Networking et echanges concrets pour securiser vos systemes d'information.",
+      "Journee dediee a l'ecosysteme cyber reunionnais. Gestion de crise le matin, presentations thematiques par les offreurs locaux l'apres-midi. Chaque intervenant aborde une problematique concrete, pas un catalogue de services.",
     accent: "cyan",
     accentHex: "#5b8cc9",
     trackNumber: "02",
     href: "/ouest",
-    highlights: ["Solutions cyber", "Rencontres B2B"],
+    highlights: ["Gestion de crise", "Thematiques cyber", "Ecosysteme local"],
   },
   {
     id: "est",
@@ -73,12 +73,12 @@ export const stages: Stage[] = [
     capacity: 50,
     theme: "Formations Cyber a La Reunion",
     description:
-      "Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Presentations des cursus par les ecoles, suivies de conferences et tables rondes sur les metiers et debouches de la cybersecurite.",
+      "Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Presentations des cursus par les ecoles le matin, puis escape game et conference d'un intervenant externe l'apres-midi.",
     accent: "emerald",
     accentHex: "#4db6ac",
     trackNumber: "03",
     href: "/est",
-    highlights: ["Formations cyber", "Conferences", "Tables rondes"],
+    highlights: ["Formations cyber", "Escape Game", "Conference"],
   },
   {
     id: "sud",
@@ -93,7 +93,7 @@ export const stages: Stage[] = [
     capacity: 150,
     theme: "Conferences & Ateliers Techniques",
     description:
-      "Deux jours de conferences techniques et d'ateliers pratiques pour les passionnes de cybersecurite. CTF, Escape Game, OSINT et exercices de gestion de crise au programme. Le rendez-vous technique incontournable du CyberTour.",
+      "Deux jours de conferences techniques et d'ateliers pratiques. Jour 1 : conferences en amphi. Jour 2 : CTF Tahir, Escape Game, gestion de crise, OSINT, scene ouverte (Rumps) et rencontres professionnelles. Le point d'orgue du CyberTour.",
     accent: "red",
     accentHex: "#e6a23c",
     trackNumber: "04",
@@ -101,7 +101,7 @@ export const stages: Stage[] = [
     highlights: [
       "Conferences techniques",
       "CTF & Ateliers",
-      "Gestion de crise",
+      "Rumps & Scene ouverte",
     ],
   },
 ];

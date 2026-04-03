@@ -30,21 +30,25 @@ const programmeJ1: TimelineItem[] = [
 const programmeJ2: TimelineItem[] = [
   { time: '08:30 - 09:00', title: 'Accueil des participants' },
   { time: '09:00 - 09:15', title: 'Briefing de la journee ateliers' },
-  { isSection: true, title: 'Ateliers du matin (2 sessions paralleles)' },
-  { time: '09:15 - 12:00', title: 'CTF (Capture The Flag) — Competition de hacking ethique en equipe' },
-  { time: '09:15 - 12:00', title: 'Gestion de crise — Simulation d\'incident cyber (groupes de 4-6)' },
-  { time: '12:00 - 13:30', title: 'Dejeuner', isPause: true },
-  { isSection: true, title: 'Ateliers de l\'apres-midi (2 sessions paralleles)' },
-  { time: '13:30 - 16:30', title: 'Escape Game Cyber Reunion — Escape game immersif cybersecurite' },
-  { time: '13:30 - 16:30', title: 'OSINT — Atelier de recherche en sources ouvertes' },
-  { time: '16:30 - 17:00', title: 'Remise des prix CTF et cloture du CyberTour 2026' },
+  { isSection: true, title: 'Ateliers du matin (sessions paralleles)' },
+  { time: '09:15 - 12:00', title: 'CTF Tahir — Competition de hacking ethique en equipe (toute la journee)' },
+  { time: '09:15 - 12:00', title: 'Gestion de crise — Simulation d\'incident cyber (4-6 groupes, session matin)', org: 'CLUSIR ROI' },
+  { time: '12:00 - 13:30', title: 'Dejeuner et rencontres professionnelles', isPause: true },
+  { isSection: true, title: 'Ateliers de l\'apres-midi (sessions paralleles)' },
+  { time: '13:30 - 16:30', title: 'CTF Tahir — Suite de la competition' },
+  { time: '13:30 - 16:30', title: 'Escape Game Cyber Reunion — Escape game immersif cybersecurite', org: 'CYBER REUNION' },
+  { time: '13:30 - 16:30', title: 'Atelier technique approfondi (ex : OSINT)', org: 'A CONFIRMER' },
+  { time: '13:30 - 16:30', title: 'Gestion de crise — Session apres-midi (4-6 groupes)', org: 'CLUSIR ROI' },
+  { isSection: true, title: 'Scene ouverte & Cloture' },
+  { time: '16:30 - 17:30', title: 'Rumps — Scene ouverte : presentations libres de 5 a 10 minutes' },
+  { time: '17:30 - 18:00', title: 'Remise des prix CTF et cloture officielle du CyberTour 2026' },
 ];
 
 const ateliers = [
   {
     icon: '\u{1F3F4}',
-    title: 'CTF (Capture The Flag)',
-    desc: 'Competition de hacking ethique : resolvez des challenges de securite en equipe.',
+    title: 'CTF Tahir',
+    desc: 'Competition de hacking ethique sur la journee entiere : resolvez des challenges de securite en equipe.',
   },
   {
     icon: '\u{1F510}',
@@ -52,14 +56,24 @@ const ateliers = [
     desc: 'Escape game immersif sur le theme de la cybersecurite, concu par Cyber Reunion.',
   },
   {
-    icon: '\u{1F50D}',
-    title: 'OSINT',
-    desc: 'Atelier de recherche en sources ouvertes : techniques d\'investigation numerique.',
-  },
-  {
     icon: '\u{1F6A8}',
     title: 'Gestion de crise',
-    desc: 'Simulation de gestion d\'incident cyber en conditions reelles, en equipe.',
+    desc: 'Simulation de gestion d\'incident cyber en conditions reelles. 4 a 6 groupes, sessions matin et apres-midi.',
+  },
+  {
+    icon: '\u{1F50D}',
+    title: 'Atelier technique (OSINT)',
+    desc: 'Atelier technique approfondi : techniques d\'investigation numerique en sources ouvertes.',
+  },
+  {
+    icon: '\u{1F3A4}',
+    title: 'Rumps — Scene ouverte',
+    desc: 'Presentations libres de 5 a 10 minutes. Partagez un projet, un outil, un retour d\'experience.',
+  },
+  {
+    icon: '\u{1F4BC}',
+    title: 'Rencontres professionnelles',
+    desc: 'Rencontres sponsors en one-to-one et atelier de recherche de stage avec les entreprises presentes.',
   },
 ];
 ---
@@ -167,6 +181,23 @@ const ateliers = [
                 <p class="text-white/50 text-sm font-body">{atelier.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        <!-- Appel a soumission Rumps -->
+        <div class="reveal delay-4 mt-10">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-2xl p-8 text-center">
+            <h3 class="font-display font-bold text-2xl mb-3">Appel a soumission — Scene ouverte (Rumps)</h3>
+            <p class="text-white/50 text-sm font-body max-w-xl mx-auto mb-6">
+              Vous avez un projet, un outil, un retour d'experience a partager ?
+              Proposez une presentation de 5 a 10 minutes lors de la scene ouverte du CyberTour.
+            </p>
+            <a href="mailto:team@cybertour.re?subject=Soumission%20Rumps%20CyberTour%202026" class="btn-primary inline-flex items-center gap-3 rounded-xl">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Soumettre une presentation
+            </a>
           </div>
         </div>
       </div>
