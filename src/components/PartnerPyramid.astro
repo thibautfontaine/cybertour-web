@@ -151,7 +151,7 @@ const tiers: SponsorTier[] = [
           <!-- Sponsor logos -->
           <div class="flex flex-wrap items-center justify-center gap-4">
             {tier.sponsors.map(s => (
-              <div class={`partner-bubble ${tier.padding} flex items-center gap-3 ${tier.accentBorder} border`}>
+              <div class={`${tier.padding} flex items-center gap-3 ${tier.accentBg} ${tier.accentBorder} border rounded-2xl transition-transform duration-300 hover:-translate-y-1`}>
                 <div class={`shrink-0 w-12 h-12 rounded-lg ${tier.accentBg} ${tier.accentBorder} border flex items-center justify-center`}>
                   <span class={`font-mono font-bold ${tier.textSize} ${tier.accent}`}>{s.initials}</span>
                 </div>
