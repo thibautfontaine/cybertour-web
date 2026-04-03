@@ -1,29 +1,91 @@
 ---
 /**
  * PartnerPyramid — pyramid layout of partners and sponsors,
- * narrowest at top (organisateur) widening to bronze tier at bottom.
+ * narrowest at top (organisateur/platinium) widening to bronze tier at bottom.
+ * Includes sponsor pack details with pricing and benefits.
  */
 
-interface SponsorEntry {
+interface SponsorTier {
   name: string;
+  price: string;
+  exclusive?: string;
+  benefits: string[];
+  accent: string;
+  accentBorder: string;
+  accentBg: string;
+  textSize: string;
+  padding: string;
 }
 
-const sponsorsGold: SponsorEntry[] = [
-  { name: "CyberShield Corp" },
-  { name: "SecureIsland" },
-];
-
-const sponsorsSilver: SponsorEntry[] = [
-  { name: "DataFortress" },
-  { name: "NetGuard Pro" },
-  { name: "IslandSec" },
-];
-
-const sponsorsBronze: SponsorEntry[] = [
-  { name: "CyberLab 974" },
-  { name: "SecuRun" },
-  { name: "DigiSafe" },
-  { name: "TechShield IO" },
+const tiers: SponsorTier[] = [
+  {
+    name: 'Platinium — Partenaire Principal',
+    price: '10 000 €',
+    exclusive: 'Exclusif : 1 seul sponsor',
+    benefits: [
+      'Tout le pack Gold +',
+      'Co-branding d\'un atelier ("Atelier presente avec [Sponsor]")',
+      'Presence sur 2 etapes (SUD + 1 etape au choix)',
+      'Prise de parole de 5 minutes',
+      'Post dedie sur les reseaux sociaux',
+      'Logo sur les badges participants',
+      'Invitation au diner speakers & organisateurs',
+      'Bilan de visibilite post-evenement',
+    ],
+    accent: 'text-purple-300',
+    accentBorder: 'border-purple-400/40',
+    accentBg: 'bg-purple-400/[0.06]',
+    textSize: 'text-lg',
+    padding: 'px-10 py-5',
+  },
+  {
+    name: 'Gold',
+    price: 'A partir de 5 000 €',
+    benefits: [
+      'Logo grande taille en tete d\'affiche sur le site web',
+      'Logo grande taille sur les supports de communication',
+      'Mention sur les reseaux sociaux',
+      'Goodies integres a ceux de l\'evenement',
+      'Espace stand sur l\'etape SUD (2 personnes marketing max)',
+      'Possibilite de fournir des goodies et/ou Ticket d\'Or',
+      'Mot d\'introduction 2 min max',
+    ],
+    accent: 'text-gold',
+    accentBorder: 'border-gold/40',
+    accentBg: 'bg-gold/[0.06]',
+    textSize: 'text-lg',
+    padding: 'px-10 py-5',
+  },
+  {
+    name: 'Silver',
+    price: 'A partir de 3 000 €',
+    benefits: [
+      'Logo taille moyenne sur le site web',
+      'Logo taille moyenne sur les supports de communication',
+      'Mention sur les reseaux sociaux',
+      'Goodies integres a ceux de l\'evenement',
+      '2 supports visuels kakemono a l\'exterieur',
+    ],
+    accent: 'text-gray-300',
+    accentBorder: 'border-gray-400/40',
+    accentBg: 'bg-gray-400/[0.06]',
+    textSize: 'text-base',
+    padding: 'px-7 py-3.5',
+  },
+  {
+    name: 'Bronze',
+    price: 'A partir de 1 000 €',
+    benefits: [
+      'Logo taille standard sur le site web',
+      'Logo taille standard sur les supports de communication',
+      'Mention sur les reseaux sociaux',
+    ],
+    accent: 'text-amber-600',
+    accentBorder: 'border-amber-600/40',
+    accentBg: 'bg-amber-600/[0.06]',
+    textSize: 'text-sm',
+    padding: 'px-5 py-2.5',
+  },
 ];
 ---
 
@@ -93,51 +155,39 @@ const sponsorsBronze: SponsorEntry[] = [
         <div class="w-px h-8 bg-white/10"></div>
       </div>
 
-      <!-- Level 3 — Sponsors Gold (large) -->
-      <div class="reveal delay-2 flex flex-col items-center gap-4 max-w-3xl w-full">
-        <span class="font-mono text-sm tracking-widest uppercase text-gold">
-          Sponsors Gold
-        </span>
-        <div class="flex flex-wrap items-center justify-center gap-6">
-          {sponsorsGold.map((s) => (
-            <div class="bg-white/[0.03] border border-gold/40 rounded-xl px-10 py-5 font-display font-bold text-lg text-gold/90 sponsor-card cursor-default">
-              {s.name}
-            </div>
-          ))}
-        </div>
-        <!-- Connecting line -->
-        <div class="w-px h-8 bg-white/10"></div>
-      </div>
+      <!-- Sponsor Tiers -->
+      {tiers.map((tier, i) => (
+        <div class={`reveal delay-${i + 2} flex flex-col items-center gap-6 w-full ${i === 0 ? 'max-w-2xl' : i === 1 ? 'max-w-3xl' : i === 2 ? 'max-w-4xl' : 'max-w-5xl'}`}>
+          <span class={`font-mono text-sm tracking-widest uppercase ${tier.accent}`}>
+            Sponsor {tier.name}
+          </span>
 
-      <!-- Level 4 — Sponsors Silver (medium) -->
-      <div class="reveal delay-3 flex flex-col items-center gap-4 max-w-4xl w-full">
-        <span class="font-mono text-xs tracking-widest uppercase text-gray-300">
-          Sponsors Silver
-        </span>
-        <div class="flex flex-wrap items-center justify-center gap-4">
-          {sponsorsSilver.map((s) => (
-            <div class="bg-white/[0.03] border border-gray-400/40 rounded-xl px-7 py-3.5 font-display font-semibold text-base text-gray-300 sponsor-card cursor-default">
-              {s.name}
+          <!-- Tier card -->
+          <div class={`${tier.accentBg} ${tier.accentBorder} border rounded-2xl p-6 sm:p-8 w-full`}>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <span class={`font-display font-bold ${tier.textSize} ${tier.accent}`}>{tier.price}</span>
+              {tier.exclusive && (
+                <span class="font-mono text-xs tracking-wider uppercase text-purple-300/70 bg-purple-400/10 px-3 py-1 rounded-full">
+                  {tier.exclusive}
+                </span>
+              )}
             </div>
-          ))}
-        </div>
-        <!-- Connecting line -->
-        <div class="w-px h-8 bg-white/10"></div>
-      </div>
+            <ul class="space-y-2">
+              {tier.benefits.map(b => (
+                <li class="flex items-start gap-2 text-white/60 text-sm font-body">
+                  <span class={`shrink-0 mt-1 ${tier.accent}`}>&bull;</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <!-- Level 5 — Sponsors Bronze (small) -->
-      <div class="reveal delay-4 flex flex-col items-center gap-4 max-w-5xl w-full">
-        <span class="font-mono text-xs tracking-widest uppercase text-amber-600">
-          Sponsors Bronze
-        </span>
-        <div class="flex flex-wrap items-center justify-center gap-3">
-          {sponsorsBronze.map((s) => (
-            <div class="bg-white/[0.03] border border-amber-600/40 rounded-xl px-5 py-2.5 font-display font-medium text-sm text-amber-600/90 sponsor-card cursor-default">
-              {s.name}
-            </div>
-          ))}
+          <!-- Connecting line (except last) -->
+          {i < tiers.length - 1 && (
+            <div class="w-px h-8 bg-white/10"></div>
+          )}
         </div>
-      </div>
+      ))}
 
     </div>
   </div>

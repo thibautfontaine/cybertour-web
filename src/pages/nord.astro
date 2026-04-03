@@ -37,11 +37,24 @@ const programme: TimelineItem[] = [
 
       <Timeline accentHex={stage.accentHex} items={programme} />
 
+      <!-- Co-organisateurs -->
+      <div class="reveal delay-1 mt-16">
+        <h3 class="font-display font-semibold text-xl mb-8">Co-organisateurs</h3>
+        <div class="flex flex-wrap items-center justify-center gap-8">
+          <div class="partner-bubble px-6 py-3">
+            <img src="/assets/logo-clusir.png" alt="CLUSIR Reunion Ocean Indien" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+          </div>
+          <div class="partner-bubble px-6 py-3">
+            <img src="/assets/logo-univ-reunion.png" alt="Universite de La Reunion" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
       <!-- Institutional partners logos -->
       <div class="reveal delay-2 mt-16">
         <h3 class="font-display font-semibold text-xl mb-8">Acteurs institutionnels attendus</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {['Region Reunion', 'Prefecture', 'ANSSI', 'Viginum', 'DINUM', 'SGDSN', 'Renater', 'CCI Reunion', 'Cyber Reunion', 'Universite de La Reunion'].map(name => (
+          {['Region Reunion', 'Prefecture', 'ANSSI', 'Viginum', 'DINUM', 'SGDSN', 'Renater', 'CCI Reunion', 'Cyber Reunion'].map(name => (
             <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-gold/20 transition-colors">
               <span class="font-display font-semibold text-sm text-white/70">{name}</span>
             </div>
