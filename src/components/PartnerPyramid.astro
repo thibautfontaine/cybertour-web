@@ -2,7 +2,6 @@
 /**
  * PartnerPyramid — pyramid layout of partners and sponsors,
  * narrowest at top (organisateur/platinium) widening to bronze tier at bottom.
- * Includes sponsor pack details with pricing and benefits.
  */
 
 interface Sponsor {
@@ -13,9 +12,6 @@ interface Sponsor {
 
 interface SponsorTier {
   name: string;
-  price: string;
-  exclusive?: string;
-  benefits: string[];
   sponsors: Sponsor[];
   accent: string;
   accentBorder: string;
@@ -27,20 +23,8 @@ interface SponsorTier {
 const tiers: SponsorTier[] = [
   {
     name: 'Platinium — Partenaire Principal',
-    price: '10 000 €',
-    exclusive: 'Exclusif : 1 seul sponsor',
     sponsors: [
       { name: 'OceanCloud Reunion', initials: 'OC', tagline: 'Hebergement souverain' },
-    ],
-    benefits: [
-      'Tout le pack Gold +',
-      'Co-branding d\'un atelier ("Atelier presente avec [Sponsor]")',
-      'Presence sur 2 etapes (SUD + 1 etape au choix)',
-      'Prise de parole de 5 minutes',
-      'Post dedie sur les reseaux sociaux',
-      'Logo sur les badges participants',
-      'Invitation au diner speakers & organisateurs',
-      'Bilan de visibilite post-evenement',
     ],
     accent: 'text-purple-300',
     accentBorder: 'border-purple-400/40',
@@ -50,19 +34,9 @@ const tiers: SponsorTier[] = [
   },
   {
     name: 'Gold',
-    price: 'A partir de 5 000 €',
     sponsors: [
       { name: 'CyberTropik', initials: 'CT', tagline: 'SOC & Threat Intelligence' },
       { name: 'SecurDom', initials: 'SD', tagline: 'Audit & Conformite DROM' },
-    ],
-    benefits: [
-      'Logo grande taille en tete d\'affiche sur le site web',
-      'Logo grande taille sur les supports de communication',
-      'Mention sur les reseaux sociaux',
-      'Goodies integres a ceux de l\'evenement',
-      'Espace stand sur l\'etape SUD (2 personnes marketing max)',
-      'Possibilite de fournir des goodies et/ou Ticket d\'Or',
-      'Mot d\'introduction 2 min max',
     ],
     accent: 'text-gold',
     accentBorder: 'border-gold/40',
@@ -72,18 +46,10 @@ const tiers: SponsorTier[] = [
   },
   {
     name: 'Silver',
-    price: 'A partir de 3 000 €',
     sponsors: [
       { name: 'ReunionNet Pro', initials: 'RN' },
       { name: 'VolcanData', initials: 'VD' },
       { name: 'IndianOcean IT', initials: 'IO' },
-    ],
-    benefits: [
-      'Logo taille moyenne sur le site web',
-      'Logo taille moyenne sur les supports de communication',
-      'Mention sur les reseaux sociaux',
-      'Goodies integres a ceux de l\'evenement',
-      '2 supports visuels kakemono a l\'exterieur',
     ],
     accent: 'text-gray-300',
     accentBorder: 'border-gray-400/40',
@@ -93,18 +59,12 @@ const tiers: SponsorTier[] = [
   },
   {
     name: 'Bronze',
-    price: 'A partir de 1 000 €',
     sponsors: [
       { name: 'TropiCode', initials: 'TC' },
       { name: 'Lagon Digital', initials: 'LD' },
       { name: 'SudDev 974', initials: 'S9' },
       { name: 'Kreol Hosting', initials: 'KH' },
       { name: 'RunWifi', initials: 'RW' },
-    ],
-    benefits: [
-      'Logo taille standard sur le site web',
-      'Logo taille standard sur les supports de communication',
-      'Mention sur les reseaux sociaux',
     ],
     accent: 'text-amber-600',
     accentBorder: 'border-amber-600/40',
@@ -203,26 +163,6 @@ const tiers: SponsorTier[] = [
                 </div>
               </div>
             ))}
-          </div>
-
-          <!-- Tier card -->
-          <div class={`${tier.accentBg} ${tier.accentBorder} border rounded-2xl p-6 sm:p-8 w-full`}>
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-              <span class={`font-display font-bold ${tier.textSize} ${tier.accent}`}>{tier.price}</span>
-              {tier.exclusive && (
-                <span class="font-mono text-xs tracking-wider uppercase text-purple-300/70 bg-purple-400/10 px-3 py-1 rounded-full">
-                  {tier.exclusive}
-                </span>
-              )}
-            </div>
-            <ul class="space-y-2">
-              {tier.benefits.map(b => (
-                <li class="flex items-start gap-2 text-white/60 text-sm font-body">
-                  <span class={`shrink-0 mt-1 ${tier.accent}`}>&bull;</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <!-- Connecting line (except last) -->
