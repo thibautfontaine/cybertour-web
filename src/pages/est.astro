@@ -47,8 +47,18 @@ const programme: TimelineItem[] = [
         <Timeline accentHex={stage.accentHex} items={programme} />
       </div>
 
-      <!-- School cards -->
+      <!-- Lieu d'accueil -->
       <div class="reveal delay-2 mt-12">
+        <h3 class="font-display font-semibold text-xl mb-8">Lieu d'accueil</h3>
+        <div class="flex flex-wrap items-center justify-center gap-8">
+          <div class="partner-bubble px-6 py-3">
+            <img src="/assets/logo-epitech.svg" alt="Epitech Reunion" class="h-10 sm:h-12 w-auto object-contain" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- School cards -->
+      <div class="reveal delay-3 mt-12">
         <h3 class="font-display font-semibold text-xl mb-8">Ecoles et formations presentes</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {['Epitech Reunion', 'ESIROI', 'IUT de La Reunion', 'Universite de La Reunion', 'CNAM Reunion', 'Lycee Lislet Geoffroy', 'ESIEA', 'Sup de Vinci'].map(name => (
