@@ -15,9 +15,14 @@ const programme: TimelineItem[] = [
   { time: '10:15 - 10:45', title: 'Pause cafe', isPause: true },
   { time: '10:45 - 11:15', title: 'Formations en alternance et professionnalisation', org: 'IUT / ESIROI' },
   { time: '11:15 - 11:45', title: 'Certifications et parcours de reconversion', org: 'A CONFIRMER' },
-  { isSection: true, title: 'Speed dating stages & alternances' },
-  { time: '12:00 - 13:30', title: 'Dejeuner et networking', isPause: true },
-  { time: '13:30 - 16:00', title: 'Speed dating : rencontres etudiants / entreprises (sessions de 8 min)' },
+  { isSection: true, title: 'Conferences' },
+  { time: '11:45 - 12:15', title: 'Cybersecurite et insertion professionnelle : quels debouches a La Reunion ?', org: 'A CONFIRMER' },
+  { time: '12:15 - 13:30', title: 'Dejeuner et networking', isPause: true },
+  { time: '13:30 - 14:00', title: 'Retour d\'experience : mon parcours en cybersecurite', org: 'A CONFIRMER' },
+  { time: '14:00 - 14:30', title: 'Les metiers de la cybersecurite : mythes et realites', org: 'A CONFIRMER' },
+  { time: '14:30 - 15:00', title: 'Pause cafe', isPause: true },
+  { time: '15:00 - 15:30', title: 'Table ronde : former les talents cyber de demain', org: 'A CONFIRMER' },
+  { time: '15:30 - 16:00', title: 'Questions / reponses et echanges avec la salle' },
   { time: '16:00 - 16:30', title: 'Cloture et bilan de la journee' },
 ];
 ---
@@ -33,7 +38,7 @@ const programme: TimelineItem[] = [
         <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Formations Cyber a La Reunion</h2>
         <p class="text-white/50 mt-4 text-lg max-w-3xl">
           Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Les ecoles presentent leurs cursus et parcours
-          de formation, suivis de rencontres directes entre etudiants et entreprises.
+          de formation, suivis de conferences et tables rondes sur les metiers et debouches du secteur.
         </p>
       </div>
 
@@ -54,17 +59,14 @@ const programme: TimelineItem[] = [
         </div>
       </div>
 
-      <!-- Speed Dating CTA -->
+      <!-- Conferences CTA -->
       <div class="reveal delay-3 mt-12 text-center">
         <div class="bg-emerald-400/[0.06] border border-emerald-400/[0.15] rounded-2xl p-8">
-          <h3 class="font-display font-bold text-2xl mb-3">Speed Dating Stages & Alternances</h3>
+          <h3 class="font-display font-bold text-2xl mb-3">Conferences &amp; Tables rondes</h3>
           <p class="text-white/50 text-sm font-body max-w-xl mx-auto mb-6">
-            Rencontrez directement les entreprises qui recrutent en cybersecurite a La Reunion.
-            Apportez votre CV et venez echanger en face-a-face avec les recruteurs.
+            Decouvrez les parcours, les metiers et les opportunites de la cybersecurite a La Reunion
+            a travers des conferences et des echanges avec des professionnels du secteur.
           </p>
-          <a href="/jobs" class="btn-primary inline-block rounded-lg font-display mt-2">
-            Speed Dating Stages & Alternances &rarr;
-          </a>
         </div>
       </div>
     </div>

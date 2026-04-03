@@ -73,12 +73,12 @@ export const stages: Stage[] = [
     capacity: 50,
     theme: "Formations Cyber a La Reunion",
     description:
-      "Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Rencontres entre etudiants, ecoles et entreprises pour favoriser l'insertion professionnelle. Speed dating stages et alternances pour construire les talents cyber de demain.",
+      "Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Presentations des cursus par les ecoles, suivies de conferences et tables rondes sur les metiers et debouches de la cybersecurite.",
     accent: "emerald",
     accentHex: "#4db6ac",
     trackNumber: "03",
     href: "/est",
-    highlights: ["Formations cyber", "Speed dating", "Alternances"],
+    highlights: ["Formations cyber", "Conferences", "Tables rondes"],
   },
   {
     id: "sud",
