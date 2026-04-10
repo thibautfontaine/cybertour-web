@@ -81,17 +81,21 @@ const ateliers = [
 <StageLayout stage={stage}>
   <Navbar slot="navbar" currentPage="sud" />
 
-  <!-- Sticky day navigator (shown via JS when programme section is visible) -->
-  <div id="day-nav" aria-label="Navigation par jour" class="fixed top-16 left-0 right-0 z-40 flex justify-center pointer-events-none opacity-0 transition-opacity duration-300">
-    <div class="pointer-events-auto flex gap-1 bg-[#0a1220]/90 backdrop-blur-md border border-white/[0.08] rounded-full p-1 shadow-2xl">
-      <a href="#day-1" class="day-nav-btn font-display font-semibold text-sm px-5 py-2 rounded-full transition-all duration-200">
+  <!-- Floating day navigator — left side -->
+  <nav id="day-nav" aria-label="Navigation par jour" class="fixed left-4 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2 pointer-events-none opacity-0 transition-opacity duration-300">
+    <a href="#day-1" class="day-nav-btn group flex items-center gap-3 pointer-events-auto">
+      <span class="day-nav-dot w-2.5 h-2.5 rounded-full border-2 transition-all duration-200 shrink-0"></span>
+      <span class="day-nav-label font-mono text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap bg-[#0a1220]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.08]">
         Jour 1 — Jeudi 22
-      </a>
-      <a href="#day-2" class="day-nav-btn font-display font-semibold text-sm px-5 py-2 rounded-full transition-all duration-200">
+      </span>
+    </a>
+    <a href="#day-2" class="day-nav-btn group flex items-center gap-3 pointer-events-auto">
+      <span class="day-nav-dot w-2.5 h-2.5 rounded-full border-2 transition-all duration-200 shrink-0"></span>
+      <span class="day-nav-label font-mono text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap bg-[#0a1220]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.08]">
         Jour 2 — Vendredi 23
-      </a>
-    </div>
-  </div>
+      </span>
+    </a>
+  </nav>
 
   <!-- Two-day programme -->
   <section id="programme" class="py-20">
@@ -231,16 +235,23 @@ const ateliers = [
 </StageLayout>
 
 <style>
-  .day-nav-btn {
-    color: rgba(255, 255, 255, 0.45);
+  .day-nav-dot {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: transparent;
   }
-  .day-nav-btn:hover {
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.05);
+  .day-nav-btn:hover .day-nav-dot {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
   }
-  .day-nav-btn.active {
+  .day-nav-btn.active .day-nav-dot {
+    border-color: #DF3C37;
+    background: #DF3C37;
+    box-shadow: 0 0 8px rgba(223, 60, 55, 0.5);
+  }
+  .day-nav-btn.active .day-nav-label {
+    opacity: 1;
     color: #DF3C37;
-    background: rgba(223, 60, 55, 0.12);
+    border-color: rgba(223, 60, 55, 0.3);
   }
 </style>
 
