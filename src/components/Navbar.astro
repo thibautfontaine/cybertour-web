@@ -17,7 +17,7 @@ const navLinks = [
 const ctaLink = { label: "Contact", href: "/#contact" };
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300" data-scrolled="false">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3 group">
       <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR Réunion Océan Indien" class="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105" />
@@ -81,3 +81,38 @@ const ctaLink = { label: "Contact", href: "/#contact" };
     </div>
   </div>
 </nav>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+
+  // Scroll — add background when user scrolls past 60px
+  function onScroll() {
+    if (!nav) return;
+    const scrolled = window.scrollY > 60;
+    nav.style.backgroundColor = scrolled ? 'var(--nav-scrolled)' : 'transparent';
+    nav.style.backdropFilter = scrolled ? 'blur(12px)' : 'none';
+    nav.style.borderBottom = scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none';
+    nav.dataset.scrolled = String(scrolled);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run on page load in case of direct anchor navigation
+
+  // Mobile menu — toggle open/close
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('hidden') === false;
+    mobileMenu?.classList.toggle('hidden', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Mobile menu — close when a link is clicked
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

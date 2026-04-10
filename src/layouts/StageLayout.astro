@@ -66,6 +66,16 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
       background: inherit !important;
     }
     .snav-item:focus-visible { outline: none; }
+
+    /* Stage progress bar hover effects */
+    .stage-progress-item:hover span:first-child {
+      opacity: 0.85;
+    }
+    .stage-progress-item:focus-visible {
+      outline: 2px solid rgba(255,255,255,0.4);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
   </style>
 
   <div style={`--stage-accent: ${stage.accentHex};`}>
@@ -158,30 +168,82 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
     <!-- Page-specific content -->
     <slot />
 
-    <!-- Navigation entre étapes -->
-    <div class="max-w-5xl mx-auto px-6 py-12">
-      <div class="flex items-center justify-between">
-        {prev && (
-          <a href={prev.href} class="group flex items-center gap-3 text-white/60 hover:text-white transition-colors">
-            <span aria-hidden="true">&larr;</span>
-            <div>
-              <span class="block text-xs font-mono uppercase tracking-wider" style={`color: ${prev.accentHex}`}>Étape précédente</span>
-              <span class="font-display font-semibold">{prev.direction}</span>
-            </div>
-          </a>
-        )}
-        {!prev && <div></div>}
-        {next && (
-          <a href={next.href} class="group flex items-center gap-3 text-right text-white/60 hover:text-white transition-colors">
-            <div>
-              <span class="block text-xs font-mono uppercase tracking-wider" style={`color: ${next.accentHex}`}>Étape suivante</span>
-              <span class="font-display font-semibold">{next.direction}</span>
-            </div>
-            <span aria-hidden="true">&rarr;</span>
-          </a>
-        )}
+    <!-- Navigation entre étapes — redesign avec indicateur de progression -->
+    <nav aria-label="Navigation entre étapes" class="max-w-5xl mx-auto px-6 py-12">
+
+      <!-- Indicateur de progression — visible sur tous les écrans -->
+      <div class="flex items-center justify-center gap-2 mb-8">
+        {stages.map((s) => {
+          const isCurrent = s.id === stage.id;
+          return (
+            <a
+              href={s.href}
+              aria-label={`Étape ${s.trackNumber} — ${s.direction}`}
+              aria-current={isCurrent ? 'page' : undefined}
+              class="stage-progress-item group flex flex-col items-center gap-1.5"
+            >
+              <span
+                class="block rounded-full transition-all duration-300"
+                style={isCurrent
+                  ? `width:32px;height:4px;background:${s.accentHex};box-shadow:0 0 8px ${s.accentHex}60;`
+                  : 'width:20px;height:3px;background:rgba(255,255,255,0.15);'}
+              ></span>
+              <span
+                class="font-mono text-[10px] tracking-widest uppercase transition-colors duration-200"
+                style={isCurrent
+                  ? `color:${s.accentHex};`
+                  : 'color:rgba(255,255,255,0.3);'}
+              >
+                {s.direction}
+              </span>
+            </a>
+          );
+        })}
       </div>
-    </div>
+
+      <!-- Liens prev / next — contraste amélioré -->
+      <div class="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+        {prev ? (
+          <a
+            href={prev.href}
+            class="group flex items-center gap-4 rounded-xl p-4 hover:bg-white/[0.04] transition-all duration-200"
+          >
+            <span
+              class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border transition-colors duration-200"
+              style={`border-color:${prev.accentHex}40;color:${prev.accentHex};`}
+              aria-hidden="true"
+            >
+              &larr;
+            </span>
+            <div>
+              <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${prev.accentHex};`}>Étape précédente</span>
+              <span class="font-display font-semibold text-white text-lg leading-tight">{prev.direction}</span>
+              <span class="block text-xs text-white/50 mt-0.5">{prev.dateShort}</span>
+            </div>
+          </a>
+        ) : <div></div>}
+
+        {next ? (
+          <a
+            href={next.href}
+            class="group flex items-center gap-4 text-right rounded-xl p-4 hover:bg-white/[0.04] transition-all duration-200"
+          >
+            <div>
+              <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${next.accentHex};`}>Étape suivante</span>
+              <span class="font-display font-semibold text-white text-lg leading-tight">{next.direction}</span>
+              <span class="block text-xs text-white/50 mt-0.5">{next.dateShort}</span>
+            </div>
+            <span
+              class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border transition-colors duration-200"
+              style={`border-color:${next.accentHex}40;color:${next.accentHex};`}
+              aria-hidden="true"
+            >
+              &rarr;
+            </span>
+          </a>
+        ) : <div></div>}
+      </div>
+    </nav>
 
     <!-- Infos Pratiques -->
     <section class="py-20 px-6">
