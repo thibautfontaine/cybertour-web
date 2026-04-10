@@ -19,142 +19,53 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
   <slot name="navbar" />
 
   <!-- Floating stage navigator — left side -->
-  <nav
-    aria-label="Navigation entre etapes"
-    class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-start"
-    style="gap: 0;"
-  >
+  <nav aria-label="Navigation entre etapes" class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-1">
     {stages.map((s, i) => {
       const isActive = s.id === stage.id;
-      const isPast   = i < currentIndex;
       const isLast   = i === stages.length - 1;
-
       return (
-        <div class="stage-nav-station flex flex-col items-start" style="position: relative;">
-
-          {/* ── Row: dot + label ── */}
+        <div class="flex flex-col items-center">
           <a
             href={s.href}
-            class="stage-nav-link group flex items-center"
+            class="snav-item group relative flex items-center"
             aria-current={isActive ? 'page' : undefined}
-            style="gap: 12px; text-decoration: none; position: relative; z-index: 1;"
           >
-
-            {/* Dot wrapper — fixe la largeur pour aligner le connecteur */}
-            <span class="stage-nav-dot-wrap" style="width: 20px; display: flex; align-items: center; justify-content: center; position: relative;">
-
-              {/* Halo pulse CSS-only sur le dot actif */}
-              {isActive && (
-                <span
-                  class="stage-nav-halo"
-                  style={`position:absolute; inset:-6px; border-radius:50%; background:${s.accentHex}20; animation: stage-pulse 2.4s ease-in-out infinite;`}
-                ></span>
-              )}
-
-              <span
-                class="stage-nav-dot"
-                style={
-                  isActive
-                    ? `width:10px; height:10px; border-radius:50%; flex-shrink:0; background:${s.accentHex}; border:2px solid ${s.accentHex}; box-shadow:0 0 10px ${s.accentHex}90, 0 0 20px ${s.accentHex}40; transition: all 0.25s ease;`
-                    : isPast
-                    ? `width:7px; height:7px; border-radius:50%; flex-shrink:0; background:rgba(255,255,255,0.35); border:1.5px solid rgba(255,255,255,0.35); transition: all 0.25s ease;`
-                    : `width:7px; height:7px; border-radius:50%; flex-shrink:0; background:transparent; border:1.5px solid rgba(255,255,255,0.18); transition: all 0.25s ease;`
-                }
-              ></span>
-            </span>
-
-            {/* Label — toujours visible, hiérarchisé par opacité */}
+            <!-- Dot -->
             <span
-              class="stage-nav-label"
-              style={
-                isActive
-                  ? `display:flex; flex-direction:column; gap:1px;`
-                  : `display:flex; flex-direction:column; gap:1px; transition: opacity 0.2s ease;`
-              }
-            >
-              {/* Track number */}
-              <span
-                style={
-                  isActive
-                    ? `font-family: var(--font-mono, monospace); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color:${s.accentHex}; line-height:1; font-weight:600;`
-                    : `font-family: var(--font-mono, monospace); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color:rgba(255,255,255,0.28); line-height:1;`
-                }
-              >
-                {s.trackNumber} / {String(stages.length).padStart(2, '0')}
-              </span>
-              {/* Direction name */}
-              <span
-                class="stage-nav-direction"
-                style={
-                  isActive
-                    ? `font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color:${s.accentHex}; line-height:1.2; font-weight:700; white-space:nowrap;`
-                    : isPast
-                    ? `font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color:rgba(255,255,255,0.38); line-height:1.2; white-space:nowrap;`
-                    : `font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color:rgba(255,255,255,0.22); line-height:1.2; white-space:nowrap;`
-                }
-              >
-                {s.direction}
-              </span>
+              class="snav-dot block rounded-full transition-all duration-250"
+              style={isActive
+                ? `width:10px;height:10px;background:${s.accentHex};box-shadow:0 0 10px ${s.accentHex}90,0 0 22px ${s.accentHex}30;`
+                : 'width:7px;height:7px;background:rgba(255,255,255,0.15);'}
+            ></span>
+            <!-- Tooltip -->
+            <span class="snav-tip pointer-events-none absolute left-6 whitespace-nowrap font-mono text-[11px] tracking-widest uppercase px-3 py-1.5 rounded-lg border opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150"
+              style={isActive
+                ? `color:${s.accentHex};background:rgba(10,18,32,0.95);border-color:${s.accentHex}30;`
+                : 'color:rgba(255,255,255,0.6);background:rgba(10,18,32,0.95);border-color:rgba(255,255,255,0.08);'}>
+              {s.direction} — {s.dateShort}
             </span>
           </a>
-
-          {/* ── Connecteur vertical entre les stations ── */}
+          <!-- Connector -->
           {!isLast && (
-            <span
-              class="stage-nav-connector"
-              style={`
-                display: block;
-                width: 1.5px;
-                height: 28px;
-                margin-left: 9px;
-                margin-top: 5px;
-                margin-bottom: 5px;
-                border-radius: 1px;
-                background: ${isPast
-                  ? `linear-gradient(to bottom, ${s.accentHex}60, rgba(255,255,255,0.12))`
-                  : 'rgba(255,255,255,0.1)'};
-                position: relative;
-              `}
-            ></span>
+            <span class="block w-px my-1.5 rounded-full" style="height:20px;background:rgba(255,255,255,0.1);"></span>
           )}
-
         </div>
       );
     })}
   </nav>
 
   <style>
-    @keyframes stage-pulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50%       { opacity: 0; transform: scale(1.8); }
+    .snav-dot { flex-shrink: 0; }
+    .snav-item:hover .snav-dot,
+    .snav-item:focus-visible .snav-dot {
+      background: rgba(255,255,255,0.45) !important;
+      box-shadow: none !important;
     }
-
-    /* Hover : réhausser opacité sur les items inactifs */
-    .stage-nav-link:not([aria-current="page"]):hover .stage-nav-dot {
-      border-color: rgba(255, 255, 255, 0.55) !important;
-      background: rgba(255, 255, 255, 0.18) !important;
-      width: 9px !important;
-      height: 9px !important;
+    .snav-item[aria-current="page"]:hover .snav-dot,
+    .snav-item[aria-current="page"]:focus-visible .snav-dot {
+      background: inherit !important;
     }
-    .stage-nav-link:not([aria-current="page"]):hover .stage-nav-direction {
-      color: rgba(255, 255, 255, 0.65) !important;
-    }
-
-    /* Focus visible pour accessibilité clavier */
-    .stage-nav-link:focus-visible {
-      outline: none;
-    }
-    .stage-nav-link:focus-visible .stage-nav-dot-wrap::after {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      pointer-events: none;
-    }
-    .stage-nav-link:focus-visible .stage-nav-direction {
-      color: rgba(255, 255, 255, 0.85) !important;
-    }
+    .snav-item:focus-visible { outline: none; }
   </style>
 
   <div style={`--stage-accent: ${stage.accentHex};`}>
