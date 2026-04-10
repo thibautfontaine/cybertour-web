@@ -19,32 +19,143 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
   <slot name="navbar" />
 
   <!-- Floating stage navigator — left side -->
-  <nav aria-label="Navigation entre etapes" class="fixed left-4 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col gap-4">
-    {stages.map((s) => {
+  <nav
+    aria-label="Navigation entre etapes"
+    class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-start"
+    style="gap: 0;"
+  >
+    {stages.map((s, i) => {
       const isActive = s.id === stage.id;
+      const isPast   = i < currentIndex;
+      const isLast   = i === stages.length - 1;
+
       return (
-        <a
-          href={s.href}
-          class="stage-nav-item group flex items-center gap-3"
-          aria-current={isActive ? 'page' : undefined}
-          title={`${s.name} — ${s.dateShort}`}
-        >
-          <span
-            class="stage-nav-dot w-2.5 h-2.5 rounded-full border-2 shrink-0 transition-all duration-200"
-            style={isActive
-              ? `background:${s.accentHex}; border-color:${s.accentHex}; box-shadow:0 0 8px ${s.accentHex}80;`
-              : 'background:transparent; border-color:rgba(255,255,255,0.2);'}
-          ></span>
-          <span
-            class="stage-nav-label font-mono text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap bg-[#0a1220]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.08]"
-            style={isActive ? `color:${s.accentHex}; border-color:${s.accentHex}30;` : 'color:rgba(255,255,255,0.5);'}
+        <div class="stage-nav-station flex flex-col items-start" style="position: relative;">
+
+          {/* ── Row: dot + label ── */}
+          <a
+            href={s.href}
+            class="stage-nav-link group flex items-center"
+            aria-current={isActive ? 'page' : undefined}
+            style="gap: 12px; text-decoration: none; position: relative; z-index: 1;"
           >
-            {s.direction} — {s.dateShort}
-          </span>
-        </a>
+
+            {/* Dot wrapper — fixe la largeur pour aligner le connecteur */}
+            <span class="stage-nav-dot-wrap" style="width: 20px; display: flex; align-items: center; justify-content: center; position: relative;">
+
+              {/* Halo pulse CSS-only sur le dot actif */}
+              {isActive && (
+                <span
+                  class="stage-nav-halo"
+                  style={`position:absolute; inset:-6px; border-radius:50%; background:${s.accentHex}20; animation: stage-pulse 2.4s ease-in-out infinite;`}
+                ></span>
+              )}
+
+              <span
+                class="stage-nav-dot"
+                style={
+                  isActive
+                    ? `width:10px; height:10px; border-radius:50%; flex-shrink:0; background:${s.accentHex}; border:2px solid ${s.accentHex}; box-shadow:0 0 10px ${s.accentHex}90, 0 0 20px ${s.accentHex}40; transition: all 0.25s ease;`
+                    : isPast
+                    ? `width:7px; height:7px; border-radius:50%; flex-shrink:0; background:rgba(255,255,255,0.35); border:1.5px solid rgba(255,255,255,0.35); transition: all 0.25s ease;`
+                    : `width:7px; height:7px; border-radius:50%; flex-shrink:0; background:transparent; border:1.5px solid rgba(255,255,255,0.18); transition: all 0.25s ease;`
+                }
+              ></span>
+            </span>
+
+            {/* Label — toujours visible, hiérarchisé par opacité */}
+            <span
+              class="stage-nav-label"
+              style={
+                isActive
+                  ? `display:flex; flex-direction:column; gap:1px;`
+                  : `display:flex; flex-direction:column; gap:1px; transition: opacity 0.2s ease;`
+              }
+            >
+              {/* Track number */}
+              <span
+                style={
+                  isActive
+                    ? `font-family: var(--font-mono, monospace); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color:${s.accentHex}; line-height:1; font-weight:600;`
+                    : `font-family: var(--font-mono, monospace); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color:rgba(255,255,255,0.28); line-height:1;`
+                }
+              >
+                {s.trackNumber} / {String(stages.length).padStart(2, '0')}
+              </span>
+              {/* Direction name */}
+              <span
+                class="stage-nav-direction"
+                style={
+                  isActive
+                    ? `font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color:${s.accentHex}; line-height:1.2; font-weight:700; white-space:nowrap;`
+                    : isPast
+                    ? `font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color:rgba(255,255,255,0.38); line-height:1.2; white-space:nowrap;`
+                    : `font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color:rgba(255,255,255,0.22); line-height:1.2; white-space:nowrap;`
+                }
+              >
+                {s.direction}
+              </span>
+            </span>
+          </a>
+
+          {/* ── Connecteur vertical entre les stations ── */}
+          {!isLast && (
+            <span
+              class="stage-nav-connector"
+              style={`
+                display: block;
+                width: 1.5px;
+                height: 28px;
+                margin-left: 9px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                border-radius: 1px;
+                background: ${isPast
+                  ? `linear-gradient(to bottom, ${s.accentHex}60, rgba(255,255,255,0.12))`
+                  : 'rgba(255,255,255,0.1)'};
+                position: relative;
+              `}
+            ></span>
+          )}
+
+        </div>
       );
     })}
   </nav>
+
+  <style>
+    @keyframes stage-pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%       { opacity: 0; transform: scale(1.8); }
+    }
+
+    /* Hover : réhausser opacité sur les items inactifs */
+    .stage-nav-link:not([aria-current="page"]):hover .stage-nav-dot {
+      border-color: rgba(255, 255, 255, 0.55) !important;
+      background: rgba(255, 255, 255, 0.18) !important;
+      width: 9px !important;
+      height: 9px !important;
+    }
+    .stage-nav-link:not([aria-current="page"]):hover .stage-nav-direction {
+      color: rgba(255, 255, 255, 0.65) !important;
+    }
+
+    /* Focus visible pour accessibilité clavier */
+    .stage-nav-link:focus-visible {
+      outline: none;
+    }
+    .stage-nav-link:focus-visible .stage-nav-dot-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+    }
+    .stage-nav-link:focus-visible .stage-nav-direction {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+  </style>
 
   <div style={`--stage-accent: ${stage.accentHex};`}>
 
