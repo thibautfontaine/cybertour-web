@@ -17,6 +17,35 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
 
 <Layout title={pageTitle} description={stage.description}>
   <slot name="navbar" />
+
+  <!-- Floating stage navigator — left side -->
+  <nav aria-label="Navigation entre etapes" class="fixed left-4 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col gap-4">
+    {stages.map((s) => {
+      const isActive = s.id === stage.id;
+      return (
+        <a
+          href={s.href}
+          class="stage-nav-item group flex items-center gap-3"
+          aria-current={isActive ? 'page' : undefined}
+          title={`${s.name} — ${s.dateShort}`}
+        >
+          <span
+            class="stage-nav-dot w-2.5 h-2.5 rounded-full border-2 shrink-0 transition-all duration-200"
+            style={isActive
+              ? `background:${s.accentHex}; border-color:${s.accentHex}; box-shadow:0 0 8px ${s.accentHex}80;`
+              : 'background:transparent; border-color:rgba(255,255,255,0.2);'}
+          ></span>
+          <span
+            class="stage-nav-label font-mono text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap bg-[#0a1220]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.08]"
+            style={isActive ? `color:${s.accentHex}; border-color:${s.accentHex}30;` : 'color:rgba(255,255,255,0.5);'}
+          >
+            {s.direction} — {s.dateShort}
+          </span>
+        </a>
+      );
+    })}
+  </nav>
+
   <div style={`--stage-accent: ${stage.accentHex};`}>
 
     <!-- Hero Banner -->
