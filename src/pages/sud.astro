@@ -261,6 +261,12 @@ const ateliers = [
         panels.forEach(panel => {
           panel.classList.toggle('hidden', panel.id !== `day-${day}`);
         });
+
+        // Force reveal for elements already in viewport when panel becomes visible
+        const activePanel = document.getElementById(`day-${day}`);
+        activePanel?.querySelectorAll<Element>('.reveal, .reveal-left, .reveal-right').forEach(el => {
+          el.classList.add('visible');
+        });
       });
     });
   });
