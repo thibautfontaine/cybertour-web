@@ -205,6 +205,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         if (gate) gate.style.display = 'none';
         if (banner) banner.classList.remove('hidden');
         document.body.style.overflow = '';
+        window.dispatchEvent(new CustomEvent('cybertour:unlocked'));
       }
 
       // Check if already authenticated
@@ -253,7 +254,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </script>
 
     <script>
-      // Scroll reveal observer
+      // Scroll reveal — IntersectionObserver + scroll fallback
+      const REVEAL_SEL = '.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)';
+
+      function checkReveals() {
+        const vh = window.innerHeight;
+        document.querySelectorAll<Element>(REVEAL_SEL).forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < vh * 0.92) {
+            el.classList.add('visible');
+          }
+        });
+      }
+
+      // IntersectionObserver as primary driver (permissive settings)
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -262,12 +276,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        { threshold: 0, rootMargin: '0px 0px 0px 0px' }
       );
 
       document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el) => {
         observer.observe(el);
       });
+
+      // Scroll fallback — catches anything the observer misses
+      window.addEventListener('scroll', checkReveals, { passive: true });
+      // Re-check after beta gate unlock (scroll was locked, elements weren't in viewport)
+      window.addEventListener('cybertour:unlocked', () => {
+        requestAnimationFrame(checkReveals);
+      });
+      // Run once immediately for elements already in viewport
+      checkReveals();
 
       // Navbar scroll effect
       const nav = document.getElementById('main-nav');
