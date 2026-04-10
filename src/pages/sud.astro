@@ -10,65 +10,65 @@ const stage = stages.find(s => s.id === 'sud')!;
 const programmeJ1: TimelineItem[] = [
   { time: '08:00 - 08:45', title: 'Accueil des participants et petit-dejeuner' },
   { time: '09:00 - 09:30', title: 'Discours de bienvenue' },
-  { isSection: true, title: 'Souverainete numerique' },
-  { time: '09:30 - 10:00', title: 'Enjeux locaux et nationaux de la souverainete numerique', org: 'A CONFIRMER' },
+  { isSection: true, title: 'Souverainete numérique' },
+  { time: '09:30 - 10:00', title: 'Enjeux locaux et nationaux de la souveraineté numérique', org: 'A CONFIRMER' },
   { time: '10:00 - 10:30', title: 'Cloud de confiance et cadre reglementaire europeen', org: 'A CONFIRMER' },
   { time: '10:30 - 11:00', title: 'Table ronde, questions/reponses avec la salle' },
-  { isSection: true, title: 'Securite des systemes IA' },
+  { isSection: true, title: 'Sécurité des systemes IA' },
   { time: '11:00 - 11:30', title: 'OWASP Top 10 GenAI : les risques de l\'IA generative', org: 'A CONFIRMER' },
   { time: '11:30 - 12:00', title: 'Protection des modeles et exfiltration de donnees', org: 'A CONFIRMER' },
-  { time: '12:00 - 13:45', title: 'Cocktail dejeunatoire, reseautage et rencontres professionnels - etudiants', isPause: true },
+  { time: '12:00 - 13:45', title: 'Cocktail dejeunatoire, réseautage et rencontres professionnels - etudiants', isPause: true },
   { isSection: true, title: 'SOC, defense proactive & Zero Trust' },
   { time: '14:00 - 14:30', title: 'Architectures Zero Trust : retour d\'experience', org: 'A CONFIRMER' },
   { time: '14:30 - 15:00', title: 'SOC et defense proactive : detecter avant l\'impact', org: 'A CONFIRMER' },
   { time: '15:00 - 15:30', title: 'Chiffrement et securisation du code source', org: 'A CONFIRMER' },
   { isSection: true, title: 'RETEX Cyber' },
   { time: '15:30 - 16:00', title: 'Retour d\'experience : gestion d\'une crise cyber', org: 'A CONFIRMER' },
-  { time: '16:00 - 17:00', title: 'Table ronde et cloture de la journee' },
+  { time: '16:00 - 17:00', title: 'Table ronde et clôture de la journée' },
 ];
 
 const programmeJ2: TimelineItem[] = [
   { time: '08:30 - 09:00', title: 'Accueil des participants' },
-  { time: '09:00 - 09:15', title: 'Briefing de la journee ateliers' },
+  { time: '09:00 - 09:15', title: 'Briefing de la journée ateliers' },
   { isSection: true, title: 'Ateliers du matin (sessions paralleles)' },
-  { time: '09:15 - 12:00', title: 'CTF Tahir — Attack/Defense : deux equipes s\'affrontent, l\'une attaque, l\'autre defend (toute la journee)' },
+  { time: '09:15 - 12:00', title: 'CTF Tahir — Attack/Defense : deux equipes s\'affrontent, l\'une attaque, l\'autre defend (toute la journée)' },
   { time: '09:15 - 12:00', title: 'Gestion de crise — Simulation d\'incident cyber (4-6 groupes, session matin)', org: 'CLUSIR ROI' },
   { time: '12:00 - 13:30', title: 'Dejeuner et rencontres professionnelles', isPause: true },
-  { isSection: true, title: 'Ateliers de l\'apres-midi (sessions paralleles)' },
+  { isSection: true, title: 'Ateliers de l\'après-midi (sessions paralleles)' },
   { time: '13:30 - 16:30', title: 'CTF Tahir — Suite du match attack/defense' },
-  { time: '13:30 - 16:30', title: 'Escape Game Cyber Reunion — Escape game immersif cybersecurite', org: 'CYBER REUNION' },
+  { time: '13:30 - 16:30', title: 'Escape Game Cyber Reunion — Escape game immersif cybersécurité', org: 'CYBER REUNION' },
   { time: '13:30 - 16:30', title: 'Atelier technique approfondi (ex : OSINT)', org: 'A CONFIRMER' },
-  { time: '13:30 - 16:30', title: 'Gestion de crise — Session apres-midi (4-6 groupes)', org: 'CLUSIR ROI' },
-  { isSection: true, title: 'Scene ouverte & Cloture' },
-  { time: '16:30 - 17:30', title: 'Rumps — Scene ouverte : presentations libres de 5 a 10 minutes' },
-  { time: '17:30 - 18:00', title: 'Remise des prix CTF et cloture officielle du CyberTour 2026' },
+  { time: '13:30 - 16:30', title: 'Gestion de crise — Session après-midi (4-6 groupes)', org: 'CLUSIR ROI' },
+  { isSection: true, title: 'Scene ouverte & Clôture' },
+  { time: '16:30 - 17:30', title: 'Rumps — Scene ouverte : présentations libres de 5 a 10 minutes' },
+  { time: '17:30 - 18:00', title: 'Remise des prix CTF et clôture officielle du CyberTour 2026' },
 ];
 
 const ateliers = [
   {
     icon: '\u{1F3F4}',
     title: 'CTF Tahir',
-    desc: 'CTF attack/defense sur la journee entiere. Deux equipes s\'affrontent : l\'une attaque, l\'autre defend ses services. Format dynamique, pression reelle.',
+    desc: 'CTF attack/defense sur la journée entiere. Deux equipes s\'affrontent : l\'une attaque, l\'autre defend ses services. Format dynamique, pression reelle.',
   },
   {
     icon: '\u{1F510}',
     title: 'Escape Game Cyber Reunion',
-    desc: 'Escape game immersif sur le theme de la cybersecurite, concu par Cyber Reunion.',
+    desc: 'Escape game immersif sur le theme de la cybersécurité, concu par Cyber Reunion.',
   },
   {
     icon: '\u{1F6A8}',
     title: 'Gestion de crise',
-    desc: 'Simulation de gestion d\'incident cyber en conditions reelles. 4 a 6 groupes, sessions matin et apres-midi.',
+    desc: 'Simulation de gestion d\'incident cyber en conditions reelles. 4 a 6 groupes, sessions matin et après-midi.',
   },
   {
     icon: '\u{1F50D}',
     title: 'Atelier technique (OSINT)',
-    desc: 'Atelier technique approfondi : techniques d\'investigation numerique en sources ouvertes.',
+    desc: 'Atelier technique approfondi : techniques d\'investigation numérique en sources ouvertes.',
   },
   {
     icon: '\u{1F3A4}',
     title: 'Rumps — Scene ouverte',
-    desc: 'Presentations libres de 5 a 10 minutes. Partagez un projet, un outil, un retour d\'experience.',
+    desc: 'Présentations libres de 5 a 10 minutes. Partagez un projet, un outil, un retour d\'experience.',
   },
   {
     icon: '\u{1F4BC}',
@@ -104,14 +104,14 @@ const ateliers = [
   <section id="programme" class="py-20">
     <div class="max-w-5xl mx-auto px-6">
 
-      <!-- Jour 1: Conferences techniques -->
+      <!-- Jour 1: Conférences techniques -->
       <div class="day-section" id="day-1">
         <div class="reveal">
           <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">Jour 1 — Jeudi 22 octobre</span>
-          <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Conferences techniques</h2>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Conférences techniques</h2>
           <p class="text-white/50 mt-4 text-lg max-w-3xl">
-            Une journee de conferences animees par des experts en cybersecurite. Retours d'experience,
-            presentations techniques et echanges avec la communaute.
+            Une journée de conférences animees par des experts en cybersécurité. Retours d'expérience,
+            présentations techniques et échanges avec la communaute.
           </p>
         </div>
 
@@ -155,8 +155,8 @@ const ateliers = [
           <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">Jour 2 — Vendredi 23 octobre</span>
           <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Ateliers pratiques</h2>
           <p class="text-white/50 mt-4 text-lg max-w-3xl">
-            Une journee les mains dans le clavier. Quatre ateliers en parallele pour experimenter
-            la cybersecurite de maniere concrete et ludique.
+            Une journée les mains dans le clavier. Quatre ateliers en parallele pour experimenter
+            la cybersécurité de maniere concrète et ludique.
           </p>
         </div>
 
@@ -170,7 +170,7 @@ const ateliers = [
             </div>
             <div>
               <h4 class="font-display font-semibold text-sm mb-1 text-red-400">Organisation</h4>
-              <p class="text-white/50 text-sm font-body">Sessions en groupes de 4 a 6, matin et apres-midi</p>
+              <p class="text-white/50 text-sm font-body">Sessions en groupes de 4 a 6, matin et après-midi</p>
             </div>
           </div>
         </div>
@@ -201,14 +201,14 @@ const ateliers = [
           <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-2xl p-8 text-center">
             <h3 class="font-display font-bold text-2xl mb-3">Appel a soumission — Scene ouverte (Rumps)</h3>
             <p class="text-white/50 text-sm font-body max-w-xl mx-auto mb-6">
-              Vous avez un projet, un outil, un retour d'experience a partager ?
-              Proposez une presentation de 5 a 10 minutes lors de la scene ouverte du CyberTour.
+              Vous avez un projet, un outil, un retour d'expérience a partager ?
+              Proposez une présentation de 5 a 10 minutes lors de la scene ouverte du CyberTour.
             </p>
             <a href="mailto:team@cybertour.re?subject=Soumission%20Rumps%20CyberTour%202026" class="btn-primary inline-flex items-center gap-3 rounded-xl">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Soumettre une presentation
+              Soumettre une présentation
             </a>
           </div>
         </div>
@@ -224,10 +224,10 @@ const ateliers = [
         <h3 class="font-display font-semibold text-xl mb-8">Co-organisateurs</h3>
         <div class="flex flex-wrap items-center justify-center gap-8">
           <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-clusir.png" alt="CLUSIR Reunion Ocean Indien" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+            <img src="/assets/logo-clusir.png" alt="CLUSIR Réunion Océan Indien" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
           </div>
           <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-univ-reunion.png" alt="Universite de La Reunion" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+            <img src="/assets/logo-univ-reunion.png" alt="Universite de La Réunion" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
           </div>
         </div>
       </div>

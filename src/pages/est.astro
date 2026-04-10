@@ -10,17 +10,17 @@ const programme: TimelineItem[] = [
   { time: '08:30 - 09:00', title: 'Accueil des participants' },
   { time: '09:00 - 09:15', title: 'Introduction et mot de bienvenue', speaker: 'CLUSIR ROI' },
   { isSection: true, title: 'Panorama des formations cyber' },
-  { time: '09:15 - 09:45', title: 'Le cursus cybersecurite d\'Epitech', org: 'EPITECH' },
+  { time: '09:15 - 09:45', title: 'Le cursus cybersécurité d\'Epitech', org: 'EPITECH' },
   { time: '09:45 - 10:15', title: 'Formations en alternance et professionnalisation', org: 'IUT / ESIROI' },
   { time: '10:15 - 10:45', title: 'Pause cafe', isPause: true },
-  { time: '10:45 - 11:15', title: 'Le BTS SIO et la cybersecurite', org: 'BTS EXPERNET' },
-  { time: '11:15 - 11:45', title: 'Le Master Informatique et la recherche en cybersecurite', speaker: 'Dominique Gay', org: 'UNIVERSITE DE LA REUNION' },
-  { time: '11:45 - 12:00', title: 'Echanges avec la salle' },
+  { time: '10:45 - 11:15', title: 'Le BTS SIO et la cybersécurité', org: 'BTS EXPERNET' },
+  { time: '11:15 - 11:45', title: 'Le Master Informatique et la recherche en cybersécurité', speaker: 'Dominique Gay', org: 'UNIVERSITE DE LA REUNION' },
+  { time: '11:45 - 12:00', title: 'Échanges avec la salle' },
   { time: '12:00 - 13:30', title: 'Dejeuner et networking', isPause: true },
-  { isSection: true, title: 'Apres-midi : Escape Game & Conference' },
-  { time: '13:30 - 15:00', title: 'Escape Game Cyber — atelier immersif cybersecurite', org: 'CYBER REUNION' },
-  { time: '15:00 - 15:45', title: 'Conference intervenant externe', org: 'A CONFIRMER' },
-  { time: '15:45 - 16:30', title: 'Echanges libres et cloture de la journee' },
+  { isSection: true, title: 'Après-midi : Escape Game & Conférence' },
+  { time: '13:30 - 15:00', title: 'Escape Game Cyber — atelier immersif cybersécurité', org: 'CYBER REUNION' },
+  { time: '15:00 - 15:45', title: 'Conférence intervenant externe', org: 'A CONFIRMER' },
+  { time: '15:45 - 16:30', title: 'Échanges libres et clôture de la journée' },
 ];
 ---
 
@@ -32,10 +32,10 @@ const programme: TimelineItem[] = [
     <div class="max-w-5xl mx-auto px-6">
       <div class="reveal">
         <span class="font-mono text-emerald-400/60 text-sm tracking-widest uppercase">Programme</span>
-        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Formations Cyber a La Reunion</h2>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Formations Cyber a La Réunion</h2>
         <p class="text-white/50 mt-4 text-lg max-w-3xl">
-          Focus sur l'ecosysteme de formation en cybersecurite a La Reunion. Les ecoles presentent leurs cursus le matin,
-          puis escape game et conference d'un intervenant externe l'apres-midi.
+          Focus sur l'écosystème de formation en cybersécurité a La Réunion. Les ecoles presentent leurs cursus le matin,
+          puis escape game et conférence d'un intervenant externe l'après-midi.
         </p>
       </div>
 
@@ -58,7 +58,7 @@ const programme: TimelineItem[] = [
       <div class="reveal delay-3 mt-12">
         <h3 class="font-display font-semibold text-xl mb-8">Ecoles et formations presentes</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {['Epitech Reunion', 'IUT de La Reunion', 'ESIROI', 'BTS Expernet', 'Master Informatique — Universite'].map(name => (
+          {['Epitech Reunion', 'IUT de La Réunion', 'ESIROI', 'BTS Expernet', 'Master Informatique — Universite'].map(name => (
             <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-emerald-400/20 transition-colors">
               <span class="font-display font-semibold text-sm text-white/70">{name}</span>
             </div>
@@ -69,10 +69,10 @@ const programme: TimelineItem[] = [
       <!-- Afternoon CTA -->
       <div class="reveal delay-4 mt-12 text-center">
         <div class="bg-emerald-400/[0.06] border border-emerald-400/[0.15] rounded-2xl p-8">
-          <h3 class="font-display font-bold text-2xl mb-3">Escape Game &amp; Conference</h3>
+          <h3 class="font-display font-bold text-2xl mb-3">Escape Game &amp; Conférence</h3>
           <p class="text-white/50 text-sm font-body max-w-xl mx-auto mb-6">
-            L'apres-midi, plongez dans un escape game immersif sur le theme de la cybersecurite,
-            puis assistez a la conference d'un intervenant externe.
+            L'après-midi, plongez dans un escape game immersif sur le theme de la cybersécurité,
+            puis assistez a la conférence d'un intervenant externe.
           </p>
         </div>
       </div>

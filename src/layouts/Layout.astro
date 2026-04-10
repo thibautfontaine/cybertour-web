@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Cyber Tour Reunion 2026 - 4 etapes, 19-23 Octobre 2026. Organise par le CLUSIR Reunion Ocean Indien." } = Astro.props;
+const { title, description = "Cyber Tour Réunion 2026 - 4 étapes, 19-23 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien." } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -20,8 +20,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="CLUSIR Reunion Ocean Indien" />
-    <meta name="keywords" content="cybersecurite, La Reunion, conference, cybermois, CLUSIR, securite informatique, SOC, IA, souverainete numerique" />
+    <meta name="author" content="CLUSIR Réunion Océan Indien" />
+    <meta name="keywords" content="cybersécurité, La Réunion, conférence, cybermois, CLUSIR, sécurité informatique, SOC, IA, souveraineté numérique" />
 
     <!-- OG Tags -->
     <meta property="og:title" content={title} />
@@ -29,11 +29,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:site_name" content="Cyber Tour Reunion" />
+    <meta property="og:site_name" content="Cyber Tour Réunion" />
     <meta property="og:image" content="https://cybertour.re/assets/og-cybertour-2026.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Cyber Tour Reunion 2026 - 19-23 Octobre - 4 etapes" />
+    <meta property="og:image:alt" content="Cyber Tour Réunion 2026 - 19-23 Octobre - 4 étapes" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -45,8 +45,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Event",
-      "name": "Cyber Tour Reunion 2026",
-      "description": "L'evenement cybersecurite de reference a La Reunion, organise par le CLUSIR Reunion Ocean Indien.",
+      "name": "Cyber Tour Réunion 2026",
+      "description": "L'événement cybersécurité de référence a La Réunion, organisé par le CLUSIR Réunion Océan Indien.",
       "startDate": "2026-10-19T08:00:00+04:00",
       "endDate": "2026-10-23T18:00:00+04:00",
       "eventStatus": "https://schema.org/EventScheduled",
@@ -57,14 +57,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Saint-Pierre",
-          "addressRegion": "La Reunion",
+          "addressRegion": "La Réunion",
           "addressCountry": "FR"
         }
       },
       "image": "https://cybertour.re/assets/og-cybertour-2026.png",
       "organizer": {
         "@type": "Organization",
-        "name": "CLUSIR Reunion Ocean Indien",
+        "name": "CLUSIR Réunion Océan Indien",
         "url": "https://clusir-roi.org"
       },
       "isAccessibleForFree": true,
@@ -89,7 +89,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="flex items-center justify-center gap-6 mb-8">
           <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR" class="h-16 sm:h-20" />
           <span class="text-white/20 font-mono text-lg">x</span>
-          <img src="/assets/cybertour-2026.png" alt="Cyber Tour Reunion 2026" class="h-16 sm:h-20" />
+          <img src="/assets/cybertour-2026.png" alt="Cyber Tour Réunion 2026" class="h-16 sm:h-20" />
         </div>
 
         <!-- Terminal window -->
@@ -175,7 +175,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             Cyber Reunion
           </a>
         </div>
-        <p class="text-white/20 text-[10px] font-mono text-center mt-3">CLUSIR Reunion Ocean Indien // Cyber Tour Reunion 2026</p>
+        <p class="text-white/20 text-[10px] font-mono text-center mt-3">CLUSIR Réunion Océan Indien // Cyber Tour Réunion 2026</p>
       </div>
     </div>
 

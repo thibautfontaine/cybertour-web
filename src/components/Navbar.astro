@@ -6,11 +6,12 @@ interface Props {
 const { currentPage } = Astro.props;
 
 const navLinks = [
-  { label: "A propos", href: "/#about" },
-  { label: "Les Etapes", href: "/#etapes" },
+  { label: "À propos", href: "/#about" },
+  { label: "Les Étapes", href: "/#etapes" },
   { label: "CTF", href: "/#ctf" },
   { label: "Speakers", href: "/#speakers" },
   { label: "Sponsors", href: "/#sponsors" },
+  { label: "Inscriptions", href: "/#inscriptions", soon: true },
 ];
 
 const ctaLink = { label: "Contact", href: "/#contact" };
@@ -19,23 +20,29 @@ const ctaLink = { label: "Contact", href: "/#contact" };
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3 group">
-      <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR Reunion Ocean Indien" class="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105" />
+      <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR Réunion Océan Indien" class="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105" />
     </a>
 
     <!-- Desktop nav -->
     <div class="hidden md:flex items-center gap-8">
       {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            "text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase",
-            currentPage && link.href.startsWith(`/${currentPage}`)
-              ? "text-gold"
-              : "text-white/70",
-          ]}
-        >
-          {link.label}
-        </a>
+        link.soon ? (
+          <span class="text-sm font-medium tracking-wider uppercase text-white/25 line-through cursor-default select-none" title="Inscriptions bientôt disponibles">
+            {link.label}
+          </span>
+        ) : (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase",
+              currentPage && link.href.startsWith(`/${currentPage}`)
+                ? "text-gold"
+                : "text-white/70",
+            ]}
+          >
+            {link.label}
+          </a>
+        )
       ))}
       <a href={ctaLink.href} class="btn-outline text-xs py-2 px-5">{ctaLink.label}</a>
     </div>
@@ -52,17 +59,23 @@ const ctaLink = { label: "Contact", href: "/#contact" };
   <div id="mobile-menu" class="hidden md:hidden bg-navy-dark/95 backdrop-blur-lg border-t border-white/10">
     <div class="px-6 py-4 flex flex-col gap-4">
       {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            "text-sm font-medium hover:text-gold transition-colors uppercase",
-            currentPage && link.href.startsWith(`/${currentPage}`)
-              ? "text-gold"
-              : "text-white/70",
-          ]}
-        >
-          {link.label}
-        </a>
+        link.soon ? (
+          <span class="text-sm font-medium uppercase text-white/25 line-through cursor-default">
+            {link.label}
+          </span>
+        ) : (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium hover:text-gold transition-colors uppercase",
+              currentPage && link.href.startsWith(`/${currentPage}`)
+                ? "text-gold"
+                : "text-white/70",
+            ]}
+          >
+            {link.label}
+          </a>
+        )
       ))}
       <a href={ctaLink.href} class="text-sm font-medium text-white/70 hover:text-gold transition-colors uppercase">{ctaLink.label}</a>
     </div>

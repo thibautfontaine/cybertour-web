@@ -10,16 +10,16 @@ const programme: TimelineItem[] = [
   { time: '08:30 - 09:00', title: 'Accueil des participants' },
   { time: '09:00 - 09:15', title: 'Introduction et mot de bienvenue', speaker: 'CLUSIR ROI' },
   { isSection: true, title: 'Gestion de crise' },
-  { time: '09:15 - 10:15', title: 'Presentation : gestion de crise cyber — methodologie et retour d\'experience', speaker: 'Anime par le CLUSIR Reunion Ocean Indien', org: 'CLUSIR ROI' },
+  { time: '09:15 - 10:15', title: 'Présentation : gestion de crise cyber — methodologie et retour d\'experience', speaker: 'Anime par le CLUSIR Réunion Océan Indien', org: 'CLUSIR ROI' },
   { time: '10:15 - 10:45', title: 'Pause cafe et networking', isPause: true },
-  { isSection: true, title: 'Presentations thematiques — Ecosysteme cyber reunionnais' },
-  { time: '10:45 - 11:15', title: 'Presentation thematique 1', org: 'A CONFIRMER' },
-  { time: '11:15 - 11:45', title: 'Presentation thematique 2', org: 'A CONFIRMER' },
-  { time: '11:45 - 12:15', title: 'Presentation thematique 3', org: 'A CONFIRMER' },
+  { isSection: true, title: 'Présentations thématiques — Écosystème cyber réunionnais' },
+  { time: '10:45 - 11:15', title: 'Présentation thématique 1', org: 'A CONFIRMER' },
+  { time: '11:15 - 11:45', title: 'Présentation thématique 2', org: 'A CONFIRMER' },
+  { time: '11:45 - 12:15', title: 'Présentation thématique 3', org: 'A CONFIRMER' },
   { time: '12:15 - 13:30', title: 'Dejeuner et networking', isPause: true },
   { isSection: true, title: 'Atelier pratique' },
   { time: '13:30 - 15:30', title: 'Exercice de gestion de crise — atelier pratique en groupes', speaker: 'Anime par le CLUSIR ROI, avec le soutien du partenaire principal' },
-  { time: '15:30 - 16:00', title: 'Retour d\'experience et cloture' },
+  { time: '15:30 - 16:00', title: 'Retour d\'experience et clôture' },
 ];
 ---
 
@@ -31,10 +31,10 @@ const programme: TimelineItem[] = [
     <div class="max-w-5xl mx-auto px-6">
       <div class="reveal">
         <span class="font-mono text-cyan-400/60 text-sm tracking-widest uppercase">Programme</span>
-        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Offreurs Cyber a La Reunion</h2>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Offreurs Cyber a La Réunion</h2>
         <p class="text-white/50 mt-4 text-lg max-w-3xl">
-          Journee dediee a l'ecosysteme cyber reunionnais. Gestion de crise le matin, presentations thematiques
-          par les offreurs locaux, puis atelier pratique l'apres-midi. Chaque intervenant aborde une problematique concrete.
+          Journée dédiée a l'écosystème cyber réunionnais. Gestion de crise le matin, présentations thématiques
+          par les offreurs locaux, puis atelier pratique l'après-midi. Chaque intervenant aborde une problématique concrète.
         </p>
       </div>
 
@@ -48,7 +48,7 @@ const programme: TimelineItem[] = [
         <div class="grid sm:grid-cols-3 gap-6">
           {[
             { title: 'Gestion de crise', desc: 'Methodologie et retour d\'experience sur la gestion d\'incidents cyber.' },
-            { title: 'Presentations thematiques', desc: 'Les offreurs locaux abordent des problematiques concretes de cybersecurite.' },
+            { title: 'Présentations thématiques', desc: 'Les offreurs locaux abordent des problématiques concrètes de cybersécurité.' },
             { title: 'Atelier pratique', desc: 'Exercice de gestion de crise en groupes, anime par le CLUSIR ROI.' },
           ].map(item => (
             <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-cyan-400/20 transition-colors">
@@ -59,9 +59,9 @@ const programme: TimelineItem[] = [
         </div>
       </div>
 
-      <!-- Ecosysteme cyber reunionnais -->
+      <!-- Écosystème cyber réunionnais -->
       <div class="reveal delay-3 mt-12">
-        <h3 class="font-display font-semibold text-xl mb-8">Ecosysteme cyber reunionnais represente</h3>
+        <h3 class="font-display font-semibold text-xl mb-8">Écosystème cyber réunionnais represente</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {['Eyako', 'Exodata', 'Idom', 'OCD', 'SFR', 'MDSI', 'NXO'].map(name => (
             <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-cyan-400/20 transition-colors">
@@ -69,7 +69,7 @@ const programme: TimelineItem[] = [
             </div>
           ))}
         </div>
-        <p class="text-white/30 text-xs font-mono mt-4">Le CLUSIR ROI ne recommande aucun produit ni prestataire. Cette etape presente l'ecosysteme cyber reunionnais dans sa diversite.</p>
+        <p class="text-white/30 text-xs font-mono mt-4">Le CLUSIR ROI ne recommande aucun produit ni prestataire. Cette étape presente l'écosystème cyber réunionnais dans sa diversite.</p>
       </div>
 
       <!-- Lieu d'accueil -->
@@ -91,7 +91,7 @@ const programme: TimelineItem[] = [
             </svg>
           </div>
           <div>
-            <h4 class="font-display font-semibold text-sm mb-1 text-cyan-400">Apres-midi</h4>
+            <h4 class="font-display font-semibold text-sm mb-1 text-cyan-400">Après-midi</h4>
             <p class="text-white/50 text-sm font-body">
               Exercice pratique de gestion de crise en groupes, anime par le CLUSIR ROI avec le soutien du partenaire principal.
             </p>
