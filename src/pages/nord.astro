@@ -19,9 +19,10 @@ const programme: TimelineItem[] = [
   { time: '10:30 - 10:45', title: 'Pause cafe', isPause: true },
   { time: '10:45 - 11:15', title: 'Lutte contre les manipulations de l\'information et transformation numérique', org: 'VIGINUM / DINUM' },
   { time: '11:15 - 11:30', title: 'Securisation des reseaux de l\'enseignement et de la recherche', org: 'RENATER' },
+  { time: '11:30 - 12:00', title: 'Cybercriminalité et signalement des incidents — rôle et missions de l\'OFAC', org: 'OFAC' },
   { isSection: true, title: 'Présentation du parcours CyberTour' },
-  { time: '11:30 - 12:00', title: 'Présentation du parcours CyberTour 2026 — Les 4 étapes', speaker: 'CLUSIR ROI' },
-  { time: '12:00 - 13:00', title: 'Cocktail dejeunatoire et networking', isPause: true },
+  { time: '12:00 - 12:30', title: 'Présentation du parcours CyberTour 2026 — Les 4 étapes', speaker: 'CLUSIR ROI' },
+  { time: '12:30 - 13:30', title: 'Cocktail dejeunatoire et networking', isPause: true },
 ];
 ---
 
@@ -56,7 +57,7 @@ const programme: TimelineItem[] = [
       <div class="reveal delay-2 mt-16">
         <h3 class="font-display font-semibold text-xl mb-8">Acteurs institutionnels attendus</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {['Region Reunion', 'Departement', 'Prefecture', 'Rectorat', 'ANSSI', 'Viginum', 'DINUM', 'SGDSN', 'Renater', 'Cyber Reunion'].map(name => (
+          {['Region Reunion', 'Departement', 'Prefecture', 'Rectorat', 'ANSSI', 'Viginum', 'DINUM', 'SGDSN', 'Renater', 'OFAC', 'Cyber Reunion'].map(name => (
             <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-gold/20 transition-colors">
               <span class="font-display font-semibold text-sm text-white/70">{name}</span>
             </div>
