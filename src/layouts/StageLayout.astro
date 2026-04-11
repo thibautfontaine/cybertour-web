@@ -83,8 +83,12 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
     .snav-item:focus-visible { outline: none; }
 
     /* Stage progress bar hover effects */
-    .stage-progress-item:hover span:first-child {
-      opacity: 0.85;
+    .stage-progress-item:not([aria-current="page"]):hover span:first-child {
+      filter: brightness(2);
+      transform: scaleX(1.2);
+    }
+    .stage-progress-item:not([aria-current="page"]):hover span:last-child {
+      color: rgba(255,255,255,0.8) !important;
     }
     .stage-progress-item:focus-visible {
       outline: 2px solid rgba(255,255,255,0.4);
@@ -246,7 +250,7 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
     <nav aria-label="Navigation entre étapes" class="max-w-5xl mx-auto px-6 py-12">
 
       <!-- Indicateur de progression — visible sur tous les écrans -->
-      <div class="flex items-center justify-center gap-2 mb-8">
+      <div class="flex items-center justify-center gap-6 mb-10">
         {stages.map((s) => {
           const isCurrent = s.id === stage.id;
           return (
@@ -254,19 +258,21 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
               href={s.href}
               aria-label={`Étape ${s.trackNumber} — ${s.direction}`}
               aria-current={isCurrent ? 'page' : undefined}
-              class="stage-progress-item group flex flex-col items-center gap-1.5"
+              class="stage-progress-item group flex flex-col items-center gap-2"
             >
+              <!-- Barre -->
               <span
                 class="block rounded-full transition-all duration-300"
                 style={isCurrent
-                  ? `width:32px;height:4px;background:${s.accentHex};box-shadow:0 0 8px ${s.accentHex}60;`
-                  : 'width:20px;height:3px;background:rgba(255,255,255,0.15);'}
+                  ? `width:48px;height:4px;background:${s.accentHex};box-shadow:0 0 10px ${s.accentHex}70,0 0 20px ${s.accentHex}30;`
+                  : `width:32px;height:3px;background:${s.accentHex}40;`}
               ></span>
+              <!-- Label -->
               <span
-                class="font-mono text-[10px] tracking-widest uppercase transition-colors duration-200"
+                class="font-mono text-[11px] tracking-widest uppercase transition-all duration-200"
                 style={isCurrent
-                  ? `color:${s.accentHex};`
-                  : 'color:rgba(255,255,255,0.3);'}
+                  ? `color:${s.accentHex};font-weight:700;`
+                  : 'color:rgba(255,255,255,0.5);'}
               >
                 {s.direction}
               </span>
