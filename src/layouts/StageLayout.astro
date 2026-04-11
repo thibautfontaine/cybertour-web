@@ -19,35 +19,51 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
   <slot name="navbar" />
 
   <!-- Floating stage navigator — left side -->
-  <nav aria-label="Navigation entre étapes" class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-1">
+  <nav aria-label="Navigation entre étapes" class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-start">
     {stages.map((s, i) => {
       const isActive = s.id === stage.id;
       const isLast   = i === stages.length - 1;
       return (
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-start">
           <a
             href={s.href}
-            class="snav-item group relative flex items-center"
+            class="snav-item group relative flex items-center gap-3"
             aria-current={isActive ? 'page' : undefined}
+            style="padding:6px 0;"
           >
-            <!-- Dot -->
+            <!-- Zone dot — largeur fixe pour aligner le connecteur -->
+            <span class="relative flex-shrink-0 flex items-center justify-center" style="width:20px;height:20px;">
+              <!-- Halo externe — actif seulement -->
+              {isActive && (
+                <span class="absolute inset-0 rounded-full" style={`border:1px solid ${s.accentHex}30;`}></span>
+              )}
+              <!-- Point central -->
+              <span
+                class="snav-dot block rounded-full transition-all duration-300"
+                style={isActive
+                  ? `width:10px;height:10px;background:${s.accentHex};box-shadow:0 0 10px ${s.accentHex}90,0 0 24px ${s.accentHex}30;`
+                  : `width:6px;height:6px;background:${s.accentHex}40;`}
+              ></span>
+            </span>
+
+            <!-- Label — visible pour l'actif, révélé au hover pour les inactifs -->
             <span
-              class="snav-dot block rounded-full transition-all duration-250"
-              style={isActive
-                ? `width:10px;height:10px;background:${s.accentHex};box-shadow:0 0 10px ${s.accentHex}90,0 0 22px ${s.accentHex}30;`
-                : 'width:7px;height:7px;background:rgba(255,255,255,0.15);'}
-            ></span>
-            <!-- Tooltip -->
-            <span class="snav-tip pointer-events-none absolute left-6 whitespace-nowrap font-mono text-[11px] tracking-widest uppercase px-3 py-1.5 rounded-lg border opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150"
-              style={isActive
-                ? `color:${s.accentHex};background:rgba(10,18,32,0.95);border-color:${s.accentHex}30;`
-                : 'color:rgba(255,255,255,0.6);background:rgba(10,18,32,0.95);border-color:rgba(255,255,255,0.08);'}>
-              {s.direction} — {s.dateShort}
+              class:list={[
+                "font-mono text-[11px] tracking-widest uppercase whitespace-nowrap transition-all duration-200",
+                isActive ? "" : "opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0"
+              ]}
+              style={`color:${s.accentHex};`}
+            >
+              {isActive ? `${s.trackNumber} · ${s.direction}` : s.direction}
             </span>
           </a>
-          <!-- Connector -->
+
+          <!-- Connecteur — centré sur le point (margin-left = 9px = (20px - 1px) / 2) -->
           {!isLast && (
-            <span class="block w-px my-1.5 rounded-full" style="height:20px;background:rgba(255,255,255,0.1);"></span>
+            <span
+              class="block rounded-full"
+              style="width:1px;height:22px;margin-left:9px;background:rgba(255,255,255,0.08);"
+            ></span>
           )}
         </div>
       );
@@ -56,15 +72,14 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
 
   <style>
     .snav-dot { flex-shrink: 0; }
-    .snav-item:hover .snav-dot,
-    .snav-item:focus-visible .snav-dot {
-      background: rgba(255,255,255,0.45) !important;
-      box-shadow: none !important;
+
+    /* Dot inactif : s'illumine et grossit au hover */
+    .snav-item:not([aria-current="page"]):hover .snav-dot,
+    .snav-item:not([aria-current="page"]):focus-visible .snav-dot {
+      filter: brightness(2);
+      transform: scale(1.4);
     }
-    .snav-item[aria-current="page"]:hover .snav-dot,
-    .snav-item[aria-current="page"]:focus-visible .snav-dot {
-      background: inherit !important;
-    }
+
     .snav-item:focus-visible { outline: none; }
 
     /* Stage progress bar hover effects */
@@ -78,7 +93,66 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
     }
   </style>
 
-  <div style={`--stage-accent: ${stage.accentHex};`}>
+  <!-- Mobile inter-stage nav — barre sticky en bas, masquée sur desktop -->
+  <nav
+    aria-label="Navigation entre étapes"
+    class="fixed bottom-0 left-0 right-0 z-40 lg:hidden"
+    style="background: rgba(15, 26, 48, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,0.08);"
+  >
+    <div class="flex items-center justify-between px-5 py-3 max-w-lg mx-auto">
+      <!-- Étape précédente -->
+      {prev ? (
+        <a
+          href={prev.href}
+          class="flex items-center gap-2 py-1"
+          style={`color:${prev.accentHex};min-width:44px;min-height:44px;`}
+          aria-label={`Étape précédente : ${prev.direction}`}
+        >
+          <span class="text-lg leading-none" aria-hidden="true">&larr;</span>
+          <span class="font-mono text-[11px] tracking-widest uppercase">{prev.direction}</span>
+        </a>
+      ) : <div style="min-width:44px"></div>}
+
+      <!-- Indicateur de position -->
+      <div class="flex items-center gap-2.5" role="list" aria-label="Progression">
+        {stages.map((s) => {
+          const isActive = s.id === stage.id;
+          return (
+            <a
+              href={s.href}
+              role="listitem"
+              aria-label={`${s.direction}`}
+              aria-current={isActive ? 'page' : undefined}
+              class="flex items-center justify-center"
+              style="width:32px;height:32px;"
+            >
+              <span
+                class="block rounded-full transition-all duration-300"
+                style={isActive
+                  ? `width:10px;height:10px;background:${s.accentHex};box-shadow:0 0 8px ${s.accentHex}80;`
+                  : 'width:6px;height:6px;background:rgba(255,255,255,0.2);'}
+              ></span>
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- Étape suivante -->
+      {next ? (
+        <a
+          href={next.href}
+          class="flex items-center gap-2 justify-end py-1"
+          style={`color:${next.accentHex};min-width:44px;min-height:44px;`}
+          aria-label={`Étape suivante : ${next.direction}`}
+        >
+          <span class="font-mono text-[11px] tracking-widest uppercase">{next.direction}</span>
+          <span class="text-lg leading-none" aria-hidden="true">&rarr;</span>
+        </a>
+      ) : <div style="min-width:44px"></div>}
+    </div>
+  </nav>
+
+  <div style={`--stage-accent: ${stage.accentHex};`} class="pb-16 lg:pb-0">
 
     <!-- Hero Banner -->
     <section class="relative min-h-[40vh] flex items-end overflow-hidden">

@@ -137,11 +137,10 @@ import { stages } from '../data/stages';
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <!-- Section header -->
       <div class="reveal mb-20">
-        <span class="font-mono text-gold/80 text-sm tracking-widest uppercase">01 // À propos</span>
+        <span class="section-label">01 // À propos</span>
         <h2 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-snug">
           L'événement cyber<br/><span class="text-gold">de référence</span> a La Réunion
         </h2>
-
       </div>
 
       <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -196,6 +195,19 @@ import { stages } from '../data/stages';
           <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-navy rounded-full blur-[80px] opacity-60"></div>
         </div>
       </div>
+
+      <!-- P3 — Micro-CTA vers le parcours -->
+      <div class="reveal delay-4 flex items-center justify-center mt-16 pt-10 border-t border-white/[0.05]">
+        <a
+          href="#etapes"
+          class="group inline-flex items-center gap-3 font-mono text-sm text-white/40 hover:text-gold transition-colors duration-200 tracking-wide"
+        >
+          <span>Voir les 4 étapes du tour</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -212,6 +224,13 @@ import { stages } from '../data/stages';
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
           Chaque jour, un lieu. Chaque lieu, un enjeu. De Saint-Denis a Saint-Pierre, la cybersécurité fait le tour de l'île.
         </p>
+        <!-- C4 — Dates bien visibles -->
+        <div class="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/[0.06]">
+          <svg class="w-4 h-4 text-gold/70 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+          <span class="font-mono text-sm text-gold/80 font-bold tracking-wider">19 — 23 OCTOBRE 2026</span>
+        </div>
       </div>
       <MapReunion />
       <!-- Stage cards bento grid -->

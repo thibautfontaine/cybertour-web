@@ -188,7 +188,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <script>
       // Beta gate — cryptolocker style
-      const BETA_HASH = 'b167a884452a93783022d2c228882a7578e2f6d278bc03da4f90103ba29f6de3';
+      // PBKDF2-SHA256, 600k iterations — résistant au brute-force hors-ligne
+      const BETA_SALT = new Uint8Array([47,218,12,99,171,3,204,88,155,61,240,17,8,133,222,74]);
+      const BETA_HASH = 'fe78561427c6aaa0049c32157429dd4aa46a714bc63e8604affdcafc8a90acee';
       const gate = document.getElementById('beta-gate');
       const banner = document.getElementById('beta-banner');
       const input = document.getElementById('beta-password') as HTMLInputElement;
@@ -196,9 +198,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       const err = document.getElementById('beta-error');
 
       async function hashPassword(pwd: string): Promise<string> {
-        const data = new TextEncoder().encode(pwd);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        const keyMaterial = await crypto.subtle.importKey(
+          'raw', new TextEncoder().encode(pwd), 'PBKDF2', false, ['deriveBits']
+        );
+        const bits = await crypto.subtle.deriveBits(
+          { name: 'PBKDF2', salt: BETA_SALT, iterations: 600000, hash: 'SHA-256' },
+          keyMaterial, 256
+        );
+        return Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
       }
 
       function unlock() {
@@ -208,10 +215,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         window.dispatchEvent(new CustomEvent('cybertour:unlocked'));
       }
 
-      // Check if already authenticated
-      if (localStorage.getItem('cybertour-beta') === 'granted') {
+      // Fix vuln 1 — vérifier le hash dérivé, pas juste 'granted'
+      // (empêche le bypass trivial localStorage.setItem(..., 'granted'))
+      if (localStorage.getItem('cybertour-beta') === BETA_HASH) {
         unlock();
       } else {
+        // Invalider tout token malformé ou ancien ('granted', etc.)
+        localStorage.removeItem('cybertour-beta');
         document.body.style.overflow = 'hidden';
       }
 
@@ -236,16 +246,64 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       updateLockCountdown();
       setInterval(updateLockCountdown, 1000);
 
+      // Fix vuln 3 — rate limiting : 5 tentatives, verrouillage 5 min
+      const MAX_ATTEMPTS = 5;
+      const LOCKOUT_MS = 5 * 60 * 1000;
+      let failedAttempts = 0;
+
+      function getLockoutRemaining(): number {
+        const until = parseInt(localStorage.getItem('cybertour-lockout') || '0', 10);
+        return Math.max(0, until - Date.now());
+      }
+
+      function applyLockout() {
+        localStorage.setItem('cybertour-lockout', String(Date.now() + LOCKOUT_MS));
+        if (btn) {
+          (btn as HTMLButtonElement).disabled = true;
+          btn.textContent = '⛔ ACCES BLOQUE — 5 MIN';
+        }
+        if (input) (input as HTMLInputElement).disabled = true;
+        if (err) {
+          err.textContent = '⚠ Trop de tentatives. Réessayez dans 5 minutes.';
+          err.classList.remove('hidden');
+        }
+      }
+
+      // Vérifier verrouillage existant au chargement
+      if (getLockoutRemaining() > 0) {
+        applyLockout();
+      }
+
       async function tryAccess() {
         if (!input) return;
+        if (getLockoutRemaining() > 0) return;
+
+        // Loading state — PBKDF2 prend ~1s
+        const btnEl = btn as HTMLButtonElement | null;
+        if (btnEl) { btnEl.disabled = true; btnEl.textContent = '⏳ DECHIFFREMENT...'; }
+
         const hash = await hashPassword(input.value);
+
         if (hash === BETA_HASH) {
-          localStorage.setItem('cybertour-beta', 'granted');
+          // Fix vuln 1 — stocker le hash dérivé, pas 'granted'
+          localStorage.setItem('cybertour-beta', BETA_HASH);
+          localStorage.removeItem('cybertour-lockout');
           unlock();
         } else {
-          if (err) err.classList.remove('hidden');
-          input.value = '';
-          input.placeholder = 'Cle incorrecte...';
+          failedAttempts++;
+          if (btnEl) { btnEl.disabled = false; btnEl.textContent = '▶ DECHIFFRER'; }
+
+          if (failedAttempts >= MAX_ATTEMPTS) {
+            applyLockout();
+          } else {
+            const remaining = MAX_ATTEMPTS - failedAttempts;
+            if (err) {
+              err.textContent = `⚠ Cle invalide. ${remaining} tentative${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}.`;
+              err.classList.remove('hidden');
+            }
+            (input as HTMLInputElement).value = '';
+            (input as HTMLInputElement).placeholder = 'Cle incorrecte...';
+          }
         }
       }
 

@@ -76,8 +76,9 @@ const programme: TimelineItem[] = [
       <div class="reveal delay-2 mt-12">
         <h3 class="font-display font-semibold text-xl mb-8">Lieu d'accueil</h3>
         <div class="flex flex-wrap items-center justify-center gap-8">
-          <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-office-eau.png" alt="Office de l'Eau Reunion" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+          <div class="partner-bubble px-6 py-3 relative">
+            <img src="/assets/logo-office-eau.png" alt="" class="h-16 sm:h-20 w-auto object-contain select-none" loading="lazy" style="filter: blur(8px); pointer-events:none;" aria-hidden="true" />
+            <span class="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-widest uppercase text-white/50">À confirmer</span>
           </div>
         </div>
       </div>

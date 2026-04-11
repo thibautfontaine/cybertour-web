@@ -13,7 +13,7 @@ const programme: TimelineItem[] = [
   { time: '09:15 - 09:45', title: 'Le cursus cybersécurité d\'Epitech', org: 'EPITECH' },
   { time: '09:45 - 10:15', title: 'Formations en alternance et professionnalisation', org: 'IUT / ESIROI' },
   { time: '10:15 - 10:45', title: 'Pause cafe', isPause: true },
-  { time: '10:45 - 11:15', title: 'Le BTS SIO et la cybersécurité', org: 'BTS EXPERNET' },
+  { time: '10:45 - 11:15', title: 'Le BTS SIO et la cybersécurité', org: 'BTS SIO' },
   { time: '11:15 - 11:45', title: 'Le Master Informatique et la recherche en cybersécurité', speaker: 'Dominique Gay', org: 'UNIVERSITE DE LA REUNION' },
   { time: '11:45 - 12:00', title: 'Échanges avec la salle' },
   { time: '12:00 - 13:30', title: 'Dejeuner et networking', isPause: true },
@@ -58,7 +58,7 @@ const programme: TimelineItem[] = [
       <div class="reveal delay-3 mt-12">
         <h3 class="font-display font-semibold text-xl mb-8">Ecoles et formations presentes</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {['Epitech Reunion', 'IUT de La Réunion', 'ESIROI', 'BTS Expernet', 'Master Informatique — Universite'].map(name => (
+          {['Epitech Reunion', 'IUT de La Réunion', 'ESIROI', 'BTS SIO', 'Master Informatique — Universite','Expertnet'].map(name => (
             <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-emerald-400/20 transition-colors">
               <span class="font-display font-semibold text-sm text-white/70">{name}</span>
             </div>
