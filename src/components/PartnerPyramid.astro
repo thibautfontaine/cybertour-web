@@ -63,8 +63,6 @@ const tiers: SponsorTier[] = [
       { name: 'TropiCode', initials: 'TC' },
       { name: 'Lagon Digital', initials: 'LD' },
       { name: 'SudDev 974', initials: 'S9' },
-      { name: 'Kreol Hosting', initials: 'KH' },
-      { name: 'RunWifi', initials: 'RW' },
     ],
     accent: 'text-amber-600',
     accentBorder: 'border-amber-600/40',
@@ -149,17 +147,20 @@ const tiers: SponsorTier[] = [
         <div class="w-px h-8 bg-white/10"></div>
       </div>
 
-      <!-- Sponsor Tiers -->
+      <!-- Sponsor Tiers — grisés, pas encore de sponsors -->
       {tiers.map((tier, i) => (
-        <div class={`reveal delay-${i + 2} flex flex-col items-center gap-6 w-full ${i === 0 ? 'max-w-2xl' : i === 1 ? 'max-w-3xl' : i === 2 ? 'max-w-4xl' : 'max-w-5xl'}`}>
-          <span class={`font-mono text-sm tracking-widest uppercase ${tier.accent}`}>
-            Sponsor {tier.name}
-          </span>
+        <div class={`reveal delay-${i + 2} flex flex-col items-center gap-6 w-full opacity-40 ${i === 0 ? 'max-w-2xl' : i === 1 ? 'max-w-3xl' : i === 2 ? 'max-w-4xl' : 'max-w-5xl'}`}>
+          <div class="flex items-center gap-3">
+            <span class={`font-mono text-sm tracking-widest uppercase ${tier.accent}`}>
+              Sponsor {tier.name}
+            </span>
+            <span class="font-mono text-xs text-white/40 border border-white/10 rounded-full px-2 py-0.5">Bientôt</span>
+          </div>
 
           <!-- Sponsor logos -->
           <div class="flex flex-wrap items-center justify-center gap-4">
             {tier.sponsors.map(s => (
-              <div class={`${tier.padding} flex items-center gap-3 ${tier.accentBg} ${tier.accentBorder} border rounded-2xl transition-transform duration-300 hover:-translate-y-1`}>
+              <div class={`${tier.padding} flex items-center gap-3 ${tier.accentBg} ${tier.accentBorder} border rounded-2xl`}>
                 <div class={`shrink-0 w-12 h-12 rounded-lg ${tier.accentBg} ${tier.accentBorder} border flex items-center justify-center`}>
                   <span class={`font-mono font-bold ${tier.textSize} ${tier.accent}`}>{s.initials}</span>
                 </div>
