@@ -41,6 +41,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
 
+    <!-- Analytics -->
+    <script data-goatcounter="https://cybertour.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
