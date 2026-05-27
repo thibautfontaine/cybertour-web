@@ -74,7 +74,7 @@ export const stages: Stage[] = [
     capacity: 150,
     theme: "Conférences & Ateliers Techniques",
     description:
-      "Deux jours de conférences techniques et d'ateliers pratiques. Jour 1 : conférences en amphi. Jour 2 : CTF Tahir, Escape Game, gestion de crise, OSINT, scène ouverte (Rumps) et rencontres professionnelles. Le point d'orgue du CyberTour.",
+      "Deux jours de conférences techniques et d'ateliers pratiques. Jour 1 : conférences en amphi. Jour 2 : CTF, Escape Game, gestion de crise, OSINT, scène ouverte (Rumps) et rencontres professionnelles. Le point d'orgue du CyberTour.",
     accent: "red",
     accentHex: "#e6a23c",
     trackNumber: "03",
