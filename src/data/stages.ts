@@ -49,8 +49,8 @@ export const stages: Stage[] = [
     date: "Mercredi 21 Octobre 2026",
     dateShort: "Mercredi 21 Oct",
     day: "Jour 2",
-    lieu: "Office de l'Eau - Saint-Paul",
-    lieuFull: "Office de l'Eau, Saint-Paul",
+    lieu: "Office de l'Eau Réunion - Saint-Paul",
+    lieuFull: "Office de l'Eau Réunion, Saint-Paul",
     capacity: 50,
     theme: "Offreurs Cyber à La Réunion",
     description:
