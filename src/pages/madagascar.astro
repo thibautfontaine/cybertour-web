@@ -3,8 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import MapMadagascar from '../components/MapMadagascar.astro';
+import { SWIO_TEAL } from '../data/stages';
 
-const accent = "#2dd4bf"; // teal océan — accent de la leg Madagascar
+/* Teal océan — accent de la leg Madagascar. Source unique : SWIO_TEAL
+   (src/data/stages.ts), miroir du token CSS --color-swio-teal. */
+const accent = SWIO_TEAL;
 
 const formats = [
   {
@@ -35,13 +38,12 @@ const pageDesc = "Étape internationale du CyberTour Océan Indien — Universit
 ---
 
 <Layout title={pageTitle} description={pageDesc}>
-  <Navbar slot="navbar" currentPage="madagascar" />
   <Navbar currentPage="madagascar" />
 
   <div style={`--stage-accent: ${accent};`} class="pb-16">
 
     <!-- ===== HERO ===== -->
-    <section class="relative min-h-[55vh] flex items-end overflow-hidden">
+    <section id="main-content" class="relative min-h-[55vh] flex items-end overflow-hidden">
       <div
         class="absolute inset-0"
         style={`background: linear-gradient(135deg, #0f1a30 0%, ${accent}14 50%, #0f1a30 100%);`}
@@ -78,7 +80,13 @@ const pageDesc = "Étape internationale du CyberTour Océan Indien — Universit
         </h1>
 
         <!-- Theme subtitle -->
-        <p class="reveal delay-3 font-display text-lg md:text-2xl italic" style={`color: ${accent};`}>
+        <!-- Sous-titre de page en Ambroise : corps de titrage (20-30px), ligne
+             isolée sous le H1 — l'emploi pour lequel une didone est faite.
+             `.font-serif` porte l'ajustement optique et `font-synthesis: none`
+             (Ambroise n'a qu'une romaine 400, aucune fausse graisse ni faux
+             oblique possible). Remplace le `font-display italic`, qui
+             synthétisait un oblique sur ITC Avant Garde. -->
+        <p class="reveal delay-3 font-serif text-xl md:text-3xl" style={`color: ${accent};`}>
           « Cybersecurity from Lands to Seas »
         </p>
 
@@ -90,7 +98,7 @@ const pageDesc = "Étape internationale du CyberTour Océan Indien — Universit
             </svg>
             <span>Novembre 2026</span>
           </div>
-          <span class="hidden sm:block w-px h-4 bg-white/20"></span>
+          <span class="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true"></span>
           <div class="flex items-center gap-2 font-body text-base" style="color: var(--text-secondary);">
             <svg class="w-4 h-4 shrink-0" style={`color: ${accent};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -207,7 +215,7 @@ const pageDesc = "Étape internationale du CyberTour Océan Indien — Universit
           ))}
         </div>
 
-        <p class="reveal delay-2 text-white/40 text-xs font-mono mt-6 text-center">
+        <p class="reveal delay-2 text-white/50 text-xs font-mono mt-6 text-center">
           Soutiens et intervenants en cours de confirmation.
         </p>
       </div>
@@ -266,6 +274,5 @@ const pageDesc = "Étape internationale du CyberTour Océan Indien — Universit
 
   </div>
 
-  <Footer slot="footer" />
   <Footer />
 </Layout>

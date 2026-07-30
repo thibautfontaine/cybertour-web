@@ -80,7 +80,19 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
       transform: scale(1.4);
     }
 
-    .snav-item:focus-visible { outline: none; }
+    /* Indicateur de focus visible — aligné sur .stage-progress-item */
+    .snav-item:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.4);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    /* Pastilles de progression mobile — même indicateur de focus */
+    .stage-dot-item:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.4);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
 
     /* Stage progress bar hover effects */
     .stage-progress-item:not([aria-current="page"]):hover span:first-child {
@@ -118,28 +130,30 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
       ) : <div style="min-width:44px"></div>}
 
       <!-- Indicateur de position -->
-      <div class="flex items-center gap-2.5" role="list" aria-label="Progression">
+      <ul class="flex items-center list-none m-0 p-0" aria-label="Progression">
         {stages.map((s) => {
           const isActive = s.id === stage.id;
           return (
-            <a
-              href={s.href}
-              role="listitem"
-              aria-label={`${s.direction}`}
-              aria-current={isActive ? 'page' : undefined}
-              class="flex items-center justify-center"
-              style="width:32px;height:32px;"
-            >
-              <span
-                class="block rounded-full transition-all duration-300"
-                style={isActive
-                  ? `width:10px;height:10px;background:${s.accentHex};box-shadow:0 0 8px ${s.accentHex}80;`
-                  : 'width:6px;height:6px;background:rgba(255,255,255,0.2);'}
-              ></span>
-            </a>
+            <li class="flex">
+              <a
+                href={s.href}
+                aria-label={`Étape ${s.trackNumber} — ${s.direction}`}
+                aria-current={isActive ? 'page' : undefined}
+                class="stage-dot-item flex items-center justify-center"
+                style="width:44px;height:44px;"
+              >
+                <span
+                  class="block rounded-full transition-all duration-300"
+                  aria-hidden="true"
+                  style={isActive
+                    ? `width:10px;height:10px;background:${s.accentHex};box-shadow:0 0 8px ${s.accentHex}80;`
+                    : 'width:6px;height:6px;background:rgba(255,255,255,0.2);'}
+                ></span>
+              </a>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <!-- Étape suivante -->
       {next ? (
@@ -159,7 +173,7 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
   <div style={`--stage-accent: ${stage.accentHex};`} class="pb-16 lg:pb-0">
 
     <!-- Hero Banner -->
-    <section class="relative min-h-[40vh] flex items-end overflow-hidden">
+    <section id="main-content" class="relative min-h-[40vh] flex items-end overflow-hidden">
       <!-- Background gradient with stage accent -->
       <div
         class="absolute inset-0"
@@ -216,7 +230,7 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
             <span>{stage.date}</span>
           </div>
 
-          <span class="hidden sm:block w-px h-4 bg-white/20"></span>
+          <span class="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true"></span>
 
           <!-- Lieu -->
           <div class="flex items-center gap-2 font-body text-base" style="color: var(--text-secondary);">
@@ -227,7 +241,7 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
             <span>{stage.lieu}</span>
           </div>
 
-          <span class="hidden sm:block w-px h-4 bg-white/20"></span>
+          <span class="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true"></span>
 
           <!-- Capacity badge -->
           <div
@@ -372,7 +386,7 @@ const next = currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
           </h2>
 
           <p class="font-body mb-8 max-w-lg mx-auto" style="color: var(--text-secondary);">
-            Les inscriptions pour cette étape ouvriront prochainement. Contactez-nous pour etre informé des qu'elles seront disponibles.
+            Les inscriptions pour cette étape ouvriront prochainement. Contactez-nous pour être informé dès qu'elles seront disponibles.
           </p>
 
           <a
