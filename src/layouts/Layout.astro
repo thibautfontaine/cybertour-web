@@ -19,6 +19,57 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#0f1a30" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
+
+    {/*
+      Préchargement des fontes — seulement les fontes du premier rendu.
+      Toutes les fontes du site sont en `font-display: swap` : sans preload,
+      le navigateur ne les découvre qu'après avoir téléchargé puis analysé la
+      feuille de styles, ce qui garantit un FOUT sur le H1.
+
+      Règle appliquée : on précharge les fontes qui peignent du texte de plus
+      de 16px au-dessus de la ligne de flottaison, plus la graisse par défaut
+      du corps. Trois fichiers, ~52 Ko :
+        - Bold 700  : le H1 « CYBER TOUR // REUNION » (le markup demande 800,
+                      aucune face 800 n'existe, le navigateur retombe sur 700)
+                      et le bouton principal.
+        - Demi 600  : la ligne date / lieu et les deux CTA du hero.
+        - Bk 400    : graisse par défaut de <body>, donc le corps de texte
+                      au-dessus de la ligne de flottaison des pages étape.
+
+      Volontairement NON préchargées :
+        - Md 500 (ITC Avant Garde)  : uniquement les 9 micro-liens de la nav.
+        - JetBrains Mono            : labels ≤ 12px, et c'est le plus lourd
+                                      fichier du lot — le précharger
+                                      retarderait les fontes de titrage.
+        - Ambroise                  : sous la ligne de flottaison, décorative.
+      Précharger les sept fontes serait pire que n'en précharger aucune : la
+      bande passante du premier rendu se répartirait au lieu de se concentrer.
+
+      `crossorigin` est obligatoire même en same-origin : les fontes sont
+      toujours récupérées en mode CORS. Sans lui le preload est ignoré et le
+      fichier est téléchargé deux fois.
+    */}
+    <link
+      rel="preload"
+      href="/fonts/ITCAvantGardeStdBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/ITCAvantGardeStdDemi.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/ITCAvantGardeStdBk.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="CLUSIR Réunion Océan Indien" />
     <meta name="keywords" content="cybersécurité, La Réunion, conférence, cybermois, CLUSIR, sécurité informatique, SOC, IA, souveraineté numérique" />
@@ -55,16 +106,42 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "endDate": "2026-10-23T18:00:00+04:00",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
-      "location": {
-        "@type": "Place",
-        "name": "IUT / ESIROI",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Saint-Pierre",
-          "addressRegion": "La Réunion",
-          "addressCountry": "FR"
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Campus du Moufia — Université de La Réunion",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Allée des Aigues-Marines",
+            "addressLocality": "Sainte-Clotilde",
+            "postalCode": "97490",
+            "addressRegion": "La Réunion",
+            "addressCountry": "FR"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Office de l'Eau Réunion",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Saint-Paul",
+            "addressRegion": "La Réunion",
+            "addressCountry": "FR"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "IUT de La Réunion / ESIROI",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "40 avenue de Soweto",
+            "addressLocality": "Saint-Pierre",
+            "postalCode": "97410",
+            "addressRegion": "La Réunion",
+            "addressCountry": "FR"
+          }
         }
-      },
+      ],
       "image": "https://cybertour.re/assets/og-cybertour-2026.png",
       "organizer": {
         "@type": "Organization",
@@ -75,7 +152,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "inLanguage": "fr"
     })} />
   </head>
-  <body class="font-body antialiased overflow-x-hidden pb-10">
+  <body class="font-body antialiased pb-10">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-gold focus:text-navy-dark focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
       Aller au contenu principal
     </a>

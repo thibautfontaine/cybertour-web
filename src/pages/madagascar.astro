@@ -3,8 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import MapMadagascar from '../components/MapMadagascar.astro';
+import { SWIO_TEAL } from '../data/stages';
 
-const accent = "#2dd4bf"; // teal océan — accent de la leg Madagascar
+/* Teal océan — accent de la leg Madagascar. Source unique : SWIO_TEAL
+   (src/data/stages.ts), miroir du token CSS --color-swio-teal. */
+const accent = SWIO_TEAL;
 
 const formats = [
   {
@@ -77,7 +80,13 @@ const pageDesc = "Étape internationale du CyberTour Océan Indien — Universit
         </h1>
 
         <!-- Theme subtitle -->
-        <p class="reveal delay-3 font-display text-lg md:text-2xl italic" style={`color: ${accent};`}>
+        <!-- Sous-titre de page en Ambroise : corps de titrage (20-30px), ligne
+             isolée sous le H1 — l'emploi pour lequel une didone est faite.
+             `.font-serif` porte l'ajustement optique et `font-synthesis: none`
+             (Ambroise n'a qu'une romaine 400, aucune fausse graisse ni faux
+             oblique possible). Remplace le `font-display italic`, qui
+             synthétisait un oblique sur ITC Avant Garde. -->
+        <p class="reveal delay-3 font-serif text-xl md:text-3xl" style={`color: ${accent};`}>
           « Cybersecurity from Lands to Seas »
         </p>
 

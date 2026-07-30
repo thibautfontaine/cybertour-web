@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { SWIO_TEAL } from '../data/stages';
 import { stages } from '../data/stages';
 
 const accent = '#5b8cc9';
@@ -99,7 +100,7 @@ const pageDesc =
             class="flex items-center justify-between gap-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 transition-colors hover:bg-white/[0.06]"
           >
             <span>
-              <span class="block font-mono text-[11px] tracking-widest uppercase mb-2" style="color:#2dd4bf;">
+              <span class="block font-mono text-[11px] tracking-widest uppercase mb-2" style={`color:${SWIO_TEAL};`}>
                 Étape internationale · SWIO
               </span>
               <span class="block font-display font-semibold text-lg text-white">Étape Madagascar</span>
@@ -107,7 +108,7 @@ const pageDesc =
                 Université d'Antananarivo — novembre 2026
               </span>
             </span>
-            <span class="shrink-0 font-mono text-lg" style="color:#2dd4bf;" aria-hidden="true">&rarr;</span>
+            <span class="shrink-0 font-mono text-lg" style={`color:${SWIO_TEAL};`} aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </div>

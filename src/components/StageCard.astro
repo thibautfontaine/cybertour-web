@@ -1,5 +1,5 @@
 ---
-import type { Stage } from "../data/stages";
+import type { Stage, TrackAccent } from "../data/stages";
 
 interface Props {
   stage: Stage;
@@ -7,14 +7,16 @@ interface Props {
 
 const { stage } = Astro.props;
 
-const trackClassMap: Record<string, string> = {
-  gold: "bento-track--gold",
-  cyan: "bento-track--cyan",
-  emerald: "bento-track--emerald",
-  red: "bento-track--red",
+/* Le Record est indexé par TrackAccent : oublier un accent est une erreur de
+   compilation, et l'index est total — pas de repli silencieux à prévoir. */
+const trackClassMap: Record<TrackAccent, string> = {
+  "red-accent": "bento-track--red-accent",
+  blue: "bento-track--blue",
+  teal: "bento-track--teal",
+  amber: "bento-track--amber",
 };
 
-const trackClass = trackClassMap[stage.accent] ?? "bento-track--gold";
+const trackClass = trackClassMap[stage.accent];
 ---
 
 <a

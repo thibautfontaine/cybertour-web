@@ -5,7 +5,9 @@
  * et un fil "câble sous-marin" vers l'Est pour évoquer le thème maritime
  * « Cybersecurity from Lands to Seas ».
  */
-const accent = "#2dd4bf"; // teal océan — différencie Madagascar de l'or réunionnais
+import { SWIO_TEAL } from "../data/stages";
+
+const accent = SWIO_TEAL; // teal océan — différencie Madagascar de l'or réunionnais
 ---
 
 <section id="carte" class="reveal relative py-20 md:py-28 overflow-hidden">
@@ -84,7 +86,7 @@ const accent = "#2dd4bf"; // teal océan — différencie Madagascar de l'or ré
       <p class="font-mono text-xs tracking-widest uppercase mb-1" style={`color: ${accent}CC;`}>
         Thématique
       </p>
-      <p class="font-display text-lg md:text-2xl font-bold text-white italic">
+      <p class="font-serif text-xl md:text-3xl text-white">
         « Cybersecurity from Lands to Seas »
       </p>
       <p class="text-white/50 text-sm mt-2 font-body">

@@ -1,45 +1,82 @@
 @import "tailwindcss";
 
-/* ========== CLUSIR FONTS ========== */
+/* ========== CLUSIR FONTS ==========
+   Chaque famille est déclarée en WOFF2 d'abord, OTF ensuite. Le WOFF2 est
+   supporté par tous les navigateurs cibles depuis 2016 : l'OTF n'est qu'un
+   filet de sécurité et n'est en pratique jamais téléchargé.
+
+   ITC Avant Garde et Ambroise sont des fontes commerciales. Les .woff2 sont
+   des conversions de format strictement sans perte des .otf sous licence
+   (même jeu de glyphes, même table `name`, aucun sous-ensemblage, aucun
+   renommage) — les originaux .otf restent en place dans public/fonts/.
+
+   JetBrains Mono (SIL OFL 1.1) est sous-ensemblée au latin utilisé par le
+   site : Latin-1, Latin Étendu-A, ponctuation générale, flèches, et le bloc
+   U+2500-259F (le caractère █ U+2588 sert aux cartes intervenants masquées).
+   Les fichiers complets sont conservés à côté pour pouvoir régénérer le
+   sous-ensemble si le contenu introduit de nouveaux caractères :
+
+     pyftsubset public/fonts/JetBrainsMono-<Poids>.woff2 \
+       --output-file=public/fonts/JetBrainsMono-<Poids>.subset.woff2 \
+       --flavor=woff2 --layout-features='kern,liga,clig,calt' \
+       --name-IDs='*' --name-legacy --notdef-outline \
+       --unicodes='U+0000-00FF,U+0100-017F,U+0192,U+02C6,U+02DA,U+02DC,\
+                   U+2000-206F,U+20AC,U+2122,U+2190-21BB,U+2212,U+2215,\
+                   U+2500-259F,U+FEFF,U+FFFD'
+
+   (pyftsubset provient de fonttools, hors dépendances npm du projet.) */
 @font-face {
   font-family: "ITC Avant Garde";
-  src: url("/fonts/ITCAvantGardeStdBk.otf") format("opentype");
+  src:
+    url("/fonts/ITCAvantGardeStdBk.woff2") format("woff2"),
+    url("/fonts/ITCAvantGardeStdBk.otf") format("opentype");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "ITC Avant Garde";
-  src: url("/fonts/ITCAvantGardeStdMd.otf") format("opentype");
+  src:
+    url("/fonts/ITCAvantGardeStdMd.woff2") format("woff2"),
+    url("/fonts/ITCAvantGardeStdMd.otf") format("opentype");
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: "ITC Avant Garde";
-  src: url("/fonts/ITCAvantGardeStdDemi.otf") format("opentype");
+  src:
+    url("/fonts/ITCAvantGardeStdDemi.woff2") format("woff2"),
+    url("/fonts/ITCAvantGardeStdDemi.otf") format("opentype");
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
   font-family: "ITC Avant Garde";
-  src: url("/fonts/ITCAvantGardeStdBold.otf") format("opentype");
+  src:
+    url("/fonts/ITCAvantGardeStdBold.woff2") format("woff2"),
+    url("/fonts/ITCAvantGardeStdBold.otf") format("opentype");
   font-weight: 700;
   font-display: swap;
 }
+/* Ambroise : une seule romaine (400). Aucun italique ni aucune autre graisse
+   n'est fournie — voir .font-serif plus bas, qui coupe la synthèse. */
 @font-face {
   font-family: "Ambroise";
-  src: url("/fonts/Ambroise Regular.otf") format("opentype");
+  src:
+    url("/fonts/Ambroise%20Regular.woff2") format("woff2"),
+    url("/fonts/Ambroise%20Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Regular.subset.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+  src: url("/fonts/JetBrainsMono-Bold.subset.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
@@ -60,10 +97,7 @@
   --color-slate-deep: #192842;
   --color-slate-mid: #21314e;
 
-  /* Accents des tracks bento — nommés d'après leur valeur réelle.
-     Les anciens noms de classe (.bento-track--gold/--red/--cyan/--emerald)
-     ne décrivaient pas la couleur peinte ; voir la table de correspondance
-     plus bas, section BENTO TRACK ACCENTS. */
+  /* Accents des tracks bento — nommés d'après leur valeur réelle. */
   --color-track-blue: #5b8cc9;
   --color-track-teal: #4db6ac;
   --color-track-amber: #e6a23c;
@@ -72,6 +106,24 @@
   --font-body: "ITC Avant Garde", system-ui, sans-serif;
   --font-serif: "Ambroise", Georgia, serif;
   --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Accent de l'étape internationale (SWIO / Madagascar). Distinct de
+   --color-track-teal (#4db6ac), qui est un accent de track réunionnais.
+
+   Bloc `static` : le teal n'est aujourd'hui consommé que depuis des attributs
+   `style` générés côté Astro, jamais depuis une utilitaire Tailwind ni un
+   `var()` en CSS. Dans un `@theme` normal, Tailwind 4 élague les tokens qu'il
+   ne voit utilisés nulle part et la custom property n'atteindrait pas le CSS
+   produit. `static` la publie inconditionnellement, ce qui la rend disponible
+   pour `var(--color-swio-teal)` et pour les utilitaires `*-swio-teal`.
+
+   Miroir JS : SWIO_TEAL dans src/data/stages.ts — les deux littéraux doivent
+   rester synchronisés. Le pendant JS est nécessaire parce que le markup
+   compose des suffixes alpha (`${SWIO_TEAL}33`), ce qu'une custom property ne
+   permet pas. */
+@theme static {
+  --color-swio-teal: #2dd4bf;
 }
 
 html {
@@ -337,32 +389,22 @@ body {
   border-radius: 0 2px 2px 0;
 }
 
-/* Les noms historiques ne décrivaient pas la couleur peinte :
-     --gold    peignait du rouge   -> alias .bento-track--red-accent
-     --red     peignait de l'orange-> alias .bento-track--amber
-     --cyan    peignait du bleu    -> alias .bento-track--blue
-     --emerald peignait du teal    -> alias .bento-track--teal
-   Les deux jeux de noms sont actifs : le markup peut migrer sans casse,
-   après quoi les anciens sélecteurs pourront être supprimés. */
+/* Chaque modificateur porte le nom de la couleur qu'il peint. Les anciens
+   noms (--gold peignait du rouge, --red de l'orange, --cyan du bleu,
+   --emerald du teal) et leurs alias de transition ont été supprimés : la
+   source de vérité est le champ `accent` de src/data/stages.ts, typé par
+   TrackAccent, et la table trackClassMap de StageCard.astro. */
 
-.bento-track--gold::before,
 .bento-track--red-accent::before { background: var(--color-clusir-red); }
-.bento-track--gold:hover,
 .bento-track--red-accent:hover { border-color: rgba(206, 70, 58, 0.2); }
 
-.bento-track--cyan::before,
 .bento-track--blue::before { background: var(--color-track-blue); }
-.bento-track--cyan:hover,
 .bento-track--blue:hover { border-color: rgba(91, 140, 201, 0.2); }
 
-.bento-track--emerald::before,
 .bento-track--teal::before { background: var(--color-track-teal); }
-.bento-track--emerald:hover,
 .bento-track--teal:hover { border-color: rgba(77, 182, 172, 0.2); }
 
-.bento-track--red::before,
 .bento-track--amber::before { background: var(--color-track-amber); }
-.bento-track--red:hover,
 .bento-track--amber:hover { border-color: rgba(230, 162, 60, 0.2); }
 
 .bento-bg-icon {
@@ -448,10 +490,31 @@ body {
   opacity: 0.5;
 }
 
-/* Ambroise serif accent — la fonte est chargée, la classe est conservée
-   en vue de la passe typographique. */
+/* ========== ACCENT ÉDITORIAL — AMBROISE ==========
+   Ambroise est une didone de titrage : contraste fort, déliés très fins.
+   Deux conséquences, appliquées ici plutôt que laissées au markup.
+
+   1. Une seule romaine (400) est fournie. `font-synthesis: none` interdit au
+      navigateur de fabriquer une fausse graisse ou un faux oblique si une
+      utilitaire `font-bold` / `italic` traînait sur un descendant. C'est le
+      défaut exact qui affectait ces accents quand ils étaient rendus en
+      `font-display italic` (ITC Avant Garde n'a aucun italique chargé).
+
+   2. Ajustement optique face à la grotesque géométrique. À corps égal,
+      Ambroise paraît plus petite et plus claire qu'ITC Avant Garde : +8 % de
+      corps la remet à niveau, l'interlignage est resserré (les didones ont
+      des ascendantes longues, l'interligne par défaut creuse le bloc) et une
+      once d'interlettrage compense la finesse des déliés sur fond sombre.
+      Le corps est exprimé en `em` : la classe se pose sur n'importe quelle
+      utilitaire `text-*` sans dupliquer les points de rupture. */
 .font-serif {
-  font-family: "Ambroise", Georgia, serif;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  font-size: 1.08em;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
 }
 
 /* ========== MOBILE UX OVERRIDES ========== */

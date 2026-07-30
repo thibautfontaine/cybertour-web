@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import MapReunion from '../components/MapReunion.astro';
 import StageCard from '../components/StageCard.astro';
 import PartnerPyramid from '../components/PartnerPyramid.astro';
-import { stages } from '../data/stages';
+import { stages, SWIO_TEAL } from '../data/stages';
 
 const contactMail = 'evenement@clusir-roi.org';
 
@@ -91,7 +91,7 @@ const mailtoSubject = (subject) =>
   <Navbar />
 
   <!-- ===== HERO ===== -->
-  <section id="main-content" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <section id="main-content" class="relative min-h-dvh flex items-center justify-center overflow-hidden">
     <!-- Background image with overlay -->
     <div class="absolute inset-0">
       <img src="/assets/hero-bg.jpg" alt="" width="1920" height="1080" class="w-full h-full object-cover" loading="eager" />
@@ -369,21 +369,21 @@ const mailtoSubject = (subject) =>
     <!-- Background — coherent with site but teal-accented -->
     <div class="absolute inset-0 bg-gradient-to-br from-navy-dark via-slate-deep to-navy-dark"></div>
     <div class="absolute inset-0 cyber-grid opacity-30"></div>
-    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 75% 50%, #2dd4bf18 0%, transparent 55%);"></div>
+    <div class="absolute inset-0 pointer-events-none" style={`background: radial-gradient(ellipse at 75% 50%, ${SWIO_TEAL}18 0%, transparent 55%);`}></div>
 
     <!-- Top divider — softens transition from #etapes -->
-    <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent 0%, #2dd4bf66 50%, transparent 100%);"></div>
+    <div class="absolute top-0 left-0 right-0 h-px" style={`background: linear-gradient(90deg, transparent 0%, ${SWIO_TEAL}66 50%, transparent 100%);`}></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
         <!-- LEFT — Pitch + meta + CTA -->
         <div class="lg:col-span-7 reveal">
-          <span class="section-label" style="color: #2dd4bfcc; border-left-color: #2dd4bf59;">
+          <span class="section-label" style={`color: ${SWIO_TEAL}cc; border-left-color: ${SWIO_TEAL}59;`}>
             04 // Étape internationale · SWIO
           </span>
           <h2 class="section-title mt-4 leading-tight">
-            Et une étape <span style="color: #2dd4bf;">internationale</span>
+            Et une étape <span style={`color: ${SWIO_TEAL};`}>internationale</span>
           </h2>
           <p class="text-white/60 mt-6 max-w-xl text-lg font-body leading-relaxed">
             Après les trois étapes réunionnaises, le CyberTour franchit le canal du Mozambique.
@@ -394,14 +394,14 @@ const mailtoSubject = (subject) =>
           <!-- Quick meta -->
           <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-sm">
             <div class="flex items-center gap-2 text-white/70">
-              <svg class="w-4 h-4 shrink-0" style="color: #2dd4bf;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-4 h-4 shrink-0" style={`color: ${SWIO_TEAL};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span>Novembre 2026</span>
             </div>
             <span class="hidden sm:block w-px h-4 bg-white/15"></span>
             <div class="flex items-center gap-2 text-white/70">
-              <svg class="w-4 h-4 shrink-0" style="color: #2dd4bf;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-4 h-4 shrink-0" style={`color: ${SWIO_TEAL};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -410,11 +410,19 @@ const mailtoSubject = (subject) =>
           </div>
 
           <!-- Thematic line -->
-          <div class="mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-full border" style="border-color: #2dd4bf33; background: #2dd4bf0F;">
-            <svg class="w-4 h-4 shrink-0" style="color: #2dd4bf;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div class="mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-full border" style={`border-color: ${SWIO_TEAL}33; background: ${SWIO_TEAL}0F;`}>
+            <svg class="w-4 h-4 shrink-0" style={`color: ${SWIO_TEAL};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 6 0M3 18c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 6 0M3 6c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 6 0" />
             </svg>
-            <span class="font-display italic text-sm md:text-base text-white/85">« Cybersecurity from Lands to Seas »</span>
+            <!-- Ambroise écartée ici : à 14-16px, dans une pilule et sur fond
+                 sombre, ses déliés de didone disparaissent. Ce n'est d'ailleurs
+                 pas une citation mise en exergue mais une étiquette, aux côtés
+                 d'une icône — le même texte joue ce rôle-là sur /madagascar, où
+                 il est traité en Ambroise parce qu'il y est en corps de titre.
+                 L'italique est retiré : ITC Avant Garde n'a aucun italique
+                 chargé, le navigateur fabriquait un faux oblique. Les
+                 guillemets suffisent à marquer la citation. -->
+            <span class="font-display text-sm md:text-base text-white/85">« Cybersecurity from Lands to Seas »</span>
           </div>
 
           <!-- CTAs -->
@@ -422,7 +430,7 @@ const mailtoSubject = (subject) =>
             <a
               href="/madagascar"
               class="inline-flex items-center gap-3 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:scale-[1.03]"
-              style="background: #2dd4bf; color: #0f1a30; box-shadow: 0 8px 30px #2dd4bf33;"
+              style={`background: ${SWIO_TEAL}; color: #0f1a30; box-shadow: 0 8px 30px ${SWIO_TEAL}33;`}
             >
               <span>Découvrir l'étape Madagascar</span>
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -445,28 +453,28 @@ const mailtoSubject = (subject) =>
           >
             <div
               class="relative aspect-square rounded-2xl border transition-all duration-500 group-hover:scale-[1.02]"
-              style="border-color: #2dd4bf26; background: rgba(15, 26, 48, 0.4); box-shadow: 0 0 60px #2dd4bf14;"
+              style={`border-color: ${SWIO_TEAL}26; background: rgba(15, 26, 48, 0.4); box-shadow: 0 0 60px ${SWIO_TEAL}14;`}
             >
               <!-- Mada outline -->
               <img
                 src="/assets/mada.svg"
                 alt="Carte de Madagascar — étape internationale"
                 class="absolute inset-0 w-full h-full p-8"
-                style="object-fit: contain; filter: drop-shadow(0 0 20px #2dd4bf33);"
+                style={`object-fit: contain; filter: drop-shadow(0 0 20px ${SWIO_TEAL}33);`}
                 loading="lazy"
                 decoding="async"
               />
               <!-- Small Tana label, positioned over pin (pin at SVG 53.7% / 50.6%, accounting for 32px padding ≈ adjust ratio) -->
               <span
                 class="absolute font-mono text-[10px] tracking-[0.2em] uppercase whitespace-nowrap pointer-events-none"
-                style="left: 63%; top: 48.5%; color: #2dd4bfdd;"
+                style={`left: 63%; top: 48.5%; color: ${SWIO_TEAL}dd;`}
               >
                 Antananarivo
               </span>
               <!-- Hover hint -->
               <span
                 class="absolute bottom-5 right-5 inline-flex items-center gap-1.5 font-mono text-[11px] tracking-widest uppercase transition-opacity duration-300 opacity-60 group-hover:opacity-100"
-                style="color: #2dd4bf;"
+                style={`color: ${SWIO_TEAL};`}
               >
                 <span>Voir la page</span>
                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -481,7 +489,7 @@ const mailtoSubject = (subject) =>
     </div>
 
     <!-- Bottom divider — softens transition into #ctf -->
-    <div class="absolute bottom-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent 0%, #2dd4bf33 50%, transparent 100%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-px" style={`background: linear-gradient(90deg, transparent 0%, ${SWIO_TEAL}33 50%, transparent 100%);`}></div>
   </section>
 
   <!-- ===== CTF CYBERMOIS ===== -->
@@ -494,7 +502,14 @@ const mailtoSubject = (subject) =>
         <h2 class="section-title mt-4">
           Championnat Réunionnais<br/>de <span class="text-gold">Cybersécurité</span>
         </h2>
-        <p class="text-white/60 mt-4 max-w-2xl mx-auto text-xl font-display italic">
+        <!-- Accent éditorial en Ambroise. C'est une phrase d'exergue, en corps
+             de titrage : le terrain naturel d'une didone. `.font-serif` porte
+             l'ajustement optique (+8% de corps, interlignage resserré) et
+             `font-synthesis: none`, qui interdit toute fausse graisse ou faux
+             oblique — Ambroise n'a qu'une romaine 400. Remplace le
+             `font-display italic` qui synthétisait un oblique sur une
+             grotesque géométrique sans italique chargé. -->
+        <p class="font-serif text-white/60 mt-5 max-w-2xl mx-auto text-2xl md:text-3xl">
           Réunir les talents d'aujourd'hui pour bâtir le hub cyber de demain.
         </p>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
@@ -660,7 +675,7 @@ const mailtoSubject = (subject) =>
                 Toutes les thématiques cyber sont les bienvenues : offensive, défensive, GRC, IA, souveraineté, RETEX d'incident.
               </p>
               <p class="text-white/50 mt-3 text-sm font-mono">
-                // Clôture des soumissions : <span class="text-gold/80">samedi 31 octobre 2026</span>
+                // Clôture des soumissions : <span class="text-gold/80">jeudi 1er octobre 2026</span>
               </p>
             </div>
             <div class="shrink-0">
