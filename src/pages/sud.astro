@@ -128,13 +128,13 @@ const ateliers = [
 
       <!-- Day separator -->
       <div class="reveal my-24 flex items-center gap-6">
-        <div class="flex-1 h-px bg-white/[0.06]"></div>
+        <div class="flex-1 h-px bg-white/[0.06]" aria-hidden="true"></div>
         <div class="flex items-center gap-3">
-          <div class="w-1.5 h-1.5 rounded-full bg-red-400/40"></div>
-          <span class="font-mono text-xs text-white/25 tracking-widest uppercase">Vendredi 23 octobre</span>
-          <div class="w-1.5 h-1.5 rounded-full bg-red-400/40"></div>
+          <div class="w-1.5 h-1.5 rounded-full bg-red-400/40" aria-hidden="true"></div>
+          <span class="font-mono text-xs text-white/50 tracking-widest uppercase">Vendredi 23 octobre</span>
+          <div class="w-1.5 h-1.5 rounded-full bg-red-400/40" aria-hidden="true"></div>
         </div>
-        <div class="flex-1 h-px bg-white/[0.06]"></div>
+        <div class="flex-1 h-px bg-white/[0.06]" aria-hidden="true"></div>
       </div>
 
       <!-- Jour 2: Ateliers pratiques -->
@@ -205,7 +205,7 @@ const ateliers = [
         <h3 class="font-display font-semibold text-xl mb-8">Co-organisateurs</h3>
         <div class="flex flex-wrap items-center justify-center gap-8">
           <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-univ-reunion.png" alt="Universite de La Réunion" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+            <img src="/assets/logo-univ-reunion.png" alt="Université de La Réunion" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
           </div>
           <div class="partner-bubble px-6 py-3">
             <img src="/assets/logo-clusir.png" alt="CLUSIR Réunion Océan Indien" class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
@@ -225,7 +225,11 @@ const ateliers = [
     background: #DF3C37 !important;
     box-shadow: 0 0 8px rgba(223,60,55,0.5);
   }
-  .dnav-item:focus-visible { outline: none; }
+  .dnav-item:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.4);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
 </style>
 
 <script>

@@ -48,13 +48,25 @@
   /* CLUSIR palette — rouge #ce463a, bleu #21314e */
   --color-navy: #21314e;
   --color-navy-dark: #0f1a30;
+  /* Aplats et fonds — couleur de charte, ne pas modifier */
   --color-clusir-red: #ce463a;
-  --color-clusir-red-bright: #d9564a;
+  /* Variante TEXTE uniquement. #d9564a ne donnait que 4.44:1 sur #0f1a30
+     et 3.93:1 sur le fond teinté des badges — sous le seuil WCAG AA (4.5:1).
+     #e56b5f : 5.45:1 sur #0f1a30, 4.82:1 sur rgba(206,70,58,.15) sur #0f1a30. */
+  --color-clusir-red-bright: #e56b5f;
   --color-gold: #FFDE59;
   --color-gold-dim: #d4b84a;
   --color-red: #ce463a;
   --color-slate-deep: #192842;
   --color-slate-mid: #21314e;
+
+  /* Accents des tracks bento — nommés d'après leur valeur réelle.
+     Les anciens noms de classe (.bento-track--gold/--red/--cyan/--emerald)
+     ne décrivaient pas la couleur peinte ; voir la table de correspondance
+     plus bas, section BENTO TRACK ACCENTS. */
+  --color-track-blue: #5b8cc9;
+  --color-track-teal: #4db6ac;
+  --color-track-amber: #e6a23c;
 
   --font-display: "ITC Avant Garde", system-ui, sans-serif;
   --font-body: "ITC Avant Garde", system-ui, sans-serif;
@@ -99,9 +111,27 @@ body {
   50% { transform: translateY(-20px) rotate(2deg); }
 }
 
+/* Entrée du hero. Référencé en style inline dans index.astro sur 6 éléments,
+   avec des délais échelonnés de 0 à 0.6s — n'anime que transform + opacity.
+   La courbe est surchargée ici (expo-out, identique aux .reveal) parce que
+   le markup déclare `ease-out` en dur. */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Le flou est fixe (porté par .animate-pulse-glow) : animer `filter: blur()`
+   en boucle forçait un repaint de large surface à chaque frame. */
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.3; filter: blur(40px); }
-  50% { opacity: 0.6; filter: blur(60px); }
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.12); }
 }
 
 @keyframes scan-line {
@@ -120,7 +150,11 @@ body {
 }
 
 .animate-float { animation: float 6s ease-in-out infinite; }
-.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-pulse-glow {
+  filter: blur(50px);
+  will-change: opacity, transform;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
 .animate-scan { animation: scan-line 8s linear infinite; }
 
 /* Scroll-triggered reveals */
@@ -150,9 +184,6 @@ body {
 .delay-5 { transition-delay: 0.5s; }
 .delay-6 { transition-delay: 0.6s; }
 
-.clip-diagonal { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
-.clip-diagonal-reverse { clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%); }
-
 .cyber-grid {
   background-image:
     linear-gradient(var(--grid-color) 1px, transparent 1px),
@@ -180,17 +211,21 @@ body {
   position: relative;
   overflow: hidden;
 }
+/* L'accent latéral se déplie en composition pure (scaleY) — animer `height`
+   déclenchait un layout à chaque frame du survol. */
 .topic-card::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 4px;
-  height: 0;
+  height: 100%;
   background: var(--color-clusir-red);
-  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.topic-card:hover::before { height: 100%; }
+.topic-card:hover::before { transform: scaleY(1); }
 
 .btn-primary {
   position: relative;
@@ -260,7 +295,7 @@ body {
 }
 
 .glitch::after {
-  color: #5b8cc9;
+  color: var(--color-track-blue);
   z-index: -1;
 }
 
@@ -288,7 +323,7 @@ body {
   color: transparent;
   -webkit-text-stroke: 2px rgba(255, 255, 255, 0.25);
   text-stroke: 2px rgba(255, 255, 255, 0.25);
-  transition: all 0.4s ease;
+  transition: -webkit-text-stroke-color 0.4s ease;
 }
 
 .reunion-outline:hover {
@@ -302,17 +337,33 @@ body {
   border-radius: 0 2px 2px 0;
 }
 
-.bento-track--gold::before { background: var(--color-clusir-red); }
-.bento-track--gold:hover { border-color: rgba(192, 81, 60, 0.2); }
+/* Les noms historiques ne décrivaient pas la couleur peinte :
+     --gold    peignait du rouge   -> alias .bento-track--red-accent
+     --red     peignait de l'orange-> alias .bento-track--amber
+     --cyan    peignait du bleu    -> alias .bento-track--blue
+     --emerald peignait du teal    -> alias .bento-track--teal
+   Les deux jeux de noms sont actifs : le markup peut migrer sans casse,
+   après quoi les anciens sélecteurs pourront être supprimés. */
 
-.bento-track--cyan::before { background: #5b8cc9; }
-.bento-track--cyan:hover { border-color: rgba(91, 140, 201, 0.2); }
+.bento-track--gold::before,
+.bento-track--red-accent::before { background: var(--color-clusir-red); }
+.bento-track--gold:hover,
+.bento-track--red-accent:hover { border-color: rgba(206, 70, 58, 0.2); }
 
-.bento-track--emerald::before { background: #4db6ac; }
-.bento-track--emerald:hover { border-color: rgba(77, 182, 172, 0.2); }
+.bento-track--cyan::before,
+.bento-track--blue::before { background: var(--color-track-blue); }
+.bento-track--cyan:hover,
+.bento-track--blue:hover { border-color: rgba(91, 140, 201, 0.2); }
 
-.bento-track--red::before { background: #e6a23c; }
-.bento-track--red:hover { border-color: rgba(230, 162, 60, 0.2); }
+.bento-track--emerald::before,
+.bento-track--teal::before { background: var(--color-track-teal); }
+.bento-track--emerald:hover,
+.bento-track--teal:hover { border-color: rgba(77, 182, 172, 0.2); }
+
+.bento-track--red::before,
+.bento-track--amber::before { background: var(--color-track-amber); }
+.bento-track--red:hover,
+.bento-track--amber:hover { border-color: rgba(230, 162, 60, 0.2); }
 
 .bento-bg-icon {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -386,8 +437,9 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.3);
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+  /* 0.3 ne donnait que 2.68:1 sur le fond du badge. 0.6 -> 6.50:1. */
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
   padding: 0.2rem 0.6rem;
   border-radius: 0.375rem;
 }
@@ -396,14 +448,8 @@ body {
   opacity: 0.5;
 }
 
-/* Weezevent section */
-.weezevent-frame {
-  border-radius: 1rem;
-  border: 1px solid var(--border-card);
-  overflow: hidden;
-}
-
-/* Ambroise serif accent */
+/* Ambroise serif accent — la fonte est chargée, la classe est conservée
+   en vue de la passe typographique. */
 .font-serif {
   font-family: "Ambroise", Georgia, serif;
 }
@@ -449,7 +495,7 @@ body {
   }
   /* Révèle l'accent bar au tap sur mobile */
   .topic-card:active::before {
-    height: 100%;
+    transform: scaleY(1);
   }
 }
 
@@ -466,4 +512,91 @@ body {
   padding-left: 0.75rem;
   border-left: 2px solid rgba(255, 222, 89, 0.35);
   line-height: 1.4;
+}
+
+/* Titre de section — remplace la chaîne utilitaire
+   `text-4xl sm:text-5xl md:text-6xl font-display font-extrabold ... leading-snug`
+   répétée 9 fois en ligne dans index.astro. Bascule du markup à faire. */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.25rem;   /* text-4xl */
+  line-height: 1.375;   /* leading-snug */
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+@media (min-width: 640px) {
+  .section-title { font-size: 3rem; }    /* sm:text-5xl */
+}
+@media (min-width: 768px) {
+  .section-title { font-size: 3.75rem; } /* md:text-6xl */
+}
+
+/* ========== ACCESSIBILITÉ — MOUVEMENT RÉDUIT ==========
+   Pas de `animation: 0.01ms !important` global : on coupe les boucles
+   décoratives infinies, on raccourcit les révélations en gardant leur état
+   final visible, et on conserve les retours d'interaction. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  /* --- Boucles infinies décoratives --- */
+  .animate-float,
+  .animate-pulse-glow,
+  .cyber-grid {
+    animation: none;
+  }
+  /* La lueur et la grille se figent sur une valeur médiane lisible */
+  .animate-pulse-glow { opacity: 0.45; transform: none; }
+  .cyber-grid { opacity: 0.05; }
+
+  /* La barre de scan n'a aucun état statique utile : on la retire */
+  .animate-scan { animation: none; opacity: 0; }
+
+  /* Shimmer permanent sur chaque bouton principal */
+  .btn-primary::after { animation: none; display: none; }
+
+  /* Le glitch ne doit pas figer deux calques décalés sur le titre */
+  .glitch:hover::before,
+  .glitch:hover::after { animation: none; opacity: 0; }
+
+  /* Terminal : trait plein et points au repos sur un état lisible */
+  .terminal-typing {
+    animation: none;
+    border-color: var(--color-clusir-red);
+  }
+  .terminal-dots::after {
+    animation: none;
+    content: "...";
+  }
+
+  /* --- Entrée du hero (styles inline dans index.astro) ---
+     `animation: none` neutralise aussi le fill `both` : les éléments
+     s'affichent immédiatement dans leur état naturel. */
+  [style*="slide-up"] { animation: none !important; }
+
+  /* --- Révélations au scroll : quasi instantanées, état final préservé --- */
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    transform: none;
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+  .delay-1, .delay-2, .delay-3,
+  .delay-4, .delay-5, .delay-6 { transition-delay: 0s; }
+
+  /* --- Retours d'interaction : conservés, sans déplacement animé --- */
+  .sponsor-card,
+  .partner-bubble,
+  .btn-primary,
+  .btn-outline,
+  .bento-bg-icon,
+  .topic-card::before,
+  .reunion-outline {
+    transition-duration: 0.01ms;
+  }
+  .sponsor-card:hover,
+  .partner-bubble:hover,
+  .btn-primary:hover { transform: none; }
+  .bento-track:hover .bento-bg-icon { transform: none; }
 }

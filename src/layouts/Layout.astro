@@ -82,92 +82,146 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot />
 
     <script>
-      // Scroll reveal — IntersectionObserver + scroll fallback
-      const REVEAL_SEL = '.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)';
+      // ── Scroll reveal — IntersectionObserver only (aucun listener scroll,
+      //    donc aucun reflow synchrone forcé par getBoundingClientRect).
+      const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
 
-      function checkReveals() {
-        const vh = window.innerHeight;
-        document.querySelectorAll<Element>(REVEAL_SEL).forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < vh * 0.92) {
-            el.classList.add('visible');
-          }
-        });
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0, rootMargin: '0px 0px -8% 0px' }
+        );
+        // L'observation déclenche un premier callback dès le prochain frame :
+        // tout ce qui est déjà dans le viewport est révélé au chargement.
+        revealEls.forEach((el) => observer.observe(el));
+      } else {
+        // Pas d'IntersectionObserver : on révèle tout plutôt que de laisser
+        // le contenu invisible (opacity: 0 par défaut).
+        revealEls.forEach((el) => el.classList.add('visible'));
       }
 
-      // IntersectionObserver as primary driver (permissive settings)
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        },
-        { threshold: 0, rootMargin: '0px 0px 0px 0px' }
-      );
+      // ── Compte à rebours (présent uniquement sur la home)
+      // Les effets navbar (scroll + menu mobile) sont gérés dans Navbar.astro.
+      const EVENT_START = new Date('2026-10-20T08:00:00+04:00').getTime();
+      const EVENT_END = new Date('2026-10-23T18:00:00+04:00').getTime();
 
-      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el) => {
-        observer.observe(el);
-      });
+      const dEl = document.getElementById('cd-days');
+      const hEl = document.getElementById('cd-hours');
+      const mEl = document.getElementById('cd-mins');
+      const sEl = document.getElementById('cd-secs');
 
-      // Scroll fallback — catches anything the observer misses
-      window.addEventListener('scroll', checkReveals, { passive: true });
-      // Run once immediately for elements already in viewport
-      checkReveals();
+      if (dEl && hEl && mEl && sEl) {
+        // Conteneur flex parent : span → div.text-center → wrapper
+        const cdWrapper = dEl.parentElement && dEl.parentElement.parentElement;
+        let timerId = null;
+        let settled = false; // true dès que l'état « en cours » / « terminé » est affiché
 
-      // Navbar scroll effect
-      const nav = document.getElementById('main-nav');
-      if (nav) {
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 80) {
-            nav.classList.add('bg-navy-dark/95', 'backdrop-blur-lg', 'shadow-lg');
-            nav.classList.remove('bg-transparent');
+        function stopCountdown() {
+          if (timerId !== null) {
+            clearInterval(timerId);
+            timerId = null;
+          }
+        }
+
+        function renderStatus(title, subtitle, ctaLabel, ctaHref) {
+          if (!cdWrapper) return;
+          const box = document.createElement('div');
+          box.className = 'mx-auto max-w-xl text-center';
+          box.setAttribute('role', 'status');
+
+          const h = document.createElement('p');
+          h.className = 'font-mono text-xl sm:text-2xl font-bold uppercase tracking-widest text-gold';
+          h.textContent = title;
+          box.appendChild(h);
+
+          const p = document.createElement('p');
+          p.className = 'mt-2 text-sm text-white/70';
+          p.textContent = subtitle;
+          box.appendChild(p);
+
+          if (ctaLabel && ctaHref) {
+            const a = document.createElement('a');
+            a.className = 'btn-outline text-xs py-2 px-5 mt-6 inline-block';
+            a.href = ctaHref;
+            a.textContent = ctaLabel;
+            box.appendChild(a);
+          }
+
+          cdWrapper.replaceChildren(box);
+          cdWrapper.classList.remove('flex', 'items-center', 'justify-center', 'gap-6', 'sm:gap-10');
+          cdWrapper.classList.add('block');
+        }
+
+        function updateCountdown() {
+          if (settled) return;
+          const now = Date.now();
+
+          if (now >= EVENT_END) {
+            settled = true;
+            stopCountdown();
+            renderStatus(
+              'Édition 2026 terminée',
+              'Merci à toutes et tous. Les conférences sont disponibles en rediffusion.',
+              'Voir les replays',
+              '/#replay'
+            );
+            return;
+          }
+
+          if (now >= EVENT_START) {
+            settled = true;
+            stopCountdown();
+            renderStatus(
+              "L'événement est en cours",
+              'Du 20 au 23 octobre 2026 — rejoignez-nous sur place ou en streaming.',
+              'Voir les étapes',
+              '/#etapes'
+            );
+            return;
+          }
+
+          const diff = EVENT_START - now;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+          dEl.textContent = String(days).padStart(3, '0');
+          hEl.textContent = String(hours).padStart(2, '0');
+          mEl.textContent = String(mins).padStart(2, '0');
+          sEl.textContent = String(secs).padStart(2, '0');
+        }
+
+        function startCountdown() {
+          updateCountdown();
+          // updateCountdown() a pu arrêter le compteur (états « en cours » / « terminé »)
+          if (timerId === null && !settled) {
+            timerId = setInterval(updateCountdown, 1000);
+          }
+        }
+
+        // Onglet caché : on suspend le tick (inutile et coûteux en batterie)
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'hidden') {
+            stopCountdown();
           } else {
-            nav.classList.remove('bg-navy-dark/95', 'backdrop-blur-lg', 'shadow-lg');
-            nav.classList.add('bg-transparent');
+            startCountdown();
           }
         });
+
+        if (document.visibilityState !== 'hidden') {
+          startCountdown();
+        } else {
+          updateCountdown();
+        }
       }
-
-      // Mobile menu toggle
-      const menuBtn = document.getElementById('menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-          menuBtn.setAttribute('aria-expanded', mobileMenu.classList.contains('hidden') ? 'false' : 'true');
-        });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-          });
-        });
-      }
-
-      // Countdown timer
-      const targetDate = new Date('2026-10-20T08:00:00+04:00').getTime();
-      function updateCountdown() {
-        const now = Date.now();
-        const diff = targetDate - now;
-        if (diff <= 0) return;
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-        const dEl = document.getElementById('cd-days');
-        const hEl = document.getElementById('cd-hours');
-        const mEl = document.getElementById('cd-mins');
-        const sEl = document.getElementById('cd-secs');
-        if (dEl) dEl.textContent = String(days).padStart(3, '0');
-        if (hEl) hEl.textContent = String(hours).padStart(2, '0');
-        if (mEl) mEl.textContent = String(mins).padStart(2, '0');
-        if (sEl) sEl.textContent = String(secs).padStart(2, '0');
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
     </script>
   </body>
 </html>

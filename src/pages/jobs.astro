@@ -10,42 +10,42 @@ const steps = [
   {
     number: '1',
     title: 'Inscrivez-vous',
-    description: 'Entreprises, deposez vos offres. Etudiants, creez votre profil. On s\'occupe du matching en amont pour que chaque rencontre compte.',
+    description: 'Entreprises, déposez vos offres. Étudiants, créez votre profil. On s\'occupe du matching en amont pour que chaque rencontre compte.',
   },
   {
     number: '2',
     title: '8 minutes chrono',
-    description: 'Face a face, sans filtre. Vous presentez votre besoin ou votre parcours, vous echangez, vous evaluez. Puis on tourne.',
+    description: 'Face à face, sans filtre. Vous présentez votre besoin ou votre parcours, vous échangez, vous évaluez. Puis on tourne.',
   },
   {
     number: '3',
     title: 'Connectez-vous',
-    description: 'Apres les rotations, retrouvez vos coups de coeur en zone libre. Les meilleures collaborations commencent souvent autour d\'un cafe.',
+    description: 'Après les rotations, retrouvez vos coups de cœur en zone libre. Les meilleures collaborations commencent souvent autour d\'un café.',
   },
 ];
 
 const studentTips = [
   {
     title: 'Soignez votre pitch',
-    description: 'Vous avez 8 minutes, pas 8 heures. Preparez une présentation claire de votre parcours, vos compétences cles et ce que vous recherchez. Allez droit au but.',
+    description: 'Vous avez 8 minutes, pas 8 heures. Préparez une présentation claire de votre parcours, vos compétences clés et ce que vous recherchez. Allez droit au but.',
   },
   {
     title: 'Montrez ce que vous savez faire',
-    description: 'Un projet perso, un CTF, une certification, un depot GitHub — tout ce qui prouve votre curiosite et votre pratique vaut plus qu\'une ligne sur un CV.',
+    description: 'Un projet perso, un CTF, une certification, un dépôt GitHub — tout ce qui prouve votre curiosité et votre pratique vaut plus qu\'une ligne sur un CV.',
   },
   {
-    title: 'Venez avec le bon materiel',
-    description: 'CV a jour en plusieurs exemplaires, portfolio ou lien vers vos realisations, et surtout : de l\'energie. Les recruteurs se souviennent des candidats qui ont de l\'enthousiasme.',
+    title: 'Venez avec le bon matériel',
+    description: 'CV à jour en plusieurs exemplaires, portfolio ou lien vers vos réalisations, et surtout : de l\'énergie. Les recruteurs se souviennent des candidats qui ont de l\'enthousiasme.',
   },
 ];
 ---
 
-<Layout title="Speed Dating Stages & Alternances | Cyber Tour Réunion 2026" description="Speed dating stages et alternances cybersécurité au CyberTour Reunion 2026. Entreprises et etudiants, inscrivez-vous pour rencontrer les talents cyber de demain.">
+<Layout title="Speed Dating Stages & Alternances | Cyber Tour Réunion 2026" description="Speed dating stages et alternances cybersécurité au CyberTour Réunion 2026. Entreprises et étudiants, inscrivez-vous pour rencontrer les talents cyber de demain.">
 
   <Navbar currentPage="jobs" />
 
   <!-- ===== HERO ===== -->
-  <section class="relative overflow-hidden pt-32 pb-20">
+  <section id="main-content" class="relative overflow-hidden pt-32 pb-20">
     <!-- Background gradient -->
     <div
       class="absolute inset-0"
@@ -70,20 +70,20 @@ const studentTips = [
           class="inline-block font-mono text-xs tracking-widest uppercase px-4 py-1.5 rounded-full border"
           style={`color: ${emerald}; border-color: ${emerald}40; background: ${emerald}10;`}
         >
-          Speed Dating Cyber &middot; Date a confirmer
+          Speed Dating Cyber &middot; Date à confirmer
         </span>
       </div>
 
       <!-- Title -->
       <h1 class="reveal delay-2 font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
         Votre prochain talent cyber<br />
-        <span style={`color: ${emerald};`}>est peut-etre dans la salle</span>
+        <span style={`color: ${emerald};`}>est peut-être dans la salle</span>
       </h1>
 
       <!-- Subtitle -->
       <p class="reveal delay-3 text-lg md:text-xl max-w-2xl mx-auto mb-10" style="color: var(--text-secondary);">
-        Speed dating stages & alternances — 8 minutes pour convaincre, une carriere pour commencer.
-        Date et lieu a confirmer.
+        Speed dating stages & alternances — 8 minutes pour convaincre, une carrière pour commencer.
+        Date et lieu à confirmer.
       </p>
 
       <!-- CTAs -->
@@ -100,7 +100,7 @@ const studentTips = [
           class="inline-block font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-lg border-2 transition-all duration-300 hover:-translate-y-0.5"
           style={`border-color: ${emerald}; color: ${emerald};`}
         >
-          Retour a l'accueil
+          Retour à l'accueil
         </a>
       </div>
     </div>
@@ -114,7 +114,7 @@ const studentTips = [
           Le format
         </span>
         <h2 class="reveal delay-1 font-display text-3xl md:text-4xl font-bold mt-3">
-          Comment ca marche
+          Comment ça marche
         </h2>
       </div>
 
@@ -143,14 +143,14 @@ const studentTips = [
           Recruteurs
         </span>
         <h2 class="reveal delay-1 font-display text-3xl md:text-4xl font-bold mt-3">
-          Recruteurs : trouvez vos futurs talents cyber a La Réunion
+          Recruteurs : trouvez vos futurs talents cyber à La Réunion
         </h2>
         <p class="reveal delay-2 mt-4 max-w-2xl mx-auto text-lg" style="color: var(--text-secondary);">
-          Les compétences cyber sont rares. A La Réunion, elles se forment chaque annee
-          dans nos ecoles et universites. Le speed dating du CyberTour vous donne un acces
-          direct a des etudiants motives, formes aux enjeux actuels, et ancres sur le territoire.
-          Pas de tri de CV a l'aveugle : des échanges concrets, en face a face, pour identifier
-          le profil qui renforcera votre equipe.
+          Les compétences cyber sont rares. À La Réunion, elles se forment chaque année
+          dans nos écoles et universités. Le speed dating du CyberTour vous donne un accès
+          direct à des étudiants motivés, formés aux enjeux actuels, et ancrés sur le territoire.
+          Pas de tri de CV à l'aveugle : des échanges concrets, en face à face, pour identifier
+          le profil qui renforcera votre équipe.
         </p>
       </div>
 
@@ -194,13 +194,13 @@ const studentTips = [
             Candidats
           </span>
           <h2 class="reveal delay-1 font-display text-3xl md:text-4xl font-bold mt-3 mb-6">
-            Etudiants : lancez votre carriere cyber au CyberTour
+            Étudiants : lancez votre carrière cyber au CyberTour
           </h2>
           <p class="reveal delay-2 text-lg mb-10" style="color: var(--text-secondary);">
             Stage, alternance, premier emploi — les entreprises réunionnaises et de l'Océan Indien
-            cherchent des profils comme le votre. Quel que soit votre niveau (Bac+2 a Bac+5) ou votre
-            specialite (sécurité offensive, GRC, developpement securise, administration systeme),
-            vous aurez 8 minutes pour faire la difference face a des recruteurs qui embauchent vraiment.
+            cherchent des profils comme le vôtre. Quel que soit votre niveau (Bac+2 à Bac+5) ou votre
+            spécialité (sécurité offensive, GRC, développement sécurisé, administration système),
+            vous aurez 8 minutes pour faire la différence face à des recruteurs qui embauchent vraiment.
           </p>
 
           <a
@@ -208,7 +208,7 @@ const studentTips = [
             class="reveal delay-3 inline-block font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-lg border-2 transition-all duration-300 hover:-translate-y-0.5"
             style={`border-color: ${emerald}; color: ${emerald};`}
           >
-            S'inscrire comme etudiant
+            S'inscrire comme étudiant
           </a>
         </div>
 
