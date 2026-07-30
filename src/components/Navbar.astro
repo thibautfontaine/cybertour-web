@@ -23,31 +23,29 @@ const navLinks: NavLink[] = [
   { label: "Replay 2025", href: "/#replay" },
   { label: "Les Étapes", href: "/#etapes" },
   { label: "Madagascar", href: "/madagascar", intl: true, page: true },
-  { label: "Jobs & Stages", href: "/jobs", page: true },
   { label: "CTF", href: "/#ctf" },
   { label: "Speakers", href: "/#speakers" },
   { label: "Sponsors", href: "/#sponsors" },
   { label: "Inscriptions", href: "/#inscription", soon: true },
 ];
 
-const isGroupStart = (i: number) => navLinks[i].page && !navLinks[i - 1]?.page;
-const isGroupEnd = (i: number) => navLinks[i].page && !navLinks[i + 1]?.page;
 
 const ctaLink = { label: "Contact", href: "/#contact" };
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300" data-scrolled="false">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3 group">
-      <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR Réunion Océan Indien" class="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105" />
+    <!-- shrink-0 obligatoire : sans lui, flexbox comprime le logo en largeur
+         quand la barre de liens deborde, ce qui l'ecrase en un trait vertical -->
+    <a href="/" class="flex items-center gap-3 group shrink-0">
+      <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR Réunion Océan Indien" width="242" height="128" class="h-14 sm:h-16 w-auto max-w-none shrink-0 transition-transform group-hover:scale-105" />
     </a>
 
     <!-- Desktop nav -->
-    <!-- Nav desktop à partir de lg : 9 liens + CTA débordent sous 1024px -->
+    <!-- Nav desktop à partir de lg : 8 liens + CTA débordent sous 1024px -->
     <div class="hidden lg:flex items-center gap-4 xl:gap-6">
       {navLinks.map((link, i) => (
         <>
-          {isGroupStart(i) && <span aria-hidden="true" class="w-px h-4 bg-white/15"></span>}
           {link.soon ? (
             <span class="inline-flex items-center gap-2 cursor-default select-none">
               <span class="text-xs xl:text-sm font-medium tracking-wider uppercase text-white/50">{link.label}</span>
@@ -66,7 +64,6 @@ const ctaLink = { label: "Contact", href: "/#contact" };
               {link.label}
             </a>
           )}
-          {isGroupEnd(i) && <span aria-hidden="true" class="w-px h-4 bg-white/15"></span>}
         </>
       ))}
       <a href={ctaLink.href} class="btn-outline text-xs py-2 px-5">{ctaLink.label}</a>
