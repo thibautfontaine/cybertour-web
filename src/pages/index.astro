@@ -73,70 +73,12 @@ const sponsorTiers = [
   },
 ];
 
-/**
- * Bénéfices dépliés palier par palier — les mentions « Tout X + » des anciennes
- * cartes sont ici explicitées colonne par colonne. Aucun bénéfice n'a été ajouté :
- * la matrice reprend strictement l'offre déjà publiée.
- * Valeur : true = inclus, false = non inclus, chaîne = niveau précis.
- */
-const sponsorBenefits = [
-  {
-    label: 'Logo sur le site web et les supports de communication',
-    values: { bronze: 'Taille standard', silver: 'Taille moyenne', gold: "Tête d'affiche", platinium: "Tête d'affiche" },
-  },
-  {
-    label: 'Mention sur les réseaux sociaux',
-    values: { bronze: true, silver: true, gold: true, platinium: true },
-  },
-  {
-    label: 'Goodies remis aux participants',
-    values: { bronze: false, silver: true, gold: true, platinium: true },
-  },
-  {
-    label: "Kakémonos à l'extérieur du lieu",
-    values: { bronze: false, silver: '2 supports', gold: '2 supports', platinium: '2 supports' },
-  },
-  {
-    label: "Ticket d'Or pour les participants",
-    values: { bronze: false, silver: false, gold: true, platinium: true },
-  },
-  {
-    label: "Espace stand à l'étape SUD (table dédiée, 2 personnes)",
-    values: { bronze: false, silver: false, gold: true, platinium: true },
-  },
-  {
-    label: 'Prise de parole en plénière',
-    values: { bronze: false, silver: false, gold: '2 min', platinium: '5 min' },
-  },
-  {
-    label: "Co-branding d'un atelier (« Atelier présenté avec… »)",
-    values: { bronze: false, silver: false, gold: false, platinium: true },
-  },
-  {
-    label: 'Présence sur 2 étapes (SUD + NORD)',
-    values: { bronze: false, silver: false, gold: false, platinium: true },
-  },
-  {
-    label: 'Post dédié sur les réseaux sociaux',
-    values: { bronze: false, silver: false, gold: false, platinium: true },
-  },
-  {
-    label: 'Logo sur les badges participants',
-    values: { bronze: false, silver: false, gold: false, platinium: true },
-  },
-  {
-    label: 'Bilan de visibilité post-événement (stats, impressions, photos)',
-    values: { bronze: false, silver: false, gold: false, platinium: true },
-  },
-  {
-    label: 'Disponibilité',
-    values: {
-      bronze: 'Places ouvertes',
-      silver: 'Places ouvertes',
-      gold: 'Places ouvertes',
-      platinium: 'Exclusif — 1 seul sponsor',
-    },
-  },
+/** Chiffres de l'édition 2025, repris tels quels de la section « Replay ». */
+const audience2025 = [
+  { value: '220', label: 'Participants' },
+  { value: '150', label: 'En présentiel' },
+  { value: '600+', label: 'Vues replay' },
+  { value: '2', label: 'Retombées presse' },
 ];
 
 const mailtoSubject = (subject) =>
@@ -762,130 +704,61 @@ const mailtoSubject = (subject) =>
   <section id="sponsors" class="relative pt-16 pb-32 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-      <div class="reveal mb-16 text-center">
-        <span class="section-label">08 // Partenaires &amp; sponsoring · 2/2</span>
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+      <div class="reveal mb-12 text-center">
+        <span class="section-label">08 // Devenir partenaire</span>
         <h2 class="section-title mt-4">
-          Devenez <span class="text-gold">partenaire</span>
+          Associez votre marque au <span class="text-gold">CyberTour</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          Quatre paliers pour accompagner la cybersécurité à La Réunion.
-          Chaque palier reprend le précédent et y ajoute ses propres bénéfices.
+          Quatre niveaux d'accompagnement, du soutien simple au partenariat principal exclusif.
         </p>
       </div>
 
-      <!-- ── Comparatif — tableau (≥ md) ───────────────────────────────── -->
-      <div class="reveal hidden md:block">
-        <div class="overflow-x-auto rounded-2xl border border-white/[0.08]">
-          <table class="w-full min-w-[52rem] border-collapse text-left">
-            <caption class="sr-only">
-              Comparatif des quatre paliers de sponsoring du Cyber Tour Réunion 2026,
-              du moins élevé au plus élevé. Chaque ligne est un bénéfice, chaque colonne un palier.
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col" class="w-[30%] align-bottom bg-white/[0.02] px-5 py-6 font-mono text-xs uppercase tracking-widest text-white/50">
-                  Bénéfices
-                </th>
-                {sponsorTiers.map(tier => (
-                  <th scope="col" class={`relative align-bottom bg-white/[0.02] px-5 py-6 text-center ${tier.text}`}>
-                    <span class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${tier.bar}`} aria-hidden="true"></span>
-                    <span class="block font-display text-xl font-bold">{tier.name}</span>
-                    <span class="mt-1 block font-mono text-lg font-bold text-clusir-red">{tier.price}</span>
-                    <span class="mt-1 block text-xs font-normal text-white/50">{tier.note}</span>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sponsorBenefits.map(benefit => (
-                <tr class="border-t border-white/[0.06]">
-                  <th scope="row" class="px-5 py-4 text-sm font-normal text-white/70">
-                    {benefit.label}
-                  </th>
-                  {sponsorTiers.map(tier => (
-                    <td class="px-5 py-4 text-center align-middle">
-                      {benefit.values[tier.key] === true && (
-                        <>
-                          <span class="sr-only">Inclus</span>
-                          <svg class={`mx-auto h-5 w-5 ${tier.text}`} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        </>
-                      )}
-                      {benefit.values[tier.key] === false && (
-                        <>
-                          <span class="sr-only">Non inclus</span>
-                          <span class="text-white/50" aria-hidden="true">—</span>
-                        </>
-                      )}
-                      {typeof benefit.values[tier.key] === 'string' && (
-                        <span class={`text-sm font-medium ${tier.text}`}>{benefit.values[tier.key]}</span>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr class="border-t border-white/[0.08]">
-                <th scope="row" class="px-5 py-6 font-mono text-xs font-normal uppercase tracking-widest text-white/50">
-                  Candidater
-                </th>
-                {sponsorTiers.map(tier => (
-                  <td class="px-4 py-6 text-center">
-                    <a
-                      href={mailtoSubject(tier.subject)}
-                      class={`inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border px-3 py-3 font-display text-xs font-semibold uppercase tracking-wider transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${tier.border} ${tier.bg} ${tier.hover} ${tier.text}`}
-                      aria-label={`Écrire au CLUSIR au sujet du sponsoring ${tier.name} à ${tier.price}`}
-                    >
-                      Devenir {tier.name}
-                    </a>
-                  </td>
-                ))}
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── Comparatif — cartes empilées (< md) ───────────────────────── -->
-      <div class="reveal md:hidden space-y-6">
+      <!-- Paliers — nom et montant seulement ; le détail de l'offre vit dans le dossier partenaire -->
+      <ul class="reveal delay-1 flex flex-col gap-3">
         {sponsorTiers.map(tier => (
-          <div class={`sponsor-card relative overflow-hidden rounded-2xl border bg-white/[0.03] p-6 ${tier.cardBorder}`}>
-            <span class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${tier.bar}`} aria-hidden="true"></span>
-            <h3 class={`font-display text-2xl font-bold ${tier.text}`}>{tier.name}</h3>
-            <p class="mt-1 font-mono text-xl font-bold text-clusir-red">{tier.price}</p>
-            <p class="mt-1 text-sm text-white/55">{tier.note}</p>
-            <p class="mt-3 text-sm text-white/60">{tier.tagline}</p>
-            <ul class="mt-5 space-y-3">
-              {sponsorBenefits.filter(b => b.values[tier.key] !== false).map(benefit => (
-                <li class="flex items-start gap-3 text-sm text-white/70">
-                  <svg class={`mt-0.5 h-5 w-5 shrink-0 ${tier.text}`} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  <span>
-                    {benefit.label}
-                    {typeof benefit.values[tier.key] === 'string' && (
-                      <span class={`ml-1 font-medium ${tier.text}`}>— {benefit.values[tier.key]}</span>
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <a
-              href={mailtoSubject(tier.subject)}
-              class={`mt-6 flex min-h-[44px] w-full items-center justify-center rounded-lg border px-4 py-3 font-display text-sm font-semibold uppercase tracking-wider transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${tier.border} ${tier.bg} ${tier.hover} ${tier.text}`}
-              aria-label={`Écrire au CLUSIR au sujet du sponsoring ${tier.name} à ${tier.price}`}
-            >
-              Devenir {tier.name}
-            </a>
-          </div>
+          <li>
+            <div class={`flex items-center justify-between gap-4 rounded-xl border ${tier.cardBorder} ${tier.bg} px-6 py-4`}>
+              <span class="flex flex-col text-left">
+                <span class={`font-display font-bold text-lg ${tier.text}`}>{tier.name}</span>
+                <span class="font-mono text-xs text-white/60 mt-0.5">{tier.note}</span>
+              </span>
+              <span class="font-mono font-bold text-base text-white shrink-0">{tier.price}</span>
+            </div>
+          </li>
         ))}
+      </ul>
+
+      <div class="reveal delay-2 mt-10 text-center">
+        <a
+          href={mailtoSubject('Cyber Tour Réunion 2026 — demande du dossier partenaire')}
+          class="btn-primary inline-flex items-center gap-3 rounded-xl"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Demander le dossier partenaire
+        </a>
+        <p class="mt-4 font-mono text-xs text-white/60">
+          // Le détail des contreparties palier par palier vous est envoyé par mail.
+        </p>
       </div>
 
-      <p class="reveal mt-8 text-center font-mono text-xs text-white/50">
-        // Un besoin qui ne rentre dans aucun palier ?
-        <a href={mailtoSubject('Sponsoring CyberTour 2026 — demande sur mesure')} class="ml-1 text-gold underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
-          Parlons-en
-        </a>
-      </p>
+      <!-- Preuve d'audience — chiffres de l'édition précédente, là où est le prix -->
+      <div class="reveal delay-3 mt-14 border-t border-white/10 pt-8">
+        <p class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-5">
+          Ce que le partenariat a touché en 2025
+        </p>
+        <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 text-center">
+          {audience2025.map(stat => (
+            <div class="flex flex-col-reverse">
+              <dt class="font-mono text-xs text-white/60 mt-1">{stat.label}</dt>
+              <dd class="font-display font-extrabold text-2xl sm:text-3xl text-gold">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
   </section>
 

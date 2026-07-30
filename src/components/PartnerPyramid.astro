@@ -1,78 +1,12 @@
 ---
 /**
- * PartnerPyramid — pyramide des partenaires et des paliers de sponsoring,
+ * PartnerPyramid — pyramide des partenaires institutionnels de l'événement,
  * la plus étroite en haut (organisateur) et s'élargissant vers le bas.
  *
- * Les paliers affichent l'inventaire réellement disponible. Aucun sponsor
- * n'est confirmé à ce jour : on montre les places ouvertes, jamais des logos
- * fictifs. Seul Platinium porte une limite annoncée (exclusivité, 1 seul
- * sponsor) ; les autres paliers n'ont pas de plafond publié, donc on n'en
- * invente pas.
+ * Les paliers de sponsoring payant ne figurent PAS ici : ils vivent dans la
+ * section #sponsors, seule source de vérité tarifaire de la page. Le détail
+ * des contreparties est réservé au dossier partenaire, hors site.
  */
-
-interface SponsorTier {
-  name: string;
-  price: string;
-  availability: string;
-  accent: string;
-  accentBorder: string;
-  accentBg: string;
-  width: string;
-  subject: string;
-}
-
-const tiers: SponsorTier[] = [
-  {
-    name: 'Platinium',
-    price: '10 000 €',
-    availability: '1 place — exclusivité',
-    accent: 'text-purple-300',
-    accentBorder: 'border-purple-400/40',
-    accentBg: 'bg-purple-400/[0.06]',
-    width: 'max-w-md',
-    subject: 'Sponsoring Platinium — 10 000 €',
-  },
-  {
-    name: 'Gold',
-    price: '5 000 €',
-    availability: 'Places ouvertes',
-    accent: 'text-gold',
-    accentBorder: 'border-gold/40',
-    accentBg: 'bg-gold/[0.06]',
-    width: 'max-w-xl',
-    subject: 'Sponsoring Gold — 5 000 €',
-  },
-  {
-    name: 'Silver',
-    price: '3 000 €',
-    availability: 'Places ouvertes',
-    accent: 'text-gray-300',
-    accentBorder: 'border-gray-400/40',
-    accentBg: 'bg-gray-400/[0.06]',
-    width: 'max-w-2xl',
-    subject: 'Sponsoring Silver — 3 000 €',
-  },
-  {
-    name: 'Bronze',
-    price: '1 000 €',
-    availability: 'Places ouvertes',
-    accent: 'text-amber-500',
-    accentBorder: 'border-amber-500/40',
-    accentBg: 'bg-amber-500/[0.06]',
-    width: 'max-w-3xl',
-    subject: 'Sponsoring Bronze — 1 000 €',
-  },
-];
-
-const contactMail = 'evenement@clusir-roi.org';
-
-/** Chiffres de l'édition 2025, repris tels quels de la section « Replay » de la home. */
-const audience2025 = [
-  { value: '220', label: 'Participants' },
-  { value: '150', label: 'En présentiel' },
-  { value: '600+', label: 'Vues replay' },
-  { value: '2', label: 'Retombées presse' },
-];
 ---
 
 <section class="relative py-32 overflow-hidden">
@@ -145,53 +79,6 @@ const audience2025 = [
             />
           </div>
         </div>
-        <!-- Connecting line -->
-        <div class="w-px h-8 bg-white/10"></div>
-      </div>
-
-      <!-- Sponsor Tiers — places ouvertes, inventaire réel -->
-      <div class="reveal delay-2 w-full flex flex-col items-center gap-6">
-        <span class="font-mono text-sm tracking-widest uppercase text-white/60">
-          Partenariats 2026 — places ouvertes
-        </span>
-
-        <ul class="w-full flex flex-col items-center gap-4">
-          {tiers.map((tier) => (
-            <li class={`w-full ${tier.width}`}>
-              <a
-                href={`mailto:${contactMail}?subject=${encodeURIComponent(tier.subject)}`}
-                class={`group flex items-center justify-between gap-4 w-full ${tier.accentBg} ${tier.accentBorder} border border-dashed rounded-2xl px-6 py-4 transition-colors hover:border-solid`}
-              >
-                <span class="flex flex-col text-left">
-                  <span class={`font-display font-bold text-lg ${tier.accent}`}>{tier.name}</span>
-                  <span class="font-mono text-xs text-white/60 mt-0.5">{tier.availability}</span>
-                </span>
-                <span class="flex items-center gap-4 shrink-0">
-                  <span class="font-mono font-bold text-base text-white">{tier.price}</span>
-                  <span class={`font-mono text-xs uppercase tracking-wider ${tier.accent} opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity hidden sm:inline`}>
-                    Réserver
-                  </span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <!-- Preuve d'audience — les chiffres de l'edition precedente, la ou est le prix -->
-        <div class="w-full max-w-3xl mt-4 border-t border-white/10 pt-6">
-          <p class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-4">
-            Ce que le partenariat a touché en 2025
-          </p>
-          <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 text-center">
-            {audience2025.map((stat) => (
-              <div class="flex flex-col-reverse">
-                <dt class="font-mono text-xs text-white/60 mt-1">{stat.label}</dt>
-                <dd class="font-display font-extrabold text-2xl sm:text-3xl text-gold">{stat.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
       </div>
 
     </div>
