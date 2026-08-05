@@ -12,8 +12,6 @@ interface NavLink {
   href: string;
   /** Surface dédiée (page complète) plutôt qu'une ancre de la home */
   page?: boolean;
-  /** Étape internationale */
-  intl?: boolean;
   /** Non encore ouvert — rendu en texte non cliquable + badge « bientôt » */
   soon?: boolean;
 }
@@ -22,7 +20,6 @@ const navLinks: NavLink[] = [
   { label: "À propos", href: "/#about" },
   { label: "Replay 2025", href: "/#replay" },
   { label: "Les Étapes", href: "/#etapes" },
-  { label: "Madagascar", href: "/madagascar", intl: true, page: true },
   { label: "CTF", href: "/#ctf" },
   { label: "Speakers", href: "/#speakers" },
   { label: "Sponsors", href: "/#sponsors" },
@@ -42,7 +39,7 @@ const ctaLink = { label: "Contact", href: "/#contact" };
     </a>
 
     <!-- Desktop nav -->
-    <!-- Nav desktop à partir de lg : 8 liens + CTA débordent sous 1024px -->
+    <!-- Nav desktop à partir de lg : 7 liens + CTA débordent sous 1024px -->
     <div class="hidden lg:flex items-center gap-4 xl:gap-6">
       {navLinks.map((link, i) => (
         <>

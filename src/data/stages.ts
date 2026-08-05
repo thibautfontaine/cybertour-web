@@ -11,14 +11,6 @@
  */
 export type TrackAccent = "red-accent" | "blue" | "teal" | "amber";
 
-/**
- * Accent de l'étape internationale (SWIO / Madagascar).
- * Miroir CSS : `--color-swio-teal` dans src/styles/global.css. Le littéral
- * est nécessaire côté JS parce que le markup compose des suffixes alpha
- * (`${SWIO_TEAL}33`), ce qu'une custom property ne permet pas.
- */
-export const SWIO_TEAL = "#2dd4bf";
-
 export interface Stage {
   id: string;
   name: string;

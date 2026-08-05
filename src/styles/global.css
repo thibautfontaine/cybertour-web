@@ -108,24 +108,6 @@
   --font-mono: "JetBrains Mono", monospace;
 }
 
-/* Accent de l'étape internationale (SWIO / Madagascar). Distinct de
-   --color-track-teal (#4db6ac), qui est un accent de track réunionnais.
-
-   Bloc `static` : le teal n'est aujourd'hui consommé que depuis des attributs
-   `style` générés côté Astro, jamais depuis une utilitaire Tailwind ni un
-   `var()` en CSS. Dans un `@theme` normal, Tailwind 4 élague les tokens qu'il
-   ne voit utilisés nulle part et la custom property n'atteindrait pas le CSS
-   produit. `static` la publie inconditionnellement, ce qui la rend disponible
-   pour `var(--color-swio-teal)` et pour les utilitaires `*-swio-teal`.
-
-   Miroir JS : SWIO_TEAL dans src/data/stages.ts — les deux littéraux doivent
-   rester synchronisés. Le pendant JS est nécessaire parce que le markup
-   compose des suffixes alpha (`${SWIO_TEAL}33`), ce qu'une custom property ne
-   permet pas. */
-@theme static {
-  --color-swio-teal: #2dd4bf;
-}
-
 html {
   scroll-behavior: smooth;
 }

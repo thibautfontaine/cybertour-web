@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import { SWIO_TEAL } from '../data/stages';
 import { stages } from '../data/stages';
 
 const accent = '#5b8cc9';
@@ -60,7 +59,6 @@ const pageDesc =
 
         <p class="reveal delay-4 mt-4 text-lg font-body leading-relaxed" style="color: var(--text-secondary);">
           Les publics et les thématiques prévus pour l'Est ont été répartis sur les étapes ci-dessous.
-          Une étape internationale à Madagascar complète le parcours en novembre 2026.
         </p>
       </div>
     </section>
@@ -94,23 +92,6 @@ const pageDesc =
           ))}
         </ul>
 
-        <div class="reveal delay-2 mt-6">
-          <a
-            href="/madagascar"
-            class="flex items-center justify-between gap-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 transition-colors hover:bg-white/[0.06]"
-          >
-            <span>
-              <span class="block font-mono text-[11px] tracking-widest uppercase mb-2" style={`color:${SWIO_TEAL};`}>
-                Étape internationale · SWIO
-              </span>
-              <span class="block font-display font-semibold text-lg text-white">Étape Madagascar</span>
-              <span class="block text-white/50 text-sm font-body mt-1">
-                Université d'Antananarivo — novembre 2026
-              </span>
-            </span>
-            <span class="shrink-0 font-mono text-lg" style={`color:${SWIO_TEAL};`} aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
       </div>
     </section>
 
