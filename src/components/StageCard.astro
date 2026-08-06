@@ -77,9 +77,9 @@ const rootProps = stage.published
     <!-- Separator -->
     <div class="h-px w-full mb-5" style={`background: linear-gradient(90deg, ${ACCENT_PAINT}30, transparent);`}></div>
 
-    <!-- Tags — absents tant que l'hôte n'a pas transmis son programme. Le
-         conteneur lui-même disparaît : un div vide laisserait sa marge et
-         creuserait un trou au milieu de la carte. -->
+    {/* Tags — absents tant que l'hôte n'a pas transmis son programme. Le
+        conteneur lui-même disparaît : un div vide laisserait sa marge et
+        creuserait un trou au milieu de la carte. */}
     {stage.highlights.length > 0 && (
       <div class="flex flex-wrap gap-2 mb-6">
         {stage.highlights.map((tag) => (
@@ -93,9 +93,11 @@ const rootProps = stage.published
       </div>
     )}
 
-    <!-- Accueillie par — art. 7.3 de la charte : « une étape du CyberTour
-         organisée par [structure hôte] ». Champ uniforme sur les six étapes,
-         CLUSIR compris : la distinction est factuelle, jamais hiérarchique. -->
+    {/* Accueillie par — art. 7.3 de la charte : « une étape du CyberTour
+        organisée par [structure hôte] ». Champ uniforme sur les six étapes,
+        CLUSIR compris : la distinction est factuelle, jamais hiérarchique.
+        Commentaire en accolades et non en HTML : le raisonnement de gouvernance
+        reste dans le source, il ne part pas dans le view-source public. */}
     <div class="pt-5 border-t border-white/[0.08]">
       <p class="font-mono text-[10px] tracking-[0.19em] uppercase text-white/40">
         Accueillie par
