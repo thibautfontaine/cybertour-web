@@ -10,15 +10,17 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
 ---
 
 <div class="max-w-6xl mx-auto">
-  <!-- Frise : horizontale à partir de md, verticale en dessous -->
-  <ol class="hidden md:flex relative list-none m-0 p-0 pt-10">
-    <!-- Ligne de liaison -->
+  {/* Frise : horizontale à partir de md, verticale en dessous.
+      La ligne de liaison est un frère de l'<ol>, pas un enfant : un <ol>
+      n'admet que des <li>, et un <div> à l'intérieur invalide la liste. */}
+  <div class="hidden md:block relative">
     <div
       class="absolute top-[calc(2.5rem+7px)] left-[6%] right-[6%] h-px"
       aria-hidden="true"
       style="background: linear-gradient(90deg, transparent, rgba(255,255,255,.22) 8%, rgba(255,255,255,.22) 92%, transparent);"
     ></div>
 
+    <ol class="flex list-none m-0 p-0 pt-10">
     {stages.map((stage) => (
       <li class="flex-1 text-center relative">
         <span
@@ -41,11 +43,13 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
         </span>
       </li>
     ))}
-  </ol>
+    </ol>
+  </div>
 
-  <!-- Repli vertical sous md -->
-  <ol class="md:hidden relative list-none m-0 p-0 pl-9">
+  {/* Repli vertical sous md — même règle : la ligne reste hors de l'<ol>. */}
+  <div class="md:hidden relative pl-9">
     <div class="absolute left-[7px] top-2 bottom-2 w-px bg-white/15" aria-hidden="true"></div>
+    <ol class="list-none m-0 p-0">
     {stages.map((stage) => (
       <li class="relative pb-7 last:pb-0">
         <span
@@ -65,5 +69,6 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
         </span>
       </li>
     ))}
-  </ol>
+    </ol>
+  </div>
 </div>
