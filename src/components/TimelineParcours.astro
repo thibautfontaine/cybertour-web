@@ -31,11 +31,15 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
           style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px #0f1a30, 0 0 14px ${ACCENT_PAINT}80;`}
           aria-hidden="true"
         ></span>
+        {/* Numéro et direction séparés, sans reprendre le nom de l'étape :
+            « 01 · NORD » suivi de « Nord » répétait le même mot, et
+            « 04 · OUEST » suivi de « Expernet » répétait l'hôte affiché juste
+            dessous. Trois lignes, trois informations distinctes. */}
         <span class="font-mono text-[11px] tracking-[0.16em] font-bold" style={`color: ${ACCENT_TEXT};`}>
-          {stage.trackNumber} · {stage.direction}
+          {stage.trackNumber}
         </span>
         <span class="block font-display font-semibold text-sm text-white mt-1 mb-2">
-          {stage.name.replace("Étape ", "")}
+          {stage.direction}
         </span>
         <span class="block font-mono text-[10px] text-white/40 leading-relaxed">
           accueillie par
@@ -60,9 +64,9 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
         <span class="font-mono text-[11px] tracking-[0.1em] text-white/50">{stage.dateShort}</span>
         <span class="block font-display font-semibold text-white mt-0.5">
           <span class="font-mono text-[11px] tracking-[0.16em] mr-2" style={`color: ${ACCENT_TEXT};`}>
-            {stage.trackNumber} · {stage.direction}
+            {stage.trackNumber}
           </span>
-          {stage.name}
+          {stage.direction}
         </span>
         <span class="block font-mono text-[11px] text-white/40 mt-1">
           accueillie par <span class="text-white/75">{stage.host}</span>
