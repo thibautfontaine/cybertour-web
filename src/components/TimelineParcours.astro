@@ -1,0 +1,69 @@
+---
+import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
+
+/* La frise possède le « quand ». Elle ne dit ni le lieu précis (c'est la
+   carte) ni le contenu (c'est la carte d'étape) — cette frontière est ce qui
+   empêche les trois objets de se marcher dessus.
+
+   Ruban continu sans chapitrage : le trou du 24 au 26 est une respiration,
+   pas une frontière. Décision D5. */
+---
+
+<div class="max-w-6xl mx-auto">
+  <!-- Frise : horizontale à partir de md, verticale en dessous -->
+  <ol class="hidden md:flex relative list-none m-0 p-0 pt-10">
+    <!-- Ligne de liaison -->
+    <div
+      class="absolute top-[calc(2.5rem+7px)] left-[6%] right-[6%] h-px"
+      aria-hidden="true"
+      style="background: linear-gradient(90deg, transparent, rgba(255,255,255,.22) 8%, rgba(255,255,255,.22) 92%, transparent);"
+    ></div>
+
+    {stages.map((stage) => (
+      <li class="flex-1 text-center relative">
+        <span
+          class="absolute -top-8 left-0 right-0 font-mono text-[11px] tracking-[0.1em] text-white/50"
+        >{stage.dateShort}</span>
+        <span
+          class="block w-[15px] h-[15px] rounded-full mx-auto mb-4 relative z-10"
+          style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px #0f1a30, 0 0 14px ${ACCENT_PAINT}80;`}
+          aria-hidden="true"
+        ></span>
+        <span class="font-mono text-[11px] tracking-[0.16em] font-bold" style={`color: ${ACCENT_TEXT};`}>
+          {stage.trackNumber} · {stage.direction}
+        </span>
+        <span class="block font-display font-semibold text-sm text-white mt-1 mb-2">
+          {stage.name.replace("Étape ", "")}
+        </span>
+        <span class="block font-mono text-[10px] text-white/40 leading-relaxed">
+          accueillie par
+          <span class="block text-white/75 mt-0.5">{stage.host}</span>
+        </span>
+      </li>
+    ))}
+  </ol>
+
+  <!-- Repli vertical sous md -->
+  <ol class="md:hidden relative list-none m-0 p-0 pl-9">
+    <div class="absolute left-[7px] top-2 bottom-2 w-px bg-white/15" aria-hidden="true"></div>
+    {stages.map((stage) => (
+      <li class="relative pb-7 last:pb-0">
+        <span
+          class="absolute -left-9 top-1 w-[15px] h-[15px] rounded-full"
+          style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px #0f1a30;`}
+          aria-hidden="true"
+        ></span>
+        <span class="font-mono text-[11px] tracking-[0.1em] text-white/50">{stage.dateShort}</span>
+        <span class="block font-display font-semibold text-white mt-0.5">
+          <span class="font-mono text-[11px] tracking-[0.16em] mr-2" style={`color: ${ACCENT_TEXT};`}>
+            {stage.trackNumber} · {stage.direction}
+          </span>
+          {stage.name}
+        </span>
+        <span class="block font-mono text-[11px] text-white/40 mt-1">
+          accueillie par <span class="text-white/75">{stage.host}</span>
+        </span>
+      </li>
+    ))}
+  </ol>
+</div>
