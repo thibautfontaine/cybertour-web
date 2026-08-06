@@ -2,7 +2,7 @@
 import StageLayout from '../layouts/StageLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import { stages } from '../data/stages';
+import { stages, ACCENT_TEXT } from '../data/stages';
 const stage = stages.find(s => s.id === 'nord')!;
 ---
 
@@ -12,7 +12,7 @@ const stage = stages.find(s => s.id === 'nord')!;
   <section class="py-20">
     <div class="max-w-5xl mx-auto px-6">
       <div class="reveal mb-12">
-        <span class="font-mono text-sm tracking-widest uppercase" style={`color: ${stage.accentHex}CC;`}>Programme</span>
+        <span class="font-mono text-sm tracking-widest uppercase" style={`color: ${ACCENT_TEXT}CC;`}>Programme</span>
         <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">Matinée institutionnelle</h2>
         <p class="text-white/50 mt-4 text-lg">Mardi 20 Octobre — 8h-13h — Campus Moufia, Saint-Denis</p>
       </div>
