@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Cyber Tour Réunion 2026 - 3 étapes, 20-23 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien." } = Astro.props;
+const { title, description = "Cyber Tour Réunion 2026 - 6 étapes, 20-29 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux." } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -84,7 +84,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image" content="https://cybertour.re/assets/og-cybertour-2026.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Cyber Tour Réunion 2026 - 20-23 Octobre - 3 étapes" />
+    <meta property="og:image:alt" content="Cyber Tour Réunion 2026 - 20-29 Octobre - 6 étapes" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -103,7 +103,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "name": "Cyber Tour Réunion 2026",
       "description": "L'événement cybersécurité de référence à La Réunion, organisé par le CLUSIR Réunion Océan Indien.",
       "startDate": "2026-10-20T08:00:00+04:00",
-      "endDate": "2026-10-23T18:00:00+04:00",
+      "endDate": "2026-10-29T18:00:00+04:00",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
       "location": [
@@ -137,6 +137,42 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             "streetAddress": "40 avenue de Soweto",
             "addressLocality": "Saint-Pierre",
             "postalCode": "97410",
+            "addressRegion": "La Réunion",
+            "addressCountry": "FR"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Expernet",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Parc 2000, 3 avenue Théodore Drouhet",
+            "addressLocality": "Le Port",
+            "postalCode": "97420",
+            "addressRegion": "La Réunion",
+            "addressCountry": "FR"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "École Du Numérique",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "12 rue Gabriel de Kerveguen",
+            "addressLocality": "Sainte-Clotilde",
+            "postalCode": "97490",
+            "addressRegion": "La Réunion",
+            "addressCountry": "FR"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Epitech Réunion",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "234 chemin de la Pente Sassy",
+            "addressLocality": "Saint-André",
+            "postalCode": "97440",
             "addressRegion": "La Réunion",
             "addressCountry": "FR"
           }
