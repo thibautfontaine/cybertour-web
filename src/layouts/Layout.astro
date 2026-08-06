@@ -223,7 +223,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       // ── Compte à rebours (présent uniquement sur la home)
       // Les effets navbar (scroll + menu mobile) sont gérés dans Navbar.astro.
       const EVENT_START = new Date('2026-10-20T08:00:00+04:00').getTime();
-      const EVENT_END = new Date('2026-10-23T18:00:00+04:00').getTime();
+      /* Fin du tour = fin de la dernière étape, pas de la dernière étape CLUSIR.
+   À 2026-10-23T18:00 le compte à rebours annonçait « Édition 2026 terminée »
+   alors que les étapes Expernet, EDN et Epitech n'avaient pas encore eu lieu.
+   Doit rester aligné sur `endDate` du JSON-LD ci-dessus. */
+const EVENT_END = new Date('2026-10-29T18:00:00+04:00').getTime();
 
       const dEl = document.getElementById('cd-days');
       const hEl = document.getElementById('cd-hours');
@@ -294,7 +298,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             stopCountdown();
             renderStatus(
               "L'événement est en cours",
-              'Du 20 au 23 octobre 2026 — rejoignez-nous sur place ou en streaming.',
+              'Du 20 au 29 octobre 2026 — rejoignez-nous sur place ou en streaming.',
               'Voir les étapes',
               '/#etapes'
             );
