@@ -77,17 +77,21 @@ const rootProps = stage.published
     <!-- Separator -->
     <div class="h-px w-full mb-5" style={`background: linear-gradient(90deg, ${ACCENT_PAINT}30, transparent);`}></div>
 
-    <!-- Tags -->
-    <div class="flex flex-wrap gap-2 mb-6">
-      {stage.highlights.map((tag) => (
-        <span
-          class="px-2.5 py-1 rounded-md text-xs font-mono"
-          style={`background: ${ACCENT_PAINT}10; color: ${ACCENT_TEXT}CC;`}
-        >
-          {tag}
-        </span>
-      ))}
-    </div>
+    <!-- Tags — absents tant que l'hôte n'a pas transmis son programme. Le
+         conteneur lui-même disparaît : un div vide laisserait sa marge et
+         creuserait un trou au milieu de la carte. -->
+    {stage.highlights.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-6">
+        {stage.highlights.map((tag) => (
+          <span
+            class="px-2.5 py-1 rounded-md text-xs font-mono"
+            style={`background: ${ACCENT_PAINT}10; color: ${ACCENT_TEXT}CC;`}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
 
     <!-- Accueillie par — art. 7.3 de la charte : « une étape du CyberTour
          organisée par [structure hôte] ». Champ uniforme sur les six étapes,
