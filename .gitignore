@@ -5,11 +5,10 @@ dist/
 .nova-tracer/
 CLAUDE.md
 todo.md
-# docs/ est un espace de travail local, jamais versionné. Les specs et plans
-# d'implémentation vivent dans documentation/plans/, qui est suivi.
-# Les skills brainstorming et writing-plans écrivent par défaut dans
-# docs/plans/ : penser à déplacer leur sortie vers documentation/plans/.
+# Espace de travail local : specs, plans d'implémentation, notes. Le dépôt est
+# public, ces documents n'ont pas à y figurer.
 docs/
+documentation/
 Logo-membre.png
 .vscode/
 .superpowers/
