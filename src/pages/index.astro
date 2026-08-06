@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import MapReunion from '../components/MapReunion.astro';
+import TimelineParcours from '../components/TimelineParcours.astro';
 import StageCard from '../components/StageCard.astro';
 import PartnerPyramid from '../components/PartnerPyramid.astro';
 import { stages } from '../data/stages';
@@ -340,23 +341,51 @@ const mailtoSubject = (subject) =>
     <div class="absolute inset-0 bg-gradient-to-br from-slate-deep to-navy-dark"></div>
     <div class="absolute inset-0 cyber-grid opacity-50"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6">
-      <div class="reveal mb-20 text-center">
+      <div class="reveal mb-16 text-center">
         <span class="section-label">03 // Le Parcours</span>
         <h2 class="section-title mt-4">
-          3 étapes à travers <span class="text-gold">toute l'île</span>
+          6 étapes, 6 organisateurs, <span class="text-gold">un seul tour</span>
         </h2>
         <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          Chaque jour, un lieu. Chaque lieu, un enjeu. De Saint-Denis à Saint-Pierre, la cybersécurité fait le tour de l'île.
+          Du 20 au 29 octobre, la cybersécurité fait le tour de l'île — portée
+          par le CLUSIR sur trois étapes, par des organisateurs locaux sur trois
+          autres. Même label, même exigence, même agenda.
         </p>
         <!-- C4 — Dates bien visibles -->
         <div class="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/[0.06]">
           <svg class="w-4 h-4 text-gold/70 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
           </svg>
-          <span class="font-mono text-sm text-gold/80 font-bold tracking-wider">20 — 23 OCTOBRE 2026</span>
+          <span class="font-mono text-sm text-gold/80 font-bold tracking-wider">20 — 29 OCTOBRE 2026</span>
         </div>
       </div>
-      <MapReunion />
+
+      {/* Les trois principes de fonctionnement de la charte d'accueil. Le
+          message d'unité n'est pas un slogan écrit pour le site : il est déjà
+          rédigé dans le document que signent les hôtes. */}
+      <ul class="reveal grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16 list-none m-0 p-0">
+        <li class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+          <p class="font-display font-semibold text-white">Communication commune</p>
+          <p class="text-white/50 text-sm mt-1">Une seule identité, un seul agenda.</p>
+        </li>
+        <li class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+          <p class="font-display font-semibold text-white">Organisation décentralisée</p>
+          <p class="text-white/50 text-sm mt-1">Chaque hôte organise son étape comme il l'entend.</p>
+        </li>
+        <li class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+          <p class="font-display font-semibold text-white">Financement propre</p>
+          <p class="text-white/50 text-sm mt-1">Chacun assume ses recettes comme ses pertes.</p>
+        </li>
+      </ul>
+
+      {/* La frise possède le quand, la carte le où. Les deux côte à côte, la
+          frise en vedette — c'est la chronologie qui structure, pas la
+          géographie (décisions D4 et D6). */}
+      <div class="reveal grid lg:grid-cols-[1.6fr_1fr] gap-10 lg:gap-14 items-center">
+        <TimelineParcours />
+        <MapReunion />
+      </div>
+
       <!-- Stage cards bento grid -->
       <div class="grid md:grid-cols-2 gap-6 mt-16">
         {stages.map(stage => <StageCard stage={stage} />)}
