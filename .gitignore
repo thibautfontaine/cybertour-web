@@ -5,13 +5,11 @@ dist/
 .nova-tracer/
 CLAUDE.md
 todo.md
-# docs/ reste hors dépôt, sauf les specs et plans d'implémentation : ils
-# expliquent pourquoi le code est ce qu'il est, et doivent donc suivre le code.
-# La négation exige d'exclure le contenu de docs/ (docs/*) et non le dossier
-# lui-même (docs/) — git ne peut pas ré-inclure un fichier dont un dossier
-# parent est exclu.
-docs/*
-!docs/plans/
+# docs/ est un espace de travail local, jamais versionné. Les specs et plans
+# d'implémentation vivent dans documentation/plans/, qui est suivi.
+# Les skills brainstorming et writing-plans écrivent par défaut dans
+# docs/plans/ : penser à déplacer leur sortie vers documentation/plans/.
+docs/
 Logo-membre.png
 .vscode/
 .superpowers/
