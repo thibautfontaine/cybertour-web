@@ -12,13 +12,16 @@ const { stage } = Astro.props;
 const Root = stage.published ? "a" : "div";
 const rootProps = stage.published
   ? { href: stage.href, style: "touch-action: manipulation;" }
-  : {};
+  : {
+      role: "group",
+      "aria-label": `Étape ${stage.direction} — ${stage.host} — programme à venir`,
+    };
 ---
 
 <Root
   {...rootProps}
   class:list={[
-    "group topic-card",
+    stage.published ? "group topic-card" : "cursor-default",
     "relative block overflow-hidden rounded-2xl border border-white/[0.08] transition-all duration-400",
     stage.published ? "hover:border-white/[0.15]" : "opacity-90",
   ]}
