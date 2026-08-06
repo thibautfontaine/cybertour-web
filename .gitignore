@@ -5,7 +5,13 @@ dist/
 .nova-tracer/
 CLAUDE.md
 todo.md
-docs/
+# docs/ reste hors dépôt, sauf les specs et plans d'implémentation : ils
+# expliquent pourquoi le code est ce qu'il est, et doivent donc suivre le code.
+# La négation exige d'exclure le contenu de docs/ (docs/*) et non le dossier
+# lui-même (docs/) — git ne peut pas ré-inclure un fichier dont un dossier
+# parent est exclu.
+docs/*
+!docs/plans/
 Logo-membre.png
 .vscode/
 .superpowers/
