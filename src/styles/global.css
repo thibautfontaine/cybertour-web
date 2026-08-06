@@ -97,10 +97,9 @@
   --color-slate-deep: #192842;
   --color-slate-mid: #21314e;
 
-  /* Accents des tracks bento — nommés d'après leur valeur réelle. */
+  /* Conservé pour `.glitch::after`, seul consommateur restant. Les deux autres
+     accents de track (teal, amber) sont partis avec l'accent unique. */
   --color-track-blue: #5b8cc9;
-  --color-track-teal: #4db6ac;
-  --color-track-amber: #e6a23c;
 
   --font-display: "ITC Avant Garde", system-ui, sans-serif;
   --font-body: "ITC Avant Garde", system-ui, sans-serif;
@@ -365,37 +364,16 @@ body {
   text-stroke: 2px var(--color-clusir-red);
 }
 
-/* ========== BENTO TRACK ACCENTS ========== */
-.bento-track::before {
-  width: 3px;
-  border-radius: 0 2px 2px 0;
-}
-
-/* Chaque modificateur porte le nom de la couleur qu'il peint. Les anciens
-   noms (--gold peignait du rouge, --red de l'orange, --cyan du bleu,
-   --emerald du teal) et leurs alias de transition ont été supprimés : la
-   source de vérité est le champ `accent` de src/data/stages.ts, typé par
-   TrackAccent, et la table trackClassMap de StageCard.astro. */
-
-.bento-track--red-accent::before { background: var(--color-clusir-red); }
-.bento-track--red-accent:hover { border-color: rgba(206, 70, 58, 0.2); }
-
-.bento-track--blue::before { background: var(--color-track-blue); }
-.bento-track--blue:hover { border-color: rgba(91, 140, 201, 0.2); }
-
-.bento-track--teal::before { background: var(--color-track-teal); }
-.bento-track--teal:hover { border-color: rgba(77, 182, 172, 0.2); }
-
-.bento-track--amber::before { background: var(--color-track-amber); }
-.bento-track--amber:hover { border-color: rgba(230, 162, 60, 0.2); }
+/* Les accents de track ont été supprimés avec le passage à l'accent unique
+   (décision D8) : les étapes ne portent plus de couleur propre, donc ni
+   `.bento-track`, ni ses quatre modificateurs, ni le champ `accent` de
+   stages.ts n'existent plus. La source de vérité est désormais le couple
+   ACCENT_PAINT / ACCENT_TEXT exporté par src/data/stages.ts. */
 
 .bento-bg-icon {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bento-track:hover .bento-bg-icon {
-  transform: scale(1.15) rotate(5deg);
-}
 
 /* Partner logo bubbles */
 .partner-bubble {
@@ -526,10 +504,6 @@ body {
 
 /* M1 — Feedback tactile sur les cartes et éléments interactifs */
 @media (hover: none) and (pointer: coarse) {
-  .bento-track:active {
-    transform: scale(0.98) !important;
-    transition: transform 0.1s ease !important;
-  }
   .sponsor-card:active {
     transform: scale(0.97) !important;
     transition: transform 0.1s ease !important;
@@ -643,5 +617,4 @@ body {
   .sponsor-card:hover,
   .partner-bubble:hover,
   .btn-primary:hover { transform: none; }
-  .bento-track:hover .bento-bg-icon { transform: none; }
 }
