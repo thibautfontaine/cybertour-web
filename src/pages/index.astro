@@ -1002,6 +1002,13 @@ const mailtoSubject = (subject) =>
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
+        // Un blob: n'a pas d'extension : l'option fileDownloads de Plausible
+        // ne le voit pas, on déclare l'événement à la main.
+        const plausible = window.plausible;
+        if (typeof plausible === 'function') {
+          plausible('Agenda ics', { props: { fichier: 'cyber-tour-reunion-2026.ics' } });
+        }
+
         if (calendarStatus) {
           calendarStatus.textContent =
             '// Fichier cyber-tour-reunion-2026.ics téléchargé — ouvrez-le pour l\'ajouter.';

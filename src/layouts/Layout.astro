@@ -92,9 +92,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
 
-    <!-- Analytics -->
-    <script data-goatcounter="https://cybertour.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+    <!-- Privacy-friendly analytics by Plausible — instance on premise, sans cookie.
+         Collecte étendue : sections de la home (#ancre) comme pages, liens sortants,
+         téléchargements, formulaires, plus les événements « Contact email » et
+         « Agenda ics » déclarés ci-dessous. Décrit dans /mentions-legales. -->
+    <link rel="preconnect" href="https://plausible.kodetis.cloud" crossorigin />
+    <script async src="https://plausible.kodetis.cloud/js/pa-6WvAN6_UyrWRAcamHXSvH.js"></script>
+    <script is:inline>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init({
+        hashBasedRouting: true,
+        outboundLinks: true,
+        fileDownloads: true,
+        formSubmissions: true
+      });
+
+      // Clic sur un lien de contact : l'objet pré-rempli dit quelle demande
+      // (dossier partenaire, palier, inscriptions…) — le mailto: lui-même
+      // n'est pas un lien sortant pour Plausible.
+      document.addEventListener('click', function (event) {
+        var target = event.target instanceof Element ? event.target.closest('a[href^="mailto:"]') : null;
+        if (!target) return;
+        var sujet = '';
+        try { sujet = new URL(target.getAttribute('href')).searchParams.get('subject') || ''; } catch (_) {}
+        plausible('Contact email', {
+          props: { sujet: sujet || '(sans objet)', page: location.pathname + location.hash }
+        });
+      });
+    </script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
