@@ -1,25 +1,31 @@
 ---
+import { getLang, localizePath } from '../i18n';
+import { ui } from '../i18n/ui';
+
+const lang = getLang(Astro.currentLocale);
+const t = ui[lang].footer;
+const p = (path: string) => localizePath(path, lang);
 ---
 
 <footer class="border-t border-white/[0.06] py-12">
   <div class="max-w-7xl mx-auto px-6">
     <!-- Top row: logo + date + links -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-      <a href="/" class="flex items-center gap-3">
-        <img src="/assets/cybertour-2026.png" alt="Cyber Tour Réunion 2026" class="h-12 sm:h-14 w-auto" />
+      <a href={p('/')} class="flex items-center gap-3">
+        <img src="/assets/cybertour-2026.png" alt={t.logoAlt} class="h-12 sm:h-14 w-auto" />
       </a>
 
       <p class="text-white/50 text-sm font-mono">
-        20 &mdash; 23 Octobre 2026 &middot; 3 étapes à La Réunion
+        {t.dates}
       </p>
 
       <div class="flex items-center gap-4">
-        <a href="/mentions-legales" class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
-          Mentions légales
+        <a href={p('/mentions-legales')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
+          {t.legal}
         </a>
         <span class="text-white/10" aria-hidden="true">|</span>
-        <a href="/#main-content" class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
-          &uarr; Haut de page
+        <a href={p('/#main-content')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
+          {t.backToTop}
         </a>
       </div>
     </div>

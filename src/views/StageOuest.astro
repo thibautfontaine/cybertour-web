@@ -1,0 +1,104 @@
+---
+/**
+ * Vue partagée de l'étape Ouest (FR `/ouest`, EN `/en/ouest`).
+ * Toute chaîne visible vient de `src/i18n/ouest.ts`.
+ */
+import StageLayout from '../layouts/StageLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getStage } from '../data/stages';
+import { getLang } from '../i18n';
+import { ouest } from '../i18n/ouest';
+
+const lang = getLang(Astro.currentLocale);
+const t = ouest[lang];
+const stage = getStage(lang, 'ouest');
+---
+
+<StageLayout stage={stage}>
+  <Navbar slot="navbar" currentPage="ouest" />
+
+  <!-- Programme section -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="reveal">
+        <span class="font-mono text-cyan-400/60 text-sm tracking-widest uppercase">{t.programmeLabel}</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.programmeTitle}</h2>
+        <p class="text-white/50 mt-4 text-lg max-w-3xl">
+          {t.programmeIntro}
+        </p>
+      </div>
+
+      <!-- Format cards -->
+      <div class="reveal delay-1 mt-14">
+        <div class="grid sm:grid-cols-3 gap-6">
+          {t.cards.map(item => (
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-cyan-400/20 transition-colors">
+              <h3 class="font-display font-semibold text-lg mb-2">{item.title}</h3>
+              <p class="text-white/50 text-sm font-body">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Programme à venir -->
+      <div class="reveal delay-2 mt-10">
+        <div class="bg-cyan-400/[0.06] border border-cyan-400/[0.15] rounded-xl p-6 flex items-start gap-4">
+          <div class="shrink-0 w-10 h-10 rounded-lg bg-cyan-400/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold text-sm mb-1 text-cyan-400">{t.fullProgrammeTitle}</h4>
+            <p class="text-white/50 text-sm font-body">
+              {t.fullProgrammeText}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Écosystème cyber réunionnais -->
+      <div class="reveal delay-3 mt-12">
+        <h3 class="font-display font-semibold text-xl mb-8">{t.ecosystemTitle}</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {t.ecosystem.map(name => (
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center hover:border-cyan-400/20 transition-colors">
+              <span class="font-display font-semibold text-sm text-white/70">{name}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-white/50 text-xs font-mono mt-4">{t.ecosystemDisclaimer}</p>
+      </div>
+
+      <!-- Lieu d'accueil -->
+      <div class="reveal delay-2 mt-12">
+        <h3 class="font-display font-semibold text-xl mb-8">{t.venueTitle}</h3>
+        <div class="flex flex-wrap items-center justify-center gap-8">
+          <div class="partner-bubble px-6 py-3">
+            <img src="/assets/logo-office-eau.png" alt={t.logoOfficeEauAlt} class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Afternoon note -->
+      <div class="reveal delay-4 mt-10">
+        <div class="bg-cyan-400/[0.06] border border-cyan-400/[0.15] rounded-xl p-6 flex items-start gap-4">
+          <div class="shrink-0 w-10 h-10 rounded-lg bg-cyan-400/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold text-sm mb-1 text-cyan-400">{t.afternoonTitle}</h4>
+            <p class="text-white/50 text-sm font-body">
+              {t.afternoonText}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</StageLayout>

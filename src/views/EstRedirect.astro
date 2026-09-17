@@ -1,0 +1,49 @@
+---
+import { getStages } from '../data/stages';
+import { getLang, localizePath } from '../i18n';
+
+/* L'étape Est n'est plus annulée : Epitech l'accueille à Saint-André le
+   29 octobre 2026. Cette page, qui annonçait le contraire, devient une
+   redirection — dans chaque langue (/est et /en/est).
+
+   La cible est dérivée de la donnée plutôt que codée en dur. Tant que la fiche
+   de l'annexe F d'Epitech n'est pas reçue (art. 8.8 de la charte : « sans
+   fiche, pas de page »), /epitech n'existe pas et rediriger dessus produirait
+   un 404. On renvoie donc vers la section parcours. Le jour où `published`
+   passe à true, la redirection bascule seule vers /epitech, sans intervention. */
+const lang = getLang(Astro.currentLocale);
+const epitech = getStages(lang).find((s) => s.id === 'epitech');
+const target = epitech?.published ? epitech.href : localizePath('/#etapes', lang);
+
+const text = {
+  fr: {
+    title: "L'étape Est du CyberTour 2026",
+    body: "L'étape Est 2026 est accueillie par Epitech à Saint-André, le jeudi 29 octobre.",
+    link: 'Voir le parcours',
+  },
+  en: {
+    title: 'CyberTour 2026 — East stage',
+    body: 'The 2026 East stage is hosted by Epitech in Saint-André on Thursday 29 October.',
+    link: 'See the route',
+  },
+}[lang];
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{text.title}</title>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={`https://cybertour.re${target}`} />
+    <meta name="robots" content="noindex, follow" />
+  </head>
+  <body>
+    <p>
+      {text.body} <a href={target}>{text.link}</a>.
+    </p>
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target);
+    </script>
+  </body>
+</html>

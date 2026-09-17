@@ -1,0 +1,255 @@
+---
+/**
+ * Vue partagée de l'étape Sud (FR `/sud`, EN `/en/sud`).
+ * Toute chaîne visible vient de `src/i18n/sud.ts`.
+ */
+import StageLayout from '../layouts/StageLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getStage } from '../data/stages';
+import { getLang } from '../i18n';
+import { sud } from '../i18n/sud';
+
+const lang = getLang(Astro.currentLocale);
+const t = sud[lang];
+const stage = getStage(lang, 'sud');
+---
+
+<StageLayout stage={stage}>
+  <Navbar slot="navbar" currentPage="sud" />
+
+  <!-- Floating day navigator -->
+  <nav id="day-nav" aria-label={t.dayNavLabel} class="fixed left-5 top-1/2 translate-y-20 z-40 hidden lg:flex flex-col items-center gap-1 pointer-events-none opacity-0 transition-opacity duration-300">
+    {t.dayNavItems.map((item, i) => (
+      <div class="flex flex-col items-center">
+        <a href={item.href} class="dnav-item group relative flex items-center pointer-events-auto">
+          <span class="dnav-dot block w-2 h-2 rounded-full transition-all duration-200" style="background:rgba(255,255,255,0.15);"></span>
+          <span class="pointer-events-none absolute left-5 whitespace-nowrap font-mono text-[11px] tracking-widest uppercase px-3 py-1.5 rounded-lg border border-white/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+            style="color:rgba(255,255,255,0.6);background:rgba(10,18,32,0.95);">
+            {item.label}
+          </span>
+        </a>
+        {i === 0 && <span class="block w-px my-1.5 rounded-full" style="height:16px;background:rgba(255,255,255,0.08);"></span>}
+      </div>
+    ))}
+  </nav>
+
+  <!-- Two-day programme -->
+  <section id="programme" class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+
+      <!-- Jour 1: Conférences techniques -->
+      <div class="day-section" id="day-1">
+        <div class="reveal">
+          <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">{t.day1Label}</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.day1Title}</h2>
+          <p class="text-white/50 mt-4 text-lg max-w-3xl">
+            {t.day1Intro}
+          </p>
+        </div>
+
+        <!-- Audience note -->
+        <div class="reveal delay-2 mt-8">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-5 flex items-start gap-4">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">{t.audienceTitle}</h4>
+              <p class="text-white/60 text-sm font-body">
+                <strong class="text-white/80">{t.audienceMorningStrong}</strong>
+                {t.audienceMorningText}
+              </p>
+              <p class="text-white/60 text-sm font-body mt-2">
+                <strong class="text-white/80">{t.audienceAfternoonStrong}</strong>
+                {t.audienceAfternoonText}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thématiques J1 -->
+        <div class="reveal delay-3 mt-10">
+          <div class="grid sm:grid-cols-2 gap-6">
+            {t.topics.map(item => (
+              <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">
+                <h3 class="font-display font-semibold text-lg mb-2">{item.title}</h3>
+                <p class="text-white/50 text-sm font-body">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Programme J1 à venir -->
+        <div class="reveal delay-4 mt-8">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-6 flex items-start gap-4">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">{t.fullProgrammeTitle}</h4>
+              <p class="text-white/50 text-sm font-body">
+                {t.fullProgrammeText}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day separator -->
+      <div class="reveal my-24 flex items-center gap-6">
+        <div class="flex-1 h-px bg-white/[0.06]" aria-hidden="true"></div>
+        <div class="flex items-center gap-3">
+          <div class="w-1.5 h-1.5 rounded-full bg-red-400/40" aria-hidden="true"></div>
+          <span class="font-mono text-xs text-white/50 tracking-widest uppercase">{t.separatorLabel}</span>
+          <div class="w-1.5 h-1.5 rounded-full bg-red-400/40" aria-hidden="true"></div>
+        </div>
+        <div class="flex-1 h-px bg-white/[0.06]" aria-hidden="true"></div>
+      </div>
+
+      <!-- Jour 2: Ateliers pratiques -->
+      <div class="day-section" id="day-2">
+        <div class="reveal">
+          <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">{t.day2Label}</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.day2Title}</h2>
+          <p class="text-white/50 mt-4 text-lg max-w-3xl">
+            {t.day2Intro}
+          </p>
+        </div>
+
+        <!-- Groups note -->
+        <div class="reveal delay-2 mt-8">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-5 flex items-start gap-4">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">{t.organisationTitle}</h4>
+              <p class="text-white/50 text-sm font-body">{t.organisationText}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atelier cards -->
+        <div class="reveal delay-3 mt-10">
+          <h3 class="font-display font-semibold text-xl mb-6">{t.ateliersTitle}</h3>
+          <div class="grid sm:grid-cols-2 gap-6">
+            {t.ateliers.map(atelier => (
+              <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">
+                <div class="text-3xl mb-4">{atelier.icon}</div>
+                <h3 class="font-display font-semibold text-lg mb-2">{atelier.title}</h3>
+                <p class="text-white/50 text-sm font-body">{atelier.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Appel à soumission Rumps -->
+        <div class="reveal delay-4 mt-10">
+          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-2xl p-8 text-center">
+            <h3 class="font-display font-bold text-2xl mb-3">{t.cfpTitle}</h3>
+            <p class="text-white/50 text-sm font-body max-w-xl mx-auto mb-6">
+              {t.cfpText}
+            </p>
+            <a href={t.cfpMailto} class="btn-primary inline-flex items-center gap-3 rounded-xl">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              {t.cfpCta}
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Co-organisateurs -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="reveal">
+        <h3 class="font-display font-semibold text-xl mb-8">{t.coOrganisersTitle}</h3>
+        <div class="flex flex-wrap items-center justify-center gap-8">
+          <div class="partner-bubble px-6 py-3">
+            <img src="/assets/logo-univ-reunion.png" alt={t.logoUnivAlt} class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+          </div>
+          <div class="partner-bubble px-6 py-3">
+            <img src="/assets/logo-clusir.png" alt={t.logoClusirAlt} class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</StageLayout>
+
+<style>
+  .dnav-item:hover .dnav-dot,
+  .dnav-item:focus-visible .dnav-dot { background: rgba(255,255,255,0.45) !important; }
+  .dnav-item.active .dnav-dot {
+    background: #DF3C37 !important;
+    box-shadow: 0 0 8px rgba(223,60,55,0.5);
+  }
+  .dnav-item:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.4);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('day-nav');
+  const programme = document.getElementById('programme');
+  const navBtns = document.querySelectorAll<HTMLAnchorElement>('.dnav-item');
+  const sections = document.querySelectorAll<HTMLElement>('.day-section');
+
+  const programmeObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!nav) return;
+      if (entry.isIntersecting) {
+        nav.style.opacity = '1';
+        nav.style.pointerEvents = 'auto';
+      } else {
+        nav.style.opacity = '0';
+        nav.style.pointerEvents = 'none';
+      }
+    },
+    { threshold: 0, rootMargin: '-80px 0px -20px 0px' }
+  );
+  if (programme) programmeObserver.observe(programme);
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navBtns.forEach(btn => {
+            const href = btn.getAttribute('href');
+            btn.classList.toggle('active', href === `#${id}`);
+          });
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '-80px 0px -40% 0px' }
+  );
+  sections.forEach(s => sectionObserver.observe(s));
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(btn.getAttribute('href') ?? '');
+      if (target) {
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>

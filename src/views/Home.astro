@@ -1,0 +1,938 @@
+---
+/**
+ * Page d'accueil, vue partagée par `/` (fr) et `/en/` (en).
+ *
+ * Aucune chaîne visible n'est écrite ici : tout vient de `src/i18n/home.ts`.
+ * Ce fichier ne porte plus que la structure, les classes Tailwind et les
+ * tracés SVG — les seuls littéraux qui restent sont des noms propres de
+ * marque (« CYBER », « TOUR », « REUNION »), des adresses et des identifiants
+ * techniques (ids d'ancre, chemins d'assets, UID du .ics).
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import MapReunion from '../components/MapReunion.astro';
+import TimelineParcours from '../components/TimelineParcours.astro';
+import StageCard from '../components/StageCard.astro';
+import PartnerPyramid from '../components/PartnerPyramid.astro';
+import { getStages } from '../data/stages';
+import { WEEZEVENT_PAGE, weezeventWidgetUrl } from '../data/ticketing';
+import { getLang, localizePath } from '../i18n';
+import { home } from '../i18n/home';
+
+const lang = getLang(Astro.currentLocale);
+const t = home[lang];
+const p = (path: string) => localizePath(path, lang);
+
+const stages = getStages(lang);
+
+const contactMail = 'evenement@clusir-roi.org';
+
+/**
+ * Icônes des quatre piliers « Pourquoi investir » (dossier partenaire V2.1,
+ * p.19). Le texte est dans le dictionnaire, le tracé reste ici : il ne se
+ * traduit pas.
+ */
+const pillarIcons: Record<string, string> = {
+  visibilite:
+    'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178zM15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  reseau:
+    'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z',
+  expertise:
+    'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18',
+  talents:
+    'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5',
+};
+
+/**
+ * Palette par palier de partenariat. Comme les icônes, ces classes ne se
+ * traduisent pas : elles restent indexées par la clé stable du dictionnaire.
+ */
+const tierStyles: Record<
+  string,
+  {
+    text: string;
+    border: string;
+    bg: string;
+    hover: string;
+    bar: string;
+    cardBorder: string;
+  }
+> = {
+  bronze: {
+    text: 'text-amber-500',
+    border: 'border-amber-700/50',
+    bg: 'bg-amber-900/20',
+    hover: 'hover:bg-amber-900/30',
+    bar: 'from-amber-700 to-amber-900',
+    cardBorder: 'border-amber-900/30',
+  },
+  silver: {
+    text: 'text-gray-300',
+    border: 'border-gray-400/50',
+    bg: 'bg-gray-400/10',
+    hover: 'hover:bg-gray-400/20',
+    bar: 'from-gray-300 to-gray-500',
+    cardBorder: 'border-gray-400/30',
+  },
+  gold: {
+    text: 'text-gold',
+    border: 'border-gold/50',
+    bg: 'bg-gold/10',
+    hover: 'hover:bg-gold/20',
+    bar: 'from-gold-dim to-gold',
+    cardBorder: 'border-gold/30',
+  },
+};
+
+const mailtoSubject = (subject: string) =>
+  `mailto:${contactMail}?subject=${encodeURIComponent(subject)}`;
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription}>
+
+  <!-- ===== NAVBAR ===== -->
+  <Navbar />
+
+  <!-- ===== HERO ===== -->
+  <section id="main-content" class="relative min-h-dvh flex items-center justify-center overflow-hidden">
+    <!-- Background image with overlay -->
+    <div class="absolute inset-0">
+      <img src="/assets/hero-bg.jpg" alt="" width="1920" height="1080" class="w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/70 to-navy-dark"></div>
+    </div>
+
+    <!-- Grid overlay -->
+    <div class="absolute inset-0 cyber-grid"></div>
+
+    <!-- Scan line effect -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute left-0 right-0 h-px bg-gold/20 animate-scan"></div>
+    </div>
+
+    <!-- Glow orbs -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-navy rounded-full animate-pulse-glow"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold/20 rounded-full animate-pulse-glow" style="animation-delay: 2s;"></div>
+
+    <!-- Floating island silhouette -->
+    <div class="absolute right-0 bottom-0 w-[500px] h-[500px] opacity-[0.06] animate-float pointer-events-none">
+      <img src="/assets/reunion-silhouette.png" alt="" class="w-full h-full object-contain" />
+    </div>
+
+    <!-- Hero content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <!-- Event badge -->
+      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-8" style="animation: slide-up 0.8s ease-out both;">
+        <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+        <span class="text-sm font-mono text-white/60 tracking-widest uppercase">{t.heroBadge}</span>
+      </div>
+
+      <!-- Main title -->
+      <h1 class="font-display font-extrabold leading-[0.95] mb-6" style="animation: slide-up 0.8s ease-out 0.15s both;">
+        <span class="glitch-wrapper block">
+          <span class="glitch text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-white" data-text="CYBER">CYBER</span>
+        </span>
+        <span class="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight">
+          <span class="text-gold">TOUR</span>
+          <span class="text-white/20 ml-2 md:ml-4" aria-hidden="true">&#47;&#47;</span>
+        </span>
+        <span class="block text-3xl sm:text-4xl md:text-5xl tracking-[0.2em] mt-4 reunion-outline">REUNION</span>
+      </h1>
+
+      <!-- Date & location -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-10" style="animation: slide-up 0.8s ease-out 0.3s both;">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+          <span class="font-display font-semibold text-lg tracking-wide">{t.heroDates}</span>
+        </div>
+        <span class="hidden sm:block w-1 h-1 bg-gold rounded-full"></span>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span class="font-display font-semibold text-lg tracking-wide">{t.heroPlaces}</span>
+        </div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="animation: slide-up 0.8s ease-out 0.45s both;">
+        <a href={p('/#etapes')} class="btn-primary rounded-lg font-display">{t.heroCtaRoute}</a>
+        <a href={p('/#contact')} class="btn-outline rounded-lg font-display text-sm">{t.heroCtaContact}</a>
+      </div>
+
+      <!-- Context pills — qualification rapide pour le visiteur -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-6" style="animation: slide-up 0.8s ease-out 0.55s both;">
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-400">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+          {t.heroPillFree}
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-gold/25 bg-gold/[0.07] text-gold">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          {t.heroPillSeats}
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-white/15 bg-white/[0.05] text-white/60">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          {t.heroPillHybrid}
+        </span>
+      </div>
+
+      <!-- Countdown -->
+      <div id="countdown" class="mt-16 flex items-center justify-center gap-6 sm:gap-10" style="animation: slide-up 0.8s ease-out 0.6s both;">
+        <div class="text-center">
+          <span id="cd-days" class="block font-mono text-3xl sm:text-4xl font-bold text-gold tabular-nums">---</span>
+          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdDays}</span>
+        </div>
+        <span class="text-white/20 text-2xl font-light" aria-hidden="true">:</span>
+        <div class="text-center">
+          <span id="cd-hours" class="block font-mono text-3xl sm:text-4xl font-bold text-white tabular-nums">--</span>
+          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdHours}</span>
+        </div>
+        <span class="text-white/20 text-2xl font-light" aria-hidden="true">:</span>
+        <div class="text-center">
+          <span id="cd-mins" class="block font-mono text-3xl sm:text-4xl font-bold text-white tabular-nums">--</span>
+          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdMins}</span>
+        </div>
+        <span class="text-white/20 text-2xl font-light" aria-hidden="true">:</span>
+        <div class="text-center">
+          <span id="cd-secs" class="block font-mono text-3xl sm:text-4xl font-bold text-white/50 tabular-nums">--</span>
+          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdSecs}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50">
+      <span class="text-xs tracking-widest uppercase">{t.scroll}</span>
+      <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <!-- Section header -->
+      <div class="reveal mb-20">
+        <span class="section-label">{t.aboutLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.aboutTitleHtml}></h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Text block -->
+        <div class="space-y-8">
+          <p class="reveal delay-1 text-lg text-white/70 leading-relaxed" set:html={t.aboutP1Html}></p>
+          <p class="reveal delay-2 text-lg text-white/70 leading-relaxed" set:html={t.aboutP2Html}></p>
+
+          <!-- Stats -->
+          <div class="reveal delay-3 grid grid-cols-3 gap-6 pt-6">
+            {t.aboutStats.map(stat => (
+              <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+                <span class="block font-display font-extrabold text-3xl text-gold">{stat.value}</span>
+                <span class="text-sm text-white/50 mt-1">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Visual block -->
+        <div class="reveal-right delay-2 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-white/10">
+            <img src="/assets/cybertour-asset-web-site.png" alt={t.aboutImgAlt} class="w-full h-auto" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/60 to-transparent"></div>
+          </div>
+          <!-- Decorative shield -->
+          <div class="absolute -top-8 -right-8 w-24 h-24 text-gold/20 animate-float" style="animation-delay: 1s;">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+            </svg>
+          </div>
+          <!-- Glow -->
+          <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-navy rounded-full blur-[80px] opacity-60"></div>
+        </div>
+      </div>
+
+      <!-- P3 — Micro-CTA vers le parcours -->
+      <div class="reveal delay-4 flex items-center justify-center mt-16 pt-10 border-t border-white/[0.05]">
+        <a
+          href={p('/#etapes')}
+          class="group inline-flex items-center gap-3 py-3 font-mono text-sm text-white/50 hover:text-gold transition-colors duration-200 tracking-wide"
+        >
+          <span>{t.aboutCta}</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RETOUR SUR 2025 ===== -->
+  <section id="replay" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <div class="reveal text-center mb-14">
+        <span class="section-label">{t.replayLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.replayTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.replayIntro}
+        </p>
+      </div>
+
+      <!-- Stats 2025 -->
+      <div class="reveal delay-1 grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+        {t.replayStats.map(stat => (
+          <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+            <span class="block font-display font-extrabold text-3xl text-gold">{stat.value}</span>
+            <span class="text-sm text-white/50 mt-1">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="reveal delay-2">
+        <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-navy/50 aspect-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/uk-gSyaxyWA?start=9748"
+            title={t.replayIframeTitle}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            class="absolute inset-0 w-full h-full"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARTE DU TOUR / ÉTAPES ===== -->
+  <section id="etapes" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-50"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-16 text-center">
+        <span class="section-label">{t.routeLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.routeTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.routeIntro}
+        </p>
+        <!-- C4 — Dates bien visibles -->
+        <div class="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/[0.06]">
+          <svg class="w-4 h-4 text-gold/70 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+          <span class="font-mono text-sm text-gold/80 font-bold tracking-wider">{t.routeDates}</span>
+        </div>
+      </div>
+
+      {/* Les trois principes de fonctionnement de la charte d'accueil. Le
+          message d'unité n'est pas un slogan écrit pour le site : il est déjà
+          rédigé dans le document que signent les hôtes. */}
+      <ul class="reveal grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16 list-none m-0 p-0">
+        {t.charter.map(item => (
+          <li class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+            <p class="font-display font-semibold text-white">{item.title}</p>
+            <p class="text-white/50 text-sm mt-1">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+
+      {/* La frise possède le quand, la carte le où. Les deux côte à côte, la
+          frise en vedette — c'est la chronologie qui structure, pas la
+          géographie (décisions D4 et D6). */}
+      <div class="reveal grid lg:grid-cols-[1.6fr_1fr] gap-10 lg:gap-14 items-center">
+        <TimelineParcours />
+        <MapReunion />
+      </div>
+
+      <!-- Stage cards bento grid -->
+      <div class="grid md:grid-cols-2 gap-6 mt-16">
+        {stages.map(stage => <StageCard stage={stage} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTF CYBERMOIS ===== -->
+  <section id="ctf" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <div class="reveal mb-16 text-center">
+        <span class="section-label">{t.ctfLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.ctfTitleHtml}></h2>
+        <!-- Accent éditorial en Ambroise. C'est une phrase d'exergue, en corps
+             de titrage : le terrain naturel d'une didone. `.font-serif` porte
+             l'ajustement optique (+8% de corps, interlignage resserré) et
+             `font-synthesis: none`, qui interdit toute fausse graisse ou faux
+             oblique — Ambroise n'a qu'une romaine 400. -->
+        <p class="font-serif text-white/60 mt-5 max-w-2xl mx-auto text-2xl md:text-3xl">
+          {t.ctfPullQuote}
+        </p>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg" set:html={t.ctfIntroHtml}></p>
+      </div>
+
+      <div class="reveal delay-1 max-w-3xl mx-auto">
+        <div class="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 sm:p-10 overflow-hidden">
+          <!-- Decorative corner -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gold/5 to-transparent"></div>
+
+          <div class="flex flex-col sm:flex-row items-start gap-6">
+            <!-- Icon -->
+            <div class="shrink-0 w-16 h-16 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"/>
+              </svg>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-4">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 bg-gold/10 border border-gold/20 rounded-full px-3 py-1 text-xs font-mono text-gold tracking-wider uppercase">
+                  <span class="w-1.5 h-1.5 bg-gold rounded-full animate-pulse"></span>
+                  {t.ctfBadgeMonth}
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-mono text-white/60 tracking-wider uppercase">
+                  {t.ctfBadgeAllMonth}
+                </span>
+              </div>
+
+              <p class="text-white/70 leading-relaxed" set:html={t.ctfBodyHtml}></p>
+
+              <div class="pt-3 text-center">
+                <span class="text-xs text-white/50 font-mono tracking-wider block mb-3">{t.ctfPartnersLabel}</span>
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                  <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="partner-bubble px-5 py-2.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]" aria-label="SecDojo">
+                    <img src="/assets/logo-secdojo.png" alt="SecDojo" class="h-8 w-auto object-contain" loading="lazy" />
+                  </a>
+                  <a href="https://www.linkedin.com/company/cyber-reunion/" target="_blank" rel="noopener noreferrer" class="partner-bubble px-5 py-2.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]" aria-label="Cyber Reunion">
+                    <img src="/assets/logo-cyber-reunion.jpg" alt="Cyber Reunion" class="h-8 w-auto object-contain" loading="lazy" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terminal-style teaser -->
+          <div class="mt-8 bg-black/40 border border-white/[0.06] rounded-lg p-4 font-mono text-sm">
+            <p class="text-emerald-400/80"><span class="text-gold/80">$</span> {t.ctfTermStatus}</p>
+            <p class="text-white/50 mt-1">{t.ctfTermPlatform} <span class="text-gold">SecDojo</span> | {t.ctfTermDuration} <span class="text-white/70">{t.ctfTermDurationValue}</span></p>
+            <p class="text-white/50">{t.ctfTermCategories} <span class="text-white/70">{t.ctfTermCategoriesValue}</span></p>
+            <p class="text-gold mt-1 terminal-typing">{t.ctfTermPreparing}<span class="terminal-dots">...</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPEAKERS ===== -->
+  <section id="speakers" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-20 text-center">
+        <span class="section-label">{t.speakersLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.speakersTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.speakersIntro}
+        </p>
+      </div>
+
+      <!-- Encrypted overlay container -->
+      <div class="relative">
+        <!-- Speaker cards (blurred) -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 blur-[6px] select-none pointer-events-none" aria-hidden="true">
+          <!-- Speaker 1 -->
+          <div class="group relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 text-center">
+            <div class="w-28 h-28 mx-auto mb-6 rounded-full bg-gradient-to-br from-navy to-slate-mid border-2 border-white/10 flex items-center justify-center">
+              <span class="font-display font-bold text-3xl text-gold/80">??</span>
+            </div>
+            <h3 class="font-display font-bold text-xl">██████ ██████</h3>
+            <p class="font-mono text-xs text-gold/70 mt-2 tracking-wider uppercase">██████████</p>
+            <p class="text-white/55 text-sm mt-4 leading-relaxed">
+              ████████ ██ ████████ ██ ███████ ██ █████████ ██ █████████.
+            </p>
+          </div>
+
+          <!-- Speaker 2 -->
+          <div class="group relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 text-center">
+            <div class="w-28 h-28 mx-auto mb-6 rounded-full bg-gradient-to-br from-navy to-slate-mid border-2 border-white/10 flex items-center justify-center">
+              <span class="font-display font-bold text-3xl text-gold/80">??</span>
+            </div>
+            <h3 class="font-display font-bold text-xl">██████ ██████</h3>
+            <p class="font-mono text-xs text-gold/70 mt-2 tracking-wider uppercase">██████████</p>
+            <p class="text-white/55 text-sm mt-4 leading-relaxed">
+              ████████ ██ ████████ ██ ███████ ██ █████████ ██ █████████.
+            </p>
+          </div>
+
+          <!-- Speaker 3 -->
+          <div class="group relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 text-center sm:col-span-2 lg:col-span-1">
+            <div class="w-28 h-28 mx-auto mb-6 rounded-full bg-gradient-to-br from-navy to-slate-mid border-2 border-white/10 flex items-center justify-center">
+              <span class="font-display font-bold text-3xl text-gold/80">??</span>
+            </div>
+            <h3 class="font-display font-bold text-xl">██████ ██████</h3>
+            <p class="font-mono text-xs text-gold/70 mt-2 tracking-wider uppercase">██████████</p>
+            <p class="text-white/55 text-sm mt-4 leading-relaxed">
+              ████████ ██ ████████ ██ ███████ ██ █████████ ██ █████████.
+            </p>
+          </div>
+        </div>
+
+        <!-- Terminal overlay -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <div class="terminal-window bg-black/80 backdrop-blur-md border border-gold/20 rounded-xl px-8 py-6 max-w-md w-full font-mono text-sm">
+            <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
+              <span class="w-3 h-3 rounded-full bg-red/80"></span>
+              <span class="w-3 h-3 rounded-full bg-gold/60"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-400/60"></span>
+              <span class="ml-3 text-white/50 text-xs">{t.speakersTermFile}</span>
+            </div>
+            <div class="space-y-2">
+              <p class="text-emerald-400/80"><span class="text-gold/80">$</span> {t.speakersTermCmd}</p>
+              <p class="text-emerald-400">{t.speakersTermOpen}</p>
+              <p class="text-white/60">{t.speakersTermBuilding}</p>
+              <p class="text-gold terminal-typing">{t.speakersTermSelecting}<span class="terminal-dots">...</span></p>
+              <a
+                href={p('/#call-for-speakers')}
+                class="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-4 py-3 font-display text-sm font-semibold text-gold transition-colors hover:bg-gold/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                <span>{t.speakersTermCta}</span>
+                <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appel à soumission (Call for Speakers) -->
+      <div id="call-for-speakers" class="reveal mt-20 scroll-mt-24">
+        <div class="relative overflow-hidden rounded-2xl border border-gold/20 bg-gradient-to-br from-navy-dark/80 via-slate-deep/60 to-navy-dark/80 backdrop-blur-sm">
+          <div class="absolute inset-0 cyber-grid opacity-10"></div>
+          <div class="relative z-10 px-8 py-12 sm:px-12 sm:py-14 flex flex-col lg:flex-row items-center gap-10">
+            <div class="flex-1 text-center lg:text-left">
+              <span class="font-mono text-gold/80 text-xs tracking-widest uppercase">{t.cfpKicker}</span>
+              <h3 class="font-display font-bold text-2xl sm:text-3xl mt-3 leading-tight" set:html={t.cfpTitleHtml}></h3>
+              <p class="text-white/60 mt-4 text-base leading-relaxed max-w-2xl">
+                {t.cfpBody}
+              </p>
+              <p class="text-white/50 mt-3 text-sm font-mono">
+                {t.cfpDeadlineLabel} <span class="text-gold/80">{t.cfpDeadlineDate}</span>
+              </p>
+            </div>
+            <div class="shrink-0 text-center">
+              <a
+                href="https://grist.numerique.gouv.fr/o/docs/forms/5yDSRXn68qAtUMiMfS2R43/69"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary inline-flex items-center gap-3 rounded-xl whitespace-nowrap"
+              >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+                {t.cfpCta}
+              </a>
+              {t.cfpFormNote && (
+                <p class="mt-3 font-mono text-xs text-white/40">{t.cfpFormNote}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTENAIRES (Pyramid) ===== -->
+  <section id="partenaires" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="relative z-10">
+      <div class="reveal mb-12 text-center px-6">
+        <span class="section-label">{t.partnersLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.partnersTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.partnersIntro}
+        </p>
+      </div>
+      <PartnerPyramid />
+    </div>
+  </section>
+
+  <!-- ===== SPONSORS ===== -->
+  <section id="sponsors" class="relative pt-16 pb-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-14 text-center">
+        <span class="section-label">{t.sponsorsLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.sponsorsTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.sponsorsIntro}
+        </p>
+      </div>
+
+      <!-- ── Pourquoi investir — les 4 piliers du dossier partenaire ──────── -->
+      <div class="reveal delay-1">
+        <h3 class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-6">
+          {t.whyInvestHeading}
+        </h3>
+        <ul class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          {t.whyInvest.map(pillar => (
+            <li class="topic-card rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
+              <svg class="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d={pillarIcons[pillar.key]} />
+              </svg>
+              <h4 class="font-display text-lg font-bold text-white mt-4">{pillar.title}</h4>
+              <p class="mt-2 text-sm leading-relaxed text-white/60">{pillar.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- ── Formules — Soutenir / Être présent / Contribuer ──────────────── -->
+      <div class="reveal delay-2 mt-20">
+        <div class="text-center mb-10">
+          <h3 class="font-mono text-xs tracking-widest uppercase text-white/60">
+            {t.tiersHeading}
+          </h3>
+          <p class="text-white/50 mt-3 max-w-2xl mx-auto">
+            {t.tiersIntro}
+          </p>
+        </div>
+
+        <ul class="grid md:grid-cols-3 gap-5 items-stretch max-w-5xl mx-auto">
+          {t.tiers.map(tier => {
+            const style = tierStyles[tier.key];
+            return (
+              <li class="flex">
+                <article class={`sponsor-card relative flex flex-col w-full overflow-hidden rounded-2xl border bg-white/[0.03] p-6 ${style.cardBorder}`}>
+                  <span class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${style.bar}`} aria-hidden="true"></span>
+                  <span class={`font-mono text-xs tracking-widest uppercase ${style.text}`}>{tier.axis}</span>
+                  <h4 class="font-display text-2xl font-bold text-white mt-2">{tier.name}</h4>
+                  <p class="mt-1 flex items-baseline gap-2 flex-wrap">
+                    <span class="font-mono text-xs text-white/60">{tier.note}</span>
+                    <span class="font-mono text-xl font-bold text-clusir-red">{tier.price}</span>
+                  </p>
+                  <p class="mt-3 text-sm text-white/60">{tier.tagline}</p>
+                  <ul class="mt-5 space-y-3 flex-1">
+                    {tier.includes && (
+                      <li class={`flex items-start gap-3 text-sm font-medium ${style.text}`}>
+                        <svg class="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                        <span>{tier.includes}</span>
+                      </li>
+                    )}
+                    {tier.benefits.map(benefit => (
+                      <li class="flex items-start gap-3 text-sm text-white/70">
+                        <svg class={`mt-0.5 h-5 w-5 shrink-0 ${style.text}`} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={mailtoSubject(tier.subject)}
+                    class={`mt-6 flex min-h-[44px] w-full items-center justify-center rounded-lg border px-4 py-3 font-display text-sm font-semibold uppercase tracking-wider transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${style.border} ${style.bg} ${style.hover} ${style.text}`}
+                    aria-label={tier.aria}
+                  >
+                    {tier.cta}
+                  </a>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+
+        <p class="mt-6 text-center font-mono text-xs text-white/60">{t.tiersFootnote}</p>
+      </div>
+
+      <div class="reveal delay-3 mt-14 text-center">
+        <a
+          href={mailtoSubject(t.deckSubject)}
+          class="btn-primary inline-flex items-center gap-3 rounded-xl"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          {t.deckCta}
+        </a>
+        <p class="mt-4 font-mono text-xs text-white/60">
+          {t.deckNote}
+        </p>
+      </div>
+
+      <!-- Preuve d'audience — chiffres de l'édition précédente, là où est le prix -->
+      <div class="reveal delay-3 mt-14 border-t border-white/10 pt-8">
+        <p class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-5">
+          {t.audienceHeading}
+        </p>
+        <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 text-center">
+          {t.audience2025.map(stat => (
+            <div class="flex flex-col-reverse">
+              <dt class="font-mono text-xs text-white/60 mt-1">{stat.label}</dt>
+              <dd class="font-display font-extrabold text-2xl sm:text-3xl text-gold">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSCRIPTION ===== -->
+  <section id="inscription" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-30"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+      <div class="reveal mb-14 text-center">
+        <span class="section-label">{t.regLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.regTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.regIntro}
+        </p>
+      </div>
+
+      {/* Billetterie Weezevent — iframe officielle, un billet par étape.
+          Fond clair volontaire : c'est le widget de Weezevent, pas une
+          surface du site ; l'encadrer suffit à l'intégrer. */}
+      <div class="reveal delay-1 mx-auto max-w-3xl">
+        <div class="overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-navy/50">
+          <iframe
+            src={weezeventWidgetUrl(lang)}
+            title={t.regWidgetTitle}
+            loading="lazy"
+            allow="payment"
+            class="block w-full"
+            style="height: 680px;"
+          ></iframe>
+        </div>
+        <p class="mt-3 text-center font-mono text-xs text-white/50">
+          {t.regWidgetFallback}
+          <a href={WEEZEVENT_PAGE} target="_blank" rel="noopener noreferrer" class="text-gold hover:text-gold/80 transition-colors underline underline-offset-2">{t.regOpenCta} &rarr;</a>
+        </p>
+      </div>
+
+      <!-- Terminal — état réel de la billetterie + actions utiles -->
+      <div class="reveal delay-2 mx-auto max-w-2xl mt-10">
+        <div class="terminal-window bg-black/70 backdrop-blur-md border border-gold/20 rounded-xl px-6 py-6 sm:px-8 font-mono text-sm">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
+            <span class="w-3 h-3 rounded-full bg-red/80" aria-hidden="true"></span>
+            <span class="w-3 h-3 rounded-full bg-gold/60" aria-hidden="true"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-400/60" aria-hidden="true"></span>
+            <span class="ml-3 text-white/50 text-xs">{t.regTermFile}</span>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-emerald-400/80"><span class="text-gold/80">$</span> {t.regTermCmd}</p>
+            <p class="text-white/70">
+              {t.regEventLabel} <span class="text-gold">{t.regEventValue}</span> {t.regEventSuffix}
+            </p>
+            <p class="text-white/70">
+              {t.regTicketLabel} <span class="text-gold">{t.regTicketDate}</span>
+            </p>
+            <p class="text-white/60">
+              {t.regHint}
+            </p>
+          </div>
+
+          <!-- Actions -->
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a
+              href={WEEZEVENT_PAGE}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-4 py-3 font-display text-sm font-semibold text-gold transition-colors hover:bg-gold/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3m-6-8h6m0 0v6m0-6L9 15" />
+              </svg>
+              {t.regOpenCta}
+            </a>
+            <button
+              type="button"
+              id="add-to-calendar"
+              data-summary={t.icsSummary}
+              data-description={t.icsDescription}
+              data-location={t.icsLocation}
+              data-done={t.icsDone}
+              class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/[0.06] px-4 py-3 font-display text-sm font-semibold text-white transition-colors hover:bg-white/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/>
+              </svg>
+              {t.regCalendarCta}
+            </button>
+          </div>
+
+          <p id="calendar-status" role="status" class="mt-3 text-xs text-white/50">
+            {t.regCalendarStatus}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-30"></div>
+
+    <!-- Decorative island -->
+    <div class="absolute left-0 bottom-0 w-[400px] h-[400px] opacity-[0.04] pointer-events-none">
+      <img src="/assets/reunion-silhouette.png" alt="" class="w-full h-full object-contain" />
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div class="reveal">
+        <span class="section-label">{t.contactLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.contactTitleHtml}></h2>
+        <p class="text-white/50 mt-6 max-w-xl mx-auto text-lg leading-relaxed">
+          {t.contactIntro}
+        </p>
+      </div>
+
+      <div class="reveal delay-2 mt-12 grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <!-- Email -->
+        <a href={`mailto:${contactMail}`} class="group flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 hover:border-gold/30 transition-all">
+          <div class="shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center group-hover:bg-gold/10 transition-colors">
+            <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <span class="text-xs text-white/55 uppercase tracking-wider">{t.contactEmailLabel}</span>
+            <span class="block font-display font-semibold text-white group-hover:text-gold transition-colors">{contactMail}</span>
+          </div>
+        </a>
+
+        <!-- Location — lien réel vers le détail du parcours -->
+        <a href={p('/#etapes')} class="group flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 hover:border-gold/30 transition-all">
+          <div class="shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center group-hover:bg-gold/10 transition-colors">
+            <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <span class="text-xs text-white/55 uppercase tracking-wider">{t.contactPlacesLabel}</span>
+            <span class="block font-display font-semibold text-white group-hover:text-gold transition-colors">{t.contactPlacesValue}</span>
+            <span class="block font-mono text-[11px] text-white/50 mt-0.5">{t.contactPlacesLink}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Streaming note -->
+      <div class="reveal delay-4 mt-10">
+        <p class="text-clusir-red text-sm font-mono font-semibold">
+          <svg class="inline w-4 h-4 mr-1 -mt-0.5" viewBox="0 0 24 24"><path fill="#ce463a" d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418A2.477 2.477 0 002.418 6.186C2 7.746 2 12 2 12s0 4.254.418 5.814a2.477 2.477 0 001.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814z"/><path fill="white" d="M10 15.5l5.5-3.5L10 8.5v7z"/></svg>
+          {t.contactStreaming}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <Footer />
+
+  <script>
+    // ── « Ajouter à mon agenda » — génération d'un .ics côté client.
+    //    Aucune dépendance : Blob + lien de téléchargement éphémère.
+    //    Dates issues du JSON-LD de Layout.astro (fuseau Indien/Réunion, UTC+4)
+    //    converties en UTC, conformément à la RFC 5545.
+    //
+    //    Ce script est bundlé : il ne voit pas le dictionnaire i18n. Les
+    //    chaînes localisées (SUMMARY, DESCRIPTION, LOCATION, message de fin)
+    //    lui sont passées par les attributs data du bouton.
+    const calendarBtn = document.getElementById('add-to-calendar');
+    const calendarStatus = document.getElementById('calendar-status');
+
+    if (calendarBtn) {
+      // Repli le champ sur 75 octets max, comme l'exige la RFC 5545 §3.1.
+      function foldIcsLine(line) {
+        const bytes = new TextEncoder().encode(line);
+        if (bytes.length <= 75) return line;
+        const out = [];
+        let current = '';
+        let currentBytes = 0;
+        let limit = 75;
+        for (const char of line) {
+          const size = new TextEncoder().encode(char).length;
+          if (currentBytes + size > limit) {
+            out.push(current);
+            current = ' ' + char;
+            currentBytes = 1 + size;
+            limit = 75;
+          } else {
+            current += char;
+            currentBytes += size;
+          }
+        }
+        out.push(current);
+        return out.join('\r\n');
+      }
+
+      function toIcsDate(date) {
+        return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      }
+
+      function escapeIcsText(text) {
+        return text
+          .replace(/\\/g, '\\\\')
+          .replace(/;/g, '\\;')
+          .replace(/,/g, '\\,')
+          .replace(/\n/g, '\\n');
+      }
+
+      calendarBtn.addEventListener('click', () => {
+        const summary = calendarBtn.dataset.summary || '';
+        const description = calendarBtn.dataset.description || '';
+        const location = calendarBtn.dataset.location || '';
+
+        const lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//CLUSIR Reunion Ocean Indien//Cyber Tour Reunion 2026//FR',
+          'CALSCALE:GREGORIAN',
+          'METHOD:PUBLISH',
+          'BEGIN:VEVENT',
+          'UID:cyber-tour-reunion-2026@cybertour.re',
+          'DTSTAMP:' + toIcsDate(new Date()),
+          'DTSTART:' + toIcsDate(new Date('2026-10-20T08:00:00+04:00')),
+          'DTEND:' + toIcsDate(new Date('2026-10-23T18:00:00+04:00')),
+          'SUMMARY:' + escapeIcsText(summary),
+          'DESCRIPTION:' + escapeIcsText(description),
+          'LOCATION:' + escapeIcsText(location),
+          'URL:https://cybertour.re/',
+          'END:VEVENT',
+          'END:VCALENDAR',
+        ];
+
+        const ics = lines.map(foldIcsLine).join('\r\n') + '\r\n';
+        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'cyber-tour-reunion-2026.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        // Un blob: n'a pas d'extension : l'option fileDownloads de Plausible
+        // ne le voit pas, on déclare l'événement à la main.
+        const plausible = window.plausible;
+        if (typeof plausible === 'function') {
+          plausible('Agenda ics', { props: { fichier: 'cyber-tour-reunion-2026.ics' } });
+        }
+
+        if (calendarStatus) {
+          calendarStatus.textContent = calendarBtn.dataset.done || '';
+        }
+      });
+    }
+  </script>
+
+</Layout>

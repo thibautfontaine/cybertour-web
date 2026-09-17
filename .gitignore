@@ -5,6 +5,10 @@ dist/
 .nova-tracer/
 CLAUDE.md
 todo.md
+# Espace de travail local : specs, plans d'implémentation, notes. Le dépôt est
+# public, ces documents n'ont pas à y figurer.
 docs/
+documentation/
 Logo-membre.png
 .vscode/
+.superpowers/

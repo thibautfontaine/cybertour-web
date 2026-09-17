@@ -1,0 +1,108 @@
+---
+/**
+ * Vue partagée des mentions légales (FR `/mentions-legales`,
+ * EN `/en/mentions-legales`). Toute chaîne visible vient de `src/i18n/legal.ts`.
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getLang } from '../i18n';
+import { legal } from '../i18n/legal';
+
+const lang = getLang(Astro.currentLocale);
+const t = legal[lang];
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription}>
+  <Navbar />
+
+  <main id="main-content" class="bg-navy-dark min-h-dvh pt-32 pb-20">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <h1 class="font-display text-3xl md:text-4xl font-bold text-white mb-12 reveal">
+        {t.pageTitle}
+      </h1>
+
+      <!-- Editeur du site -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.publisherTitle}</h2>
+        <div class="text-white/70 leading-relaxed space-y-1">
+          <p><strong class="text-white">{t.publisherName}</strong> {t.publisherDescription}</p>
+          <p>{t.publisherLegalForm}</p>
+          <p>{t.publisherIds}</p>
+          <p>{t.publisherRna}</p>
+          <p>{t.publisherAddress}</p>
+          <p>{t.publisherContactLabel} <a href={`mailto:${t.email}`} class="text-gold hover:underline">{t.email}</a></p>
+        </div>
+      </section>
+
+      <!-- Directeur de la publication -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.directorTitle}</h2>
+        <p class="text-white/70 leading-relaxed">
+          {t.directorText}
+        </p>
+      </section>
+
+      <!-- Hebergement -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.hostingTitle}</h2>
+        <div class="text-white/70 leading-relaxed space-y-1">
+          <p><strong class="text-white">{t.hostingProvider}</strong> — GitHub, Inc.</p>
+          <p>{t.hostingAddress}</p>
+          <p>{t.hostingSourceLabel} <a href={t.sourceUrl} target="_blank" rel="noopener" class="text-gold hover:underline">{t.hostingSourceLinkText}</a></p>
+        </div>
+      </section>
+
+      <!-- Conception et developpement -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.designTitle}</h2>
+        <p class="text-white/70 leading-relaxed">
+          <a href={t.linkedinUrl} target="_blank" rel="noopener" class="text-gold hover:underline">{t.designName}</a> — {t.designRole}
+        </p>
+      </section>
+
+      <!-- Propriete intellectuelle -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.ipTitle}</h2>
+        <p class="text-white/70 leading-relaxed">
+          {t.ipText}
+        </p>
+      </section>
+
+      <!-- Donnees personnelles et cookies -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.dataTitle}</h2>
+        <p class="text-white/70 leading-relaxed mb-4">
+          {t.dataIntro}
+        </p>
+        <ul class="text-white/70 leading-relaxed space-y-2 list-disc list-inside">
+          <li>{t.dataSiteLabel} <strong class="text-white">{t.dataNoCookiesStrong}</strong>{t.dataNoCookiesRest}</li>
+          <li>{t.dataSiteLabel} <strong class="text-white">{t.dataNoFormStrong}</strong>{t.dataNoFormRest}</li>
+          <li>{t.dataAnalyticsBefore}<strong class="text-white">{t.dataAnalyticsStrong}</strong>{t.dataAnalyticsAfter}</li>
+          <li>{t.dataTicketingBefore}<strong class="text-white">{t.dataTicketingStrong}</strong>{t.dataTicketingAfter}</li>
+        </ul>
+      </section>
+
+      <!-- Liens externes -->
+      <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.externalLinksTitle}</h2>
+        <p class="text-white/70 leading-relaxed">
+          {t.externalLinksText}
+        </p>
+      </section>
+
+      <!-- Contact -->
+      <section class="reveal">
+        <h2 class="font-display text-xl font-semibold text-white mb-4">{t.contactTitle}</h2>
+        <p class="text-white/70 leading-relaxed">
+          {t.contactText}
+          <a href={`mailto:${t.email}`} class="text-gold hover:underline">{t.email}</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
