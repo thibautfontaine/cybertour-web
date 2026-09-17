@@ -1,77 +1,116 @@
 ---
+import { getLang, localizePath, alternatePath, otherLang, LANGS, LANG_STORAGE_KEY } from '../i18n';
+import { ui } from '../i18n/ui';
+
 interface Props {
   currentPage?: string;
 }
 
 const { currentPage } = Astro.props;
 
+const lang = getLang(Astro.currentLocale);
+const t = ui[lang].nav;
+const p = (path: string) => localizePath(path, lang);
+
 // Les ancres de la home suivent l'ordre des sections de index.astro.
-// Les liens `page: true` (surfaces dédiées) sont regroupés visuellement.
-interface NavLink {
-  label: string;
-  href: string;
-  /** Surface dédiée (page complète) plutôt qu'une ancre de la home */
-  page?: boolean;
-  /** Non encore ouvert — rendu en texte non cliquable + badge « bientôt » */
-  soon?: boolean;
-}
+// Les libellés vivent dans src/i18n/ui.ts ; `soon` = non encore ouvert,
+// rendu en texte non cliquable + badge « bientôt ».
+const navLinks = t.links.map((link) => ({ ...link, href: p(link.href) }));
+const ctaLink = { label: t.cta.label, href: p(t.cta.href) };
 
-const navLinks: NavLink[] = [
-  { label: "À propos", href: "/#about" },
-  { label: "Replay 2025", href: "/#replay" },
-  { label: "Les Étapes", href: "/#etapes" },
-  { label: "CTF", href: "/#ctf" },
-  { label: "Speakers", href: "/#speakers" },
-  { label: "Sponsors", href: "/#sponsors" },
-  { label: "Inscriptions", href: "/#inscription", soon: true },
-];
+/* Sélecteur de langue : un lien par langue vers la même page dans l'autre
+   langue. Le clic écrit localStorage[ct-lang] (voir <script> plus bas) — c'est
+   la seule écriture de cette clé, et elle prime ensuite sur la détection
+   automatique de src/i18n/redirect.js. */
+const langLinks = LANGS.map((l) => ({
+  lang: l,
+  code: l.toUpperCase(),
+  name: t.langNames[l],
+  href: l === lang ? Astro.url.pathname : alternatePath(Astro.url.pathname, l),
+  current: l === lang,
+}));
 
-
-const ctaLink = { label: "Contact", href: "/#contact" };
+const isCurrent = (href: string) =>
+  Boolean(currentPage) && href.startsWith(p(`/${currentPage}`));
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300" data-scrolled="false">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
     <!-- shrink-0 obligatoire : sans lui, flexbox comprime le logo en largeur
          quand la barre de liens deborde, ce qui l'ecrase en un trait vertical -->
-    <a href="/" class="flex items-center gap-3 group shrink-0">
-      <img src="/assets/logo-clusir-roi-sombre.png" alt="CLUSIR Réunion Océan Indien" width="242" height="128" class="h-14 sm:h-16 w-auto max-w-none shrink-0 transition-transform group-hover:scale-105" />
+    <a href={p('/')} class="flex items-center gap-3 group shrink-0">
+      <img src="/assets/logo-clusir-roi-sombre.png" alt={t.logoAlt} width="242" height="128" class="h-14 sm:h-16 w-auto max-w-none shrink-0 transition-transform group-hover:scale-105" />
     </a>
 
-    <!-- Desktop nav -->
-    <!-- Nav desktop à partir de lg : 7 liens + CTA débordent sous 1024px -->
-    <div class="hidden lg:flex items-center gap-4 xl:gap-6">
-      {navLinks.map((link, i) => (
-        <>
-          {link.soon ? (
-            <span class="inline-flex items-center gap-2 cursor-default select-none">
-              <span class="text-xs xl:text-sm font-medium tracking-wider uppercase text-white/50">{link.label}</span>
-              <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-gold/40 bg-gold/10 text-gold">bientôt</span>
-            </span>
-          ) : (
+    <div class="flex items-center gap-4 xl:gap-6">
+      <!-- Desktop nav -->
+      <!-- Nav desktop à partir de lg : 7 liens + CTA débordent sous 1024px -->
+      <div class="hidden lg:flex items-center gap-4 xl:gap-6">
+        {navLinks.map((link) => (
+          <>
+            {link.soon ? (
+              <span class="inline-flex items-center gap-2 cursor-default select-none">
+                <span class="text-xs xl:text-sm font-medium tracking-wider uppercase text-white/50">{link.label}</span>
+                <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-gold/40 bg-gold/10 text-gold">{t.soon}</span>
+              </span>
+            ) : (
+              <a
+                href={link.href}
+                class:list={[
+                  "text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
+                  isCurrent(link.href) ? "text-gold" : "text-white/70",
+                ]}
+              >
+                {link.label}
+              </a>
+            )}
+          </>
+        ))}
+        <a href={ctaLink.href} class="btn-outline text-xs py-2 px-5">{ctaLink.label}</a>
+      </div>
+
+      <!-- Sélecteur de langue — visible à toutes les largeurs -->
+      <div
+        class="inline-flex items-center rounded-full border border-white/15 bg-white/[0.04] font-mono text-[11px] tracking-wider uppercase"
+        role="group"
+        aria-label={t.langSwitcher}
+      >
+        {langLinks.map((l, i) => (
+          <>
+            {i > 0 && <span class="text-white/15 select-none" aria-hidden="true">|</span>}
             <a
-              href={link.href}
+              href={l.href}
+              hreflang={l.lang}
+              lang={l.lang}
+              data-set-lang={l.lang}
+              aria-current={l.current ? 'true' : undefined}
+              aria-label={l.name}
               class:list={[
-                "text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
-                currentPage && link.href.startsWith(`/${currentPage}`)
-                  ? "text-gold"
-                  : "text-white/70",
+                "px-2.5 py-1 transition-colors",
+                l.current ? "text-gold font-bold" : "text-white/60 hover:text-white",
               ]}
             >
-              {link.label}
+              {l.code}
             </a>
-          )}
-        </>
-      ))}
-      <a href={ctaLink.href} class="btn-outline text-xs py-2 px-5">{ctaLink.label}</a>
-    </div>
+          </>
+        ))}
+      </div>
 
-    <!-- Mobile burger -->
-    <button id="menu-toggle" class="lg:hidden text-white" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
+      <!-- Mobile burger -->
+      <button
+        id="menu-toggle"
+        class="lg:hidden text-white"
+        aria-label={t.openMenu}
+        data-label-open={t.openMenu}
+        data-label-close={t.closeMenu}
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
   </div>
 
   <!-- Mobile menu -->
@@ -81,16 +120,14 @@ const ctaLink = { label: "Contact", href: "/#contact" };
         link.soon ? (
           <span class="inline-flex items-center gap-2 cursor-default select-none">
             <span class="text-sm font-medium uppercase text-white/50">{link.label}</span>
-            <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-gold/40 bg-gold/10 text-gold">bientôt</span>
+            <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-gold/40 bg-gold/10 text-gold">{t.soon}</span>
           </span>
         ) : (
           <a
             href={link.href}
             class:list={[
               "text-sm font-medium hover:text-gold transition-colors uppercase",
-              currentPage && link.href.startsWith(`/${currentPage}`)
-                ? "text-gold"
-                : "text-white/70",
+              isCurrent(link.href) ? "text-gold" : "text-white/70",
             ]}
           >
             {link.label}
@@ -101,6 +138,16 @@ const ctaLink = { label: "Contact", href: "/#contact" };
     </div>
   </div>
 </nav>
+
+<script define:vars={{ storageKey: LANG_STORAGE_KEY }} is:inline>
+  // Choix manuel de langue : mémorisé avant la navigation naturelle du lien.
+  // Seul endroit du site qui écrit cette clé (cf. src/i18n/redirect.js).
+  document.addEventListener('click', function (event) {
+    var link = event.target instanceof Element ? event.target.closest('a[data-set-lang]') : null;
+    if (!link) return;
+    try { window.localStorage.setItem(storageKey, link.getAttribute('data-set-lang')); } catch (_) {}
+  });
+</script>
 
 <script>
   const nav = document.getElementById('main-nav');
@@ -127,11 +174,12 @@ const ctaLink = { label: "Contact", href: "/#contact" };
     return mobileMenu?.classList.contains('hidden') === false;
   }
 
-  function setMenu(open) {
+  function setMenu(open: boolean) {
     if (!mobileMenu || !menuToggle) return;
     mobileMenu.classList.toggle('hidden', !open);
     menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    const label = open ? menuToggle.dataset.labelClose : menuToggle.dataset.labelOpen;
+    if (label) menuToggle.setAttribute('aria-label', label);
   }
 
   // État initial cohérent avec le DOM rendu (menu fermé)

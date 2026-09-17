@@ -1,11 +1,14 @@
 ---
 import { ACCENT_PAINT, ACCENT_TEXT, type Stage } from "../data/stages";
+import { getLang } from "../i18n";
+import { ui } from "../i18n/ui";
 
 interface Props {
   stage: Stage;
 }
 
 const { stage } = Astro.props;
+const t = ui[getLang(Astro.currentLocale)].stage;
 
 /* Une étape non publiée (art. 8.8 — fiche annexe F non reçue) rend une carte
    inerte plutôt qu'un lien mort. Le composant racine change de balise. */
@@ -14,7 +17,7 @@ const rootProps = stage.published
   ? { href: stage.href, style: "touch-action: manipulation;" }
   : {
       role: "group",
-      "aria-label": `Étape ${stage.direction} — ${stage.host} — programme à venir`,
+      "aria-label": t.unpublishedLabel(stage.direction, stage.host),
     };
 ---
 
@@ -60,7 +63,7 @@ const rootProps = stage.published
           class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-mono font-bold"
           style={`background: ${ACCENT_PAINT}18; color: ${ACCENT_TEXT}; border: 1px solid ${ACCENT_PAINT}25;`}
         >
-          {stage.capacity} places
+          {stage.capacity} {t.seats}
         </span>
       )}
     </div>
@@ -103,7 +106,7 @@ const rootProps = stage.published
         reste dans le source, il ne part pas dans le view-source public. */}
     <div class="pt-5 border-t border-white/[0.08]">
       <p class="font-mono text-[10px] tracking-[0.19em] uppercase text-white/40">
-        Accueillie par
+        {t.hostedBy}
       </p>
       <p class="font-display font-semibold text-white/90 mt-1">{stage.host}</p>
     </div>
@@ -114,13 +117,13 @@ const rootProps = stage.published
           class="inline-flex items-center gap-2 text-sm font-bold tracking-wide uppercase group-hover:gap-3 transition-all duration-300"
           style={`color: ${ACCENT_TEXT}`}
         >
-          Découvrir l'étape
+          {t.discover}
           <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
         </span>
       </div>
     ) : (
       <p class="mt-5 font-mono text-xs uppercase tracking-wider text-white/40">
-        Programme à venir
+        {t.programmeSoon}
       </p>
     )}
   </div>

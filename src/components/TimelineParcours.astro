@@ -1,5 +1,11 @@
 ---
-import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
+import { getStages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
+import { getLang } from "../i18n";
+import { ui } from "../i18n/ui";
+
+const lang = getLang(Astro.currentLocale);
+const stages = getStages(lang);
+const t = ui[lang].stage;
 
 /* La frise possède le « quand ». Elle ne dit ni le lieu précis (c'est la
    carte) ni le contenu (c'est la carte d'étape) — cette frontière est ce qui
@@ -42,7 +48,7 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
           {stage.direction}
         </span>
         <span class="block font-mono text-[10px] text-white/40 leading-relaxed">
-          accueillie par
+          {t.hostedByLower}
           <span class="block text-white/75 mt-0.5">{stage.host}</span>
         </span>
       </li>
@@ -69,7 +75,7 @@ import { stages, ACCENT_PAINT, ACCENT_TEXT } from "../data/stages";
           {stage.direction}
         </span>
         <span class="block font-mono text-[11px] text-white/40 mt-1">
-          accueillie par <span class="text-white/75">{stage.host}</span>
+          {t.hostedByLower} <span class="text-white/75">{stage.host}</span>
         </span>
       </li>
     ))}

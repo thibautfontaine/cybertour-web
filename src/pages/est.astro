@@ -1,37 +1,5 @@
 ---
-import { stages } from '../data/stages';
-
-/* L'étape Est n'est plus annulée : Epitech l'accueille à Saint-André le
-   29 octobre 2026. Cette page, qui annonçait le contraire, devient une
-   redirection.
-
-   La cible est dérivée de la donnée plutôt que codée en dur. Tant que la fiche
-   de l'annexe F d'Epitech n'est pas reçue (art. 8.8 de la charte : « sans
-   fiche, pas de page »), /epitech n'existe pas et rediriger dessus produirait
-   un 404. On renvoie donc vers la section parcours. Le jour où `published`
-   passe à true, la redirection bascule seule vers /epitech, sans intervention. */
-const epitech = stages.find((s) => s.id === 'epitech');
-const target = epitech?.published ? epitech.href : '/#etapes';
-
-const pageTitle = "L'étape Est du CyberTour 2026";
+import EstRedirect from '../views/EstRedirect.astro';
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{pageTitle}</title>
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <link rel="canonical" href={`https://cybertour.re${target}`} />
-    <meta name="robots" content="noindex, follow" />
-  </head>
-  <body>
-    <p>
-      L'étape Est 2026 est accueillie par Epitech à Saint-André, le jeudi
-      29 octobre. <a href={target}>Voir le parcours</a>.
-    </p>
-    <script is:inline define:vars={{ target }}>
-      window.location.replace(target);
-    </script>
-  </body>
-</html>
+<EstRedirect />

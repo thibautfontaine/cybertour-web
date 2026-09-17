@@ -1,24 +1,61 @@
 ---
 import '../styles/global.css'
+import { getLang, localizePath, alternatePath, otherLang, LANGS, OG_LOCALE, DEFAULT_LANG } from '../i18n';
+import { ui } from '../i18n/ui';
+/* Script de détection de la langue du navigateur, inliné tel quel dans <head>
+   (import `?raw` de Vite) : il doit tourner avant le premier rendu, sans
+   attendre un bundle. Fonction pure `decide()` + IIFE — voir le fichier. */
+import redirectRaw from '../i18n/redirect.js?raw';
+
+/* Les commentaires du fichier source (documentation en français) ne partent
+   pas dans le HTML public : on ne garde que le code. */
+const redirectSrc = redirectRaw
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^\s*\/\/.*$/gm, '')
+  .replace(/\n\s*\n+/g, '\n')
+  .trim();
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Cyber Tour Réunion 2026 - 6 étapes, 20-29 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux." } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = ui[lang].layout;
+
+const { title, description = t.defaultDescription } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+/* hreflang : chaque page annonce sa jumelle dans l'autre langue, et
+   x-default pointe sur le français (langue par défaut, URL sans préfixe).
+   C'est ce qui permet à Google de servir la bonne version malgré la
+   redirection côté client, que les robots ne suivent pas forcément. */
+const alternates = LANGS.map((l) => ({
+  hreflang: l,
+  href: new URL(alternatePath(Astro.url.pathname, l), Astro.site).href,
+}));
+const xDefault = new URL(alternatePath(Astro.url.pathname, DEFAULT_LANG), Astro.site).href;
+
+/* Chaînes du compte à rebours pour le script bundlé en bas de page (qui ne
+   peut pas lire le dictionnaire au build). Sérialisées en JSON dans le DOM. */
+const countdownI18n = {
+  ended: { ...t.countdown.ended, href: localizePath(t.countdown.ended.href, lang) },
+  live:  { ...t.countdown.live,  href: localizePath(t.countdown.live.href, lang) },
+};
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline set:html={redirectSrc}></script>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0f1a30" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
 
     {/*
       Préchargement des fontes — seulement les fontes du premier rendu.
@@ -72,19 +109,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="CLUSIR Réunion Océan Indien" />
-    <meta name="keywords" content="cybersécurité, La Réunion, conférence, cybermois, CLUSIR, sécurité informatique, SOC, IA, souveraineté numérique" />
+    <meta name="keywords" content={t.keywords} />
 
     <!-- OG Tags -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[otherLang(lang)]} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:site_name" content="Cyber Tour Réunion" />
     <meta property="og:image" content="https://cybertour.re/assets/og-cybertour-2026.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Cyber Tour Réunion 2026 - 20-29 Octobre - 6 étapes" />
+    <meta property="og:image:alt" content={t.ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -126,7 +164,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "@context": "https://schema.org",
       "@type": "Event",
       "name": "Cyber Tour Réunion 2026",
-      "description": "L'événement cybersécurité de référence à La Réunion, organisé par le CLUSIR Réunion Océan Indien.",
+      "description": t.jsonLdDescription,
       "startDate": "2026-10-20T08:00:00+04:00",
       "endDate": "2026-10-29T18:00:00+04:00",
       "eventStatus": "https://schema.org/EventScheduled",
@@ -210,15 +248,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "url": "https://clusir-roi.org"
       },
       "isAccessibleForFree": true,
-      "inLanguage": "fr"
+      "inLanguage": lang
     })} />
   </head>
   <body class="font-body antialiased pb-10">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-gold focus:text-navy-dark focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
-      Aller au contenu principal
+      {t.skipToContent}
     </a>
     <slot />
 
+    <script type="application/json" id="countdown-i18n" set:html={JSON.stringify(countdownI18n)}></script>
     <script>
       // ── Scroll reveal — IntersectionObserver only (aucun listener scroll,
       //    donc aucun reflow synchrone forcé par getBoundingClientRect).
@@ -247,23 +286,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
       // ── Compte à rebours (présent uniquement sur la home)
       // Les effets navbar (scroll + menu mobile) sont gérés dans Navbar.astro.
+      // Les textes viennent du JSON #countdown-i18n rendu par le layout dans la
+      // langue de la page.
       const EVENT_START = new Date('2026-10-20T08:00:00+04:00').getTime();
       /* Fin du tour = fin de la dernière étape, pas de la dernière étape CLUSIR.
-   À 2026-10-23T18:00 le compte à rebours annonçait « Édition 2026 terminée »
-   alors que les étapes Expernet, EDN et Epitech n'avaient pas encore eu lieu.
-   Doit rester aligné sur `endDate` du JSON-LD ci-dessus. */
-const EVENT_END = new Date('2026-10-29T18:00:00+04:00').getTime();
+         À 2026-10-23T18:00 le compte à rebours annonçait « Édition 2026 terminée »
+         alors que les étapes Expernet, EDN et Epitech n'avaient pas encore eu lieu.
+         Doit rester aligné sur `endDate` du JSON-LD ci-dessus. */
+      const EVENT_END = new Date('2026-10-29T18:00:00+04:00').getTime();
+
+      type CountdownStatus = { title: string; subtitle: string; cta: string; href: string };
+      let i18n: { ended: CountdownStatus; live: CountdownStatus } | null = null;
+      try {
+        i18n = JSON.parse(document.getElementById('countdown-i18n')?.textContent || 'null');
+      } catch (_) {
+        i18n = null;
+      }
 
       const dEl = document.getElementById('cd-days');
       const hEl = document.getElementById('cd-hours');
       const mEl = document.getElementById('cd-mins');
       const sEl = document.getElementById('cd-secs');
 
-      if (dEl && hEl && mEl && sEl) {
+      if (dEl && hEl && mEl && sEl && i18n) {
+        const strings = i18n;
         // Conteneur du compte à rebours ; repli sur la remontée DOM si l'id manque
         const cdWrapper = document.getElementById('countdown')
           || (dEl.parentElement && dEl.parentElement.parentElement);
-        let timerId = null;
+        let timerId: ReturnType<typeof setInterval> | null = null;
         let settled = false; // true dès que l'état « en cours » / « terminé » est affiché
 
         function stopCountdown() {
@@ -273,7 +323,7 @@ const EVENT_END = new Date('2026-10-29T18:00:00+04:00').getTime();
           }
         }
 
-        function renderStatus(title, subtitle, ctaLabel, ctaHref) {
+        function renderStatus(status: CountdownStatus) {
           if (!cdWrapper) return;
           const box = document.createElement('div');
           box.className = 'mx-auto max-w-xl text-center';
@@ -281,19 +331,19 @@ const EVENT_END = new Date('2026-10-29T18:00:00+04:00').getTime();
 
           const h = document.createElement('p');
           h.className = 'font-mono text-xl sm:text-2xl font-bold uppercase tracking-widest text-gold';
-          h.textContent = title;
+          h.textContent = status.title;
           box.appendChild(h);
 
           const p = document.createElement('p');
           p.className = 'mt-2 text-sm text-white/70';
-          p.textContent = subtitle;
+          p.textContent = status.subtitle;
           box.appendChild(p);
 
-          if (ctaLabel && ctaHref) {
+          if (status.cta && status.href) {
             const a = document.createElement('a');
             a.className = 'btn-outline text-xs py-2 px-5 mt-6 inline-block';
-            a.href = ctaHref;
-            a.textContent = ctaLabel;
+            a.href = status.href;
+            a.textContent = status.cta;
             box.appendChild(a);
           }
 
@@ -309,24 +359,14 @@ const EVENT_END = new Date('2026-10-29T18:00:00+04:00').getTime();
           if (now >= EVENT_END) {
             settled = true;
             stopCountdown();
-            renderStatus(
-              'Édition 2026 terminée',
-              'Merci à toutes et tous. Les conférences sont disponibles en rediffusion.',
-              'Voir les replays',
-              '/#replay'
-            );
+            renderStatus(strings.ended);
             return;
           }
 
           if (now >= EVENT_START) {
             settled = true;
             stopCountdown();
-            renderStatus(
-              "L'événement est en cours",
-              'Du 20 au 29 octobre 2026 — rejoignez-nous sur place ou en streaming.',
-              'Voir les étapes',
-              '/#etapes'
-            );
+            renderStatus(strings.live);
             return;
           }
 

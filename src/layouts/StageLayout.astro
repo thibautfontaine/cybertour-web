@@ -1,14 +1,21 @@
 ---
 import Layout from './Layout.astro';
-import { stages, ACCENT_PAINT, ACCENT_TEXT } from '../data/stages';
+import { getStages, ACCENT_PAINT, ACCENT_TEXT } from '../data/stages';
 import type { Stage } from '../data/stages';
+import { getLang, localizePath } from '../i18n';
+import { ui } from '../i18n/ui';
+import { WEEZEVENT_PAGE } from '../data/ticketing';
 
 interface Props {
   stage: Stage;
 }
 
 const { stage } = Astro.props;
-const pageTitle = `${stage.name} | Cyber Tour Réunion 2026`;
+const lang = getLang(Astro.currentLocale);
+const t = ui[lang].stage;
+const p = (path: string) => localizePath(path, lang);
+const stages = getStages(lang);
+const pageTitle = t.pageTitle(stage.name);
 
 /* prev/next ne traversent que les étapes publiées (art. 8.8) : une étape sans
    fiche annexe F ne doit jamais devenir le "précédent"/"suivant" d'une étape
@@ -27,7 +34,7 @@ const next =
   <slot name="navbar" />
 
   <!-- Floating stage navigator — left side -->
-  <nav aria-label="Navigation entre étapes" class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-start">
+  <nav aria-label={t.navBetweenStages} class="fixed left-5 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-start">
     {stages.map((s, i) => {
       const isActive = s.id === stage.id;
       const isLast   = i === stages.length - 1;
@@ -36,7 +43,7 @@ const next =
       const ItemTag = s.published ? 'a' : 'div';
       const itemProps = s.published
         ? { href: s.href }
-        : { role: 'group', 'aria-label': `Étape ${s.direction} — ${s.host} — programme à venir` };
+        : { role: 'group', 'aria-label': t.unpublishedLabel(s.direction, s.host) };
       return (
         <div class="flex flex-col items-start">
           <ItemTag
@@ -125,7 +132,7 @@ const next =
 
   <!-- Mobile inter-stage nav — barre sticky en bas, masquée sur desktop -->
   <nav
-    aria-label="Navigation entre étapes"
+    aria-label={t.navBetweenStages}
     class="fixed bottom-0 left-0 right-0 z-40 lg:hidden"
     style="background: rgba(15, 26, 48, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,0.08);"
   >
@@ -136,7 +143,7 @@ const next =
           href={prev.href}
           class="flex items-center gap-2 py-1"
           style={`color:${ACCENT_TEXT};min-width:44px;min-height:44px;`}
-          aria-label={`Étape précédente : ${prev.direction}`}
+          aria-label={t.prevStageAria(prev.direction)}
         >
           <span class="text-lg leading-none" aria-hidden="true">&larr;</span>
           <span class="font-mono text-[11px] tracking-widest uppercase">{prev.direction}</span>
@@ -144,14 +151,14 @@ const next =
       ) : <div style="min-width:44px"></div>}
 
       <!-- Indicateur de position -->
-      <ul class="flex items-center list-none m-0 p-0" aria-label="Progression">
+      <ul class="flex items-center list-none m-0 p-0" aria-label={t.progress}>
         {stages.map((s) => {
           const isActive = s.id === stage.id;
           /* Étape non publiée (art. 8.8) : même position, même pastille, pas de lien. */
           const DotTag = s.published ? 'a' : 'div';
           const dotProps = s.published
-            ? { href: s.href, 'aria-label': `Étape ${s.trackNumber} — ${s.direction}` }
-            : { role: 'group', 'aria-label': `Étape ${s.direction} — ${s.host} — programme à venir` };
+            ? { href: s.href, 'aria-label': t.stageLabel(s.trackNumber, s.direction) }
+            : { role: 'group', 'aria-label': t.unpublishedLabel(s.direction, s.host) };
           return (
             <li class="flex">
               <DotTag
@@ -179,7 +186,7 @@ const next =
           href={next.href}
           class="flex items-center gap-2 justify-end py-1"
           style={`color:${ACCENT_TEXT};min-width:44px;min-height:44px;`}
-          aria-label={`Étape suivante : ${next.direction}`}
+          aria-label={t.nextStageAria(next.direction)}
         >
           <span class="font-mono text-[11px] tracking-widest uppercase">{next.direction}</span>
           <span class="text-lg leading-none" aria-hidden="true">&rarr;</span>
@@ -208,11 +215,11 @@ const next =
       <div class="relative z-10 w-full max-w-6xl mx-auto px-6 pb-12 pt-32">
 
         <!-- Breadcrumb -->
-        <nav class="reveal mb-8" aria-label="Fil d'Ariane">
+        <nav class="reveal mb-8" aria-label={t.breadcrumb}>
           <ol class="flex items-center gap-2 font-mono text-sm tracking-wide" style="color: var(--text-muted);">
-            <li><a href="/" class="hover:text-white transition-colors">Accueil</a></li>
+            <li><a href={p('/')} class="hover:text-white transition-colors">{t.home}</a></li>
             <li class="select-none">&gt;</li>
-            <li><a href="/#etapes" class="hover:text-white transition-colors">Les Étapes</a></li>
+            <li><a href={p('/#etapes')} class="hover:text-white transition-colors">{t.stages}</a></li>
             <li class="select-none">&gt;</li>
             <li style={`color: ${ACCENT_TEXT};`}>{stage.direction}</li>
           </ol>
@@ -224,7 +231,7 @@ const next =
             class="inline-block font-mono text-xs tracking-widest uppercase px-3 py-1 rounded-full border"
             style={`color: ${ACCENT_TEXT}; border-color: ${ACCENT_PAINT}40; background: ${ACCENT_PAINT}10;`}
           >
-            Étape {stage.trackNumber}
+            {t.stageBadge} {stage.trackNumber}
           </span>
         </div>
 
@@ -269,7 +276,7 @@ const next =
             <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span>{stage.capacity} places</span>
+            <span>{stage.capacity} {t.seats}</span>
           </div>
         </div>
       </div>
@@ -279,7 +286,7 @@ const next =
     <slot />
 
     <!-- Navigation entre étapes — redesign avec indicateur de progression -->
-    <nav aria-label="Navigation entre étapes" class="max-w-5xl mx-auto px-6 py-12">
+    <nav aria-label={t.navBetweenStages} class="max-w-5xl mx-auto px-6 py-12">
 
       <!-- Indicateur de progression — visible sur tous les écrans -->
       <div class="flex items-center justify-center gap-6 mb-10">
@@ -288,8 +295,8 @@ const next =
           /* Étape non publiée (art. 8.8) : même position, même barre, pas de lien. */
           const ProgressTag = s.published ? 'a' : 'div';
           const progressProps = s.published
-            ? { href: s.href, 'aria-label': `Étape ${s.trackNumber} — ${s.direction}` }
-            : { role: 'group', 'aria-label': `Étape ${s.direction} — ${s.host} — programme à venir` };
+            ? { href: s.href, 'aria-label': t.stageLabel(s.trackNumber, s.direction) }
+            : { role: 'group', 'aria-label': t.unpublishedLabel(s.direction, s.host) };
           return (
             <ProgressTag
               {...progressProps}
@@ -332,7 +339,7 @@ const next =
               &larr;
             </span>
             <div>
-              <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${ACCENT_TEXT};`}>Étape précédente</span>
+              <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${ACCENT_TEXT};`}>{t.prevStage}</span>
               <span class="font-display font-semibold text-white text-lg leading-tight">{prev.direction}</span>
               <span class="block text-xs text-white/50 mt-0.5">{prev.dateShort}</span>
             </div>
@@ -345,7 +352,7 @@ const next =
             class="group flex items-center gap-4 text-right rounded-xl p-4 hover:bg-white/[0.04] transition-all duration-200"
           >
             <div>
-              <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${ACCENT_TEXT};`}>Étape suivante</span>
+              <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${ACCENT_TEXT};`}>{t.nextStage}</span>
               <span class="font-display font-semibold text-white text-lg leading-tight">{next.direction}</span>
               <span class="block text-xs text-white/50 mt-0.5">{next.dateShort}</span>
             </div>
@@ -365,7 +372,7 @@ const next =
     <section class="py-20 px-6">
       <div class="max-w-4xl mx-auto">
         <h2 class="reveal font-display text-2xl md:text-3xl font-bold mb-10 text-center">
-          Infos Pratiques
+          {t.practicalInfo}
         </h2>
 
         <div class="reveal delay-1 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
@@ -382,7 +389,7 @@ const next =
             </div>
 
             <div>
-              <h3 class="font-display text-lg font-semibold mb-1">Adresse</h3>
+              <h3 class="font-display text-lg font-semibold mb-1">{t.address}</h3>
               <p class="font-body" style="color: var(--text-secondary);">{stage.lieuFull}</p>
             </div>
           </div>
@@ -404,25 +411,28 @@ const next =
           </div>
 
           <h2 class="font-display text-2xl md:text-3xl font-bold mb-4">
-            Inscription bientôt disponible
+            {t.registrationTitle}
           </h2>
 
           <p class="font-body mb-8 max-w-lg mx-auto" style="color: var(--text-secondary);">
-            Les inscriptions pour cette étape ouvriront prochainement. Contactez-nous pour être informé dès qu'elles seront disponibles.
+            {t.registrationText}
           </p>
 
           <a
-            href="mailto:evenement@clusir-roi.org"
+            href={WEEZEVENT_PAGE}
+            target="_blank"
+            rel="noopener noreferrer"
             class="btn-primary inline-flex items-center gap-3 rounded-xl"
           >
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
             </svg>
-            Nous contacter
+            {t.registrationCta}
           </a>
 
           <p class="mt-4 font-mono text-xs tracking-wide" style="color: var(--text-muted);">
-            evenement@clusir-roi.org
+            {t.registrationContactHint}
+            <a href="mailto:evenement@clusir-roi.org" class="hover:text-white transition-colors underline underline-offset-2">evenement@clusir-roi.org</a>
           </p>
         </div>
       </div>

@@ -1,5 +1,11 @@
 ---
-import { stages, ACCENT_PAINT } from "../data/stages";
+import { getStages, ACCENT_PAINT } from "../data/stages";
+import { getLang } from "../i18n";
+import { ui } from "../i18n/ui";
+
+const lang = getLang(Astro.currentLocale);
+const stages = getStages(lang);
+const t = ui[lang].map;
 
 /* La carte possède le « où » et rien d'autre. Elle a perdu son titre et son
    statut de pièce maîtresse au profit de la frise (décision D6) : elle est
@@ -47,6 +53,6 @@ const positions: Record<string, { top: number; left: number }> = {
     })}
   </div>
   <p class="text-center font-mono text-[10px] tracking-[0.13em] uppercase text-white/45 mt-3">
-    Les six lieux · quatre façades
+    {t.caption}
   </p>
 </div>

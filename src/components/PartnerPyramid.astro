@@ -1,4 +1,9 @@
 ---
+import { getLang } from '../i18n';
+import { ui } from '../i18n/ui';
+
+const t = ui[getLang(Astro.currentLocale)].pyramid;
+
 /**
  * PartnerPyramid — pyramide des partenaires institutionnels de l'événement,
  * la plus étroite en haut (organisateur) et s'élargissant vers le bas.
@@ -16,7 +21,7 @@
       <!-- Level 1 — Organisateur -->
       <div class="reveal flex flex-col items-center gap-6 max-w-2xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-gold">
-          Organisateur
+          {t.organiser}
         </span>
         <div class="flex items-center justify-center gap-6">
           <div class="partner-bubble px-8 py-4">
@@ -43,7 +48,7 @@
       <!-- Level 2 — Partenaires -->
       <div class="reveal delay-1 flex flex-col items-center gap-6 max-w-2xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-white/60">
-          Partenaires
+          {t.partners}
         </span>
         <div class="flex flex-wrap items-center justify-center gap-6">
           <div class="partner-bubble px-6 py-3">
