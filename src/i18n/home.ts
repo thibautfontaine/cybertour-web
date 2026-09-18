@@ -183,13 +183,13 @@ export interface HomeDict {
 }
 
 const fr: HomeDict = {
-  metaTitle: 'Cyber Tour Réunion 2026 | 20-29 Octobre - 6 Étapes',
+  metaTitle: 'Cyber Tour Réunion 2026 | 20-30 Octobre - 7 Étapes',
   metaDescription:
-    'Cyber Tour Réunion 2026 - 6 étapes, 20-29 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.',
+    'Cyber Tour Réunion 2026 - 7 étapes, 20-30 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.',
 
   heroBadge: 'Cybermois 2026 — La Réunion',
-  heroDates: '20 — 29 OCTOBRE 2026',
-  heroPlaces: "3 ÉTAPES · TOUTE L'ILE",
+  heroDates: '20 — 30 OCTOBRE 2026',
+  heroPlaces: "7 ÉTAPES · TOUTE L'ÎLE",
   heroCtaRoute: 'Découvrir le parcours',
   heroCtaContact: 'Contact',
   heroPillFree: 'Entrée gratuite',
@@ -205,16 +205,16 @@ const fr: HomeDict = {
   aboutTitleHtml:
     'L\'événement cyber<br/><span class="text-gold">de référence</span> à La Réunion',
   aboutP1Html:
-    '<strong class="text-white font-semibold">Quatre jours. Trois étapes. Toute l\'île.</strong> Le <strong class="text-white font-semibold">Cyber Tour Réunion</strong> est le rendez-vous annuel de la cybersécurité à La Réunion. Organisé dans le cadre du <strong class="text-gold font-semibold">Cybermois</strong> par le <strong class="text-white font-semibold">CLUSIR Réunion Océan Indien</strong>, il réunit décideurs, professionnels et étudiants autour d\'un objectif commun : renforcer la résilience numérique du territoire.',
+    '<strong class="text-white font-semibold">Sept étapes. Six lieux. Toute l\'île.</strong> Le <strong class="text-white font-semibold">Cyber Tour Réunion</strong> est le rendez-vous annuel de la cybersécurité à La Réunion. Organisé dans le cadre du <strong class="text-gold font-semibold">Cybermois</strong> par le <strong class="text-white font-semibold">CLUSIR Réunion Océan Indien</strong>, il réunit décideurs, professionnels et étudiants autour d\'un objectif commun : renforcer la résilience numérique du territoire.',
   aboutP2Html:
-    'En 2025 : <strong class="text-white font-semibold">220 participants</strong>, <strong class="text-white font-semibold">600 vues</strong> en replay, <strong class="text-white font-semibold">2 articles</strong> dans Le Quotidien. En 2026, le format s\'élargit : 6 étapes sur les quatre façades de l\'île, portées par le CLUSIR et par des organisateurs locaux.',
+    'En 2025 : <strong class="text-white font-semibold">220 participants</strong>, <strong class="text-white font-semibold">600 vues</strong> en replay, <strong class="text-white font-semibold">2 articles</strong> dans Le Quotidien. En 2026, le format s\'élargit : 7 étapes sur les façades de l\'île, dont 4 portées par le CLUSIR et 3 par des organisateurs locaux.',
   aboutStats: [
-    { value: '3', label: 'Étapes' },
-    { value: '4', label: 'Jours' },
+    { value: '7', label: 'Étapes' },
+    { value: '6', label: 'Lieux' },
     { value: '600+', label: 'Vues YouTube' },
   ],
   aboutImgAlt: 'Cyber Tour Réunion',
-  aboutCta: 'Voir les 6 étapes du tour',
+  aboutCta: 'Voir les 7 étapes du tour',
 
   replayLabel: '02 // Replay',
   replayTitleHtml: 'Édition <span class="text-gold">2025</span>',
@@ -228,10 +228,10 @@ const fr: HomeDict = {
 
   routeLabel: '03 // Le Parcours',
   routeTitleHtml:
-    '6 étapes, 6 organisateurs, <span class="text-gold">un seul tour</span>',
+    '7 étapes, <span class="text-gold">un seul tour</span>',
   routeIntro:
-    "Du 20 au 29 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur trois étapes, par des organisateurs locaux sur trois autres. Même label, même exigence, même agenda.",
-  routeDates: '20 — 29 OCTOBRE 2026',
+    "Du 20 au 30 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur quatre étapes, par des organisateurs locaux sur trois autres. Même label, même exigence, même agenda.",
+  routeDates: '20 — 30 OCTOBRE 2026',
   charter: [
     {
       title: 'Communication commune',
@@ -239,11 +239,7 @@ const fr: HomeDict = {
     },
     {
       title: 'Organisation décentralisée',
-      text: "Chaque hôte organise son étape comme il l'entend.",
-    },
-    {
-      title: 'Financement propre',
-      text: 'Chacun assume ses recettes comme ses pertes.',
+      text: 'Autonome mais solidaire et collégial, chaque hôte orchestre son étape.',
     },
   ],
 
@@ -404,8 +400,8 @@ const fr: HomeDict = {
   regTermFile: 'inscription.status',
   regTermCmd: './inscription --status',
   regEventLabel: 'Événement :',
-  regEventValue: '20 — 29 octobre 2026',
-  regEventSuffix: '· 6 étapes · La Réunion',
+  regEventValue: '20 — 30 octobre 2026',
+  regEventSuffix: '· 7 étapes · La Réunion',
   regTicketLabel: 'Billetterie :',
   regTicketDate: 'ouverte — gratuite, inscription obligatoire',
   regHint:
@@ -429,19 +425,19 @@ const fr: HomeDict = {
     'Que vous soyez participant, speaker ou sponsor, contactez-nous pour faire partie du Cyber Tour Réunion 2026.',
   contactEmailLabel: 'Email',
   contactPlacesLabel: 'Lieux',
-  contactPlacesValue: '6 étapes · La Réunion',
+  contactPlacesValue: '7 étapes · La Réunion',
   contactPlacesLink: 'Voir le parcours →',
   contactStreaming: 'Également accessible en streaming YouTube',
 };
 
 const en: HomeDict = {
-  metaTitle: 'Cyber Tour Réunion 2026 | 20-29 October - 6 Stages',
+  metaTitle: 'Cyber Tour Réunion 2026 | 20-30 October - 7 Stages',
   metaDescription:
-    'Cyber Tour Réunion 2026 - 6 stages, 20-29 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
+    'Cyber Tour Réunion 2026 - 7 stages, 20-30 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
 
   heroBadge: 'Cybermois (European Cybersecurity Month) 2026 — Reunion Island',
-  heroDates: '20 — 29 OCTOBER 2026',
-  heroPlaces: '3 STAGES · ACROSS THE ISLAND',
+  heroDates: '20 — 30 OCTOBER 2026',
+  heroPlaces: '7 STAGES · ACROSS THE ISLAND',
   heroCtaRoute: 'Explore the route',
   heroCtaContact: 'Contact',
   heroPillFree: 'Free entry',
@@ -457,16 +453,16 @@ const en: HomeDict = {
   aboutTitleHtml:
     'The <span class="text-gold">leading</span> cybersecurity<br/>event in Reunion Island',
   aboutP1Html:
-    '<strong class="text-white font-semibold">Four days. Three stages. Across the island.</strong> The <strong class="text-white font-semibold">Cyber Tour Réunion</strong> is the annual cybersecurity gathering of Reunion Island. Held as part of <strong class="text-gold font-semibold">Cybermois</strong> (European Cybersecurity Month) by <strong class="text-white font-semibold">CLUSIR Réunion Océan Indien</strong>, it brings together decision-makers, professionals and students around a shared goal: strengthening the digital resilience of the territory.',
+    '<strong class="text-white font-semibold">Seven stages. Six venues. Across the island.</strong> The <strong class="text-white font-semibold">Cyber Tour Réunion</strong> is the annual cybersecurity gathering of Reunion Island. Held as part of <strong class="text-gold font-semibold">Cybermois</strong> (European Cybersecurity Month) by <strong class="text-white font-semibold">CLUSIR Réunion Océan Indien</strong>, it brings together decision-makers, professionals and students around a shared goal: strengthening the digital resilience of the territory.',
   aboutP2Html:
-    'In 2025: <strong class="text-white font-semibold">220 attendees</strong>, <strong class="text-white font-semibold">600 replay views</strong>, <strong class="text-white font-semibold">2 articles</strong> in Le Quotidien. In 2026 the format grows: 6 stages across the four sides of the island, run by CLUSIR and by local hosts.',
+    'In 2025: <strong class="text-white font-semibold">220 attendees</strong>, <strong class="text-white font-semibold">600 replay views</strong>, <strong class="text-white font-semibold">2 articles</strong> in Le Quotidien. In 2026 the format grows: 7 stages across the island, 4 run by CLUSIR and 3 by local hosts.',
   aboutStats: [
-    { value: '3', label: 'Stages' },
-    { value: '4', label: 'Days' },
+    { value: '7', label: 'Stages' },
+    { value: '6', label: 'Venues' },
     { value: '600+', label: 'YouTube views' },
   ],
   aboutImgAlt: 'Cyber Tour Réunion',
-  aboutCta: 'See the 6 stages of the tour',
+  aboutCta: 'See the 7 stages of the tour',
 
   replayLabel: '02 // Replay',
   replayTitleHtml: 'The <span class="text-gold">2025</span> edition',
@@ -480,10 +476,10 @@ const en: HomeDict = {
 
   routeLabel: '03 // The Route',
   routeTitleHtml:
-    '6 stages, 6 hosts, <span class="text-gold">one single tour</span>',
+    '7 stages, <span class="text-gold">one single tour</span>',
   routeIntro:
-    'From 20 to 29 October, cybersecurity tours the island — three stages run by CLUSIR, three more by local hosts. Same label, same standards, same schedule.',
-  routeDates: '20 — 29 OCTOBER 2026',
+    'From 20 to 30 October, cybersecurity tours the island — four stages run by CLUSIR, three more by local hosts. Same label, same standards, same schedule.',
+  routeDates: '20 — 30 OCTOBER 2026',
   charter: [
     {
       title: 'Shared communication',
@@ -491,11 +487,7 @@ const en: HomeDict = {
     },
     {
       title: 'Decentralised organisation',
-      text: 'Each host runs their stage as they see fit.',
-    },
-    {
-      title: 'Independent funding',
-      text: 'Each host owns their revenue and their losses.',
+      text: 'Independent yet supportive and collegial, each host orchestrates their own stage.',
     },
   ],
 
@@ -655,8 +647,8 @@ const en: HomeDict = {
   regTermFile: 'registration.status',
   regTermCmd: './registration --status',
   regEventLabel: 'Event:',
-  regEventValue: '20 — 29 October 2026',
-  regEventSuffix: '· 6 stages · Reunion Island',
+  regEventValue: '20 — 30 October 2026',
+  regEventSuffix: '· 7 stages · Reunion Island',
   regTicketLabel: 'Ticketing:',
   regTicketDate: 'open — free, registration required',
   regHint:
@@ -680,7 +672,7 @@ const en: HomeDict = {
     'Whether you come as an attendee, a speaker or a sponsor, get in touch to be part of the Cyber Tour Réunion 2026.',
   contactEmailLabel: 'Email',
   contactPlacesLabel: 'Venues',
-  contactPlacesValue: '6 stages · Reunion Island',
+  contactPlacesValue: '7 stages · Reunion Island',
   contactPlacesLink: 'See the route →',
   contactStreaming: 'Also available as a YouTube stream',
 };

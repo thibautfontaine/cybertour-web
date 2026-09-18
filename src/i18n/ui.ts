@@ -60,6 +60,11 @@ export interface UiDict {
     pageTitle: (name: string) => string;
   };
   map: { caption: string };
+  timeline: {
+    label: string;
+    clusirGroup: (n: number) => string;
+    localGroup: (n: number) => string;
+  };
   pyramid: { organiser: string; partners: string };
 }
 
@@ -78,10 +83,10 @@ export const ui: Record<Lang, UiDict> = {
   fr: {
     layout: {
       defaultDescription:
-        "Cyber Tour Réunion 2026 - 6 étapes, 20-29 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.",
+        "Cyber Tour Réunion 2026 - 7 étapes, 20-30 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.",
       jsonLdDescription:
         "L'événement cybersécurité de référence à La Réunion, organisé par le CLUSIR Réunion Océan Indien.",
-      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-29 Octobre - 6 étapes',
+      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-30 Octobre - 7 étapes',
       keywords:
         'cybersécurité, La Réunion, conférence, cybermois, CLUSIR, sécurité informatique, SOC, IA, souveraineté numérique',
       skipToContent: 'Aller au contenu principal',
@@ -94,7 +99,7 @@ export const ui: Record<Lang, UiDict> = {
         },
         live: {
           title: "L'événement est en cours",
-          subtitle: 'Du 20 au 29 octobre 2026 — rejoignez-nous sur place ou en streaming.',
+          subtitle: 'Du 20 au 30 octobre 2026 — rejoignez-nous sur place ou en streaming.',
           cta: 'Voir les étapes',
           href: HOME_ANCHORS.etapes,
         },
@@ -120,7 +125,7 @@ export const ui: Record<Lang, UiDict> = {
     },
     footer: {
       logoAlt: 'Cyber Tour Réunion 2026',
-      dates: '20 — 29 Octobre 2026 · 6 étapes à La Réunion',
+      dates: '20 — 30 Octobre 2026 · 7 étapes à La Réunion',
       legal: 'Mentions légales',
       backToTop: '↑ Haut de page',
     },
@@ -146,21 +151,26 @@ export const ui: Record<Lang, UiDict> = {
       address: 'Adresse',
       registrationTitle: 'Réservez votre place',
       registrationText:
-        "L'inscription est gratuite mais obligatoire, et les places sont limitées. La billetterie regroupe les trois étapes portées par le CLUSIR : choisissez la vôtre, un billet par étape.",
+        "L'inscription est gratuite mais obligatoire, et les places sont limitées. La billetterie regroupe les étapes portées par le CLUSIR : choisissez la vôtre, un billet par étape.",
       registrationCta: 'Réserver ma place',
       registrationContactHint: 'Une question sur cette étape ?',
       pageTitle: (name) => `${name} | Cyber Tour Réunion 2026`,
     },
-    map: { caption: 'Les six lieux · quatre façades' },
+    map: { caption: 'Les six lieux du tour' },
+    timeline: {
+      label: 'Calendrier des étapes, du 20 au 30 octobre',
+      clusirGroup: (n) => `CLUSIR · ${n} étapes`,
+      localGroup: (n) => `Organisateurs locaux · ${n} étapes`,
+    },
     pyramid: { organiser: 'Organisateur', partners: 'Partenaires' },
   },
   en: {
     layout: {
       defaultDescription:
-        'Cyber Tour Réunion 2026 - 6 stages, 20-29 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
+        'Cyber Tour Réunion 2026 - 7 stages, 20-30 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
       jsonLdDescription:
         "Reunion Island's leading cybersecurity event, organised by CLUSIR Réunion Océan Indien.",
-      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-29 October - 6 stages',
+      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-30 October - 7 stages',
       keywords:
         'cybersecurity, Reunion Island, conference, Cybermois, CLUSIR, information security, SOC, AI, digital sovereignty, Indian Ocean',
       skipToContent: 'Skip to main content',
@@ -173,7 +183,7 @@ export const ui: Record<Lang, UiDict> = {
         },
         live: {
           title: 'The event is under way',
-          subtitle: '20 to 29 October 2026 — join us on site or via live stream.',
+          subtitle: '20 to 30 October 2026 — join us on site or via live stream.',
           cta: 'See the stages',
           href: HOME_ANCHORS.etapes,
         },
@@ -199,7 +209,7 @@ export const ui: Record<Lang, UiDict> = {
     },
     footer: {
       logoAlt: 'Cyber Tour Réunion 2026',
-      dates: '20 — 29 October 2026 · 6 stages across Reunion Island',
+      dates: '20 — 30 October 2026 · 7 stages across Reunion Island',
       legal: 'Legal notice',
       backToTop: '↑ Back to top',
     },
@@ -225,12 +235,17 @@ export const ui: Record<Lang, UiDict> = {
       address: 'Address',
       registrationTitle: 'Book your seat',
       registrationText:
-        'Registration is free but required, and seats are limited. The ticketing page covers the three stages run by CLUSIR: pick yours, one ticket per stage.',
+        'Registration is free but required, and seats are limited. The ticketing page covers the stages run by CLUSIR: pick yours, one ticket per stage.',
       registrationCta: 'Book my seat',
       registrationContactHint: 'A question about this stage?',
       pageTitle: (name) => `${name} | Cyber Tour Réunion 2026`,
     },
-    map: { caption: 'Six venues · four coasts' },
+    map: { caption: 'The six venues of the tour' },
+    timeline: {
+      label: 'Stage calendar, 20 to 30 October',
+      clusirGroup: (n) => `CLUSIR · ${n} stages`,
+      localGroup: (n) => `Local hosts · ${n} stages`,
+    },
     pyramid: { organiser: 'Organiser', partners: 'Partners' },
   },
 };

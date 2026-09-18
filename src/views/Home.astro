@@ -330,10 +330,13 @@ const mailtoSubject = (subject: string) =>
         </div>
       </div>
 
-      {/* Les trois principes de fonctionnement de la charte d'accueil. Le
+      {/* Les principes de fonctionnement de la charte d'accueil. Le
           message d'unité n'est pas un slogan écrit pour le site : il est déjà
           rédigé dans le document que signent les hôtes. */}
-      <ul class="reveal grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16 list-none m-0 p-0">
+      <ul class:list={[
+        "reveal grid gap-4 mx-auto mb-16 list-none m-0 p-0",
+        t.charter.length === 2 ? "sm:grid-cols-2 max-w-3xl" : "sm:grid-cols-3 max-w-4xl",
+      ]}>
         {t.charter.map(item => (
           <li class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
             <p class="font-display font-semibold text-white">{item.title}</p>

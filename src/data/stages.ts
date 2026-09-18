@@ -30,6 +30,13 @@ export interface Stage {
   highlights: string[];
   /** Structure organisatrice réelle — art. 7.3 de la charte d'accueil. */
   host: string;
+  /** Nom court du lieu, affiché sur la frise (le PTU, pas « CLUSIR »). */
+  venue: string;
+  /**
+   * Jours de l'étape au format ISO. Le Sud en a deux, et chaque jour compte
+   * pour une étape du tour : 6 lieux, 7 étapes.
+   */
+  days: string[];
   /**
    * Faux tant que la fiche annexe F n'est pas reçue (art. 8.8 : « sans fiche,
    * pas de page »). Une étape non publiée s'affiche mais n'est pas cliquable.
@@ -52,11 +59,13 @@ interface StageBase {
   /** Slug commun aux deux langues (décision ISA : pas de slugs traduits). */
   path: string;
   host: string;
+  venue: string;
+  days: string[];
   published: boolean;
   text: Record<Lang, StageText>;
 }
 
-const CLUSIR = "CLUSIR Réunion Océan Indien";
+export const CLUSIR = "CLUSIR Réunion Océan Indien";
 
 /* Traduction des seuls champs de texte. Les adresses postales (lieuFull) et
    les communes restent en français : ce sont des noms de lieux, pas du
@@ -69,12 +78,14 @@ const HOST_FREE_PROGRAMME: Record<Lang, string> = {
 const base: StageBase[] = [
   {
     id: "nord",
-    lieuFull: "Campus du Moufia, Allée des Aigues-Marines, 97490 Sainte-Clotilde",
+    lieuFull: "Parc Technologique Universitaire (PTU), 2 rue Joseph Wetzell, 97490 Sainte-Clotilde",
     commune: "Sainte-Clotilde",
     capacity: 150,
     trackNumber: "01",
     path: "/nord",
     host: CLUSIR,
+    venue: "PTU",
+    days: ["2026-10-20"],
     published: true,
     text: {
       fr: {
@@ -83,7 +94,7 @@ const base: StageBase[] = [
         date: "Mardi 20 Octobre 2026",
         dateShort: "Mardi 20 Oct",
         day: "Jour 1",
-        lieu: "Campus Moufia - Université de La Réunion",
+        lieu: "PTU - Parc Technologique Universitaire",
         theme: "Institutionnel, Tables Rondes & Ciné-débat",
         description:
           "Matinée d'ouverture officielle du CyberTour Réunion (8h-12h). Rencontres institutionnelles, interventions des personnalités publiques et tables rondes stratégiques autour de la souveraineté numérique. Présentation du parcours CyberTour 2026. L'après-midi, ciné-débat autour du film « Don't Go to the Police » (Orange Cyberdefense) : projection puis échange avec la salle.",
@@ -95,7 +106,7 @@ const base: StageBase[] = [
         date: "Tuesday 20 October 2026",
         dateShort: "Tuesday 20 Oct",
         day: "Day 1",
-        lieu: "Moufia Campus - University of Reunion Island",
+        lieu: "PTU - University Technology Park",
         theme: "Institutions, Panel Discussions & Film Debate",
         description:
           "Official opening morning of CyberTour Réunion (8am-12pm). Institutional meetings, addresses by public figures and strategic panel discussions on digital sovereignty. Presentation of the CyberTour 2026 route. In the afternoon, a screening of “Don't Go to the Police” (Orange Cyberdefense) followed by an open discussion with the audience.",
@@ -111,6 +122,8 @@ const base: StageBase[] = [
     trackNumber: "02",
     path: "/ouest",
     host: CLUSIR,
+    venue: "Office de l'Eau",
+    days: ["2026-10-21"],
     published: true,
     text: {
       fr: {
@@ -144,9 +157,11 @@ const base: StageBase[] = [
     lieuFull: "IUT de La Réunion / ESIROI, 40 avenue de Soweto, 97410 Saint-Pierre",
     commune: "Saint-Pierre",
     capacity: 150,
-    trackNumber: "03",
+    trackNumber: "03-04",
     path: "/sud",
     host: CLUSIR,
+    venue: "IUT / ESIROI",
+    days: ["2026-10-22", "2026-10-23"],
     published: true,
     text: {
       fr: {
@@ -180,9 +195,11 @@ const base: StageBase[] = [
     lieuFull: "Expernet, Parc 2000, 3 avenue Théodore Drouhet, 97420 Le Port",
     commune: "Le Port",
     capacity: null,
-    trackNumber: "04",
+    trackNumber: "05",
     path: "/expernet",
     host: "Expernet",
+    venue: "Expernet",
+    days: ["2026-10-27"],
     published: false,
     text: {
       fr: {
@@ -212,42 +229,6 @@ const base: StageBase[] = [
     },
   },
   {
-    id: "edn",
-    lieuFull: "École Du Numérique, 12 rue Gabriel de Kerveguen, 97490 Sainte-Clotilde",
-    commune: "Sainte-Clotilde",
-    capacity: null,
-    trackNumber: "05",
-    path: "/edn",
-    host: "EDN",
-    published: false,
-    text: {
-      fr: {
-        name: "Étape EDN",
-        direction: "NORD",
-        date: "Mercredi 28 Octobre 2026",
-        dateShort: "Mercredi 28 Oct",
-        day: "Jour 6",
-        lieu: "Locaux EDN - Sainte-Clotilde",
-        theme: HOST_FREE_PROGRAMME.fr,
-        description:
-          "Étape accueillie par l'École Du Numérique dans ses locaux de Sainte-Clotilde. Le programme est défini par l'hôte et sera publié dès réception de sa fiche d'étape.",
-        highlights: [],
-      },
-      en: {
-        name: "EDN Stage",
-        direction: "NORTH",
-        date: "Wednesday 28 October 2026",
-        dateShort: "Wednesday 28 Oct",
-        day: "Day 6",
-        lieu: "EDN premises - Sainte-Clotilde",
-        theme: HOST_FREE_PROGRAMME.en,
-        description:
-          "Stage hosted by École Du Numérique at its premises in Sainte-Clotilde. The programme is set by the host and will be published once its stage sheet is received.",
-        highlights: [],
-      },
-    },
-  },
-  {
     id: "epitech",
     lieuFull: "Epitech, 234 chemin de la Pente Sassy, 97440 Saint-André",
     commune: "Saint-André",
@@ -255,6 +236,8 @@ const base: StageBase[] = [
     trackNumber: "06",
     path: "/epitech",
     host: "Epitech",
+    venue: "Epitech",
+    days: ["2026-10-29"],
     published: false,
     text: {
       fr: {
@@ -262,7 +245,7 @@ const base: StageBase[] = [
         direction: "EST",
         date: "Jeudi 29 Octobre 2026",
         dateShort: "Jeudi 29 Oct",
-        day: "Jour 7",
+        day: "Jour 6",
         lieu: "Locaux Epitech - Saint-André",
         theme: HOST_FREE_PROGRAMME.fr,
         description:
@@ -274,7 +257,7 @@ const base: StageBase[] = [
         direction: "EAST",
         date: "Thursday 29 October 2026",
         dateShort: "Thursday 29 Oct",
-        day: "Day 7",
+        day: "Day 6",
         lieu: "Epitech campus - Saint-André",
         theme: HOST_FREE_PROGRAMME.en,
         description:
@@ -283,9 +266,47 @@ const base: StageBase[] = [
       },
     },
   },
+  {
+    id: "edn",
+    lieuFull: "École Du Numérique, 12 rue Gabriel de Kerveguen, 97490 Sainte-Clotilde",
+    commune: "Sainte-Clotilde",
+    capacity: null,
+    trackNumber: "07",
+    path: "/edn",
+    host: "EDN",
+    venue: "EDN",
+    days: ["2026-10-30"],
+    published: false,
+    text: {
+      fr: {
+        name: "Étape EDN",
+        direction: "NORD",
+        date: "Vendredi 30 Octobre 2026",
+        dateShort: "Vendredi 30 Oct",
+        day: "Jour 7",
+        lieu: "Locaux EDN - Sainte-Clotilde",
+        theme: HOST_FREE_PROGRAMME.fr,
+        description:
+          "Étape de clôture du CyberTour, accueillie par l'École Du Numérique dans ses locaux de Sainte-Clotilde. Le programme est défini par l'hôte et sera publié dès réception de sa fiche d'étape.",
+        highlights: [],
+      },
+      en: {
+        name: "EDN Stage",
+        direction: "NORTH",
+        date: "Friday 30 October 2026",
+        dateShort: "Friday 30 Oct",
+        day: "Day 7",
+        lieu: "EDN premises - Sainte-Clotilde",
+        theme: HOST_FREE_PROGRAMME.en,
+        description:
+          "Closing stage of the CyberTour, hosted by École Du Numérique at its premises in Sainte-Clotilde. The programme is set by the host and will be published once its stage sheet is received.",
+        highlights: [],
+      },
+    },
+  },
 ];
 
-/** Les six étapes dans la langue demandée, `href` déjà localisé. */
+/** Les six lieux d'étape (sept étapes : le Sud compte deux jours) dans la langue demandée, `href` déjà localisé. */
 export function getStages(lang: Lang): Stage[] {
   return base.map(({ text, path, ...common }) => ({
     ...common,

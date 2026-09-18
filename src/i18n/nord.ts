@@ -41,11 +41,11 @@ export const nord: Record<Lang, NordDict> = {
   fr: {
     programmeLabel: 'Programme',
     programmeTitle: 'Matinée institutionnelle',
-    programmeSubtitle: 'Mardi 20 Octobre — 8h-12h — Campus Moufia, Saint-Denis',
+    programmeSubtitle: 'Mardi 20 Octobre — 8h-12h — PTU, Sainte-Clotilde',
     cards: [
       { title: 'Ouverture officielle', desc: 'Discours de bienvenue des représentants institutionnels de La Réunion.' },
       { title: 'Interventions institutionnelles', desc: "Services de l'État, agences nationales et acteurs de la cybersécurité dans les Outre-mer." },
-      { title: 'Présentation du CyberTour', desc: 'Présentation du parcours CyberTour 2026 et de ses six étapes, par le CLUSIR ROI.' },
+      { title: 'Présentation du CyberTour', desc: 'Présentation du parcours CyberTour 2026 et de ses sept étapes, par le CLUSIR ROI.' },
     ],
     afternoonLabel: 'Après-midi',
     afternoonTitle: 'Ciné-débat',
@@ -61,11 +61,11 @@ export const nord: Record<Lang, NordDict> = {
   en: {
     programmeLabel: 'Programme',
     programmeTitle: 'Institutional morning',
-    programmeSubtitle: 'Tuesday 20 October — 8am–12pm — Moufia Campus, Saint-Denis',
+    programmeSubtitle: 'Tuesday 20 October — 8am–12pm — PTU, Sainte-Clotilde',
     cards: [
       { title: 'Official opening', desc: 'Welcome addresses by the institutional representatives of Reunion Island.' },
       { title: 'Institutional addresses', desc: 'French state services, national agencies and cybersecurity stakeholders across the French overseas territories.' },
-      { title: 'Introducing the CyberTour', desc: 'An introduction to the CyberTour 2026 route and its six stages, by CLUSIR ROI.' },
+      { title: 'Introducing the CyberTour', desc: 'An introduction to the CyberTour 2026 route and its seven stages, by CLUSIR ROI.' },
     ],
     afternoonLabel: 'Afternoon',
     afternoonTitle: 'Film screening & debate',
