@@ -38,8 +38,8 @@
 
   <!-- Date & Location -->
   <rect x="80" y="480" width="2" height="50" fill="#FFDE59" rx="1"/>
-  <text x="96" y="502" font-family="system-ui, sans-serif" font-weight="600" font-size="22" fill="white">22 OCTOBRE 2026</text>
-  <text x="96" y="528" font-family="system-ui, sans-serif" font-weight="400" font-size="18" fill="rgba(255,255,255,0.5)">IUT / ESIROI — Sud Reunion</text>
+  <text x="96" y="502" font-family="system-ui, sans-serif" font-weight="600" font-size="22" fill="white">20 — 30 OCTOBRE 2026</text>
+  <text x="96" y="528" font-family="system-ui, sans-serif" font-weight="400" font-size="18" fill="rgba(255,255,255,0.5)">7 étapes · 6 lieux · toute l'île</text>
 
   <!-- Right side decorative shield -->
   <g transform="translate(920, 220)" opacity="0.12">

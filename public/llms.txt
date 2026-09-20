@@ -1,46 +1,75 @@
 # Cyber Tour Reunion 2026
 
-> L'evenement cybersecurite de reference a La Reunion. Organise dans le cadre du Cybermois, octobre 2026.
+> Le tour cyber de La Reunion : 7 etapes gratuites du 20 au 30 octobre 2026, dans le cadre du Cybermois. Pilote par le CLUSIR Reunion Ocean Indien, avec des organisateurs locaux.
 
 ## Informations cles
 
 - **Nom** : Cyber Tour Reunion 2026
-- **Date** : 22 octobre 2026
-- **Lieu** : IUT / ESIROI — Sud de La Reunion (ile de La Reunion, France)
-- **Format** : Presentiel (150 places) + streaming YouTube
-- **Tarif** : Gratuit, inscription obligatoire
-- **Contact** : evenements@rt-iut.re
+- **Dates** : du 20 au 30 octobre 2026
+- **Format du tour** : 7 etapes dans 6 lieux, sur toute l'ile. L'etape Sud dure deux jours et compte pour deux etapes.
+- **Tarif** : gratuit, inscription obligatoire, un billet par etape
+- **Billetterie** (etapes portees par le CLUSIR) : https://my.weezevent.com/cybertour
 - **Site web** : https://cybertour.re
+- **Contact** : cyber-tour-reunion-2026@cybertour.re
+- **Organisateurs** : 4 — le CLUSIR Reunion Ocean Indien, Expernet, EDN et Epitech
 
-## Programme — 4 thematiques
+## Le parcours
 
-1. **Souverainete Numerique** : Cloud de confiance, cadre reglementaire europeen, strategies pour les territoires ultramarins, SecNumCloud.
-2. **Securite des Systemes IA** : OWASP Top 10 GenAI, injection de prompts, exfiltration de donnees, empoisonnement de modeles.
-3. **SOC & Defense en Profondeur** : Outils de supervision, architectures Zero Trust, securisation du code source, SIEM/SOAR, DevSecOps.
-4. **RETEX & Table Ronde** : Retours d'experience d'incidents cyber reels, gestion de crise, echanges entre professionnels.
+### Etapes portees par le CLUSIR Reunion Ocean Indien
 
-## Edition 2025 — Chiffres
+1. **Nord — mardi 20 octobre** — PTU (Parc Technologique Universitaire), 2 rue Joseph Wetzell, Sainte-Clotilde — 150 places.
+   Matinee d'ouverture officielle, rencontres institutionnelles et tables rondes sur la souverainete numerique. L'apres-midi, cine-debat autour du film « Don't Go to the Police » (Orange Cyberdefense).
+2. **Ouest — mercredi 21 octobre** — Office de l'Eau Reunion, Saint-Paul — 50 places.
+   Gestion de crise le matin, presentations des offreurs cyber locaux l'apres-midi.
+3. **Sud — jeudi 22 et vendredi 23 octobre** — IUT de La Reunion / ESIROI, 40 avenue de Soweto, Saint-Pierre — 150 places.
+   Jour 1 : conferences techniques en amphi. Jour 2 : CTF, escape game, gestion de crise, OSINT, scene ouverte (Rumps) et rencontres professionnelles.
 
-- 220+ participants (150 sur place + streaming)
-- 8 conferences
-- 600+ vues sur la rediffusion YouTube
-- 2 articles de presse dans Le Quotidien de La Reunion
+### Etapes organisees par des organisateurs locaux
+
+4. **Expernet — mardi 27 octobre** — Le Port. Programme defini par l'hote, a paraitre.
+5. **Epitech — jeudi 29 octobre** — Saint-Andre. Programme defini par l'hote, a paraitre.
+6. **EDN (Ecole Du Numerique) — vendredi 30 octobre** — Sainte-Clotilde. Etape de cloture. Programme defini par l'hote, a paraitre.
+
+## Ce qui definit le tour
+
+- Le programme n'est pas a vendre : aucun partenaire n'obtient de creneau, un intervenant est retenu sur sa proposition.
+- L'acces est gratuit, sans exception.
+- Les competences locales passent avant l'importation d'intervenants.
+- Ce qui se dit sur scene est rediffuse en acces libre.
+
+## Thematiques 2026
+
+1. **Souverainete numerique** : cloud de confiance, cadre reglementaire europeen, strategies pour les territoires ultramarins, SecNumCloud.
+2. **Securite des systemes d'IA** : OWASP Top 10 GenAI, injection de prompts, exfiltration de donnees, empoisonnement de modeles.
+3. **SOC et defense en profondeur** : supervision, Zero Trust, securisation du code source, SIEM/SOAR, DevSecOps.
+4. **RETEX et tables rondes** : retours d'experience d'incidents reels, gestion de crise.
+
+## CTF Cybermois
+
+Un CTF tout au long du mois d'octobre 2026, en partenariat avec Sec-Dojo et Cyber Reunion. Categories : Linux, Windows, Network, Web.
+
+## Edition 2025 — chiffres
+
+- 220 participants : 150 sur place, 70 en direct
+- 600 vues de la rediffusion YouTube
+- 2 articles dans Le Quotidien de La Reunion
+- Replay : https://www.youtube.com/watch?v=uk-gSyaxyWA
 
 ## Partenaires
 
-- CLUSIR Reunion Ocean Indien
-- Universite de La Reunion
-- IUT de La Reunion
-- ESIROI — Ecole d'Ingenieurs
-- Cyber Reunion
+- Organisateur : CLUSIR Reunion Ocean Indien, avec l'Universite de La Reunion
+- Partenaires : IUT de La Reunion, ESIROI — Ecole d'Ingenieurs, Cyber Reunion
 
 ## Sponsoring
 
-Trois niveaux de partenariat :
-- **Bronze** (a partir de 1 000 €) : Logo site + supports + reseaux sociaux
-- **Silver** (a partir de 3 000 €) : Bronze + goodies + 2 kakemonos
-- **Gold** (a partir de 5 000 €) : Silver + stand + mot d'introduction + logo en tete d'affiche
+Trois niveaux, detailles sur https://cybertour.re/#sponsors :
+- **Bronze** (a partir de 1 000 €) : presence identifiee comme partenaire, supports de visibilite, reseaux sociaux.
+- **Silver** (a partir de 3 000 €) : Bronze + goodies + kakemonos.
+- **Gold** (a partir de 5 000 €) : Silver + stand + mot d'introduction de deux minutes.
 
-## Replay edition 2025
+Le sponsoring donne de la visibilite, jamais un creneau au programme.
 
-Disponible sur YouTube : https://www.youtube.com/watch?v=uk-gSyaxyWA
+## Contact
+
+- Evenement : cyber-tour-reunion-2026@cybertour.re
+- CLUSIR Reunion Ocean Indien : evenement@clusir-roi.org
