@@ -20,7 +20,7 @@
 1. **Nord — mardi 20 octobre** — PTU (Parc Technologique Universitaire), 2 rue Joseph Wetzell, Sainte-Clotilde — 150 places.
    Matinee d'ouverture officielle, rencontres institutionnelles et tables rondes sur la souverainete numerique. L'apres-midi, cine-debat autour du film « Don't Go to the Police » (Orange Cyberdefense).
 2. **Ouest — mercredi 21 octobre** — Office de l'Eau Reunion, Saint-Paul — 50 places.
-   Gestion de crise le matin, presentations des offreurs cyber locaux l'apres-midi.
+   Journee entiere consacree a la gestion de crise cyber : methode et retours d'experience le matin, exercice pratique en groupes l'apres-midi.
 3. **Sud — jeudi 22 et vendredi 23 octobre** — IUT de La Reunion / ESIROI, 40 avenue de Soweto, Saint-Pierre — 150 places.
    Jour 1 : conferences techniques en amphi. Jour 2 : CTF, escape game, gestion de crise, OSINT, scene ouverte (Rumps) et rencontres professionnelles.
 

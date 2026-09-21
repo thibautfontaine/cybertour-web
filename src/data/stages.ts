@@ -133,10 +133,10 @@ const base: StageBase[] = [
         dateShort: "Mercredi 21 Oct",
         day: "Jour 2",
         lieu: "Office de l'Eau Réunion - Saint-Paul",
-        theme: "Offreurs Cyber à La Réunion",
+        theme: "Gestion de crise : théorie et pratique",
         description:
-          "Journée dédiée à l'écosystème cyber réunionnais. Gestion de crise le matin, présentations thématiques par les offreurs locaux l'après-midi. Chaque intervenant aborde une problématique concrète, pas un catalogue de services.",
-        highlights: ["Gestion de crise", "Thématiques cyber", "Écosystème local"],
+          "Journée entière consacrée à la gestion de crise cyber. Le matin, la méthode et les retours d'expérience de ceux qui ont géré un incident réel. L'après-midi, un exercice pratique en groupes animé par le CLUSIR ROI.",
+        highlights: ["Gestion de crise", "Retours d'expérience", "Exercice en groupes"],
       },
       en: {
         name: "West Stage",
@@ -145,10 +145,10 @@ const base: StageBase[] = [
         dateShort: "Wednesday 21 Oct",
         day: "Day 2",
         lieu: "Office de l'Eau Réunion - Saint-Paul",
-        theme: "Cybersecurity Providers in Reunion Island",
+        theme: "Crisis Management: Theory and Practice",
         description:
-          "A day dedicated to Reunion Island's cybersecurity ecosystem. Crisis management in the morning, themed talks by local providers in the afternoon. Every speaker tackles a concrete problem, not a product catalogue.",
-        highlights: ["Crisis management", "Cyber topics", "Local ecosystem"],
+          "A full day devoted to cyber crisis management. In the morning, the method and the lessons learned by those who handled a real incident. In the afternoon, a hands-on group exercise run by CLUSIR ROI.",
+        highlights: ["Crisis management", "Lessons learned", "Group exercise"],
       },
     },
   },
