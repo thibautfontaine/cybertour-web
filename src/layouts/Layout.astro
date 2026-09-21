@@ -132,18 +132,24 @@ const countdownI18n = {
 
     <!-- Privacy-friendly analytics by Plausible — instance on premise, sans cookie.
          Collecte étendue : sections de la home (#ancre) comme pages, liens sortants,
-         téléchargements, formulaires, plus les événements « Contact email » et
-         « Agenda ics » déclarés ci-dessous. Décrit dans /mentions-legales. -->
-    <link rel="preconnect" href="https://plausible.kodetis.cloud" crossorigin />
-    <script async src="https://plausible.kodetis.cloud/js/pa-6WvAN6_UyrWRAcamHXSvH.js"></script>
+         téléchargements, plus les événements « Contact email » et « Agenda ics »
+         déclarés ci-dessous. Décrit dans /mentions-legales. -->
+    {/* Snippet public hits.kodetis.cloud + data-api, JAMAIS celui de la
+        console : plausible.kodetis.cloud est le host privé Netbird-only,
+        injoignable depuis Internet. Les options se déclarent dans le nom du
+        script (hash, outbound-links, file-downloads). */}
+    <link rel="preconnect" href="https://hits.kodetis.cloud" crossorigin />
+    <script
+      is:inline
+      defer
+      data-domain="cybertour.re"
+      data-api="https://hits.kodetis.cloud/api/event"
+      src="https://hits.kodetis.cloud/js/script.hash.outbound-links.file-downloads.js"
+    ></script>
     <script is:inline>
-      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-      plausible.init({
-        hashBasedRouting: true,
-        outboundLinks: true,
-        fileDownloads: true,
-        formSubmissions: true
-      });
+      // File d'attente : les appels à plausible() faits avant le chargement
+      // du script sont rejoués une fois qu'il est là.
+      window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)};
 
       // Clic sur un lien de contact : l'objet pré-rempli dit quelle demande
       // (dossier partenaire, palier, inscriptions…) — le mailto: lui-même
