@@ -15,6 +15,7 @@ import MapReunion from '../components/MapReunion.astro';
 import TimelineParcours from '../components/TimelineParcours.astro';
 import StageCard from '../components/StageCard.astro';
 import PartnerPyramid from '../components/PartnerPyramid.astro';
+import SponsorsFloating from '../components/SponsorsFloating.astro';
 import { getStages } from '../data/stages';
 import { WEEZEVENT_PAGE, weezeventWidgetUrl } from '../data/ticketing';
 import { getLang, localizePath } from '../i18n';
@@ -204,8 +205,9 @@ const mailtoSubject = (subject: string) =>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50">
+    {/* Sous sm, la barre des partenaires Gold occupe le bas du hero :
+        l'indicateur de défilement lui laisse la place. */}
+    <div class="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/50">
       <span class="text-xs tracking-widest uppercase">{t.scroll}</span>
       <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
     </div>
@@ -938,4 +940,6 @@ const mailtoSubject = (subject: string) =>
     }
   </script>
 
+
+  <SponsorsFloating />
 </Layout>

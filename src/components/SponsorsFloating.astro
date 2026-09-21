@@ -1,0 +1,50 @@
+---
+import { getLang } from "../i18n";
+import { ui } from "../i18n/ui";
+
+const lang = getLang(Astro.currentLocale);
+const label = ui[lang].pyramid.gold;
+
+/* Barre flottante des partenaires Gold, visible à l'arrivée sur la page.
+   Deux règles tiennent ce composant :
+   - il accompagne l'arrivée et s'efface dès qu'on quitte le hero ;
+   - il se pose dans le coin bas gauche, seul endroit libre du hero : le
+     compte à rebours et l'indicateur de défilement occupent le centre.
+
+   La pyramide (#partenaires) reste la source de vérité des paliers : cette
+   barre ne montre que le palier Gold, jamais toute la liste. */
+---
+
+<aside
+  id="gold-float"
+  class="fixed z-40 left-3 right-3 bottom-4 sm:left-8 sm:right-auto sm:bottom-7 flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/10 opacity-0 translate-y-3 transition-all duration-500 motion-reduce:transition-none"
+  style="background: rgba(10,16,34,.72); backdrop-filter: blur(14px); box-shadow: 0 12px 40px rgba(0,0,0,.35);"
+  aria-label={label}
+>
+  <span class="hidden sm:inline font-mono text-[10px] tracking-[0.18em] uppercase text-gold/80">{label}</span>
+
+  <span class="bg-white rounded-xl px-3 py-1.5 flex items-center justify-center">
+    <img src="/assets/logo-orange-cyberdefense.png" alt="Orange Cyberdefense" class="h-5 sm:h-6 w-auto object-contain" loading="lazy" />
+  </span>
+  <span class="bg-white rounded-xl px-3 py-1.5 flex items-center justify-center">
+    <img src="/assets/logo-sfr-business.png" alt="SFR Business" class="h-5 sm:h-6 w-auto object-contain" loading="lazy" />
+  </span>
+</aside>
+
+<script>
+  const bar = document.getElementById('gold-float');
+  const hero = document.getElementById('main-content');
+  if (bar && hero) {
+    /* Le hero occupe tout l'écran : tant qu'un quart reste visible, on est
+       encore à l'arrivée. Au-delà, la barre s'efface. */
+    new IntersectionObserver(
+      (entries) => {
+        const visible = entries[0].intersectionRatio > 0.25;
+        bar.classList.toggle('opacity-0', !visible);
+        bar.classList.toggle('translate-y-3', !visible);
+        bar.classList.toggle('pointer-events-none', !visible);
+      },
+      { threshold: [0, 0.25, 0.5] },
+    ).observe(hero);
+  }
+</script>
