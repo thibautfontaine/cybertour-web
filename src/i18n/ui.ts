@@ -65,7 +65,7 @@ export interface UiDict {
     clusirGroup: (n: number) => string;
     localGroup: (n: number) => string;
   };
-  pyramid: { organiser: string; partners: string };
+  pyramid: { organiser: string; gold: string; partners: string };
 }
 
 const HOME_ANCHORS = {
@@ -162,7 +162,7 @@ export const ui: Record<Lang, UiDict> = {
       clusirGroup: (n) => `CLUSIR · ${n} étapes`,
       localGroup: (n) => `Organisateurs locaux · ${n} étapes`,
     },
-    pyramid: { organiser: 'Organisateur', partners: 'Partenaires' },
+    pyramid: { organiser: 'Organisateur', gold: 'Partenaires Gold', partners: 'Partenaires' },
   },
   en: {
     layout: {
@@ -246,6 +246,6 @@ export const ui: Record<Lang, UiDict> = {
       clusirGroup: (n) => `CLUSIR · ${n} stages`,
       localGroup: (n) => `Local hosts · ${n} stages`,
     },
-    pyramid: { organiser: 'Organiser', partners: 'Partners' },
+    pyramid: { organiser: 'Organiser', gold: 'Gold Partners', partners: 'Partners' },
   },
 };
