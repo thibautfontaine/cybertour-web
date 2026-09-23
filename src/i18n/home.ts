@@ -406,7 +406,7 @@ const fr: HomeDict = {
   regTicketDate: 'ouverte — gratuite, inscription obligatoire',
   regHint:
     'Cliquez sur le visuel ci-dessus pour ouvrir la billetterie et choisir votre étape, un billet par étape. La confirmation arrive par email. Pensez aussi à bloquer les dates dans votre agenda.',
-  regImageAlt: 'Cyber Tour Réunion 2026, du 20 au 30 octobre : 7 étapes, 6 lieux, toute l\'île',
+  regImageAlt: 'Logo Cyber Tour Réunion 2026',
   regImageLinkLabel: 'S\'inscrire sur la billetterie Weezevent du Cyber Tour (nouvel onglet)',
   regOpenCta: 'Ouvrir la billetterie',
   regCalendarCta: 'Ajouter à mon agenda',
@@ -653,7 +653,7 @@ const en: HomeDict = {
   regTicketDate: 'open — free, registration required',
   regHint:
     'Click the image above to open the ticketing page and pick your stage, one ticket per stage. Confirmation arrives by email. Remember to block the dates in your calendar too.',
-  regImageAlt: 'Cyber Tour Réunion 2026, 20 to 30 October: 7 stages, 6 venues, all over the island',
+  regImageAlt: 'Cyber Tour Réunion 2026 logo',
   regImageLinkLabel: 'Register on the Cyber Tour Weezevent ticketing page (new tab)',
   regOpenCta: 'Open ticketing',
   regCalendarCta: 'Add to my calendar',
