@@ -158,10 +158,10 @@ export interface HomeDict {
   regTicketLabel: string;
   regTicketDate: string;
   regHint: string;
-  /** Titre accessible de l'iframe Weezevent. */
-  regWidgetTitle: string;
-  /** Lien de secours sous le widget (nouvel onglet). */
-  regWidgetFallback: string;
+  /** Texte alternatif du visuel cliquable de la billetterie. */
+  regImageAlt: string;
+  /** Nom accessible du lien porté par le visuel (nouvel onglet). */
+  regImageLinkLabel: string;
   regOpenCta: string;
   regCalendarCta: string;
   regCalendarStatus: string;
@@ -405,9 +405,9 @@ const fr: HomeDict = {
   regTicketLabel: 'Billetterie :',
   regTicketDate: 'ouverte — gratuite, inscription obligatoire',
   regHint:
-    'Choisissez votre étape dans le module ci-dessus, un billet par étape. La confirmation arrive par email. Pensez aussi à bloquer les dates dans votre agenda.',
-  regWidgetTitle: 'Billetterie Weezevent — Cyber Tour Réunion 2026',
-  regWidgetFallback: 'Le module ne s\'affiche pas ? Ouvrez la billetterie dans un nouvel onglet.',
+    'Cliquez sur le visuel ci-dessus pour ouvrir la billetterie et choisir votre étape, un billet par étape. La confirmation arrive par email. Pensez aussi à bloquer les dates dans votre agenda.',
+  regImageAlt: 'Cyber Tour Réunion 2026, du 20 au 30 octobre : 7 étapes, 6 lieux, toute l\'île',
+  regImageLinkLabel: 'S\'inscrire sur la billetterie Weezevent du Cyber Tour (nouvel onglet)',
   regOpenCta: 'Ouvrir la billetterie',
   regCalendarCta: 'Ajouter à mon agenda',
   regCalendarStatus:
@@ -652,9 +652,9 @@ const en: HomeDict = {
   regTicketLabel: 'Ticketing:',
   regTicketDate: 'open — free, registration required',
   regHint:
-    'Pick your stage in the module above, one ticket per stage. Confirmation arrives by email. Remember to block the dates in your calendar too.',
-  regWidgetTitle: 'Weezevent ticketing — Cyber Tour Réunion 2026',
-  regWidgetFallback: 'Module not showing? Open the ticketing page in a new tab.',
+    'Click the image above to open the ticketing page and pick your stage, one ticket per stage. Confirmation arrives by email. Remember to block the dates in your calendar too.',
+  regImageAlt: 'Cyber Tour Réunion 2026, 20 to 30 October: 7 stages, 6 venues, all over the island',
+  regImageLinkLabel: 'Register on the Cyber Tour Weezevent ticketing page (new tab)',
   regOpenCta: 'Open ticketing',
   regCalendarCta: 'Add to my calendar',
   regCalendarStatus:

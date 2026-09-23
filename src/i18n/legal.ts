@@ -99,7 +99,7 @@ export const legal: Record<Lang, LegalDict> = {
     dataSiteLabel: 'Ce site',
     dataIntro: 'Conformement au Reglement General sur la Protection des Donnees (RGPD) et a la loi Informatique et Libertes :',
     dataNoCookiesStrong: "n'utilise aucun cookie",
-    dataNoCookiesRest: ' ni traceur propre ; seul le module de billetterie Weezevent, chargé dans la page Inscription, peut en déposer.',
+    dataNoCookiesRest: " ni traceur, et n'embarque aucun module tiers.",
     dataNoFormStrong: 'ne comporte aucun formulaire',
     dataNoFormRest: ' : les liens de contact ouvrent votre logiciel de messagerie.',
     dataAnalyticsBefore: "La mesure d'audience est assurée par ",
@@ -108,7 +108,7 @@ export const legal: Record<Lang, LegalDict> = {
     dataTicketingBefore: "L'inscription à l'événement est assurée par ",
     dataTicketingStrong: 'Weezevent',
     dataTicketingAfter:
-      ' (module intégré dans la page Inscription et site my.weezevent.com) : les données saisies lors de l\'inscription sont traitées par Weezevent selon ses propres conditions et sa politique de confidentialité, pour le compte du CLUSIR Réunion Océan Indien.',
+      ' (site my.weezevent.com, ouvert depuis la section Inscription) : les données saisies lors de l\'inscription sont traitées par Weezevent selon ses propres conditions et sa politique de confidentialité, pour le compte du CLUSIR Réunion Océan Indien.',
 
     externalLinksTitle: 'Liens externes',
     externalLinksText: 'Ce site peut contenir des liens vers des sites tiers. Le CLUSIR Réunion Océan Indien ne saurait etre tenu responsable du contenu de ces sites externes ni de leur politique de protection des donnees personnelles.',
@@ -154,7 +154,7 @@ export const legal: Record<Lang, LegalDict> = {
     dataSiteLabel: 'This site',
     dataIntro: 'In accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act:',
     dataNoCookiesStrong: 'uses no cookies',
-    dataNoCookiesRest: ' or trackers of its own; only the Weezevent ticketing module, loaded in the Registration section, may set some.',
+    dataNoCookiesRest: ' or trackers, and embeds no third-party module.',
     dataNoFormStrong: 'has no forms',
     dataNoFormRest: ': contact links open your email client.',
     dataAnalyticsBefore: 'Audience measurement is provided by ',
@@ -163,7 +163,7 @@ export const legal: Record<Lang, LegalDict> = {
     dataTicketingBefore: 'Event registration is handled by ',
     dataTicketingStrong: 'Weezevent',
     dataTicketingAfter:
-      ' (module embedded in the Registration section and my.weezevent.com website): the data you enter when registering is processed by Weezevent under its own terms and privacy policy, on behalf of CLUSIR Réunion Océan Indien.',
+      ' (my.weezevent.com website, opened from the Registration section): the data you enter when registering is processed by Weezevent under its own terms and privacy policy, on behalf of CLUSIR Réunion Océan Indien.',
 
     externalLinksTitle: 'External links',
     externalLinksText: 'This site may contain links to third-party sites. CLUSIR Réunion Océan Indien cannot be held responsible for the content of those external sites, nor for their personal data protection policies.',

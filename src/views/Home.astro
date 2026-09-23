@@ -17,7 +17,7 @@ import StageCard from '../components/StageCard.astro';
 import PartnerPyramid from '../components/PartnerPyramid.astro';
 import SponsorsFloating from '../components/SponsorsFloating.astro';
 import { getStages } from '../data/stages';
-import { WEEZEVENT_PAGE, weezeventWidgetUrl } from '../data/ticketing';
+import { WEEZEVENT_PAGE } from '../data/ticketing';
 import { getLang, localizePath } from '../i18n';
 import { home } from '../i18n/home';
 
@@ -700,24 +700,26 @@ const mailtoSubject = (subject: string) =>
         </p>
       </div>
 
-      {/* Billetterie Weezevent — iframe officielle, un billet par étape.
-          Fond clair volontaire : c'est le widget de Weezevent, pas une
-          surface du site ; l'encadrer suffit à l'intégrer. */}
+      {/* Billetterie Weezevent — simple visuel cliquable vers la page
+          publique my.weezevent.com/cybertour (nouvel onglet). Aucun module
+          tiers chargé sur le site. */}
       <div class="reveal delay-1 mx-auto max-w-3xl">
-        <div class="overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-navy/50">
-          <iframe
-            src={weezeventWidgetUrl(lang)}
-            title={t.regWidgetTitle}
+        <a
+          href={WEEZEVENT_PAGE}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={t.regImageLinkLabel}
+          class="group block overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-navy/50 transition-all hover:border-gold/50 hover:shadow-gold/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+        >
+          <img
+            src="/assets/og-cybertour-2026.png"
+            alt={t.regImageAlt}
+            width="1200"
+            height="630"
             loading="lazy"
-            allow="payment"
-            class="block w-full"
-            style="height: 680px;"
-          ></iframe>
-        </div>
-        <p class="mt-3 text-center font-mono text-xs text-white/50">
-          {t.regWidgetFallback}
-          <a href={WEEZEVENT_PAGE} target="_blank" rel="noopener noreferrer" class="text-gold hover:text-gold/80 transition-colors underline underline-offset-2">{t.regOpenCta} &rarr;</a>
-        </p>
+            class="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </a>
       </div>
 
       <!-- Terminal — état réel de la billetterie + actions utiles -->
