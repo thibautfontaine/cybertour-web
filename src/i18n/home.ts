@@ -158,10 +158,6 @@ export interface HomeDict {
   regTicketLabel: string;
   regTicketDate: string;
   regHint: string;
-  /** Texte alternatif du visuel cliquable de la billetterie. */
-  regImageAlt: string;
-  /** Nom accessible du lien porté par le visuel (nouvel onglet). */
-  regImageLinkLabel: string;
   regOpenCta: string;
   regCalendarCta: string;
   regCalendarStatus: string;
@@ -405,9 +401,7 @@ const fr: HomeDict = {
   regTicketLabel: 'Billetterie :',
   regTicketDate: 'ouverte — gratuite, inscription obligatoire',
   regHint:
-    'Cliquez sur le visuel ci-dessus pour ouvrir la billetterie et choisir votre étape, un billet par étape. La confirmation arrive par email. Pensez aussi à bloquer les dates dans votre agenda.',
-  regImageAlt: 'Logo Cyber Tour Réunion 2026',
-  regImageLinkLabel: 'S\'inscrire sur la billetterie Weezevent du Cyber Tour (nouvel onglet)',
+    'Ouvrez la billetterie ci-dessous et choisissez votre étape, un billet par étape. La confirmation arrive par email. Pensez aussi à bloquer les dates dans votre agenda.',
   regOpenCta: 'Ouvrir la billetterie',
   regCalendarCta: 'Ajouter à mon agenda',
   regCalendarStatus:
@@ -652,9 +646,7 @@ const en: HomeDict = {
   regTicketLabel: 'Ticketing:',
   regTicketDate: 'open — free, registration required',
   regHint:
-    'Click the image above to open the ticketing page and pick your stage, one ticket per stage. Confirmation arrives by email. Remember to block the dates in your calendar too.',
-  regImageAlt: 'Cyber Tour Réunion 2026 logo',
-  regImageLinkLabel: 'Register on the Cyber Tour Weezevent ticketing page (new tab)',
+    'Open the ticketing page below and pick your stage, one ticket per stage. Confirmation arrives by email. Remember to block the dates in your calendar too.',
   regOpenCta: 'Open ticketing',
   regCalendarCta: 'Add to my calendar',
   regCalendarStatus:
