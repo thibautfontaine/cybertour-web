@@ -19,7 +19,7 @@ const navLinks = t.links.map((link) => ({ ...link, href: p(link.href) }));
 const ctaLink = { label: t.cta.label, href: p(t.cta.href) };
 
 /* Sélecteur de langue : un lien par langue vers la même page dans l'autre
-   langue. Le clic écrit localStorage[ct-lang] (voir <script> plus bas) — c'est
+   langue. Le clic écrit localStorage[ct-lang] (voir le script plus bas) — c'est
    la seule écriture de cette clé, et elle prime ensuite sur la détection
    automatique de src/i18n/redirect.js. */
 const langLinks = LANGS.map((l) => ({
