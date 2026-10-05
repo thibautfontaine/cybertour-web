@@ -19,11 +19,19 @@ const p = (path: string) => localizePath(path, lang);
         {t.dates}
       </p>
 
-      <div class="flex items-center gap-4">
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         <a href={p('/mentions-legales')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
           {t.legal}
         </a>
-        <span class="text-white/10" aria-hidden="true">|</span>
+        <span class="hidden sm:inline text-white/10" aria-hidden="true">|</span>
+        <a href={p('/confidentialite')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
+          {t.privacy}
+        </a>
+        <span class="hidden sm:inline text-white/10" aria-hidden="true">|</span>
+        <a href={p('/cookies')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
+          {t.cookies}
+        </a>
+        <span class="hidden sm:inline text-white/10" aria-hidden="true">|</span>
         <a href={p('/#main-content')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
           {t.backToTop}
         </a>

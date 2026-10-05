@@ -31,6 +31,8 @@ export interface UiDict {
     logoAlt: string;
     dates: string;
     legal: string;
+    privacy: string;
+    cookies: string;
     backToTop: string;
   };
   stage: {
@@ -127,6 +129,8 @@ export const ui: Record<Lang, UiDict> = {
       logoAlt: 'Cyber Tour Réunion 2026',
       dates: '20 — 30 Octobre 2026 · 7 étapes à La Réunion',
       legal: 'Mentions légales',
+      privacy: 'Confidentialité',
+      cookies: 'Cookies',
       backToTop: '↑ Haut de page',
     },
     stage: {
@@ -211,6 +215,8 @@ export const ui: Record<Lang, UiDict> = {
       logoAlt: 'Cyber Tour Réunion 2026',
       dates: '20 — 30 October 2026 · 7 stages across Reunion Island',
       legal: 'Legal notice',
+      privacy: 'Privacy',
+      cookies: 'Cookies',
       backToTop: '↑ Back to top',
     },
     stage: {

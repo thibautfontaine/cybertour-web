@@ -36,18 +36,9 @@ export interface LegalDict {
   ipText: string;
 
   dataTitle: string;
-  dataIntro: string;
-  dataSiteLabel: string;
-  dataNoCookiesStrong: string;
-  dataNoCookiesRest: string;
-  dataNoFormStrong: string;
-  dataNoFormRest: string;
-  dataAnalyticsBefore: string;
-  dataAnalyticsStrong: string;
-  dataAnalyticsAfter: string;
-  dataTicketingBefore: string;
-  dataTicketingStrong: string;
-  dataTicketingAfter: string;
+  dataText: string;
+  privacyLinkText: string;
+  cookiesLinkText: string;
 
   externalLinksTitle: string;
   externalLinksText: string;
@@ -95,20 +86,10 @@ export const legal: Record<Lang, LegalDict> = {
     ipTitle: 'Propriete intellectuelle',
     ipText: "L'ensemble des contenus de ce site (textes, images, logos, elements graphiques, videos) est protege par le Code de la propriete intellectuelle. Toute reproduction ou représentation, totale ou partielle, est interdite sans autorisation ecrite du CLUSIR Réunion Océan Indien.",
 
-    dataTitle: 'Donnees personnelles et cookies',
-    dataSiteLabel: 'Ce site',
-    dataIntro: 'Conformement au Reglement General sur la Protection des Donnees (RGPD) et a la loi Informatique et Libertes :',
-    dataNoCookiesStrong: "n'utilise aucun cookie",
-    dataNoCookiesRest: " ni traceur, et n'embarque aucun module tiers.",
-    dataNoFormStrong: 'ne comporte aucun formulaire',
-    dataNoFormRest: ' : les liens de contact ouvrent votre logiciel de messagerie.',
-    dataAnalyticsBefore: "La mesure d'audience est assurée par ",
-    dataAnalyticsStrong: 'Plausible Analytics',
-    dataAnalyticsAfter: ', hébergé sur une instance on premise.',
-    dataTicketingBefore: "L'inscription à l'événement est assurée par ",
-    dataTicketingStrong: 'Weezevent',
-    dataTicketingAfter:
-      ' (site my.weezevent.com, ouvert depuis la section Inscription) : les données saisies lors de l\'inscription sont traitées par Weezevent selon ses propres conditions et sa politique de confidentialité, pour le compte du CLUSIR Réunion Océan Indien.',
+    dataTitle: 'Données personnelles et cookies',
+    dataText: 'Le site ne dépose aucun cookie et ne comporte aucun formulaire. Les traitements de données liés au site et aux inscriptions sont décrits dans deux pages dédiées :',
+    privacyLinkText: 'Politique de confidentialité',
+    cookiesLinkText: 'Politique de cookies',
 
     externalLinksTitle: 'Liens externes',
     externalLinksText: 'Ce site peut contenir des liens vers des sites tiers. Le CLUSIR Réunion Océan Indien ne saurait etre tenu responsable du contenu de ces sites externes ni de leur politique de protection des donnees personnelles.',
@@ -151,19 +132,9 @@ export const legal: Record<Lang, LegalDict> = {
     ipText: 'All content on this site (text, images, logos, graphic elements, videos) is protected by French intellectual property law. Any reproduction or representation, in whole or in part, is prohibited without the written authorisation of CLUSIR Réunion Océan Indien.',
 
     dataTitle: 'Personal data & cookies',
-    dataSiteLabel: 'This site',
-    dataIntro: 'In accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act:',
-    dataNoCookiesStrong: 'uses no cookies',
-    dataNoCookiesRest: ' or trackers, and embeds no third-party module.',
-    dataNoFormStrong: 'has no forms',
-    dataNoFormRest: ': contact links open your email client.',
-    dataAnalyticsBefore: 'Audience measurement is provided by ',
-    dataAnalyticsStrong: 'Plausible Analytics',
-    dataAnalyticsAfter: ', hosted on an on-premise instance.',
-    dataTicketingBefore: 'Event registration is handled by ',
-    dataTicketingStrong: 'Weezevent',
-    dataTicketingAfter:
-      ' (my.weezevent.com website, opened from the Registration section): the data you enter when registering is processed by Weezevent under its own terms and privacy policy, on behalf of CLUSIR Réunion Océan Indien.',
+    dataText: 'The website sets no cookies and has no forms. Data processing related to the website and registrations is described on two dedicated pages:',
+    privacyLinkText: 'Privacy policy',
+    cookiesLinkText: 'Cookie policy',
 
     externalLinksTitle: 'External links',
     externalLinksText: 'This site may contain links to third-party sites. CLUSIR Réunion Océan Indien cannot be held responsible for the content of those external sites, nor for their personal data protection policies.',
