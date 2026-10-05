@@ -1,0 +1,123 @@
+---
+/**
+ * Vue partagée des pages de politique : confidentialité (`/confidentialite`)
+ * et cookies (`/cookies`), en FR et sous `/en/`. Le contenu vient du
+ * dictionnaire passé en prop (`src/i18n/privacy.ts`, `src/i18n/cookies.ts`).
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getLang } from '../i18n';
+import type { Lang } from '../i18n';
+import type { PolicyDict } from '../i18n/policy';
+
+interface Props {
+  dict: Record<Lang, PolicyDict>;
+}
+
+const lang = getLang(Astro.currentLocale);
+const t = Astro.props.dict[lang];
+const lastIndex = t.sections.length - 1;
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription}>
+  <Navbar />
+
+  <main id="main-content" class="bg-navy-dark min-h-dvh pt-32 pb-20">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <h1 class="font-display text-3xl md:text-4xl font-bold text-white mb-3 reveal">
+        {t.pageTitle}
+      </h1>
+      <p class="text-white/50 text-sm font-mono mb-12 reveal">{t.updated}</p>
+
+      {t.sections.map((section, i) => (
+        <section class:list={['reveal', i < lastIndex && 'border-b border-white/[0.06] pb-8 mb-8']}>
+          <h2 class="font-display text-xl font-semibold text-white mb-4">{section.title}</h2>
+          <div class="policy-body text-white/70 leading-relaxed space-y-4">
+            {section.blocks.map((block) => {
+              if (block.kind === 'p') return <p set:html={block.html} />;
+              if (block.kind === 'ul') {
+                return (
+                  <ul class="list-disc pl-5 space-y-2">
+                    {block.itemsHtml.map((item) => <li set:html={item} />)}
+                  </ul>
+                );
+              }
+              return (
+                <div class="rounded-lg border border-white/10">
+                  <table class="policy-table w-full text-sm text-left">
+                    <thead class="bg-white/[0.04] text-white">
+                      <tr>
+                        {block.head.map((cell) => <th scope="col" class="px-3 py-2 font-semibold align-bottom">{cell}</th>)}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {block.rowsHtml.map((row) => (
+                        <tr class="border-t border-white/[0.06]">
+                          {row.map((cell, j) => (
+                            j === 0
+                              ? <th scope="row" class="px-3 py-2 font-semibold text-white align-top" set:html={cell} />
+                              : <td class="px-3 py-2 align-top" data-label={block.head[j]} set:html={cell} />
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .policy-body :global(strong) {
+    color: #fff;
+  }
+  .policy-body :global(a) {
+    color: var(--color-gold);
+  }
+  .policy-body :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  /* Sous 640 px, chaque ligne devient une fiche : l'en-tête de ligne en
+     titre, puis chaque cellule précédée de son intitulé de colonne. */
+  @media (max-width: 639px) {
+    .policy-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    .policy-table tr,
+    .policy-table th,
+    .policy-table td {
+      display: block;
+    }
+    .policy-table tbody tr:first-child {
+      border-top: 0;
+    }
+    .policy-table tbody th {
+      padding-top: 0.75rem;
+    }
+    .policy-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.75rem;
+      color: rgb(255 255 255 / 0.45);
+      font-family: var(--font-mono, monospace);
+    }
+    .policy-table td:last-child {
+      padding-bottom: 0.75rem;
+    }
+  }
+</style>

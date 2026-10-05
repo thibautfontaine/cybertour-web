@@ -6,11 +6,12 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import { getLang } from '../i18n';
+import { getLang, localizePath } from '../i18n';
 import { legal } from '../i18n/legal';
 
 const lang = getLang(Astro.currentLocale);
 const t = legal[lang];
+const p = (path: string) => localizePath(path, lang);
 ---
 
 <Layout title={t.metaTitle} description={t.metaDescription}>
@@ -70,17 +71,15 @@ const t = legal[lang];
         </p>
       </section>
 
-      <!-- Donnees personnelles et cookies -->
+      <!-- Donnees personnelles et cookies : renvoi vers les pages dédiées -->
       <section class="border-b border-white/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-white mb-4">{t.dataTitle}</h2>
         <p class="text-white/70 leading-relaxed mb-4">
-          {t.dataIntro}
+          {t.dataText}
         </p>
         <ul class="text-white/70 leading-relaxed space-y-2 list-disc list-inside">
-          <li>{t.dataSiteLabel} <strong class="text-white">{t.dataNoCookiesStrong}</strong>{t.dataNoCookiesRest}</li>
-          <li>{t.dataSiteLabel} <strong class="text-white">{t.dataNoFormStrong}</strong>{t.dataNoFormRest}</li>
-          <li>{t.dataAnalyticsBefore}<strong class="text-white">{t.dataAnalyticsStrong}</strong>{t.dataAnalyticsAfter}</li>
-          <li>{t.dataTicketingBefore}<strong class="text-white">{t.dataTicketingStrong}</strong>{t.dataTicketingAfter}</li>
+          <li><a href={p('/confidentialite')} class="text-gold hover:underline">{t.privacyLinkText}</a></li>
+          <li><a href={p('/cookies')} class="text-gold hover:underline">{t.cookiesLinkText}</a></li>
         </ul>
       </section>
 

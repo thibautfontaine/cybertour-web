@@ -80,6 +80,10 @@ export interface HomeDict {
   replayIntro: string;
   replayStats: Stat[];
   replayIframeTitle: string;
+  /** Texte du bouton de la vignette : l'iframe YouTube ne se charge qu'au clic. */
+  replayPlayLabel: string;
+  /** Mention sous la vignette : ce que le clic déclenche côté YouTube. */
+  replayPrivacyNote: string;
 
   // ── Parcours ────────────────────────────────────────────────────────
   routeLabel: string;
@@ -225,6 +229,9 @@ const fr: HomeDict = {
     { value: '600+', label: 'Vues replay' },
   ],
   replayIframeTitle: 'Cyber Tour Réunion 2025 - Replay',
+  replayPlayLabel: 'Lire le replay',
+  replayPrivacyNote:
+    'La vidéo est hébergée sur YouTube. Elle ne se charge qu’au clic : Google reçoit alors votre adresse IP et peut enregistrer des données sur votre appareil.',
 
   routeLabel: '03 // Le Parcours',
   routeTitleHtml:
@@ -473,6 +480,9 @@ const en: HomeDict = {
     { value: '600+', label: 'Replay views' },
   ],
   replayIframeTitle: 'Cyber Tour Réunion 2025 - Replay',
+  replayPlayLabel: 'Play the replay',
+  replayPrivacyNote:
+    'The video is hosted on YouTube. It only loads when you click: Google then receives your IP address and may store data on your device.',
 
   routeLabel: '03 // The Route',
   routeTitleHtml:
