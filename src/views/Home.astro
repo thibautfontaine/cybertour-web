@@ -298,16 +298,27 @@ const mailtoSubject = (subject: string) =>
       </div>
 
       <div class="reveal delay-2">
-        <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-navy/50 aspect-video">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/uk-gSyaxyWA?start=9748"
-            title={t.replayIframeTitle}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-            class="absolute inset-0 w-full h-full"
-          ></iframe>
+        <!-- Façade : vignette locale, aucune requête vers Google avant le clic.
+             Sans JS, le lien ouvre la vidéo sur youtube.com ; avec JS, le
+             script plus bas le remplace par l'iframe youtube-nocookie. -->
+        <div id="replay-player" class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-navy/50 aspect-video bg-navy">
+          <a
+            id="replay-facade"
+            href="https://www.youtube.com/watch?v=uk-gSyaxyWA&t=9748s"
+            data-embed="https://www.youtube-nocookie.com/embed/uk-gSyaxyWA?start=9748&autoplay=1"
+            data-title={t.replayIframeTitle}
+            class="group absolute inset-0 block"
+          >
+            <img src="/assets/replay-2025.webp" alt="" width="1280" height="720" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy" />
+            <span class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy/30">
+              <span class="flex items-center justify-center w-20 h-20 rounded-full bg-gold text-navy shadow-2xl transition-transform group-hover:scale-110 group-focus-visible:scale-110" aria-hidden="true">
+                <svg class="w-9 h-9 ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+              <span class="px-3 py-1 rounded-md bg-navy/80 font-mono text-sm text-white">{t.replayPlayLabel}</span>
+            </span>
+          </a>
         </div>
+        <p class="mt-3 text-xs text-white/50 text-center">{t.replayPrivacyNote}</p>
       </div>
     </div>
   </section>
@@ -845,6 +856,22 @@ const mailtoSubject = (subject: string) =>
   <Footer />
 
   <script>
+    // ── Replay : l'iframe YouTube n'est injectée qu'au clic sur la vignette.
+    const replayFacade = document.getElementById('replay-facade');
+    if (replayFacade) {
+      replayFacade.addEventListener('click', (event) => {
+        event.preventDefault();
+        const iframe = document.createElement('iframe');
+        iframe.src = replayFacade.dataset.embed || '';
+        iframe.title = replayFacade.dataset.title || '';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.className = 'absolute inset-0 w-full h-full';
+        replayFacade.replaceWith(iframe);
+        iframe.focus();
+      });
+    }
+
     // ── « Ajouter à mon agenda » — génération d'un .ics côté client.
     //    Aucune dépendance : Blob + lien de téléchargement éphémère.
     //    Dates issues du JSON-LD de Layout.astro (fuseau Indien/Réunion, UTC+4)
