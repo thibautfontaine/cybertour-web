@@ -1,0 +1,25 @@
+# Mises à jour automatiques des dépendances, une PR groupée par semaine
+# pour npm et par mois pour les actions GitHub. Merger la PR suffit : le
+# workflow de déploiement republie le site.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Indian/Reunion
+    open-pull-requests-limit: 5
+    groups:
+      npm:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      timezone: Indian/Reunion
+    groups:
+      actions:
+        patterns: ["*"]

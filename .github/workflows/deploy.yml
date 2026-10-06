@@ -33,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Security audit
-        run: npm audit --audit-level=high
-
       - name: Build Astro
         run: npm run build
 
@@ -43,6 +40,24 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+
+  # L'audit tourne à côté du build sans le bloquer : une alerte publiée sur
+  # une dépendance d'Astro ne doit pas empêcher de corriger le contenu du
+  # site, qui est entièrement statique. Le job reste visible en rouge dans
+  # Actions ; Dependabot ouvre les PR de mise à jour (.github/dependabot.yml).
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Security audit
+        run: npm audit --audit-level=high
 
   deploy:
     environment:
