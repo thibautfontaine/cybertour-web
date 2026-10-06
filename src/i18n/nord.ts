@@ -27,7 +27,6 @@ const STAKEHOLDERS = [
   'Région Réunion',
   'Département',
   'Préfecture',
-  'Rectorat',
   'ANSSI',
   'Viginum',
   'DINUM',
