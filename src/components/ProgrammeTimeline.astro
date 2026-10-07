@@ -1,0 +1,63 @@
+---
+/**
+ * Frise d'un programme d'étape : blocs thématiques, créneaux horaires,
+ * pauses en grisé, temps forts surlignés. La couleur d'accent suit celle de
+ * l'étape (rouge au Sud, cyan à l'Ouest).
+ */
+import type { ProgrammeSession } from '../i18n/programme';
+
+interface Props {
+  sessions: ProgrammeSession[];
+  remoteLabel?: string;
+  accent?: 'red' | 'cyan';
+}
+
+const { sessions, remoteLabel = '', accent = 'red' } = Astro.props;
+
+// Classes complètes (pas de concaténation) pour que Tailwind les détecte.
+const tones = {
+  red: { title: 'text-red-400', dot: 'bg-red-400', highlight: 'bg-red-400/[0.06]' },
+  cyan: { title: 'text-cyan-400', dot: 'bg-cyan-400', highlight: 'bg-cyan-400/[0.06]' },
+}[accent];
+---
+
+<div class="space-y-8">
+  {sessions.map((session) => (
+    <div>
+      {session.title && (
+        <h4 class:list={['font-mono text-xs tracking-widest uppercase mb-3', tones.title]}>{session.title}</h4>
+      )}
+      <ol class="border-l border-white/10">
+        {session.slots.map((slot) => (
+          <li class:list={[
+            'relative grid grid-cols-[4.5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 py-3 pl-5',
+            slot.kind === 'highlight' && [tones.highlight, 'rounded-r-xl'],
+          ]}>
+            <span class:list={[
+              'absolute -left-[5px] top-[1.2rem] w-2.5 h-2.5 rounded-full',
+              slot.kind === 'break' ? 'bg-white/20' : tones.dot,
+            ]} aria-hidden="true"></span>
+            <span class="font-mono text-sm text-white/70 leading-tight">
+              {slot.start}
+              {slot.end && <span class="block text-xs text-white/40">{slot.end}</span>}
+            </span>
+            <span>
+              <span class:list={[
+                'block font-body',
+                slot.kind === 'break' ? 'text-white/50 italic' : 'text-white',
+                slot.kind === 'highlight' && 'font-semibold',
+              ]}>{slot.title}</span>
+              {slot.desc && <span class="block text-sm text-white/60 mt-0.5">{slot.desc}</span>}
+              {slot.speaker && (
+                <span class="block text-sm text-white/50 mt-0.5">
+                  {slot.speaker}
+                  {slot.remote && <span class="ml-2 font-mono text-[10px] uppercase tracking-wider rounded-full px-2 py-0.5 border border-white/15 text-white/50">{remoteLabel}</span>}
+                </span>
+              )}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  ))}
+</div>

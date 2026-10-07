@@ -1,26 +1,11 @@
 /** Chaînes de l'étape Sud. Le FR reprend mot pour mot la page d'origine. */
 import type { Lang } from './index';
+import type { ProgrammeSession } from './programme';
 
 export interface SudAtelier {
   icon: string;
   title: string;
   desc: string;
-}
-
-/** Créneau du programme. `kind` règle le rendu : pause, temps fort, table ronde. */
-export interface SudSlot {
-  start: string;
-  end?: string;
-  title: string;
-  speaker?: string;
-  remote?: boolean;
-  kind?: 'break' | 'highlight' | 'panel';
-}
-
-/** Bloc thématique du programme ; sans titre pour l'accueil, la pause, la clôture. */
-export interface SudSession {
-  title?: string;
-  slots: SudSlot[];
 }
 
 export interface SudDict {
@@ -39,7 +24,7 @@ export interface SudDict {
   programmePdfCta: string;
   programmePdfMeta: string;
   remoteLabel: string;
-  programme: SudSession[];
+  programme: ProgrammeSession[];
   separatorLabel: string;
   day2Label: string;
   day2Title: string;

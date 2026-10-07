@@ -1,55 +1,103 @@
-/** Chaînes de l'étape Ouest. Le FR reprend mot pour mot la page d'origine. */
+/** Chaînes de l'étape Ouest : journée de gestion de crise, mercredi 21 octobre. */
 import type { Lang } from './index';
-
-export interface OuestCard {
-  title: string;
-  desc: string;
-}
+import type { ProgrammeSession } from './programme';
 
 export interface OuestDict {
   programmeLabel: string;
   programmeTitle: string;
-  programmeIntro: string;
-  cards: OuestCard[];
-  fullProgrammeTitle: string;
-  fullProgrammeText: string;
+  objectiveLabel: string;
+  objective: string;
+  format: string;
+  scheduleTitle: string;
+  programme: ProgrammeSession[];
   venueTitle: string;
   logoOfficeEauAlt: string;
-  afternoonTitle: string;
-  afternoonText: string;
 }
+
+const SPEAKER = 'Tahiry Razafindralambo, Université de La Réunion';
+const SPEAKER_EN = 'Tahiry Razafindralambo, University of La Réunion';
 
 export const ouest: Record<Lang, OuestDict> = {
   fr: {
     programmeLabel: 'Programme',
     programmeTitle: 'Gestion de crise : théorie et pratique',
-    programmeIntro: "Journée entière consacrée à la gestion de crise cyber. Méthode et retours d'expérience le matin, exercice pratique en groupes l'après-midi.",
-    cards: [
-      { title: 'Méthode', desc: "Comment s'organise une cellule de crise, qui décide quoi, et dans quel ordre." },
-      { title: "Retours d'expérience", desc: "Ce qu'ont appris ceux qui ont géré un incident cyber réel." },
-      { title: 'Exercice pratique', desc: 'Simulation de crise en groupes, animée par le CLUSIR ROI.' },
+    objectiveLabel: 'Objectif de la journée',
+    objective:
+      "Comprendre les fondamentaux de la gestion de crise, acquérir les bons réflexes et les mettre en pratique lors d'un exercice sur table.",
+    format:
+      'La journée alterne apports théoriques, bonnes pratiques et mise en situation, pour préparer les participants à réagir de façon structurée et coordonnée face à une crise.',
+    scheduleTitle: 'Programme du mercredi 21 octobre',
+    programme: [
+      {
+        slots: [
+          { start: '08:30', end: '09:00', title: 'Accueil des participants et café', kind: 'break' },
+          { start: '09:00', end: '09:30', title: 'Ouverture de la journée', speaker: "CLUSIR, Cyber Réunion et Office de l'Eau" },
+        ],
+      },
+      {
+        title: 'Matin : les fondamentaux',
+        slots: [
+          { start: '09:30', end: '10:30', title: 'Théorie et fondamentaux de la gestion de crise', speaker: SPEAKER },
+          { start: '10:30', end: '10:45', title: 'Pause', kind: 'break' },
+          { start: '10:45', end: '12:00', title: 'Réflexes et règles clés en situation de crise', speaker: SPEAKER },
+        ],
+      },
+      {
+        slots: [{ start: '12:00', end: '13:30', title: 'Pause déjeuner', kind: 'break' }],
+      },
+      {
+        title: 'Après-midi : la mise en pratique',
+        slots: [
+          { start: '13:30', end: '15:30', title: 'Exercice de gestion de crise sur table', desc: 'Mise en situation et simulation en groupes', kind: 'highlight' },
+          { start: '15:30', end: '16:30', title: 'RETEX à chaud', desc: "Débriefing collectif : enseignements et axes d'amélioration", kind: 'panel' },
+        ],
+      },
+      {
+        slots: [{ start: '16:30', title: 'Clôture de la journée' }],
+      },
     ],
-    fullProgrammeTitle: 'Programme complet',
-    fullProgrammeText: "Le programme détaillé et la liste des intervenants seront publiés à l'approche de l'événement.",
     venueTitle: "Lieu d'accueil",
     logoOfficeEauAlt: "Office de l'Eau",
-    afternoonTitle: 'Après-midi',
-    afternoonText: 'Exercice pratique de gestion de crise en groupes, animé par le CLUSIR ROI avec le soutien du partenaire principal.',
   },
   en: {
     programmeLabel: 'Programme',
     programmeTitle: 'Crisis management: theory and practice',
-    programmeIntro: 'A full day devoted to cyber crisis management. Method and lessons learned in the morning, a hands-on group exercise in the afternoon.',
-    cards: [
-      { title: 'Method', desc: 'How a crisis unit is organised, who decides what, and in which order.' },
-      { title: 'Lessons learned', desc: 'What those who handled a real cyber incident took away from it.' },
-      { title: 'Hands-on exercise', desc: 'A crisis simulation in groups, run by CLUSIR ROI.' },
+    objectiveLabel: 'Goal of the day',
+    objective:
+      'Understand the fundamentals of crisis management, learn the right reflexes and put them into practice in a tabletop exercise.',
+    format:
+      'The day alternates theory, good practice and role play, to prepare participants to respond to a crisis in a structured and coordinated way.',
+    scheduleTitle: 'Programme for Wednesday 21 October',
+    programme: [
+      {
+        slots: [
+          { start: '08:30', end: '09:00', title: 'Welcome and coffee', kind: 'break' },
+          { start: '09:00', end: '09:30', title: 'Opening of the day', speaker: "CLUSIR, Cyber Réunion and Office de l'Eau" },
+        ],
+      },
+      {
+        title: 'Morning: the fundamentals',
+        slots: [
+          { start: '09:30', end: '10:30', title: 'Crisis management theory and fundamentals', speaker: SPEAKER_EN },
+          { start: '10:30', end: '10:45', title: 'Break', kind: 'break' },
+          { start: '10:45', end: '12:00', title: 'Key reflexes and rules in a crisis', speaker: SPEAKER_EN },
+        ],
+      },
+      {
+        slots: [{ start: '12:00', end: '13:30', title: 'Lunch break', kind: 'break' }],
+      },
+      {
+        title: 'Afternoon: putting it into practice',
+        slots: [
+          { start: '13:30', end: '15:30', title: 'Tabletop crisis management exercise', desc: 'Role play and simulation in groups', kind: 'highlight' },
+          { start: '15:30', end: '16:30', title: 'Hot debrief (RETEX)', desc: 'Group debriefing: lessons learned and areas for improvement', kind: 'panel' },
+        ],
+      },
+      {
+        slots: [{ start: '16:30', title: 'Closing of the day' }],
+      },
     ],
-    fullProgrammeTitle: 'Full programme',
-    fullProgrammeText: 'The detailed programme and the list of speakers will be published closer to the event.',
     venueTitle: 'Venue',
     logoOfficeEauAlt: "Office de l'Eau",
-    afternoonTitle: 'Afternoon',
-    afternoonText: 'A hands-on crisis management exercise in groups, run by CLUSIR ROI with the support of the lead partner.',
   },
 };
