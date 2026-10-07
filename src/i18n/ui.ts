@@ -19,17 +19,23 @@ export interface UiDict {
   };
   nav: {
     links: { label: string; href: string; soon?: boolean }[];
+    aboutMenu: { label: string; items: { label: string; href: string }[] };
+    stagesMenu: { label: string; all: string; allHref: string; soon: string };
     cta: { label: string; href: string };
     soon: string;
     openMenu: string;
     closeMenu: string;
     logoAlt: string;
+    logoCyberTourAlt: string;
     langSwitcher: string;
     langNames: Record<Lang, string>;
   };
   footer: {
     logoAlt: string;
     dates: string;
+    partnersBand: string;
+    partnerDeck: string;
+    partnerDeckSubject: string;
     legal: string;
     privacy: string;
     cookies: string;
@@ -71,14 +77,16 @@ export interface UiDict {
 }
 
 const HOME_ANCHORS = {
-  about: '/#about',
-  replay: '/#replay',
   etapes: '/#etapes',
   ctf: '/#ctf',
-  speakers: '/#speakers',
-  sponsors: '/#sponsors',
   inscription: '/#inscription',
-  contact: '/#contact',
+};
+
+/** Sections de la page « À propos » (src/views/About.astro). */
+const ABOUT_ANCHORS = {
+  about: '/a-propos#about',
+  edition2025: '/a-propos#edition-2025',
+  contact: '/a-propos#contact',
 };
 
 export const ui: Record<Lang, UiDict> = {
@@ -97,7 +105,7 @@ export const ui: Record<Lang, UiDict> = {
           title: 'Édition 2026 terminée',
           subtitle: 'Merci à toutes et tous. Les conférences sont disponibles en rediffusion.',
           cta: 'Voir les replays',
-          href: HOME_ANCHORS.replay,
+          href: ABOUT_ANCHORS.edition2025,
         },
         live: {
           title: "L'événement est en cours",
@@ -109,25 +117,32 @@ export const ui: Record<Lang, UiDict> = {
     },
     nav: {
       links: [
-        { label: 'À propos', href: HOME_ANCHORS.about },
-        { label: 'Replay 2025', href: HOME_ANCHORS.replay },
-        { label: 'Les Étapes', href: HOME_ANCHORS.etapes },
         { label: 'CTF', href: HOME_ANCHORS.ctf },
-        { label: 'Speakers', href: HOME_ANCHORS.speakers },
-        { label: 'Sponsors', href: HOME_ANCHORS.sponsors },
-        { label: 'Inscriptions', href: HOME_ANCHORS.inscription },
       ],
-      cta: { label: 'Contact', href: HOME_ANCHORS.contact },
+      aboutMenu: {
+        label: 'À propos',
+        items: [
+          { label: 'Le Cyber Tour', href: ABOUT_ANCHORS.about },
+          { label: 'Édition 2025', href: ABOUT_ANCHORS.edition2025 },
+          { label: 'Contact', href: ABOUT_ANCHORS.contact },
+        ],
+      },
+      cta: { label: "S'inscrire", href: HOME_ANCHORS.inscription },
+      stagesMenu: { label: 'Les étapes', all: 'Voir les 7 étapes', allHref: HOME_ANCHORS.etapes, soon: 'programme à venir' },
       soon: 'bientôt',
       openMenu: 'Ouvrir le menu',
       closeMenu: 'Fermer le menu',
       logoAlt: 'CLUSIR Réunion Océan Indien',
+      logoCyberTourAlt: 'Cyber Tour Réunion 2026',
       langSwitcher: 'Langue du site',
       langNames: { fr: 'Français', en: 'English' },
     },
     footer: {
       logoAlt: 'Cyber Tour Réunion 2026',
       dates: '20 — 30 Octobre 2026 · 7 étapes à La Réunion',
+      partnersBand: 'Organisateurs et partenaires',
+      partnerDeck: 'Demander le dossier partenaire',
+      partnerDeckSubject: 'Cyber Tour Réunion 2026 : demande du dossier partenaire',
       legal: 'Mentions légales',
       privacy: 'Confidentialité',
       cookies: 'Cookies',
@@ -183,7 +198,7 @@ export const ui: Record<Lang, UiDict> = {
           title: '2026 edition is over',
           subtitle: 'Thank you all. The talks are available on replay.',
           cta: 'Watch the replays',
-          href: HOME_ANCHORS.replay,
+          href: ABOUT_ANCHORS.edition2025,
         },
         live: {
           title: 'The event is under way',
@@ -195,25 +210,32 @@ export const ui: Record<Lang, UiDict> = {
     },
     nav: {
       links: [
-        { label: 'About', href: HOME_ANCHORS.about },
-        { label: 'Replay 2025', href: HOME_ANCHORS.replay },
-        { label: 'The Stages', href: HOME_ANCHORS.etapes },
         { label: 'CTF', href: HOME_ANCHORS.ctf },
-        { label: 'Speakers', href: HOME_ANCHORS.speakers },
-        { label: 'Sponsors', href: HOME_ANCHORS.sponsors },
-        { label: 'Registration', href: HOME_ANCHORS.inscription },
       ],
-      cta: { label: 'Contact', href: HOME_ANCHORS.contact },
+      aboutMenu: {
+        label: 'About',
+        items: [
+          { label: 'Cyber Tour', href: ABOUT_ANCHORS.about },
+          { label: '2025 edition', href: ABOUT_ANCHORS.edition2025 },
+          { label: 'Contact', href: ABOUT_ANCHORS.contact },
+        ],
+      },
+      cta: { label: 'Register', href: HOME_ANCHORS.inscription },
+      stagesMenu: { label: 'Stages', all: 'See all 7 stages', allHref: HOME_ANCHORS.etapes, soon: 'programme coming soon' },
       soon: 'soon',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
       logoAlt: 'CLUSIR Réunion Océan Indien',
+      logoCyberTourAlt: 'Cyber Tour Réunion 2026',
       langSwitcher: 'Site language',
       langNames: { fr: 'Français', en: 'English' },
     },
     footer: {
       logoAlt: 'Cyber Tour Réunion 2026',
       dates: '20 — 30 October 2026 · 7 stages across Reunion Island',
+      partnersBand: 'Organisers and partners',
+      partnerDeck: 'Request the partnership deck',
+      partnerDeckSubject: 'Cyber Tour Réunion 2026: partnership deck request',
       legal: 'Legal notice',
       privacy: 'Privacy',
       cookies: 'Cookies',

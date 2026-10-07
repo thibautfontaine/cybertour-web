@@ -1,0 +1,28 @@
+---
+/**
+ * Logo de partenaire cliquable, dans sa pastille blanche. Le lien s'ouvre
+ * dans un nouvel onglet ; le nom complet sert de texte alternatif.
+ */
+import type { Partner } from '../data/partners';
+import { partnerRel } from '../data/partners';
+
+interface Props {
+  partner: Partner;
+  /** Hauteur du logo (classes Tailwind). */
+  size: string;
+  /** Marges internes de la pastille. */
+  pad?: string;
+  class?: string;
+}
+
+const { partner, size, pad = 'px-6 py-3', class: extra } = Astro.props;
+---
+
+<a
+  href={partner.url}
+  target="_blank"
+  rel={partnerRel(partner)}
+  class:list={['partner-bubble inline-flex items-center justify-center transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold', pad, extra]}
+>
+  <img src={partner.logo} alt={partner.name} class:list={['w-auto object-contain', size, partner.imgClass]} loading="lazy" />
+</a>

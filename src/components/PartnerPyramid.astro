@@ -1,6 +1,8 @@
 ---
 import { getLang } from '../i18n';
 import { ui } from '../i18n/ui';
+import { partnersByTier } from '../data/partners';
+import PartnerLogo from './PartnerLogo.astro';
 
 const t = ui[getLang(Astro.currentLocale)].pyramid;
 
@@ -11,10 +13,15 @@ const t = ui[getLang(Astro.currentLocale)].pyramid;
  * Les paliers de sponsoring payant ne figurent PAS ici : ils vivent dans la
  * section #sponsors, seule source de vérité tarifaire de la page. Le détail
  * des contreparties est réservé au dossier partenaire, hors site.
+ *
+ * Les logos viennent de `src/data/partners.ts` et sont cliquables.
  */
+const organisers = partnersByTier('organiser');
+const gold = partnersByTier('gold');
+const others = partnersByTier('partner');
 ---
 
-<section class="relative py-32 overflow-hidden">
+<section class="relative py-24 overflow-hidden">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex flex-col items-center gap-12">
 
@@ -23,23 +30,8 @@ const t = ui[getLang(Astro.currentLocale)].pyramid;
         <span class="font-mono text-sm tracking-widest uppercase text-gold">
           {t.organiser}
         </span>
-        <div class="flex items-center justify-center gap-6">
-          <div class="partner-bubble px-8 py-4">
-            <img
-              src="/assets/logo-clusir.png"
-              alt="CLUSIR Réunion Océan Indien"
-              class="h-20 sm:h-24 w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div class="partner-bubble px-8 py-4">
-            <img
-              src="/assets/logo-univ-reunion.png"
-              alt="Université de La Réunion"
-              class="h-20 sm:h-24 w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          {organisers.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-8 py-4" />)}
         </div>
         <!-- Connecting line -->
         <div class="w-px h-8 bg-white/10"></div>
@@ -48,70 +40,24 @@ const t = ui[getLang(Astro.currentLocale)].pyramid;
       {/* Level 2 — Partenaires Gold. La charte proscrit le mot « sponsor »
           en public (art. 6.4) : le palier s'appelle Gold, la structure est
           un partenaire. */}
-      <div class="reveal delay-1 flex flex-col items-center gap-6 max-w-2xl w-full">
+      <div class="reveal delay-1 flex flex-col items-center gap-6 max-w-3xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-gold/80">
           {t.gold}
         </span>
         <div class="flex flex-wrap items-center justify-center gap-6">
-          <div class="partner-bubble px-7 py-4">
-            <img
-              src="/assets/logo-orange-cyberdefense.png"
-              alt="Orange Cyberdefense"
-              class="h-9 sm:h-11 w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div class="partner-bubble px-7 py-4">
-            <img
-              src="/assets/logo-sfr-business.png"
-              alt="SFR Business"
-              class="h-14 sm:h-[4.5rem] w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div class="partner-bubble px-7 py-4">
-            <img
-              src="/assets/logo-youtell.png"
-              alt="YOUTELL"
-              class="h-11 sm:h-14 w-auto object-contain rounded-lg"
-              loading="lazy"
-            />
-          </div>
+          {gold.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-7 py-4" />)}
         </div>
         <!-- Connecting line -->
         <div class="w-px h-8 bg-white/10"></div>
       </div>
 
       <!-- Level 3 — Partenaires -->
-      <div class="reveal delay-2 flex flex-col items-center gap-6 max-w-2xl w-full">
+      <div class="reveal delay-2 flex flex-col items-center gap-6 max-w-4xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-white/60">
           {t.partners}
         </span>
         <div class="flex flex-wrap items-center justify-center gap-6">
-          <div class="partner-bubble px-6 py-3">
-            <img
-              src="/assets/logo-iut.png"
-              alt="IUT de La Réunion"
-              class="h-14 sm:h-16 w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div class="partner-bubble px-6 py-3">
-            <img
-              src="/assets/logo-esiroi.jpg"
-              alt="ESIROI — École d'Ingénieurs"
-              class="h-14 sm:h-16 w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div class="partner-bubble px-6 py-3">
-            <img
-              src="/assets/logo-cyber-reunion.jpg"
-              alt="Cyber Réunion"
-              class="h-14 sm:h-16 w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
+          {others.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-5 py-2.5" />)}
         </div>
       </div>
 

@@ -1,0 +1,205 @@
+---
+/**
+ * Page « À propos » (FR `/a-propos`, EN `/en/a-propos`) : présentation du
+ * Cyber Tour, édition 2025 (chiffres et replay) et contact. Ces trois
+ * sections étaient sur l'accueil ; elles ont leur page, ouverte depuis le
+ * menu « À propos ». Les chaînes restent dans `src/i18n/home.ts` (clés
+ * `about*`, `replay*`, `contact*`).
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getLang, localizePath } from '../i18n';
+import { home } from '../i18n/home';
+
+const lang = getLang(Astro.currentLocale);
+const t = home[lang];
+const p = (path: string) => localizePath(path, lang);
+
+const contactMail = 'evenement@clusir-roi.org';
+---
+
+<Layout title={t.aboutPageMetaTitle} description={t.aboutPageMetaDescription}>
+  <Navbar currentPage="a-propos" />
+
+  <main id="main-content">
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="relative pt-36 pb-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <!-- Section header -->
+      <div class="reveal mb-20">
+        <span class="section-label">{t.aboutLabel}</span>
+        <h1 class="section-title mt-4" set:html={t.aboutTitleHtml}></h1>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Text block -->
+        <div class="space-y-8">
+          <p class="reveal delay-1 text-lg text-white/70 leading-relaxed" set:html={t.aboutP1Html}></p>
+          <p class="reveal delay-2 text-lg text-white/70 leading-relaxed" set:html={t.aboutP2Html}></p>
+
+          <!-- Stats -->
+          <div class="reveal delay-3 grid grid-cols-3 gap-6 pt-6">
+            {t.aboutStats.map(stat => (
+              <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+                <span class="block font-display font-extrabold text-3xl text-gold">{stat.value}</span>
+                <span class="text-sm text-white/50 mt-1">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Visual block -->
+        <div class="reveal-right delay-2 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-white/10">
+            <img src="/assets/cybertour-asset-web-site.png" alt={t.aboutImgAlt} class="w-full h-auto" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/60 to-transparent"></div>
+          </div>
+          <!-- Decorative shield -->
+          <div class="absolute -top-8 -right-8 w-24 h-24 text-gold/20 animate-float" style="animation-delay: 1s;">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+            </svg>
+          </div>
+          <!-- Glow -->
+          <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-navy rounded-full blur-[80px] opacity-60"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== RETOUR SUR 2025 ===== -->
+  <section id="edition-2025" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <div class="reveal text-center mb-14">
+        <span class="section-label">{t.replayLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.replayTitleHtml}></h2>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.replayIntro}
+        </p>
+      </div>
+
+      <!-- Stats 2025 -->
+      <div class="reveal delay-1 grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+        {t.replayStats.map(stat => (
+          <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+            <span class="block font-display font-extrabold text-3xl text-gold">{stat.value}</span>
+            <span class="text-sm text-white/50 mt-1">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="reveal delay-2">
+        <!-- Façade : vignette locale, aucune requête vers Google avant le clic.
+             Sans JS, le lien ouvre la vidéo sur youtube.com ; avec JS, le
+             script plus bas le remplace par l'iframe youtube-nocookie. -->
+        <div id="replay-player" class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-navy/50 aspect-video bg-navy">
+          <a
+            id="replay-facade"
+            href="https://www.youtube.com/watch?v=uk-gSyaxyWA&t=9748s"
+            data-embed="https://www.youtube-nocookie.com/embed/uk-gSyaxyWA?start=9748&autoplay=1"
+            data-title={t.replayIframeTitle}
+            class="group absolute inset-0 block"
+          >
+            <img src="/assets/replay-2025.webp" alt="" width="1280" height="720" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy" />
+            <span class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy/30">
+              <span class="flex items-center justify-center w-20 h-20 rounded-full bg-gold text-navy shadow-2xl transition-transform group-hover:scale-110 group-focus-visible:scale-110" aria-hidden="true">
+                <svg class="w-9 h-9 ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+              <span class="px-3 py-1 rounded-md bg-navy/80 font-mono text-sm text-white">{t.replayPlayLabel}</span>
+            </span>
+          </a>
+        </div>
+        <p class="mt-3 text-xs text-white/50 text-center">{t.replayPrivacyNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-gradient-to-br from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-30"></div>
+
+    <!-- Decorative island -->
+    <div class="absolute left-0 bottom-0 w-[400px] h-[400px] opacity-[0.04] pointer-events-none">
+      <img src="/assets/reunion-silhouette.png" alt="" class="w-full h-full object-contain" />
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div class="reveal">
+        <span class="section-label">{t.contactLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.contactTitleHtml}></h2>
+        <p class="text-white/50 mt-6 max-w-xl mx-auto text-lg leading-relaxed">
+          {t.contactIntro}
+        </p>
+      </div>
+
+      <div class="reveal delay-2 mt-12 grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <!-- Email -->
+        <a href={`mailto:${contactMail}`} class="group flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 hover:border-gold/30 transition-all">
+          <div class="shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center group-hover:bg-gold/10 transition-colors">
+            <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <span class="text-xs text-white/55 uppercase tracking-wider">{t.contactEmailLabel}</span>
+            <span class="block font-display font-semibold text-white group-hover:text-gold transition-colors">{contactMail}</span>
+          </div>
+        </a>
+
+        <!-- Location — lien réel vers le détail du parcours -->
+        <a href={p('/#etapes')} class="group flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 hover:border-gold/30 transition-all">
+          <div class="shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center group-hover:bg-gold/10 transition-colors">
+            <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <span class="text-xs text-white/55 uppercase tracking-wider">{t.contactPlacesLabel}</span>
+            <span class="block font-display font-semibold text-white group-hover:text-gold transition-colors">{t.contactPlacesValue}</span>
+            <span class="block font-mono text-[11px] text-white/50 mt-0.5">{t.contactPlacesLink}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Streaming note -->
+      <div class="reveal delay-4 mt-10">
+        <p class="text-clusir-red text-sm font-mono font-semibold">
+          <svg class="inline w-4 h-4 mr-1 -mt-0.5" viewBox="0 0 24 24"><path fill="#ce463a" d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418A2.477 2.477 0 002.418 6.186C2 7.746 2 12 2 12s0 4.254.418 5.814a2.477 2.477 0 001.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814z"/><path fill="white" d="M10 15.5l5.5-3.5L10 8.5v7z"/></svg>
+          {t.contactStreaming}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <Footer />
+
+  <script>
+    // ── Replay : l'iframe YouTube n'est injectée qu'au clic sur la vignette.
+    const replayFacade = document.getElementById('replay-facade');
+    if (replayFacade) {
+      replayFacade.addEventListener('click', (event) => {
+        event.preventDefault();
+        const iframe = document.createElement('iframe');
+        iframe.src = replayFacade.dataset.embed || '';
+        iframe.title = replayFacade.dataset.title || '';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.className = 'absolute inset-0 w-full h-full';
+        replayFacade.replaceWith(iframe);
+        iframe.focus();
+      });
+    }
+
+  </script>
+</Layout>

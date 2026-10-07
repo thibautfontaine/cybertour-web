@@ -1,9 +1,11 @@
 ---
 import { getLang } from "../i18n";
 import { ui } from "../i18n/ui";
+import { partnersByTier, partnerRel } from "../data/partners";
 
 const lang = getLang(Astro.currentLocale);
 const label = ui[lang].pyramid.gold;
+const gold = partnersByTier('gold');
 
 /* Barre flottante des partenaires Gold, visible à l'arrivée sur la page.
    Deux règles tiennent ce composant :
@@ -23,15 +25,11 @@ const label = ui[lang].pyramid.gold;
 >
   <span class="hidden sm:inline font-mono text-[10px] tracking-[0.18em] uppercase text-gold/80">{label}</span>
 
-  <span class="bg-white rounded-xl px-3 py-1.5 flex items-center justify-center">
-    <img src="/assets/logo-orange-cyberdefense.png" alt="Orange Cyberdefense" class="h-5 sm:h-6 w-auto object-contain" loading="lazy" />
-  </span>
-  <span class="bg-white rounded-xl px-3 py-1.5 flex items-center justify-center">
-    <img src="/assets/logo-sfr-business.png" alt="SFR Business" class="h-7 sm:h-9 w-auto object-contain" loading="lazy" />
-  </span>
-  <span class="bg-white rounded-xl px-3 py-1.5 flex items-center justify-center">
-    <img src="/assets/logo-youtell.png" alt="YOUTELL" class="h-6 sm:h-7 w-auto object-contain rounded" loading="lazy" />
-  </span>
+  {gold.map((p) => (
+    <a href={p.url} target="_blank" rel={partnerRel(p)} class="bg-white rounded-xl px-3 py-1.5 flex items-center justify-center transition-transform hover:-translate-y-0.5">
+      <img src={p.logo} alt={p.name} class:list={['w-auto object-contain', p.size.float, p.imgClass && 'rounded']} loading="lazy" />
+    </a>
+  ))}
 </aside>
 
 <script>

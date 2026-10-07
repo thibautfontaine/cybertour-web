@@ -58,11 +58,11 @@ Un CTF tout au long du mois d'octobre 2026, en partenariat avec Sec-Dojo et Cybe
 ## Partenaires
 
 - Organisateur : CLUSIR Reunion Ocean Indien, avec l'Universite de La Reunion
-- Partenaires : IUT de La Reunion, ESIROI — Ecole d'Ingenieurs, Cyber Reunion
+- Partenaires : IUT de La Reunion, ESIROI — Ecole d'Ingenieurs, Cyber Reunion, EDIH La Reunion, CF Cyber
 
 ## Sponsoring
 
-Trois niveaux, detailles sur https://cybertour.re/#sponsors :
+Trois niveaux, detailles sur https://cybertour.re/partenaires :
 - **Bronze** (a partir de 1 000 €) : presence identifiee comme partenaire, supports de visibilite, reseaux sociaux.
 - **Silver** (a partir de 3 000 €) : Bronze + goodies + kakemonos.
 - **Gold** (a partir de 5 000 €) : Silver + stand + mot d'introduction de deux minutes.

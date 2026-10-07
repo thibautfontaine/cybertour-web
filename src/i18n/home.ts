@@ -40,11 +40,6 @@ export interface Stat {
   label: string;
 }
 
-export interface CharterItem {
-  title: string;
-  text: string;
-}
-
 export interface HomeDict {
   // ── Méta ────────────────────────────────────────────────────────────
   metaTitle: string;
@@ -54,8 +49,10 @@ export interface HomeDict {
   heroBadge: string;
   heroDates: string;
   heroPlaces: string;
+  /** Phrase de présentation sous le titre : ce qu'est l'événement, pour le visiteur et le référencement. */
+  heroTagline: string;
+  heroCtaRegister: string;
   heroCtaRoute: string;
-  heroCtaContact: string;
   heroPillFree: string;
   heroPillSeats: string;
   heroPillHybrid: string;
@@ -67,12 +64,13 @@ export interface HomeDict {
 
   // ── À propos ────────────────────────────────────────────────────────
   aboutLabel: string;
+  aboutPageMetaTitle: string;
+  aboutPageMetaDescription: string;
   aboutTitleHtml: string;
   aboutP1Html: string;
   aboutP2Html: string;
   aboutStats: Stat[];
   aboutImgAlt: string;
-  aboutCta: string;
 
   // ── Replay 2025 ─────────────────────────────────────────────────────
   replayLabel: string;
@@ -90,49 +88,24 @@ export interface HomeDict {
   routeTitleHtml: string;
   routeIntro: string;
   routeDates: string;
-  charter: CharterItem[];
 
   // ── CTF ─────────────────────────────────────────────────────────────
   ctfLabel: string;
   ctfTitleHtml: string;
-  ctfPullQuote: string;
   ctfIntroHtml: string;
   ctfBadgeMonth: string;
   ctfBadgeAllMonth: string;
   ctfBodyHtml: string;
   ctfPartnersLabel: string;
-  ctfTermStatus: string;
-  ctfTermPlatform: string;
-  ctfTermDuration: string;
-  ctfTermDurationValue: string;
-  ctfTermCategories: string;
-  ctfTermCategoriesValue: string;
-  ctfTermPreparing: string;
 
-  // ── Speakers ────────────────────────────────────────────────────────
-  speakersLabel: string;
-  speakersTitleHtml: string;
-  speakersIntro: string;
-  speakersTermFile: string;
-  speakersTermCmd: string;
-  speakersTermOpen: string;
-  speakersTermBuilding: string;
-  speakersTermSelecting: string;
-  speakersTermCta: string;
-
-  cfpKicker: string;
-  cfpTitleHtml: string;
-  cfpBody: string;
-  cfpDeadlineLabel: string;
-  cfpDeadlineDate: string;
-  cfpCta: string;
-  /** Mention discrète : le formulaire Grist est rédigé en français. */
-  cfpFormNote: string;
 
   // ── Partenaires (pyramide) ──────────────────────────────────────────
   partnersLabel: string;
   partnersTitleHtml: string;
   partnersIntro: string;
+  partnersCta: string;
+  partnersPageMetaTitle: string;
+  partnersPageMetaDescription: string;
 
   // ── Sponsoring ──────────────────────────────────────────────────────
   sponsorsLabel: string;
@@ -194,8 +167,10 @@ const fr: HomeDict = {
   heroBadge: 'Cybermois 2026 — La Réunion',
   heroDates: '20 — 30 OCTOBRE 2026',
   heroPlaces: "7 ÉTAPES · TOUTE L'ÎLE",
-  heroCtaRoute: 'Découvrir le parcours',
-  heroCtaContact: 'Contact',
+  heroTagline:
+    "Sept étapes gratuites autour de l'île pour faire le point sur la cybersécurité : conférences, ateliers pratiques et CTF, pour les décideurs, les professionnels de l'IT et les étudiants. Organisé par le CLUSIR Réunion Océan Indien.",
+  heroCtaRegister: "S'inscrire",
+  heroCtaRoute: 'Voir les 7 étapes',
   heroPillFree: 'Entrée gratuite',
   heroPillSeats: 'Places limitées',
   heroPillHybrid: 'Présentiel + streaming',
@@ -206,6 +181,9 @@ const fr: HomeDict = {
   scroll: 'Scroll',
 
   aboutLabel: '01 // À propos',
+  aboutPageMetaTitle: 'À propos | Cyber Tour Réunion 2026',
+  aboutPageMetaDescription:
+    "Le Cyber Tour Réunion, son organisation par le CLUSIR Réunion Océan Indien, le bilan et le replay de l'édition 2025, et comment nous contacter.",
   aboutTitleHtml:
     'L\'événement cyber<br/><span class="text-gold">de référence</span> à La Réunion',
   aboutP1Html:
@@ -218,9 +196,8 @@ const fr: HomeDict = {
     { value: '600+', label: 'Vues YouTube' },
   ],
   aboutImgAlt: 'Cyber Tour Réunion',
-  aboutCta: 'Voir les 7 étapes du tour',
 
-  replayLabel: '02 // Replay',
+  replayLabel: '02 // Édition 2025',
   replayTitleHtml: 'Édition <span class="text-gold">2025</span>',
   replayIntro: "Revivez les conférences de l'édition précédente en intégralité.",
   replayStats: [
@@ -233,28 +210,15 @@ const fr: HomeDict = {
   replayPrivacyNote:
     'La vidéo est hébergée sur YouTube. Elle ne se charge qu’au clic : Google reçoit alors votre adresse IP et peut enregistrer des données sur votre appareil.',
 
-  routeLabel: '03 // Le Parcours',
+  routeLabel: '01 // Le Parcours',
   routeTitleHtml:
     '7 étapes, <span class="text-gold">un seul tour</span>',
   routeIntro:
-    "Du 20 au 30 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur quatre étapes, par des organisateurs locaux sur trois autres. Même label, même exigence, même agenda.",
+    "Du 20 au 30 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur quatre étapes, par des organisateurs locaux sur trois autres. Même label, même exigence, même agenda. Le Cyber Tour est organisé par le CLUSIR Réunion Océan Indien avec l'Université de La Réunion ; l'édition 2025 a réuni 220 participants.",
   routeDates: '20 — 30 OCTOBRE 2026',
-  charter: [
-    {
-      title: 'Communication commune',
-      text: 'Une seule identité, un seul agenda.',
-    },
-    {
-      title: 'Organisation décentralisée',
-      text: 'Autonome mais solidaire et collégial, chaque hôte orchestre son étape.',
-    },
-  ],
-
   ctfLabel: '04 // CTF',
   ctfTitleHtml:
     'Championnat Réunionnais<br/>de <span class="text-gold">Cybersécurité</span>',
-  ctfPullQuote:
-    "Réunir les talents d'aujourd'hui pour bâtir le hub cyber de demain.",
   ctfIntroHtml:
     'Un CTF tout au long du mois d\'octobre pour le <strong class="text-gold font-semibold">Cybermois 2026</strong>, en partenariat avec <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold font-semibold hover:text-gold/80 transition-colors">Sec-Dojo</a> et <strong class="text-white font-semibold">Cyber Reunion</strong>.',
   ctfBadgeMonth: 'Octobre 2026',
@@ -262,41 +226,18 @@ const fr: HomeDict = {
   ctfBodyHtml:
     'Testez vos compétences en cybersécurité à travers des challenges techniques sur la plateforme <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold hover:text-gold/80 transition-colors font-semibold">SecDojo</a> : Linux, Windows, Network, Web et plus encore. Ouvert à tous les niveaux, du débutant au confirmé.',
   ctfPartnersLabel: 'En partenariat avec',
-  ctfTermStatus: './ctf --status',
-  ctfTermPlatform: 'Plateforme:',
-  ctfTermDuration: 'Durée:',
-  ctfTermDurationValue: 'Octobre 2026',
-  ctfTermCategories: 'Catégories:',
-  ctfTermCategoriesValue: 'Linux, Windows, Network, Web',
-  ctfTermPreparing: 'Preparing challenges',
 
-  speakersLabel: '05 // Speakers',
-  speakersTitleHtml: 'Nos <span class="text-gold">Conférenciers</span>',
-  speakersIntro:
-    "Des spécialistes reconnus en cybersécurité partagent leur expertise et leurs retours d'expérience.",
-  speakersTermFile: 'speakers.build',
-  speakersTermCmd: './cfp --status',
-  speakersTermOpen: 'OPEN — appel à conférenciers en cours',
-  speakersTermBuilding:
-    'Le programme 2026 se construit à partir des propositions reçues.',
-  speakersTermSelecting: 'Sélection en cours',
-  speakersTermCta: 'Proposer une conférence',
 
-  cfpKicker: 'Call for Speakers',
-  cfpTitleHtml: 'Appel à <span class="text-gold">soumission</span>',
-  cfpBody:
-    "Vous êtes expert·e en cybersécurité, chercheur·euse, praticien·ne ou passionné·e ? Proposez une conférence, un retour d'expérience ou un atelier technique pour le CyberTour Réunion 2026. Toutes les thématiques cyber sont les bienvenues : offensive, défensive, GRC, IA, souveraineté, RETEX d'incident.",
-  cfpDeadlineLabel: '// Clôture des soumissions :',
-  cfpDeadlineDate: 'jeudi 1er octobre 2026',
-  cfpCta: 'Soumettre une proposition',
-  cfpFormNote: '',
-
-  partnersLabel: '06 // Partenaires & sponsoring · 1/2',
+  partnersLabel: '03 // Partenaires',
   partnersTitleHtml: 'L\'écosystème <span class="text-gold">CyberTour</span>',
   partnersIntro:
-    "Qui porte l'événement, et à quelle place. Les paliers de sponsoring sont détaillés juste en dessous, palier par palier.",
+    "Qui porte l'événement, et à quelle place.",
+  partnersCta: 'Devenir partenaire',
+  partnersPageMetaTitle: 'Devenir partenaire | Cyber Tour Réunion 2026',
+  partnersPageMetaDescription:
+    'Formules de partenariat Bronze, Silver et Gold du Cyber Tour Réunion 2026 : visibilité, réseau, expertise et talents.',
 
-  sponsorsLabel: '07 // Devenir partenaire',
+  sponsorsLabel: 'Devenir partenaire',
   sponsorsTitleHtml:
     'Devenez acteur du <span class="text-gold">CyberTour Réunion</span>',
   sponsorsIntro:
@@ -400,7 +341,7 @@ const fr: HomeDict = {
     { value: '2', label: 'Retombées presse' },
   ],
 
-  regLabel: '08 // Inscription',
+  regLabel: '02 // Inscription',
   regTitleHtml: 'Réservez votre <span class="text-gold">place</span>',
   regIntro:
     "L'événement est gratuit mais les places sont limitées sur chaque étape.",
@@ -426,7 +367,7 @@ const fr: HomeDict = {
   icsDone:
     "// Fichier cyber-tour-reunion-2026.ics téléchargé — ouvrez-le pour l'ajouter.",
 
-  contactLabel: '09 // Contact',
+  contactLabel: '03 // Contact',
   contactTitleHtml: 'Rejoignez <span class="text-gold">l\'aventure</span>',
   contactIntro:
     'Que vous soyez participant, speaker ou sponsor, contactez-nous pour faire partie du Cyber Tour Réunion 2026.',
@@ -445,8 +386,10 @@ const en: HomeDict = {
   heroBadge: 'Cybermois (European Cybersecurity Month) 2026 — Reunion Island',
   heroDates: '20 — 30 OCTOBER 2026',
   heroPlaces: '7 STAGES · ACROSS THE ISLAND',
-  heroCtaRoute: 'Explore the route',
-  heroCtaContact: 'Contact',
+  heroTagline:
+    'Seven free stages around the island to take stock of cybersecurity: talks, hands-on workshops and a CTF, for decision-makers, IT professionals and students. Organised by CLUSIR Réunion Océan Indien.',
+  heroCtaRegister: 'Register',
+  heroCtaRoute: 'See the 7 stages',
   heroPillFree: 'Free entry',
   heroPillSeats: 'Limited seats',
   heroPillHybrid: 'On site + streaming',
@@ -457,6 +400,9 @@ const en: HomeDict = {
   scroll: 'Scroll',
 
   aboutLabel: '01 // About',
+  aboutPageMetaTitle: 'About | Cyber Tour Réunion 2026',
+  aboutPageMetaDescription:
+    'Cyber Tour Réunion, its organisation by CLUSIR Réunion Océan Indien, the 2025 edition in figures and on replay, and how to reach us.',
   aboutTitleHtml:
     'The <span class="text-gold">leading</span> cybersecurity<br/>event in Reunion Island',
   aboutP1Html:
@@ -469,9 +415,8 @@ const en: HomeDict = {
     { value: '600+', label: 'YouTube views' },
   ],
   aboutImgAlt: 'Cyber Tour Réunion',
-  aboutCta: 'See the 7 stages of the tour',
 
-  replayLabel: '02 // Replay',
+  replayLabel: '02 // 2025 edition',
   replayTitleHtml: 'The <span class="text-gold">2025</span> edition',
   replayIntro: 'Watch every talk from last year’s edition in full.',
   replayStats: [
@@ -484,28 +429,15 @@ const en: HomeDict = {
   replayPrivacyNote:
     'The video is hosted on YouTube. It only loads when you click: Google then receives your IP address and may store data on your device.',
 
-  routeLabel: '03 // The Route',
+  routeLabel: '01 // The Route',
   routeTitleHtml:
     '7 stages, <span class="text-gold">one single tour</span>',
   routeIntro:
-    'From 20 to 30 October, cybersecurity tours the island — four stages run by CLUSIR, three more by local hosts. Same label, same standards, same schedule.',
+    'From 20 to 30 October, cybersecurity tours the island — four stages run by CLUSIR, three more by local hosts. Same label, same standards, same schedule. Cyber Tour is organised by CLUSIR Réunion Océan Indien with the University of La Réunion; the 2025 edition brought together 220 participants.',
   routeDates: '20 — 30 OCTOBER 2026',
-  charter: [
-    {
-      title: 'Shared communication',
-      text: 'One identity, one schedule.',
-    },
-    {
-      title: 'Decentralised organisation',
-      text: 'Independent yet supportive and collegial, each host orchestrates their own stage.',
-    },
-  ],
-
   ctfLabel: '04 // CTF',
   ctfTitleHtml:
     'Reunion Island<br/><span class="text-gold">Cybersecurity</span> Championship',
-  ctfPullQuote:
-    "Bringing together today's talent to build tomorrow's cyber hub.",
   ctfIntroHtml:
     'A month-long CTF running through October for <strong class="text-gold font-semibold">Cybermois 2026</strong>, in partnership with <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold font-semibold hover:text-gold/80 transition-colors">Sec-Dojo</a> and <strong class="text-white font-semibold">Cyber Reunion</strong>.',
   ctfBadgeMonth: 'October 2026',
@@ -513,41 +445,18 @@ const en: HomeDict = {
   ctfBodyHtml:
     'Put your cybersecurity skills to the test with technical challenges on the <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold hover:text-gold/80 transition-colors font-semibold">SecDojo</a> platform: Linux, Windows, Network, Web and more. Open to every level, from beginner to advanced.',
   ctfPartnersLabel: 'In partnership with',
-  ctfTermStatus: './ctf --status',
-  ctfTermPlatform: 'Platform:',
-  ctfTermDuration: 'Duration:',
-  ctfTermDurationValue: 'October 2026',
-  ctfTermCategories: 'Categories:',
-  ctfTermCategoriesValue: 'Linux, Windows, Network, Web',
-  ctfTermPreparing: 'Preparing challenges',
 
-  speakersLabel: '05 // Speakers',
-  speakersTitleHtml: 'Our <span class="text-gold">Speakers</span>',
-  speakersIntro:
-    'Recognised cybersecurity specialists share their expertise and their field experience.',
-  speakersTermFile: 'speakers.build',
-  speakersTermCmd: './cfp --status',
-  speakersTermOpen: 'OPEN — call for speakers in progress',
-  speakersTermBuilding:
-    'The 2026 programme is being built from the submissions we receive.',
-  speakersTermSelecting: 'Selection in progress',
-  speakersTermCta: 'Submit a talk',
 
-  cfpKicker: 'Call for Speakers',
-  cfpTitleHtml: 'Call for <span class="text-gold">submissions</span>',
-  cfpBody:
-    'Are you a cybersecurity expert, researcher, practitioner or enthusiast? Submit a talk, a case study or a technical workshop for the CyberTour Réunion 2026. Every cyber topic is welcome: offensive, defensive, GRC, AI, sovereignty, incident debriefs.',
-  cfpDeadlineLabel: '// Submissions close:',
-  cfpDeadlineDate: 'Thursday 1 October 2026',
-  cfpCta: 'Submit a proposal',
-  cfpFormNote: '(form in French)',
-
-  partnersLabel: '06 // Partners & sponsoring · 1/2',
+  partnersLabel: '03 // Partners',
   partnersTitleHtml: 'The <span class="text-gold">CyberTour</span> ecosystem',
   partnersIntro:
-    'Who runs the event, and in what role. The sponsoring tiers are detailed right below, tier by tier.',
+    'Who runs the event, and in what role.',
+  partnersCta: 'Become a partner',
+  partnersPageMetaTitle: 'Become a partner | Cyber Tour Réunion 2026',
+  partnersPageMetaDescription:
+    'Bronze, Silver and Gold partnership packages for Cyber Tour Réunion 2026: visibility, network, expertise and talent.',
 
-  sponsorsLabel: '07 // Become a partner',
+  sponsorsLabel: 'Become a partner',
   sponsorsTitleHtml:
     'Take part in the <span class="text-gold">CyberTour Réunion</span>',
   sponsorsIntro:
@@ -651,7 +560,7 @@ const en: HomeDict = {
     { value: '2', label: 'Press coverage' },
   ],
 
-  regLabel: '08 // Registration',
+  regLabel: '02 // Registration',
   regTitleHtml: 'Book your <span class="text-gold">seat</span>',
   regIntro: 'The event is free, but seats are limited at every stage. Talks are mainly given in French; international attendees are welcome.',
   regTermFile: 'registration.status',
@@ -676,7 +585,7 @@ const en: HomeDict = {
   icsDone:
     '// File cyber-tour-reunion-2026.ics downloaded — open it to add the event.',
 
-  contactLabel: '09 // Contact',
+  contactLabel: '03 // Contact',
   contactTitleHtml: 'Join <span class="text-gold">the adventure</span>',
   contactIntro:
     'Whether you come as an attendee, a speaker or a sponsor, get in touch to be part of the Cyber Tour Réunion 2026.',

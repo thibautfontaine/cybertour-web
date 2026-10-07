@@ -1,15 +1,26 @@
 /** Chaînes de l'étape Sud. Le FR reprend mot pour mot la page d'origine. */
 import type { Lang } from './index';
 
-export interface SudCard {
-  title: string;
-  desc: string;
-}
-
 export interface SudAtelier {
   icon: string;
   title: string;
   desc: string;
+}
+
+/** Créneau du programme. `kind` règle le rendu : pause, temps fort, table ronde. */
+export interface SudSlot {
+  start: string;
+  end?: string;
+  title: string;
+  speaker?: string;
+  remote?: boolean;
+  kind?: 'break' | 'highlight' | 'panel';
+}
+
+/** Bloc thématique du programme ; sans titre pour l'accueil, la pause, la clôture. */
+export interface SudSession {
+  title?: string;
+  slots: SudSlot[];
 }
 
 export interface SudDict {
@@ -23,9 +34,12 @@ export interface SudDict {
   audienceMorningText: string;
   audienceAfternoonStrong: string;
   audienceAfternoonText: string;
-  topics: SudCard[];
-  fullProgrammeTitle: string;
-  fullProgrammeText: string;
+  programmeTitle: string;
+  programmeDraftNote: string;
+  programmePdfCta: string;
+  programmePdfMeta: string;
+  remoteLabel: string;
+  programme: SudSession[];
   separatorLabel: string;
   day2Label: string;
   day2Title: string;
@@ -39,8 +53,7 @@ export interface SudDict {
   cfpCta: string;
   cfpMailto: string;
   coOrganisersTitle: string;
-  logoUnivAlt: string;
-  logoClusirAlt: string;
+  stagePartnersTitle: string;
 }
 
 export const sud: Record<Lang, SudDict> = {
@@ -58,14 +71,48 @@ export const sud: Record<Lang, SudDict> = {
     audienceMorningText: 'Enjeux cyber pour les TPE, PME et collectivités, sans prérequis technique.',
     audienceAfternoonStrong: 'Après-midi — profils techniques.',
     audienceAfternoonText: "Étudiants et professionnels de l'IT.",
-    topics: [
-      { title: 'Souveraineté numérique', desc: 'Cloud de confiance, enjeux locaux et cadre réglementaire européen.' },
-      { title: 'Sécurité des systèmes IA', desc: "OWASP Top 10 GenAI, risques de l'IA générative, protection des modèles." },
-      { title: 'SOC, défense proactive & Zero Trust', desc: 'Architectures Zero Trust, détection proactive, chiffrement du code source.' },
-      { title: 'RETEX Cyber', desc: "Retour d'expérience sur la gestion d'une crise cyber réelle." },
+    programmeTitle: 'Programme du jeudi 22 octobre',
+    programmeDraftNote: "Programme provisoire : il peut encore évoluer d'ici l'événement (horaires, intervenants, sujets).",
+    programmePdfCta: 'Télécharger le programme',
+    programmePdfMeta: 'PDF, 2,2 Mo',
+    remoteLabel: 'à distance',
+    programme: [
+      {
+        slots: [
+          { start: '08:00', end: '08:45', title: 'Accueil des participants et petit-déjeuner', kind: 'break' },
+          { start: '09:00', end: '09:30', title: 'Discours de bienvenue' },
+        ],
+      },
+      {
+        title: 'Les enjeux de la confiance numérique',
+        slots: [
+          { start: '09:30', end: '10:00', title: "Hygiène numérique à l'ère de l'IA : faut-il adopter de nouveaux réflexes ?", speaker: 'Rodolphe Hoarau, GHT' },
+          { start: '10:00', end: '10:30', title: "Pilotage et gouvernance de la sécurité des systèmes d'information dans une organisation", speaker: 'Grégory Chevaillier, Eyako' },
+          { start: '10:30', end: '11:00', title: "Conférence d'un expert en cybersécurité", speaker: 'Julien Bedel, Orange Cyberdefense', remote: true },
+          { start: '11:00', end: '11:30', title: "Focus sur la menace en période électorale, notamment à l'approche de la présidentielle 2027", speaker: 'Victoria Blin, Viginum', remote: true },
+          { start: '11:30', end: '12:00', title: 'Table ronde et questions de la salle', speaker: 'Cyber Réunion, CLUSIR, Université de La Réunion', kind: 'panel' },
+        ],
+      },
+      {
+        slots: [
+          { start: '12:00', end: '13:45', title: 'Cocktail déjeunatoire, réseautage et rencontres professionnels-étudiants', kind: 'break' },
+        ],
+      },
+      {
+        title: 'Cybersécurité : anticiper, détecter, sensibiliser',
+        slots: [
+          { start: '14:00', end: '15:00', title: "Retour d'expérience sur les podcasts « Le monde de la cyber »", speaker: "Leslie Fornero, invitée d'honneur", kind: 'highlight' },
+          { start: '15:00', end: '15:30', title: "Conférence d'un avocat en droit de la cybercriminalité", speaker: 'Sulliman Omarjee, Cyberlaw Avocats' },
+          { start: '15:30', end: '16:00', title: "Système de détection des menaces pour l'IA générative", speaker: 'Vincent Poudroux, Kodetis' },
+          { start: '16:00', end: '16:30', title: 'Analyser le périmètre cyber externe de son organisation', speaker: 'Siddique Vally-Adam, Reverse-OI' },
+          { start: '16:30', end: '17:00', title: "OSINT : comment les hackers se renseignent sur une cible avant de l'attaquer", speaker: 'Willy Repusseau' },
+          { start: '17:00', end: '17:30', title: 'Table ronde et questions de la salle', speaker: 'Cyber Réunion, CLUSIR, Université de La Réunion, Leslie Fornero', kind: 'panel' },
+        ],
+      },
+      {
+        slots: [{ start: '17:30', title: "Clôture de l'événement" }],
+      },
     ],
-    fullProgrammeTitle: 'Programme complet',
-    fullProgrammeText: "Le programme détaillé et la liste des intervenants seront publiés à l'approche de l'événement.",
     separatorLabel: 'Vendredi 23 octobre',
     day2Label: 'Jour 2 — Vendredi 23 octobre',
     day2Title: 'Ateliers pratiques',
@@ -110,8 +157,7 @@ export const sud: Record<Lang, SudDict> = {
     cfpCta: 'Soumettre une présentation',
     cfpMailto: 'mailto:evenement@clusir-roi.org?subject=Soumission%20Rumps%20CyberTour%202026',
     coOrganisersTitle: 'Co-organisateurs',
-    logoUnivAlt: 'Université de La Réunion',
-    logoClusirAlt: 'CLUSIR Réunion Océan Indien',
+    stagePartnersTitle: "Partenaires de l'étape",
   },
   en: {
     dayNavLabel: 'Navigate by day',
@@ -127,14 +173,48 @@ export const sud: Record<Lang, SudDict> = {
     audienceMorningText: 'Cyber stakes for small businesses, SMEs and local authorities, with no technical prerequisites.',
     audienceAfternoonStrong: 'Afternoon — technical profiles.',
     audienceAfternoonText: 'Students and IT professionals.',
-    topics: [
-      { title: 'Digital sovereignty', desc: 'Trusted cloud, local stakes and the European regulatory framework.' },
-      { title: 'Securing AI systems', desc: 'OWASP Top 10 for GenAI, generative AI risks, protecting models.' },
-      { title: 'SOC, proactive defence & Zero Trust', desc: 'Zero Trust architectures, proactive detection, source code encryption.' },
-      { title: 'Cyber RETEX', desc: 'Lessons learned (RETEX) from handling a real cyber crisis.' },
+    programmeTitle: 'Programme for Thursday 22 October',
+    programmeDraftNote: 'Provisional programme: times, speakers and topics may still change before the event.',
+    programmePdfCta: 'Download the programme',
+    programmePdfMeta: 'PDF in French, 2.2 MB',
+    remoteLabel: 'remote',
+    programme: [
+      {
+        slots: [
+          { start: '08:00', end: '08:45', title: 'Welcome and breakfast', kind: 'break' },
+          { start: '09:00', end: '09:30', title: 'Welcome speeches' },
+        ],
+      },
+      {
+        title: 'The stakes of digital trust',
+        slots: [
+          { start: '09:30', end: '10:00', title: 'Digital hygiene in the age of AI: do we need new habits?', speaker: 'Rodolphe Hoarau, GHT' },
+          { start: '10:00', end: '10:30', title: 'Steering and governing information systems security in an organisation', speaker: 'Grégory Chevaillier, Eyako' },
+          { start: '10:30', end: '11:00', title: 'Talk by a cybersecurity expert', speaker: 'Julien Bedel, Orange Cyberdefense', remote: true },
+          { start: '11:00', end: '11:30', title: 'Focus on threats during election periods, ahead of the 2027 French presidential election', speaker: 'Victoria Blin, Viginum', remote: true },
+          { start: '11:30', end: '12:00', title: 'Panel and audience Q&A', speaker: 'Cyber Réunion, CLUSIR, University of La Réunion', kind: 'panel' },
+        ],
+      },
+      {
+        slots: [
+          { start: '12:00', end: '13:45', title: 'Buffet lunch, networking and professional-student meetings', kind: 'break' },
+        ],
+      },
+      {
+        title: 'Cybersecurity: anticipate, detect, raise awareness',
+        slots: [
+          { start: '14:00', end: '15:00', title: 'Lessons from the “Le monde de la cyber” podcasts', speaker: 'Leslie Fornero, guest of honour', kind: 'highlight' },
+          { start: '15:00', end: '15:30', title: 'Talk by a cybercrime lawyer', speaker: 'Sulliman Omarjee, Cyberlaw Avocats' },
+          { start: '15:30', end: '16:00', title: 'Threat detection for generative AI', speaker: 'Vincent Poudroux, Kodetis' },
+          { start: '16:00', end: '16:30', title: "Analysing your organisation's external cyber perimeter", speaker: 'Siddique Vally-Adam, Reverse-OI' },
+          { start: '16:30', end: '17:00', title: 'OSINT: how hackers research a target before attacking', speaker: 'Willy Repusseau' },
+          { start: '17:00', end: '17:30', title: 'Panel and audience Q&A', speaker: 'Cyber Réunion, CLUSIR, University of La Réunion, Leslie Fornero', kind: 'panel' },
+        ],
+      },
+      {
+        slots: [{ start: '17:30', title: 'Closing' }],
+      },
     ],
-    fullProgrammeTitle: 'Full programme',
-    fullProgrammeText: 'The detailed programme and the list of speakers will be published closer to the event.',
     separatorLabel: 'Friday 23 October',
     day2Label: 'Day 2 — Friday 23 October',
     day2Title: 'Hands-on workshops',
@@ -179,7 +259,6 @@ export const sud: Record<Lang, SudDict> = {
     cfpCta: 'Submit a talk',
     cfpMailto: 'mailto:evenement@clusir-roi.org?subject=Rumps%20submission%20CyberTour%202026',
     coOrganisersTitle: 'Co-organisers',
-    logoUnivAlt: 'Université de La Réunion',
-    logoClusirAlt: 'CLUSIR Réunion Océan Indien',
+    stagePartnersTitle: 'Stage partners',
   },
 };
