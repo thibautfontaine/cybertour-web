@@ -9,10 +9,18 @@ import Footer from '../components/Footer.astro';
 import { getStage } from '../data/stages';
 import { getLang } from '../i18n';
 import { sud } from '../i18n/sud';
+import { getPartners } from '../data/partners';
+import PartnerLogo from '../components/PartnerLogo.astro';
 
 const lang = getLang(Astro.currentLocale);
 const t = sud[lang];
 const stage = getStage(lang, 'sud');
+
+// Co-organisateurs et partenaires affichés sur le programme officiel (PDF).
+const coOrganisers = getPartners(['univ', 'clusir']);
+const stagePartners = getPartners(['edih', 'orange-cyberdefense', 'sfr-business', 'youtell', 'cf-cyber']);
+
+const PROGRAMME_PDF = '/assets/programme-sud-22-octobre-2026.pdf';
 ---
 
 <StageLayout stage={stage}>
@@ -59,43 +67,74 @@ const stage = getStage(lang, 'sud');
             <div>
               <h4 class="font-display font-semibold text-sm mb-1 text-red-400">{t.audienceTitle}</h4>
               <p class="text-white/60 text-sm font-body">
-                <strong class="text-white/80">{t.audienceMorningStrong}</strong>
+                <strong class="text-white/80">{t.audienceMorningStrong}</strong>{' '}
                 {t.audienceMorningText}
               </p>
               <p class="text-white/60 text-sm font-body mt-2">
-                <strong class="text-white/80">{t.audienceAfternoonStrong}</strong>
+                <strong class="text-white/80">{t.audienceAfternoonStrong}</strong>{' '}
                 {t.audienceAfternoonText}
               </p>
             </div>
           </div>
         </div>
 
-        <!-- Thématiques J1 -->
-        <div class="reveal delay-3 mt-10">
-          <div class="grid sm:grid-cols-2 gap-6">
-            {t.topics.map(item => (
-              <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">
-                <h3 class="font-display font-semibold text-lg mb-2">{item.title}</h3>
-                <p class="text-white/50 text-sm font-body">{item.desc}</p>
+        <!-- Programme J1 : créneaux issus du PDF officiel, aussi proposé en téléchargement -->
+        <div class="reveal delay-3 mt-12" id="programme-j1">
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
+            <h3 class="font-display font-semibold text-2xl">{t.programmeTitle}</h3>
+            <a href={PROGRAMME_PDF} download class="btn-outline inline-flex items-center gap-2 text-xs py-2 px-4 self-start sm:self-auto">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+              </svg>
+              {t.programmePdfCta}
+              <span class="font-mono text-[10px] text-white/50 normal-case">{t.programmePdfMeta}</span>
+            </a>
+          </div>
+          <p class="flex items-start gap-2 text-sm text-amber-200/80 bg-amber-300/[0.06] border border-amber-300/20 rounded-lg px-4 py-3 mb-8">
+            <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" />
+            </svg>
+            {t.programmeDraftNote}
+          </p>
+
+          <div class="space-y-8">
+            {t.programme.map((session) => (
+              <div>
+                {session.title && (
+                  <h4 class="font-mono text-xs tracking-widest uppercase text-red-400 mb-3">{session.title}</h4>
+                )}
+                <ol class="border-l border-white/10">
+                  {session.slots.map((slot) => (
+                    <li class:list={[
+                      'relative grid grid-cols-[4.5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 py-3 pl-5',
+                      slot.kind === 'highlight' && 'bg-red-400/[0.06] rounded-r-xl',
+                    ]}>
+                      <span class:list={[
+                        'absolute -left-[5px] top-[1.2rem] w-2.5 h-2.5 rounded-full',
+                        slot.kind === 'break' ? 'bg-white/20' : 'bg-red-400',
+                      ]} aria-hidden="true"></span>
+                      <span class="font-mono text-sm text-white/70 leading-tight">
+                        {slot.start}
+                        {slot.end && <span class="block text-xs text-white/40">{slot.end}</span>}
+                      </span>
+                      <span>
+                        <span class:list={[
+                          'block font-body',
+                          slot.kind === 'break' ? 'text-white/50 italic' : 'text-white',
+                          slot.kind === 'highlight' && 'font-semibold',
+                        ]}>{slot.title}</span>
+                        {slot.speaker && (
+                          <span class="block text-sm text-white/50 mt-0.5">
+                            {slot.speaker}
+                            {slot.remote && <span class="ml-2 font-mono text-[10px] uppercase tracking-wider rounded-full px-2 py-0.5 border border-white/15 text-white/50">{t.remoteLabel}</span>}
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
               </div>
             ))}
-          </div>
-        </div>
-
-        <!-- Programme J1 à venir -->
-        <div class="reveal delay-4 mt-8">
-          <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-6 flex items-start gap-4">
-            <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
-              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">{t.fullProgrammeTitle}</h4>
-              <p class="text-white/50 text-sm font-body">
-                {t.fullProgrammeText}
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -170,18 +209,19 @@ const stage = getStage(lang, 'sud');
     </div>
   </section>
 
-  <!-- Co-organisateurs -->
+  <!-- Co-organisateurs et partenaires de l'étape -->
   <section class="py-16">
-    <div class="max-w-5xl mx-auto px-6">
+    <div class="max-w-5xl mx-auto px-6 space-y-14">
       <div class="reveal">
         <h3 class="font-display font-semibold text-xl mb-8">{t.coOrganisersTitle}</h3>
         <div class="flex flex-wrap items-center justify-center gap-8">
-          <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-univ-reunion.png" alt={t.logoUnivAlt} class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
-          </div>
-          <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-clusir.png" alt={t.logoClusirAlt} class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
-          </div>
+          {coOrganisers.map((p) => <PartnerLogo partner={p} size={p.size.stage} />)}
+        </div>
+      </div>
+      <div class="reveal">
+        <h3 class="font-display font-semibold text-xl mb-8">{t.stagePartnersTitle}</h3>
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          {stagePartners.map((p) => <PartnerLogo partner={p} size={p.size.stage} pad="px-5 py-3" />)}
         </div>
       </div>
     </div>

@@ -1,0 +1,207 @@
+---
+/**
+ * Page « Devenir partenaire » (FR `/partenaires`, EN `/en/partenaires`).
+ *
+ * L'offre de sponsoring vivait au milieu de la page d'accueil, où elle
+ * s'adressait aux entreprises au milieu d'un parcours pensé pour les
+ * participants. Elle a sa page ; l'accueil garde la pyramide des logos et un
+ * lien ici. Les chaînes restent dans `src/i18n/home.ts` (clés `sponsors*`,
+ * `whyInvest*`, `tiers*`, `deck*`, `audience*`).
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getLang } from '../i18n';
+import { home } from '../i18n/home';
+
+const lang = getLang(Astro.currentLocale);
+const t = home[lang];
+
+const contactMail = 'evenement@clusir-roi.org';
+
+/**
+ * Icônes des quatre piliers « Pourquoi investir » (dossier partenaire V2.1,
+ * p.19). Le texte est dans le dictionnaire, le tracé reste ici : il ne se
+ * traduit pas.
+ */
+const pillarIcons: Record<string, string> = {
+  visibilite:
+    'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178zM15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  reseau:
+    'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z',
+  expertise:
+    'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18',
+  talents:
+    'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5',
+};
+
+/**
+ * Palette par palier de partenariat. Comme les icônes, ces classes ne se
+ * traduisent pas : elles restent indexées par la clé stable du dictionnaire.
+ */
+const tierStyles: Record<
+  string,
+  {
+    text: string;
+    border: string;
+    bg: string;
+    hover: string;
+    bar: string;
+    cardBorder: string;
+  }
+> = {
+  bronze: {
+    text: 'text-amber-500',
+    border: 'border-amber-700/50',
+    bg: 'bg-amber-900/20',
+    hover: 'hover:bg-amber-900/30',
+    bar: 'from-amber-700 to-amber-900',
+    cardBorder: 'border-amber-900/30',
+  },
+  silver: {
+    text: 'text-gray-300',
+    border: 'border-gray-400/50',
+    bg: 'bg-gray-400/10',
+    hover: 'hover:bg-gray-400/20',
+    bar: 'from-gray-300 to-gray-500',
+    cardBorder: 'border-gray-400/30',
+  },
+  gold: {
+    text: 'text-gold',
+    border: 'border-gold/50',
+    bg: 'bg-gold/10',
+    hover: 'hover:bg-gold/20',
+    bar: 'from-gold-dim to-gold',
+    cardBorder: 'border-gold/30',
+  },
+};
+
+const mailtoSubject = (subject: string) =>
+  `mailto:${contactMail}?subject=${encodeURIComponent(subject)}`;
+---
+
+<Layout title={t.partnersPageMetaTitle} description={t.partnersPageMetaDescription}>
+  <Navbar currentPage="partenaires" />
+
+  <main id="main-content" class="bg-navy-dark">
+  <section id="sponsors" class="relative pt-36 pb-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-14 text-center">
+        <span class="section-label">{t.sponsorsLabel}</span>
+        <h1 class="section-title mt-4" set:html={t.sponsorsTitleHtml}></h1>
+        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+          {t.sponsorsIntro}
+        </p>
+      </div>
+
+      <!-- ── Pourquoi investir — les 4 piliers du dossier partenaire ──────── -->
+      <div class="reveal delay-1">
+        <h3 class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-6">
+          {t.whyInvestHeading}
+        </h3>
+        <ul class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          {t.whyInvest.map(pillar => (
+            <li class="topic-card rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
+              <svg class="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d={pillarIcons[pillar.key]} />
+              </svg>
+              <h4 class="font-display text-lg font-bold text-white mt-4">{pillar.title}</h4>
+              <p class="mt-2 text-sm leading-relaxed text-white/60">{pillar.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- ── Formules — Soutenir / Être présent / Contribuer ──────────────── -->
+      <div class="reveal delay-2 mt-20">
+        <div class="text-center mb-10">
+          <h3 class="font-mono text-xs tracking-widest uppercase text-white/60">
+            {t.tiersHeading}
+          </h3>
+          <p class="text-white/50 mt-3 max-w-2xl mx-auto">
+            {t.tiersIntro}
+          </p>
+        </div>
+
+        <ul class="grid md:grid-cols-3 gap-5 items-stretch max-w-5xl mx-auto">
+          {t.tiers.map(tier => {
+            const style = tierStyles[tier.key];
+            return (
+              <li class="flex">
+                <article class={`sponsor-card relative flex flex-col w-full overflow-hidden rounded-2xl border bg-white/[0.03] p-6 ${style.cardBorder}`}>
+                  <span class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${style.bar}`} aria-hidden="true"></span>
+                  <span class={`font-mono text-xs tracking-widest uppercase ${style.text}`}>{tier.axis}</span>
+                  <h4 class="font-display text-2xl font-bold text-white mt-2">{tier.name}</h4>
+                  <p class="mt-1 flex items-baseline gap-2 flex-wrap">
+                    <span class="font-mono text-xs text-white/60">{tier.note}</span>
+                    <span class="font-mono text-xl font-bold text-clusir-red">{tier.price}</span>
+                  </p>
+                  <p class="mt-3 text-sm text-white/60">{tier.tagline}</p>
+                  <ul class="mt-5 space-y-3 flex-1">
+                    {tier.includes && (
+                      <li class={`flex items-start gap-3 text-sm font-medium ${style.text}`}>
+                        <svg class="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                        <span>{tier.includes}</span>
+                      </li>
+                    )}
+                    {tier.benefits.map(benefit => (
+                      <li class="flex items-start gap-3 text-sm text-white/70">
+                        <svg class={`mt-0.5 h-5 w-5 shrink-0 ${style.text}`} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={mailtoSubject(tier.subject)}
+                    class={`mt-6 flex min-h-[44px] w-full items-center justify-center rounded-lg border px-4 py-3 font-display text-sm font-semibold uppercase tracking-wider transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${style.border} ${style.bg} ${style.hover} ${style.text}`}
+                    aria-label={tier.aria}
+                  >
+                    {tier.cta}
+                  </a>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+
+        <p class="mt-6 text-center font-mono text-xs text-white/60">{t.tiersFootnote}</p>
+      </div>
+
+      <div class="reveal delay-3 mt-14 text-center">
+        <a
+          href={mailtoSubject(t.deckSubject)}
+          class="btn-primary inline-flex items-center gap-3 rounded-xl"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          {t.deckCta}
+        </a>
+        <p class="mt-4 font-mono text-xs text-white/60">
+          {t.deckNote}
+        </p>
+      </div>
+
+      <!-- Preuve d'audience — chiffres de l'édition précédente, là où est le prix -->
+      <div class="reveal delay-3 mt-14 border-t border-white/10 pt-8">
+        <p class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-5">
+          {t.audienceHeading}
+        </p>
+        <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 text-center">
+          {t.audience2025.map(stat => (
+            <div class="flex flex-col-reverse">
+              <dt class="font-mono text-xs text-white/60 mt-1">{stat.label}</dt>
+              <dd class="font-display font-extrabold text-2xl sm:text-3xl text-gold">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <Footer />
+</Layout>

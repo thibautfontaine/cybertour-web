@@ -1,25 +1,61 @@
 ---
 import { getLang, localizePath } from '../i18n';
 import { ui } from '../i18n/ui';
+import { partnersByTier } from '../data/partners';
+import PartnerLogo from './PartnerLogo.astro';
 
 const lang = getLang(Astro.currentLocale);
 const t = ui[lang].footer;
+const goldLabel = ui[lang].pyramid.gold;
+const gold = partnersByTier('gold');
+const others = [...partnersByTier('organiser'), ...partnersByTier('partner')];
 const p = (path: string) => localizePath(path, lang);
 ---
 
 <footer class="border-t border-white/[0.06] py-12">
   <div class="max-w-7xl mx-auto px-6">
-    <!-- Top row: logo + date + links -->
+    <!-- Bandeau partenaires, sur toutes les pages : le palier Gold en grand,
+         organisateurs et partenaires en dessous (src/data/partners.ts). -->
+    <div class="mb-10 pb-10 border-b border-white/[0.06] flex flex-col items-center gap-8">
+      <div class="flex flex-col items-center gap-4">
+        <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-gold/80">{goldLabel}</span>
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          {gold.map((p) => <PartnerLogo partner={p} size={p.size.band} pad="px-5 py-3" />)}
+        </div>
+      </div>
+      <div class="flex flex-col items-center gap-4">
+        <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-white/50">{t.partnersBand}</span>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          {others.map((p) => <PartnerLogo partner={p} size={p.size.band} pad="px-3 py-2" />)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Ligne 1 : logo, dates, retour en haut -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
       <a href={p('/')} class="flex items-center gap-3">
-        <img src="/assets/cybertour-2026.png" alt={t.logoAlt} class="h-12 sm:h-14 w-auto" />
+        <img src="/assets/logo-cybertour-2026-blanc.webp" alt={t.logoAlt} width="395" height="256" class="h-12 sm:h-14 w-auto" />
       </a>
 
-      <p class="text-white/50 text-sm font-mono">
+      <p class="text-white/50 text-sm font-mono text-center">
         {t.dates}
       </p>
 
-      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+      <a href={p('/#main-content')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
+        {t.backToTop}
+      </a>
+    </div>
+
+    <!-- Ligne 2 : dossier partenaire et pages légales -->
+    <div class="border-t border-white/[0.06] pt-6 mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <a href="mailto:evenement@clusir-roi.org" class="text-gold/80 hover:text-gold transition-colors text-sm font-mono">
+          evenement@clusir-roi.org
+        </a>
+        <span class="hidden sm:inline text-white/10" aria-hidden="true">|</span>
+        <a href={`mailto:evenement@clusir-roi.org?subject=${encodeURIComponent(t.partnerDeckSubject)}`} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
+          {t.partnerDeck}
+        </a>
+        <span class="hidden sm:inline text-white/10" aria-hidden="true">|</span>
         <a href={p('/mentions-legales')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
           {t.legal}
         </a>
@@ -31,11 +67,6 @@ const p = (path: string) => localizePath(path, lang);
         <a href={p('/cookies')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
           {t.cookies}
         </a>
-        <span class="hidden sm:inline text-white/10" aria-hidden="true">|</span>
-        <a href={p('/#main-content')} class="text-white/50 hover:text-gold transition-colors text-sm font-mono">
-          {t.backToTop}
-        </a>
-      </div>
     </div>
 
     <!-- Bottom row: LinkedIn links with names -->

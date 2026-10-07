@@ -1,6 +1,7 @@
 ---
 import { getLang, localizePath, alternatePath, otherLang, LANGS, LANG_STORAGE_KEY } from '../i18n';
 import { ui } from '../i18n/ui';
+import { getStages } from '../data/stages';
 
 interface Props {
   currentPage?: string;
@@ -17,6 +18,16 @@ const p = (path: string) => localizePath(path, lang);
 // rendu en texte non cliquable + badge « bientôt ».
 const navLinks = t.links.map((link) => ({ ...link, href: p(link.href) }));
 const ctaLink = { label: t.cta.label, href: p(t.cta.href) };
+
+// Menu « Les étapes » : les sept étapes dans l'ordre du tour. Celles qui ont
+// une page (`published`) sont des liens, les autres restent visibles, grisées.
+const stages = getStages(lang);
+const stagesAllHref = p(t.stagesMenu.allHref);
+const onStagePage = stages.some((s) => s.published && s.id === currentPage);
+
+// Menu « À propos » : présentation, édition 2025 et contact, sur /a-propos.
+const aboutItems = t.aboutMenu.items.map((item) => ({ ...item, href: p(item.href) }));
+const onAboutPage = currentPage === 'a-propos';
 
 /* Sélecteur de langue : un lien par langue vers la même page dans l'autre
    langue. Le clic écrit localStorage[ct-lang] (voir le script plus bas) — c'est
@@ -39,13 +50,74 @@ const isCurrent = (href: string) =>
     <!-- shrink-0 obligatoire : sans lui, flexbox comprime le logo en largeur
          quand la barre de liens deborde, ce qui l'ecrase en un trait vertical -->
     <a href={p('/')} class="flex items-center gap-3 group shrink-0">
-      <img src="/assets/logo-clusir-roi-sombre.png" alt={t.logoAlt} width="242" height="128" class="h-14 sm:h-16 w-auto max-w-none shrink-0 transition-transform group-hover:scale-105" />
+      <img src="/assets/logo-clusir-roi-sombre.png" alt={t.logoAlt} width="242" height="128" class="h-12 sm:h-16 w-auto max-w-none shrink-0" />
+      <span class="w-px h-8 sm:h-10 bg-white/20" aria-hidden="true"></span>
+      <img src="/assets/logo-cybertour-2026-blanc.webp" alt={t.logoCyberTourAlt} width="395" height="256" class="h-10 sm:h-12 w-auto max-w-none shrink-0" />
     </a>
 
     <div class="flex items-center gap-4 xl:gap-6">
       <!-- Desktop nav -->
       <!-- Nav desktop à partir de lg : 7 liens + CTA débordent sous 1024px -->
       <div class="hidden lg:flex items-center gap-4 xl:gap-6">
+        <!-- Menu « Les étapes » : s'ouvre au survol, au clic, au toucher et au
+             clavier (Entrée, Espace) ; se ferme avec Échap ou un clic ailleurs. -->
+        <div class="relative" id="stages-dropdown" data-dropdown>
+          <button
+            type="button"
+            id="stages-toggle"
+            data-dropdown-toggle
+            aria-expanded="false"
+            aria-controls="stages-menu"
+            class:list={[
+              "inline-flex items-center gap-1.5 text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
+              onStagePage ? "text-gold" : "text-white/70",
+            ]}
+          >
+            {t.stagesMenu.label}
+            <svg class="w-3.5 h-3.5 transition-transform" data-chevron fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <!-- pt-3 : pont invisible entre le bouton et le panneau, pour que le
+               survol ne se perde pas en descendant la souris. -->
+          <div id="stages-menu" data-dropdown-menu class="hidden absolute left-1/2 -translate-x-1/2 top-full pt-3 w-96">
+            <div class="rounded-xl border border-white/10 bg-navy-dark/95 backdrop-blur-lg shadow-2xl p-2">
+              <ul class="list-none m-0 p-0">
+                {stages.map((stage) => (
+                  <li>
+                    {stage.published ? (
+                      <a
+                        href={stage.href}
+                        aria-current={stage.id === currentPage ? 'page' : undefined}
+                        class:list={[
+                          "flex items-baseline justify-between gap-3 rounded-lg px-3 py-2 hover:bg-white/[0.06] focus-visible:bg-white/[0.06] transition-colors",
+                          stage.id === currentPage && "bg-white/[0.04]",
+                        ]}
+                      >
+                        <span>
+                          <span class:list={["block text-sm font-semibold", stage.id === currentPage ? "text-gold" : "text-white"]}>{stage.direction} · {stage.commune}</span>
+                          <span class="block text-xs text-white/50">{stage.host}</span>
+                        </span>
+                        <span class="font-mono text-[11px] text-white/60 whitespace-nowrap">{stage.dateShort}</span>
+                      </a>
+                    ) : (
+                      <span class="flex items-baseline justify-between gap-3 px-3 py-2 cursor-default">
+                        <span>
+                          <span class="block text-sm font-semibold text-white/40">{stage.direction} · {stage.commune}</span>
+                          <span class="block text-xs text-white/35">{stage.host} · {t.stagesMenu.soon}</span>
+                        </span>
+                        <span class="font-mono text-[11px] text-white/35 whitespace-nowrap">{stage.dateShort}</span>
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              <a href={stagesAllHref} class="mt-1 block border-t border-white/10 px-3 pt-3 pb-2 text-xs font-mono uppercase tracking-wider text-gold hover:text-white transition-colors">
+                {t.stagesMenu.all} →
+              </a>
+            </div>
+          </div>
+        </div>
         {navLinks.map((link) => (
           <>
             {link.soon ? (
@@ -66,6 +138,35 @@ const isCurrent = (href: string) =>
             )}
           </>
         ))}
+        <div class="relative" id="about-dropdown" data-dropdown>
+          <button
+            type="button"
+            id="about-toggle"
+            data-dropdown-toggle
+            aria-expanded="false"
+            aria-controls="about-menu"
+            class:list={[
+              "inline-flex items-center gap-1.5 text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
+              onAboutPage ? "text-gold" : "text-white/70",
+            ]}
+          >
+            {t.aboutMenu.label}
+            <svg class="w-3.5 h-3.5 transition-transform" data-chevron fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <div id="about-menu" data-dropdown-menu class="hidden absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56">
+            <ul class="list-none m-0 rounded-xl border border-white/10 bg-navy-dark/95 backdrop-blur-lg shadow-2xl p-2">
+              {aboutItems.map((item) => (
+                <li>
+                  <a href={item.href} class="block rounded-lg px-3 py-2 text-sm font-semibold text-white hover:bg-white/[0.06] focus-visible:bg-white/[0.06] hover:text-gold transition-colors">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <a href={ctaLink.href} class="btn-outline text-xs py-2 px-5">{ctaLink.label}</a>
       </div>
 
@@ -116,6 +217,25 @@ const isCurrent = (href: string) =>
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden lg:hidden bg-navy-dark/95 backdrop-blur-lg border-t border-white/10">
     <div class="px-6 py-4 flex flex-col gap-4">
+      <div>
+        <span class="text-sm font-medium uppercase text-white/50">{t.stagesMenu.label}</span>
+        <ul class="list-none m-0 mt-2 p-0 flex flex-col gap-2 border-l border-white/10 pl-4">
+          {stages.map((stage) => (
+            <li>
+              {stage.published ? (
+                <a href={stage.href} class:list={["text-sm hover:text-gold transition-colors", stage.id === currentPage ? "text-gold" : "text-white/80"]}>
+                  {stage.direction} · {stage.commune} <span class="font-mono text-[11px] text-white/50 ml-1">{stage.dateShort}</span>
+                </a>
+              ) : (
+                <span class="text-sm text-white/35">
+                  {stage.direction} · {stage.commune} <span class="font-mono text-[11px] ml-1">{stage.dateShort}</span>
+                </span>
+              )}
+            </li>
+          ))}
+          <li><a href={stagesAllHref} class="text-xs font-mono uppercase tracking-wider text-gold">{t.stagesMenu.all} →</a></li>
+        </ul>
+      </div>
       {navLinks.map((link) => (
         link.soon ? (
           <span class="inline-flex items-center gap-2 cursor-default select-none">
@@ -134,6 +254,14 @@ const isCurrent = (href: string) =>
           </a>
         )
       ))}
+      <div>
+        <span class="text-sm font-medium uppercase text-white/50">{t.aboutMenu.label}</span>
+        <ul class="list-none m-0 mt-2 p-0 flex flex-col gap-2 border-l border-white/10 pl-4">
+          {aboutItems.map((item) => (
+            <li><a href={item.href} class="text-sm text-white/80 hover:text-gold transition-colors">{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
       <a href={ctaLink.href} class="text-sm font-medium text-white/70 hover:text-gold transition-colors uppercase">{ctaLink.label}</a>
     </div>
   </div>
@@ -200,5 +328,69 @@ const isCurrent = (href: string) =>
       setMenu(false);
       menuToggle?.focus();
     }
+  });
+
+  // Menus déroulants du desktop (« Les étapes », « À propos »). Le survol ne
+  // suffit pas : sans souris (tactile, clavier), le bouton ouvre et ferme la
+  // liste. Un seul menu ouvert à la fois.
+  const dropdowns = Array.from(document.querySelectorAll<HTMLElement>('[data-dropdown]')).map((root) => ({
+    root,
+    toggle: root.querySelector<HTMLButtonElement>('[data-dropdown-toggle]'),
+    menu: root.querySelector<HTMLElement>('[data-dropdown-menu]'),
+    chevron: root.querySelector<SVGElement>('[data-chevron]'),
+    timer: undefined as number | undefined,
+  }));
+  type Dropdown = (typeof dropdowns)[number];
+
+  const isOpen = (d: Dropdown) => d.toggle?.getAttribute('aria-expanded') === 'true';
+
+  function setDropdown(d: Dropdown, open: boolean) {
+    if (!d.menu || !d.toggle) return;
+    window.clearTimeout(d.timer);
+    if (open) dropdowns.forEach((other) => other !== d && isOpen(other) && setDropdown(other, false));
+    d.menu.classList.toggle('hidden', !open);
+    d.toggle.setAttribute('aria-expanded', String(open));
+    d.chevron?.classList.toggle('rotate-180', open);
+  }
+
+  dropdowns.forEach((d) => {
+    // À la souris, le survol a déjà ouvert la liste : le clic la laisse
+    // ouverte au lieu de la refermer. Clavier (pointerType vide) et toucher
+    // basculent.
+    d.toggle?.addEventListener('click', (e) => {
+      if ((e as PointerEvent).pointerType === 'mouse') setDropdown(d, true);
+      else setDropdown(d, !isOpen(d));
+    });
+    // Survol à la souris uniquement : un toucher émet aussi pointerenter, qui
+    // rouvrirait la liste juste avant que le clic ne la referme.
+    d.root.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'mouse') setDropdown(d, true);
+    });
+    d.root.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      d.timer = window.setTimeout(() => setDropdown(d, false), 150);
+    });
+    // Focus sorti du menu (Tab) : fermeture.
+    d.root.addEventListener('focusout', (e) => {
+      if (!d.root.contains(e.relatedTarget as Node | null)) setDropdown(d, false);
+    });
+    // Lien d'ancre vers la page courante : pas de rechargement, on referme.
+    d.menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setDropdown(d, false)));
+  });
+
+  // Clic ailleurs ou Échap : fermeture, focus rendu au bouton avec Échap.
+  document.addEventListener('click', (e) => {
+    dropdowns.forEach((d) => {
+      if (isOpen(d) && !d.root.contains(e.target as Node)) setDropdown(d, false);
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    dropdowns.forEach((d) => {
+      if (isOpen(d)) {
+        setDropdown(d, false);
+        d.toggle?.focus();
+      }
+    });
   });
 </script>
