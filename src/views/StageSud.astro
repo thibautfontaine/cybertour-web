@@ -11,6 +11,7 @@ import { getLang } from '../i18n';
 import { sud } from '../i18n/sud';
 import { getPartners } from '../data/partners';
 import PartnerLogo from '../components/PartnerLogo.astro';
+import ProgrammeTimeline from '../components/ProgrammeTimeline.astro';
 
 const lang = getLang(Astro.currentLocale);
 const t = sud[lang];
@@ -97,45 +98,7 @@ const PROGRAMME_PDF = '/assets/programme-sud-22-octobre-2026.pdf';
             {t.programmeDraftNote}
           </p>
 
-          <div class="space-y-8">
-            {t.programme.map((session) => (
-              <div>
-                {session.title && (
-                  <h4 class="font-mono text-xs tracking-widest uppercase text-red-400 mb-3">{session.title}</h4>
-                )}
-                <ol class="border-l border-white/10">
-                  {session.slots.map((slot) => (
-                    <li class:list={[
-                      'relative grid grid-cols-[4.5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 py-3 pl-5',
-                      slot.kind === 'highlight' && 'bg-red-400/[0.06] rounded-r-xl',
-                    ]}>
-                      <span class:list={[
-                        'absolute -left-[5px] top-[1.2rem] w-2.5 h-2.5 rounded-full',
-                        slot.kind === 'break' ? 'bg-white/20' : 'bg-red-400',
-                      ]} aria-hidden="true"></span>
-                      <span class="font-mono text-sm text-white/70 leading-tight">
-                        {slot.start}
-                        {slot.end && <span class="block text-xs text-white/40">{slot.end}</span>}
-                      </span>
-                      <span>
-                        <span class:list={[
-                          'block font-body',
-                          slot.kind === 'break' ? 'text-white/50 italic' : 'text-white',
-                          slot.kind === 'highlight' && 'font-semibold',
-                        ]}>{slot.title}</span>
-                        {slot.speaker && (
-                          <span class="block text-sm text-white/50 mt-0.5">
-                            {slot.speaker}
-                            {slot.remote && <span class="ml-2 font-mono text-[10px] uppercase tracking-wider rounded-full px-2 py-0.5 border border-white/15 text-white/50">{t.remoteLabel}</span>}
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
-          </div>
+          <ProgrammeTimeline sessions={t.programme} remoteLabel={t.remoteLabel} accent="red" />
         </div>
       </div>
 

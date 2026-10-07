@@ -135,8 +135,8 @@ const base: StageBase[] = [
         lieu: "Office de l'Eau Réunion - Saint-Paul",
         theme: "Gestion de crise : théorie et pratique",
         description:
-          "Journée entière consacrée à la gestion de crise cyber. Le matin, la méthode et les retours d'expérience de ceux qui ont géré un incident réel. L'après-midi, un exercice pratique en groupes animé par le CLUSIR ROI.",
-        highlights: ["Gestion de crise", "Retours d'expérience", "Exercice en groupes"],
+          "Journée entière consacrée à la gestion de crise cyber. Le matin, les fondamentaux et les réflexes clés. L'après-midi, un exercice sur table en groupes, suivi d'un débriefing à chaud.",
+        highlights: ["Fondamentaux", "Réflexes clés", "Exercice sur table"],
       },
       en: {
         name: "West Stage",
@@ -147,8 +147,8 @@ const base: StageBase[] = [
         lieu: "Office de l'Eau Réunion - Saint-Paul",
         theme: "Crisis Management: Theory and Practice",
         description:
-          "A full day devoted to cyber crisis management. In the morning, the method and the lessons learned by those who handled a real incident. In the afternoon, a hands-on group exercise run by CLUSIR ROI.",
-        highlights: ["Crisis management", "Lessons learned", "Group exercise"],
+          "A full day devoted to cyber crisis management. In the morning, the fundamentals and key reflexes. In the afternoon, a tabletop exercise in groups, followed by a hot debrief.",
+        highlights: ["Fundamentals", "Key reflexes", "Tabletop exercise"],
       },
     },
   },
