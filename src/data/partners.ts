@@ -95,7 +95,7 @@ export const partners: Partner[] = [
   {
     id: 'esiroi',
     name: "ESIROI, école d'ingénieurs de l'Université de La Réunion",
-    logo: '/assets/logo-esiroi.jpg',
+    logo: '/assets/logo-esiroi.png',
     url: 'https://esiroi.univ-reunion.fr/',
     tier: 'partner',
     size: { pyramid: 'h-8 sm:h-9', band: 'h-9', stage: 'h-12' },
@@ -103,7 +103,7 @@ export const partners: Partner[] = [
   {
     id: 'cyber-reunion',
     name: 'Cyber Réunion',
-    logo: '/assets/logo-cyber-reunion.jpg',
+    logo: '/assets/logo-cyber-reunion.png',
     url: 'https://www.cyber-reunion.fr/',
     tier: 'partner',
     size: { pyramid: 'h-8 sm:h-9', band: 'h-9', stage: 'h-12' },
