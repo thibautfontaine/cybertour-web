@@ -12,7 +12,11 @@
  * Adresses vérifiées le 7 octobre 2026.
  */
 
-export type PartnerTier = 'organiser' | 'gold' | 'partner';
+/**
+ * `host` : structure qui co-organise une seule étape. Elle apparaît sur la
+ * page de cette étape, pas dans la pyramide ni le bandeau du pied de page.
+ */
+export type PartnerTier = 'organiser' | 'gold' | 'partner' | 'host';
 
 export interface Partner {
   id: string;
@@ -42,6 +46,14 @@ export const partners: Partner[] = [
     logo: '/assets/logo-univ-reunion.png',
     url: 'https://www.univ-reunion.fr/',
     tier: 'organiser',
+    size: { pyramid: 'h-20 sm:h-24', band: 'h-10', stage: 'h-16 sm:h-20' },
+  },
+  {
+    id: 'office-eau',
+    name: "Office de l'Eau Réunion",
+    logo: '/assets/logo-office-eau.png',
+    url: 'https://www.eaureunion.fr/',
+    tier: 'host',
     size: { pyramid: 'h-20 sm:h-24', band: 'h-10', stage: 'h-16 sm:h-20' },
   },
   {

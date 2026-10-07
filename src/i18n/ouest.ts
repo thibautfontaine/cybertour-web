@@ -10,8 +10,8 @@ export interface OuestDict {
   format: string;
   scheduleTitle: string;
   programme: ProgrammeSession[];
-  venueTitle: string;
-  logoOfficeEauAlt: string;
+  organisersTitle: string;
+  stagePartnersTitle: string;
 }
 
 const SPEAKER = 'Tahiry Razafindralambo, Université de La Réunion';
@@ -56,8 +56,8 @@ export const ouest: Record<Lang, OuestDict> = {
         slots: [{ start: '16:30', title: 'Clôture de la journée' }],
       },
     ],
-    venueTitle: "Lieu d'accueil",
-    logoOfficeEauAlt: "Office de l'Eau",
+    organisersTitle: 'Organisateurs',
+    stagePartnersTitle: "Partenaires de l'étape",
   },
   en: {
     programmeLabel: 'Programme',
@@ -97,7 +97,7 @@ export const ouest: Record<Lang, OuestDict> = {
         slots: [{ start: '16:30', title: 'Closing of the day' }],
       },
     ],
-    venueTitle: 'Venue',
-    logoOfficeEauAlt: "Office de l'Eau",
+    organisersTitle: 'Organisers',
+    stagePartnersTitle: 'Stage partners',
   },
 };

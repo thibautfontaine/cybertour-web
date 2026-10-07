@@ -10,10 +10,15 @@ import { getStage } from '../data/stages';
 import { getLang } from '../i18n';
 import { ouest } from '../i18n/ouest';
 import ProgrammeTimeline from '../components/ProgrammeTimeline.astro';
+import PartnerLogo from '../components/PartnerLogo.astro';
+import { getPartners } from '../data/partners';
 
 const lang = getLang(Astro.currentLocale);
 const t = ouest[lang];
 const stage = getStage(lang, 'ouest');
+
+const organisers = getPartners(['clusir', 'office-eau']);
+const stagePartners = getPartners(['orange-cyberdefense', 'sfr-business', 'youtell', 'cf-cyber']);
 ---
 
 <StageLayout stage={stage}>
@@ -47,12 +52,18 @@ const stage = getStage(lang, 'ouest');
         <ProgrammeTimeline sessions={t.programme} accent="cyan" />
       </div>
 
-      <!-- Lieu d'accueil -->
-      <div class="reveal mt-16">
-        <h3 class="font-display font-semibold text-xl mb-8">{t.venueTitle}</h3>
-        <div class="flex flex-wrap items-center justify-center gap-8">
-          <div class="partner-bubble px-6 py-3">
-            <img src="/assets/logo-office-eau.png" alt={t.logoOfficeEauAlt} class="h-16 sm:h-20 w-auto object-contain" loading="lazy" />
+      <!-- Organisateurs et partenaires de l'étape -->
+      <div class="reveal mt-16 space-y-14">
+        <div>
+          <h3 class="font-display font-semibold text-xl mb-8">{t.organisersTitle}</h3>
+          <div class="flex flex-wrap items-center justify-center gap-8">
+            {organisers.map((p) => <PartnerLogo partner={p} size={p.size.stage} />)}
+          </div>
+        </div>
+        <div>
+          <h3 class="font-display font-semibold text-xl mb-8">{t.stagePartnersTitle}</h3>
+          <div class="flex flex-wrap items-center justify-center gap-6">
+            {stagePartners.map((p) => <PartnerLogo partner={p} size={p.size.stage} pad="px-5 py-3" />)}
           </div>
         </div>
       </div>
