@@ -72,7 +72,7 @@ export const partners: Partner[] = [
     url: 'https://www.sfrbusiness.re/',
     tier: 'gold',
     sponsored: true,
-    size: { pyramid: 'h-14 sm:h-[4.5rem]', float: 'h-7 sm:h-9', band: 'h-12 sm:h-14', stage: 'h-12 sm:h-14' },
+    size: { pyramid: 'h-9 sm:h-11', float: 'h-[18px] sm:h-6', band: 'h-8 sm:h-9', stage: 'h-8 sm:h-9' },
   },
   {
     id: 'youtell',
@@ -81,7 +81,7 @@ export const partners: Partner[] = [
     url: 'https://youtell.re/',
     tier: 'gold',
     sponsored: true,
-    size: { pyramid: 'h-11 sm:h-14', float: 'h-6 sm:h-7', band: 'h-9 sm:h-11', stage: 'h-9 sm:h-11' },
+    size: { pyramid: 'h-10 sm:h-11', float: 'h-[22px] sm:h-[26px]', band: 'h-[34px] sm:h-10', stage: 'h-[34px] sm:h-10' },
     imgClass: 'rounded-lg',
   },
   {
@@ -90,7 +90,7 @@ export const partners: Partner[] = [
     logo: '/assets/logo-iut.png',
     url: 'https://iut.univ-reunion.fr/',
     tier: 'partner',
-    size: { pyramid: 'h-10 sm:h-11', band: 'h-9', stage: 'h-12' },
+    size: { pyramid: 'h-8 sm:h-9', band: 'h-9', stage: 'h-12' },
   },
   {
     id: 'esiroi',
@@ -98,7 +98,7 @@ export const partners: Partner[] = [
     logo: '/assets/logo-esiroi.jpg',
     url: 'https://esiroi.univ-reunion.fr/',
     tier: 'partner',
-    size: { pyramid: 'h-10 sm:h-11', band: 'h-9', stage: 'h-12' },
+    size: { pyramid: 'h-8 sm:h-9', band: 'h-9', stage: 'h-12' },
   },
   {
     id: 'cyber-reunion',
@@ -106,7 +106,7 @@ export const partners: Partner[] = [
     logo: '/assets/logo-cyber-reunion.jpg',
     url: 'https://www.cyber-reunion.fr/',
     tier: 'partner',
-    size: { pyramid: 'h-10 sm:h-11', band: 'h-9', stage: 'h-12' },
+    size: { pyramid: 'h-8 sm:h-9', band: 'h-9', stage: 'h-12' },
   },
   {
     id: 'edih',
@@ -114,7 +114,7 @@ export const partners: Partner[] = [
     logo: '/assets/logo-edih-reunion.png',
     url: 'https://www.cyber-reunion.fr/edih/',
     tier: 'partner',
-    size: { pyramid: 'h-7 sm:h-8', band: 'h-7', stage: 'h-9' },
+    size: { pyramid: 'h-6 sm:h-7', band: 'h-7', stage: 'h-9' },
   },
   {
     id: 'cf-cyber',
@@ -122,7 +122,7 @@ export const partners: Partner[] = [
     logo: '/assets/logo-cf-cyber.png',
     url: 'https://cfcyber.fr/',
     tier: 'partner',
-    size: { pyramid: 'h-6 sm:h-7', band: 'h-6', stage: 'h-8' },
+    size: { pyramid: 'h-5 sm:h-6', band: 'h-6', stage: 'h-8' },
   },
 ];
 
