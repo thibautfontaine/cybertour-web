@@ -57,6 +57,14 @@ export const partners: Partner[] = [
     size: { pyramid: 'h-20 sm:h-24', band: 'h-10', stage: 'h-16 sm:h-20' },
   },
   {
+    id: 'prefecture',
+    name: 'Préfet de la Région Réunion',
+    logo: '/assets/logo-prefecture-reunion.png',
+    url: 'https://www.reunion.gouv.fr/',
+    tier: 'host',
+    size: { pyramid: 'h-20 sm:h-24', band: 'h-10', stage: 'h-16 sm:h-20' },
+  },
+  {
     id: 'orange-cyberdefense',
     name: 'Orange Cyberdefense',
     logo: '/assets/logo-orange-cyberdefense.png',

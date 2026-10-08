@@ -97,7 +97,7 @@ const base: StageBase[] = [
         lieu: "PTU - Parc Technologique Universitaire",
         theme: "Institutionnel, Tables Rondes & Ciné-débat",
         description:
-          "Matinée d'ouverture officielle du CyberTour Réunion (8h-12h). Rencontres institutionnelles, interventions des personnalités publiques et tables rondes stratégiques autour de la souveraineté numérique. Présentation du parcours CyberTour 2026. L'après-midi, ciné-débat autour du film « Don't Go to the Police » (Orange Cyberdefense) : projection puis échange avec la salle.",
+          "Matinée d'ouverture officielle du CyberTour Réunion (8h-12h30) : état de la menace cyber sur le territoire (ANSSI, Cyber Réunion, FAZSOI), deux tables rondes sur les risques cyber dans le secteur privé et sur la capacité du territoire à réagir aux crises, puis un temps consacré au facteur humain et à la formation. L'après-midi, ciné-débat autour du film « Don't Go to the Police » (Orange Cyberdefense) : projection puis échange avec la salle.",
         highlights: ["Acteurs institutionnels", "Tables rondes", "Personnalités publiques", "Ciné-débat"],
       },
       en: {
@@ -109,7 +109,7 @@ const base: StageBase[] = [
         lieu: "PTU - University Technology Park",
         theme: "Institutions, Panel Discussions & Film Debate",
         description:
-          "Official opening morning of CyberTour Réunion (8am-12pm). Institutional meetings, addresses by public figures and strategic panel discussions on digital sovereignty. Presentation of the CyberTour 2026 route. In the afternoon, a screening of “Don't Go to the Police” (Orange Cyberdefense) followed by an open discussion with the audience.",
+          "Official opening morning of CyberTour Réunion (8am-12:30pm): the state of the cyber threat on the island (ANSSI, Cyber Réunion, FAZSOI), two panels on cyber risk in the private sector and on the island's ability to respond to crises, then a session on the human factor and training. In the afternoon, a screening of “Don't Go to the Police” (Orange Cyberdefense) followed by an open discussion with the audience.",
         highlights: ["Institutional stakeholders", "Panel discussions", "Public figures", "Film debate"],
       },
     },
