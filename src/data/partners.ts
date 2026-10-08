@@ -71,7 +71,7 @@ export const partners: Partner[] = [
     url: 'https://www.orangecyberdefense.com/fr/',
     tier: 'gold',
     sponsored: true,
-    size: { pyramid: 'h-9 sm:h-11', float: 'h-5 sm:h-6', band: 'h-8 sm:h-9', stage: 'h-8 sm:h-9' },
+    size: { pyramid: 'h-6 sm:h-8', float: 'h-[14px] sm:h-[17px]', band: 'h-[22px] sm:h-[26px]', stage: 'h-[22px] sm:h-[26px]' },
   },
   {
     id: 'sfr-business',
