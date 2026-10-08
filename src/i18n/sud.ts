@@ -73,7 +73,7 @@ export const sud: Record<Lang, SudDict> = {
         slots: [
           { start: '09:30', end: '10:00', title: "Hygiène numérique à l'ère de l'IA : faut-il adopter de nouveaux réflexes ?", speaker: 'Rodolphe Hoarau, GHT' },
           { start: '10:00', end: '10:30', title: "Pilotage et gouvernance de la sécurité des systèmes d'information dans une organisation", speaker: 'Grégory Chevaillier, Eyako' },
-          { start: '10:30', end: '11:00', title: "Conférence d'un expert en cybersécurité", speaker: 'Julien Bedel, Orange Cyberdefense', remote: true },
+          { start: '10:30', end: '11:00', title: 'Hacking : riposter avec le droit de la cybercriminalité', speaker: 'Maître Sulliman Omarjee, Cyberlaw Avocats' },
           { start: '11:00', end: '11:30', title: "Focus sur la menace en période électorale, notamment à l'approche de la présidentielle 2027", speaker: 'Victoria Blin, Viginum', remote: true },
           { start: '11:30', end: '12:00', title: 'Table ronde et questions de la salle', speaker: 'Cyber Réunion, CLUSIR, Université de La Réunion', kind: 'panel' },
         ],
@@ -87,7 +87,7 @@ export const sud: Record<Lang, SudDict> = {
         title: 'Cybersécurité : anticiper, détecter, sensibiliser',
         slots: [
           { start: '14:00', end: '15:00', title: "Retour d'expérience sur les podcasts « Le monde de la cyber »", speaker: "Leslie Fornero, invitée d'honneur", kind: 'highlight' },
-          { start: '15:00', end: '15:30', title: "Conférence d'un avocat en droit de la cybercriminalité", speaker: 'Sulliman Omarjee, Cyberlaw Avocats' },
+          { start: '15:00', end: '15:30', title: "Immersion au cœur d'une opération Red Team", speaker: 'Julien Bedel, Orange Cyberdefense', remote: true },
           { start: '15:30', end: '16:00', title: "Système de détection des menaces pour l'IA générative", speaker: 'Vincent Poudroux, Kodetis' },
           { start: '16:00', end: '16:30', title: 'Analyser le périmètre cyber externe de son organisation', speaker: 'Siddique Vally-Adam, Reverse-OI' },
           { start: '16:30', end: '17:00', title: "OSINT : comment les hackers se renseignent sur une cible avant de l'attaquer", speaker: 'Willy Repusseau' },
@@ -175,7 +175,7 @@ export const sud: Record<Lang, SudDict> = {
         slots: [
           { start: '09:30', end: '10:00', title: 'Digital hygiene in the age of AI: do we need new habits?', speaker: 'Rodolphe Hoarau, GHT' },
           { start: '10:00', end: '10:30', title: 'Steering and governing information systems security in an organisation', speaker: 'Grégory Chevaillier, Eyako' },
-          { start: '10:30', end: '11:00', title: 'Talk by a cybersecurity expert', speaker: 'Julien Bedel, Orange Cyberdefense', remote: true },
+          { start: '10:30', end: '11:00', title: 'Hacking: fighting back with cybercrime law', speaker: 'Sulliman Omarjee, attorney, Cyberlaw Avocats' },
           { start: '11:00', end: '11:30', title: 'Focus on threats during election periods, ahead of the 2027 French presidential election', speaker: 'Victoria Blin, Viginum', remote: true },
           { start: '11:30', end: '12:00', title: 'Panel and audience Q&A', speaker: 'Cyber Réunion, CLUSIR, University of La Réunion', kind: 'panel' },
         ],
@@ -189,7 +189,7 @@ export const sud: Record<Lang, SudDict> = {
         title: 'Cybersecurity: anticipate, detect, raise awareness',
         slots: [
           { start: '14:00', end: '15:00', title: 'Lessons from the “Le monde de la cyber” podcasts', speaker: 'Leslie Fornero, guest of honour', kind: 'highlight' },
-          { start: '15:00', end: '15:30', title: 'Talk by a cybercrime lawyer', speaker: 'Sulliman Omarjee, Cyberlaw Avocats' },
+          { start: '15:00', end: '15:30', title: 'Inside a Red Team operation', speaker: 'Julien Bedel, Orange Cyberdefense', remote: true },
           { start: '15:30', end: '16:00', title: 'Threat detection for generative AI', speaker: 'Vincent Poudroux, Kodetis' },
           { start: '16:00', end: '16:30', title: "Analysing your organisation's external cyber perimeter", speaker: 'Siddique Vally-Adam, Reverse-OI' },
           { start: '16:30', end: '17:00', title: 'OSINT: how hackers research a target before attacking', speaker: 'Willy Repusseau' },
