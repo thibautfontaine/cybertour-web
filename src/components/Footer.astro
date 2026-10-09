@@ -20,13 +20,13 @@ const p = (path: string) => localizePath(path, lang);
       <div class="flex flex-col items-center gap-4">
         <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-gold/80">{goldLabel}</span>
         <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          {gold.map((p) => <PartnerLogo partner={p} size={p.size.band} pad="px-5 py-3" />)}
+          {gold.map((p) => <PartnerLogo partner={p} size={p.size.band} pad="px-5 py-3" box="w-48 h-16 sm:w-56 sm:h-[68px]" />)}
         </div>
       </div>
       <div class="flex flex-col items-center gap-4">
         <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-white/50">{t.partnersBand}</span>
         <div class="flex flex-wrap items-center justify-center gap-3">
-          {others.map((p) => <PartnerLogo partner={p} size={p.size.band} pad="px-3 py-2" />)}
+          {others.map((p) => <PartnerLogo partner={p} size={p.size.band} pad="px-3 py-2" box="w-32 h-12 sm:w-32 sm:h-12" />)}
         </div>
       </div>
     </div>
