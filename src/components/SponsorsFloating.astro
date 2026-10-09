@@ -26,8 +26,8 @@ const gold = partnersByTier('gold');
   <span class="hidden sm:inline font-mono text-[10px] tracking-[0.18em] uppercase text-gold/80">{label}</span>
 
   {gold.map((p) => (
-    <a href={p.url} target="_blank" rel={partnerRel(p)} class="logo-white-bg rounded-xl px-3 py-1.5 flex items-center justify-center transition-transform hover:-translate-y-0.5">
-      <img src={p.logo} alt={p.name} class:list={['w-auto object-contain', p.size.float, p.imgClass && 'rounded']} loading="lazy" />
+    <a href={p.url} target="_blank" rel={partnerRel(p)} class="logo-white-bg rounded-xl w-[92px] h-8 sm:w-[136px] sm:h-[38px] px-2 sm:px-3 flex items-center justify-center transition-transform hover:-translate-y-0.5">
+      <img src={p.logo} alt={p.name} class:list={['w-auto object-contain max-w-full max-h-full', p.size.float, p.imgClass && 'rounded']} loading="lazy" />
     </a>
   ))}
 </aside>

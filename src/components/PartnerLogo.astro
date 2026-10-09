@@ -2,6 +2,9 @@
 /**
  * Logo de partenaire cliquable, dans sa pastille blanche. Le lien s'ouvre
  * dans un nouvel onglet ; le nom complet sert de texte alternatif.
+ *
+ * `box` fixe la largeur et la hauteur de la pastille : les logos d'un même
+ * niveau reçoivent la même, et chaque logo se centre dedans.
  */
 import type { Partner } from '../data/partners';
 import { partnerRel } from '../data/partners';
@@ -12,17 +15,19 @@ interface Props {
   size: string;
   /** Marges internes de la pastille. */
   pad?: string;
+  /** Largeur et hauteur de la pastille (classes Tailwind). */
+  box?: string;
   class?: string;
 }
 
-const { partner, size, pad = 'px-6 py-3', class: extra } = Astro.props;
+const { partner, size, pad = 'px-6 py-3', box, class: extra } = Astro.props;
 ---
 
 <a
   href={partner.url}
   target="_blank"
   rel={partnerRel(partner)}
-  class:list={['partner-bubble inline-flex items-center justify-center transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold', pad, extra]}
+  class:list={['partner-bubble inline-flex items-center justify-center transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold', pad, box, extra]}
 >
-  <img src={partner.logo} alt={partner.name} class:list={['w-auto object-contain', size, partner.imgClass]} loading="lazy" />
+  <img src={partner.logo} alt={partner.name} class:list={['w-auto object-contain', size, box && 'max-w-full max-h-full', partner.imgClass]} loading="lazy" />
 </a>

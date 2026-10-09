@@ -26,12 +26,12 @@ const others = partnersByTier('partner');
     <div class="flex flex-col items-center gap-12">
 
       <!-- Level 1 — Organisateur -->
-      <div class="reveal flex flex-col items-center gap-6 max-w-2xl w-full">
+      <div class="reveal flex flex-col items-center gap-6 max-w-4xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-gold">
           {t.organiser}
         </span>
         <div class="flex flex-wrap items-center justify-center gap-6">
-          {organisers.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-8 py-4" />)}
+          {organisers.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-8 py-4" box="w-40 h-14 sm:w-44 sm:h-[60px]" />)}
         </div>
         <!-- Connecting line -->
         <div class="w-px h-8 bg-white/10"></div>
@@ -40,24 +40,24 @@ const others = partnersByTier('partner');
       {/* Level 2 — Partenaires Gold. La charte proscrit le mot « sponsor »
           en public (art. 6.4) : le palier s'appelle Gold, la structure est
           un partenaire. */}
-      <div class="reveal delay-1 flex flex-col items-center gap-6 max-w-3xl w-full">
+      <div class="reveal delay-1 flex flex-col items-center gap-6 max-w-4xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-gold/80">
           {t.gold}
         </span>
         <div class="flex flex-wrap items-center justify-center gap-6">
-          {gold.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-7 py-4" />)}
+          {gold.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-7 py-4" box="w-48 h-16 sm:w-52 sm:h-[68px]" />)}
         </div>
         <!-- Connecting line -->
         <div class="w-px h-8 bg-white/10"></div>
       </div>
 
       <!-- Level 3 — Partenaires -->
-      <div class="reveal delay-2 flex flex-col items-center gap-6 max-w-4xl w-full">
+      <div class="reveal delay-2 flex flex-col items-center gap-6 max-w-6xl w-full">
         <span class="font-mono text-sm tracking-widest uppercase text-white/60">
           {t.partners}
         </span>
         <div class="flex flex-wrap items-center justify-center gap-6">
-          {others.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-4 py-2" />)}
+          {others.map((p) => <PartnerLogo partner={p} size={p.size.pyramid} pad="px-4 py-2" box="w-36 h-12 sm:w-40 sm:h-14" />)}
         </div>
       </div>
 
