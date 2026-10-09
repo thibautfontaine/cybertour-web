@@ -28,6 +28,7 @@ export interface UiDict {
     logoAlt: string;
     logoCyberTourAlt: string;
     logoPrefectureAlt: string;
+    logoCyberReunionAlt: string;
     langSwitcher: string;
     langNames: Record<Lang, string>;
   };
@@ -136,6 +137,7 @@ export const ui: Record<Lang, UiDict> = {
       logoAlt: 'CLUSIR Réunion Océan Indien',
       logoCyberTourAlt: 'Cyber Tour Réunion 2026',
       logoPrefectureAlt: 'Préfet de La Réunion',
+      logoCyberReunionAlt: 'Cyber Réunion',
       langSwitcher: 'Langue du site',
       langNames: { fr: 'Français', en: 'English' },
     },
@@ -230,6 +232,7 @@ export const ui: Record<Lang, UiDict> = {
       logoAlt: 'CLUSIR Réunion Océan Indien',
       logoCyberTourAlt: 'Cyber Tour Réunion 2026',
       logoPrefectureAlt: 'Préfet de La Réunion',
+      logoCyberReunionAlt: 'Cyber Réunion',
       langSwitcher: 'Site language',
       langNames: { fr: 'Français', en: 'English' },
     },
