@@ -214,7 +214,7 @@ const fr: HomeDict = {
   routeTitleHtml:
     '7 étapes, <span class="text-gold">un seul tour</span>',
   routeIntro:
-    "Du 20 au 30 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur quatre étapes, par des organisateurs locaux sur trois autres. Même label, même exigence, même agenda. Le Cyber Tour est organisé par le CLUSIR Réunion Océan Indien avec l'Université de La Réunion ; l'édition 2025 a réuni 220 participants.",
+    "Du 20 au 30 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur quatre étapes, par des organisateurs locaux sur trois autres. Même label, même exigence, même agenda. Le Cyber Tour est organisé par le CLUSIR Réunion Océan Indien, en partenariat avec l'Université de La Réunion ; l'édition 2025 a réuni 220 participants.",
   routeDates: '20 — 30 OCTOBRE 2026',
   ctfLabel: '04 // CTF',
   ctfTitleHtml:
@@ -433,7 +433,7 @@ const en: HomeDict = {
   routeTitleHtml:
     '7 stages, <span class="text-gold">one single tour</span>',
   routeIntro:
-    'From 20 to 30 October, cybersecurity tours the island — four stages run by CLUSIR, three more by local hosts. Same label, same standards, same schedule. Cyber Tour is organised by CLUSIR Réunion Océan Indien with the University of La Réunion; the 2025 edition brought together 220 participants.',
+    'From 20 to 30 October, cybersecurity tours the island — four stages run by CLUSIR, three more by local hosts. Same label, same standards, same schedule. Cyber Tour is organised by CLUSIR Réunion Océan Indien, in partnership with the University of La Réunion; the 2025 edition brought together 220 participants.',
   routeDates: '20 — 30 OCTOBER 2026',
   ctfLabel: '04 // CTF',
   ctfTitleHtml:
