@@ -57,8 +57,8 @@ Un CTF tout au long du mois d'octobre 2026, en partenariat avec Sec-Dojo et Cybe
 
 ## Partenaires
 
-- Organisateur : CLUSIR Reunion Ocean Indien, avec l'Universite de La Reunion
-- Partenaires : IUT de La Reunion, ESIROI — Ecole d'Ingenieurs, Cyber Reunion, EDIH La Reunion, CF Cyber
+- Organisateur : CLUSIR Reunion Ocean Indien
+- Partenaires : Universite de La Reunion, IUT de La Reunion, ESIROI — Ecole d'Ingenieurs, Cyber Reunion, EDIH La Reunion, CF Cyber
 
 ## Sponsoring
 

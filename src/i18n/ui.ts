@@ -185,7 +185,7 @@ export const ui: Record<Lang, UiDict> = {
       clusirGroup: (n) => `CLUSIR · ${n} étapes`,
       localGroup: (n) => `Organisateurs locaux · ${n} étapes`,
     },
-    pyramid: { organiser: 'Organisateurs', gold: 'Partenaires Gold', partners: 'Partenaires' },
+    pyramid: { organiser: 'Organisateur', gold: 'Partenaires Gold', partners: 'Partenaires' },
   },
   en: {
     layout: {
@@ -280,6 +280,6 @@ export const ui: Record<Lang, UiDict> = {
       clusirGroup: (n) => `CLUSIR · ${n} stages`,
       localGroup: (n) => `Local hosts · ${n} stages`,
     },
-    pyramid: { organiser: 'Organisers', gold: 'Gold Partners', partners: 'Partners' },
+    pyramid: { organiser: 'Organiser', gold: 'Gold Partners', partners: 'Partners' },
   },
 };
