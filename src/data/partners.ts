@@ -58,7 +58,7 @@ export const partners: Partner[] = [
   },
   {
     id: 'prefecture',
-    name: 'Préfet de la Région Réunion',
+    name: 'Préfet de La Réunion',
     logo: '/assets/logo-prefecture-reunion.png',
     url: 'https://www.reunion.gouv.fr/',
     tier: 'host',
