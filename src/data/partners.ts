@@ -45,7 +45,7 @@ export const partners: Partner[] = [
     name: 'Université de La Réunion',
     logo: '/assets/logo-univ-reunion.png',
     url: 'https://www.univ-reunion.fr/',
-    tier: 'organiser',
+    tier: 'partner',
     size: { pyramid: 'h-20 sm:h-24', band: 'h-10', stage: 'h-16 sm:h-20' },
   },
   {
