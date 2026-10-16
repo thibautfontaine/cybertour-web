@@ -110,8 +110,8 @@ export const sud: Record<Lang, SudDict> = {
     ateliers: [
       {
         icon: '\u{1F3F4}',
-        title: 'CTF',
-        desc: "CTF au format Jeopardy, par équipes de 4, organisé avec l'association BSides Réunion. Des lots sont offerts par nos partenaires, dont SFR Business.",
+        title: 'CTF par BSides La Réunion',
+        desc: "CTF au format Jeopardy, par équipes de 4. Des lots sont offerts par nos partenaires, dont SFR Business.",
       },
       {
         icon: '\u{1F510}',
@@ -208,8 +208,8 @@ export const sud: Record<Lang, SudDict> = {
     ateliers: [
       {
         icon: '\u{1F3F4}',
-        title: 'CTF',
-        desc: 'A Jeopardy-style CTF in teams of 4, run with the BSides Réunion association. Prizes are offered by our partners, including SFR Business.',
+        title: 'CTF by BSides La Réunion',
+        desc: 'A Jeopardy-style CTF in teams of 4. Prizes are offered by our partners, including SFR Business.',
       },
       {
         icon: '\u{1F510}',
