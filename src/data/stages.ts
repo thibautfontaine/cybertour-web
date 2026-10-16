@@ -173,7 +173,7 @@ const base: StageBase[] = [
         lieu: "Campus IUT / ESIROI - Université de La Réunion",
         theme: "Conférences & Ateliers Techniques",
         description:
-          "Deux jours de conférences techniques et d'ateliers pratiques. Jour 1 : conférences en amphi. Jour 2 : CTF, Escape Game, gestion de crise, OSINT, scène ouverte (Rumps) et rencontres professionnelles. Le point d'orgue du CyberTour.",
+          "Deux jours de conférences techniques et d'ateliers pratiques. Jour 1 : conférences en amphi. Jour 2 : CTF Jeopardy avec BSides Réunion, Escape Game, OSINT, scène ouverte (Rumps) et rencontres professionnelles. Le point d'orgue du CyberTour.",
         highlights: ["Conférences techniques", "CTF & Ateliers", "Rumps & Scène ouverte"],
       },
       en: {
@@ -185,7 +185,7 @@ const base: StageBase[] = [
         lieu: "IUT / ESIROI Campus - University of Reunion Island",
         theme: "Technical Talks & Hands-on Workshops",
         description:
-          "Two days of technical talks and hands-on workshops. Day 1: lecture-hall conferences. Day 2: CTF, escape game, crisis management, OSINT, open stage (Rumps) and professional networking. The highlight of the CyberTour.",
+          "Two days of technical talks and hands-on workshops. Day 1: lecture-hall conferences. Day 2: Jeopardy CTF with BSides Réunion, escape game, OSINT, open stage (Rumps) and professional networking. The highlight of the CyberTour.",
         highlights: ["Technical talks", "CTF & Workshops", "Rumps & Open stage"],
       },
     },

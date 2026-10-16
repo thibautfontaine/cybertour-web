@@ -96,6 +96,7 @@ export interface HomeDict {
   ctfBadgeMonth: string;
   ctfBadgeAllMonth: string;
   ctfBodyHtml: string;
+  ctfCta: string;
   ctfPartnersLabel: string;
 
 
@@ -220,11 +221,12 @@ const fr: HomeDict = {
   ctfTitleHtml:
     'Championnat Réunionnais<br/>de <span class="text-gold">Cybersécurité</span>',
   ctfIntroHtml:
-    'Un CTF tout au long du mois d\'octobre pour le <strong class="text-gold font-semibold">Cybermois 2026</strong>, en partenariat avec <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold font-semibold hover:text-gold/80 transition-colors">Sec-Dojo</a> et <strong class="text-white font-semibold">Cyber Reunion</strong>.',
-  ctfBadgeMonth: 'Octobre 2026',
-  ctfBadgeAllMonth: 'Tout le mois',
+    'Un CTF le vendredi 23 octobre pour le <strong class="text-gold font-semibold">Cybermois 2026</strong>, pendant l\'étape Sud sur le campus IUT / ESIROI de Saint-Pierre, en partenariat avec l\'association <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-gold font-semibold hover:text-gold/80 transition-colors">BSides Réunion</a>.',
+  ctfBadgeMonth: 'Vendredi 23 octobre',
+  ctfBadgeAllMonth: 'Jeopardy · équipes de 4',
   ctfBodyHtml:
-    'Testez vos compétences en cybersécurité à travers des challenges techniques sur la plateforme <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold hover:text-gold/80 transition-colors font-semibold">SecDojo</a> : Linux, Windows, Network, Web et plus encore. Ouvert à tous les niveaux, du débutant au confirmé.',
+    'Format Jeopardy, par équipes de 4. Des lots sont offerts par nos partenaires, dont <strong class="text-white font-semibold">SFR Business</strong>. Contact : <a href="mailto:bsidesreunion@gmail.com" class="text-gold hover:text-gold/80 transition-colors">bsidesreunion@gmail.com</a>.',
+  ctfCta: 'Inscrivez-vous au CTF ici',
   ctfPartnersLabel: 'En partenariat avec',
 
 
@@ -439,11 +441,12 @@ const en: HomeDict = {
   ctfTitleHtml:
     'Reunion Island<br/><span class="text-gold">Cybersecurity</span> Championship',
   ctfIntroHtml:
-    'A month-long CTF running through October for <strong class="text-gold font-semibold">Cybermois 2026</strong>, in partnership with <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold font-semibold hover:text-gold/80 transition-colors">Sec-Dojo</a> and <strong class="text-white font-semibold">Cyber Reunion</strong>.',
-  ctfBadgeMonth: 'October 2026',
-  ctfBadgeAllMonth: 'All month long',
+    'A CTF on Friday 23 October for <strong class="text-gold font-semibold">Cybermois 2026</strong>, during the South stage at the IUT / ESIROI campus in Saint-Pierre, in partnership with the <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-gold font-semibold hover:text-gold/80 transition-colors">BSides Réunion</a> association.',
+  ctfBadgeMonth: 'Friday 23 October',
+  ctfBadgeAllMonth: 'Jeopardy · teams of 4',
   ctfBodyHtml:
-    'Put your cybersecurity skills to the test with technical challenges on the <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="text-gold hover:text-gold/80 transition-colors font-semibold">SecDojo</a> platform: Linux, Windows, Network, Web and more. Open to every level, from beginner to advanced.',
+    'Jeopardy format, in teams of 4. Prizes are offered by our partners, including <strong class="text-white font-semibold">SFR Business</strong>. Contact: <a href="mailto:bsidesreunion@gmail.com" class="text-gold hover:text-gold/80 transition-colors">bsidesreunion@gmail.com</a>.',
+  ctfCta: 'Register for the CTF here',
   ctfPartnersLabel: 'In partnership with',
 
 
