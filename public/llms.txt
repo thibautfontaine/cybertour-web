@@ -22,7 +22,7 @@
 2. **Ouest — mercredi 21 octobre** — Office de l'Eau Reunion, Saint-Paul — 50 places.
    Journee entiere consacree a la gestion de crise cyber : fondamentaux et reflexes cles le matin (Tahiry Razafindralambo, Universite de La Reunion), exercice sur table en groupes et debriefing a chaud l'apres-midi.
 3. **Sud — jeudi 22 et vendredi 23 octobre** — IUT de La Reunion / ESIROI, 40 avenue de Soweto, Saint-Pierre — 150 places.
-   Jour 1 : conferences techniques en amphi. Jour 2 : CTF, escape game, gestion de crise, OSINT, scene ouverte (Rumps) et rencontres professionnelles.
+   Jour 1 : conferences techniques en amphi. Jour 2 : CTF, escape game, OSINT, scene ouverte (Rumps) et rencontres professionnelles.
 
 ### Etapes organisees par des organisateurs locaux
 
@@ -46,7 +46,7 @@
 
 ## CTF Cybermois
 
-Un CTF tout au long du mois d'octobre 2026, en partenariat avec Sec-Dojo et Cyber Reunion. Categories : Linux, Windows, Network, Web.
+Un CTF le vendredi 23 octobre 2026, pendant l'etape Sud (IUT / ESIROI, Saint-Pierre), en partenariat avec l'association BSides Reunion (https://bsides-reunion.re, bsidesreunion@gmail.com). Format Jeopardy, par equipes de 4. Lots offerts par les partenaires, dont SFR Business. Inscription : https://ctf.inge.re
 
 ## Edition 2025 — chiffres
 

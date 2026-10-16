@@ -141,6 +141,9 @@ const PROGRAMME_PDF = '/assets/programme-sud-22-octobre-2026.pdf';
         <!-- Atelier cards -->
         <div class="reveal delay-3 mt-10">
           <h3 class="font-display font-semibold text-xl mb-6">{t.ateliersTitle}</h3>
+          <div class="mb-8 text-center">
+            <a href="https://ctf.inge.re" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block rounded-lg font-display">{t.ctfCta}</a>
+          </div>
           <div class="grid sm:grid-cols-2 gap-6">
             {t.ateliers.map(atelier => (
               <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">

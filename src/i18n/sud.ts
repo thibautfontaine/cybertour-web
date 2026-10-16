@@ -32,6 +32,7 @@ export interface SudDict {
   organisationTitle: string;
   organisationText: string;
   ateliersTitle: string;
+  ctfCta: string;
   ateliers: SudAtelier[];
   cfpTitle: string;
   cfpText: string;
@@ -101,25 +102,21 @@ export const sud: Record<Lang, SudDict> = {
     separatorLabel: 'Vendredi 23 octobre',
     day2Label: 'Jour 2 — Vendredi 23 octobre',
     day2Title: 'Ateliers pratiques',
-    day2Intro: 'Une journée les mains dans le clavier. Quatre ateliers en parallèle pour expérimenter la cybersécurité de manière concrète et ludique.',
+    day2Intro: 'Une journée les mains dans le clavier. Trois ateliers en parallèle pour expérimenter la cybersécurité de manière concrète et ludique.',
     organisationTitle: 'Organisation',
     organisationText: 'Sessions en groupes de 4 à 6, matin et après-midi',
     ateliersTitle: 'Les ateliers',
+    ctfCta: 'Inscrivez-vous au CTF ici',
     ateliers: [
       {
         icon: '\u{1F3F4}',
         title: 'CTF',
-        desc: "CTF attack/defense sur la journée entière. Deux équipes s'affrontent : l'une attaque, l'autre défend ses services. Format dynamique, pression réelle.",
+        desc: "CTF au format Jeopardy, par équipes de 4, organisé avec l'association BSides Réunion. Des lots sont offerts par nos partenaires, dont SFR Business.",
       },
       {
         icon: '\u{1F510}',
         title: 'Escape Game Cyber Reunion',
         desc: 'Escape game immersif sur le thème de la cybersécurité, conçu par Cyber Reunion.',
-      },
-      {
-        icon: '\u{1F6A8}',
-        title: 'Gestion de crise',
-        desc: "Simulation de gestion d'incident cyber en conditions réelles. 4 à 6 groupes, sessions matin et après-midi.",
       },
       {
         icon: '\u{1F50D}',
@@ -203,25 +200,21 @@ export const sud: Record<Lang, SudDict> = {
     separatorLabel: 'Friday 23 October',
     day2Label: 'Day 2 — Friday 23 October',
     day2Title: 'Hands-on workshops',
-    day2Intro: 'A day with your hands on the keyboard. Four parallel workshops to experience cybersecurity in a concrete and playful way.',
+    day2Intro: 'A day with your hands on the keyboard. Three parallel workshops to experience cybersecurity in a concrete and playful way.',
     organisationTitle: 'Format',
     organisationText: 'Sessions in groups of 4 to 6, morning and afternoon',
     ateliersTitle: 'The workshops',
+    ctfCta: 'Register for the CTF here',
     ateliers: [
       {
         icon: '\u{1F3F4}',
         title: 'CTF',
-        desc: 'A full-day attack/defense CTF. Two teams face off: one attacks, the other defends its services. Fast-paced format, real pressure.',
+        desc: 'A Jeopardy-style CTF in teams of 4, run with the BSides Réunion association. Prizes are offered by our partners, including SFR Business.',
       },
       {
         icon: '\u{1F510}',
         title: 'Escape Game Cyber Reunion',
         desc: 'An immersive escape game on the theme of cybersecurity, designed by Cyber Reunion.',
-      },
-      {
-        icon: '\u{1F6A8}',
-        title: 'Crisis management',
-        desc: 'A cyber incident response simulation under realistic conditions. 4 to 6 groups, morning and afternoon sessions.',
       },
       {
         icon: '\u{1F50D}',

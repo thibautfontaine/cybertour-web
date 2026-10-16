@@ -311,8 +311,7 @@ const stages = getStages(lang);
   </section>
 
   <!-- ===== CTF CYBERMOIS ===== -->
-  <!-- Version courte tant que le détail du CTF (dates, inscription) n'est pas
-       connu : un titre, deux phrases, les partenaires. -->
+  <!-- CTF du vendredi 23 octobre, pendant l'étape Sud, avec BSides Réunion. -->
   <section id="ctf" class="relative py-20 overflow-hidden">
     <div class="absolute inset-0 noise-overlay"></div>
 
@@ -336,13 +335,15 @@ const stages = getStages(lang);
         <p class="text-white/70 leading-relaxed mt-5" set:html={t.ctfIntroHtml}></p>
         <p class="text-white/60 leading-relaxed mt-3" set:html={t.ctfBodyHtml}></p>
 
+        <div class="mt-6 text-center">
+          <a href="https://ctf.inge.re" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block rounded-lg font-display">{t.ctfCta}</a>
+        </div>
+
         <div class="flex flex-wrap items-center gap-4 mt-6">
           <span class="text-xs text-white/50 font-mono tracking-wider">{t.ctfPartnersLabel}</span>
-          <a href="https://sec-dojo.com/fr" target="_blank" rel="noopener noreferrer" class="partner-bubble px-4 py-2" aria-label="SecDojo">
-            <img src="/assets/logo-secdojo.png" alt="SecDojo" class="h-7 w-auto object-contain" loading="lazy" />
-          </a>
-          <a href="https://www.linkedin.com/company/cyber-reunion/" target="_blank" rel="noopener noreferrer" class="partner-bubble px-4 py-2" aria-label="Cyber Reunion">
-            <img src="/assets/logo-cyber-reunion.png" alt="Cyber Reunion" class="h-7 w-auto object-contain" loading="lazy" />
+          <!-- Logo blanc et orange sur fond transparent : pas de pastille blanche. -->
+          <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" aria-label="BSides Réunion">
+            <img src="/assets/logo-bsides-reunion.webp" alt="BSides Réunion" width="800" height="346" class="h-14 w-auto" loading="lazy" />
           </a>
         </div>
       </div>
