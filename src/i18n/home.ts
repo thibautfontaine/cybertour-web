@@ -225,7 +225,7 @@ const fr: HomeDict = {
   ctfBadgeMonth: 'Vendredi 23 octobre',
   ctfBadgeAllMonth: 'Jeopardy · équipes de 4',
   ctfBodyHtml:
-    'Format Jeopardy, par équipes de 4. Des lots sont offerts par nos partenaires, dont <strong class="text-white font-semibold">SFR Business</strong>. Contact : <a href="mailto:bsidesreunion@gmail.com" class="text-gold hover:text-gold/80 transition-colors">bsidesreunion@gmail.com</a>.',
+    'Format Jeopardy, par équipes de 4. Des lots sont offerts par nos partenaires, dont <strong class="text-white font-semibold">SFR Business</strong>. Contact : <a href="mailto:contact@bsides-reunion.re" class="text-gold hover:text-gold/80 transition-colors">contact@bsides-reunion.re</a>.',
   ctfCta: 'Inscrivez-vous au CTF ici',
   ctfPartnersLabel: 'En partenariat avec',
 
@@ -445,7 +445,7 @@ const en: HomeDict = {
   ctfBadgeMonth: 'Friday 23 October',
   ctfBadgeAllMonth: 'Jeopardy · teams of 4',
   ctfBodyHtml:
-    'Jeopardy format, in teams of 4. Prizes are offered by our partners, including <strong class="text-white font-semibold">SFR Business</strong>. Contact: <a href="mailto:bsidesreunion@gmail.com" class="text-gold hover:text-gold/80 transition-colors">bsidesreunion@gmail.com</a>.',
+    'Jeopardy format, in teams of 4. Prizes are offered by our partners, including <strong class="text-white font-semibold">SFR Business</strong>. Contact: <a href="mailto:contact@bsides-reunion.re" class="text-gold hover:text-gold/80 transition-colors">contact@bsides-reunion.re</a>.',
   ctfCta: 'Register for the CTF here',
   ctfPartnersLabel: 'In partnership with',
 
