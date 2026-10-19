@@ -46,7 +46,7 @@
 
 ## CTF Cybermois
 
-Un CTF le vendredi 23 octobre 2026, pendant l'etape Sud (IUT / ESIROI, Saint-Pierre), en partenariat avec l'association BSides Reunion (https://bsides-reunion.re, bsidesreunion@gmail.com). Format Jeopardy, par equipes de 4. Lots offerts par les partenaires, dont SFR Business. Inscription : https://ctf.inge.re
+Un CTF le vendredi 23 octobre 2026, pendant l'etape Sud (IUT / ESIROI, Saint-Pierre), en partenariat avec l'association BSides Reunion (https://bsides-reunion.re, contact@bsides-reunion.re). Format Jeopardy, par equipes de 4. Lots offerts par les partenaires, dont SFR Business. Inscription : https://ctf.inge.re
 
 ## Edition 2025 — chiffres
 
