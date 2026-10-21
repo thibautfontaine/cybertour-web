@@ -40,10 +40,6 @@ export interface SudDict {
   ateliersTitle: string;
   ctfCta: string;
   ateliers: SudAtelier[];
-  cfpTitle: string;
-  cfpText: string;
-  cfpCta: string;
-  cfpMailto: string;
   coOrganisersTitle: string;
   stagePartnersTitle: string;
 }
@@ -162,10 +158,6 @@ export const sud: Record<Lang, SudDict> = {
         desc: 'Rencontres sponsors en one-to-one et atelier de recherche de stage avec les entreprises présentes.',
       },
     ],
-    cfpTitle: 'Appel à soumission — Scène ouverte (Rumps)',
-    cfpText: "Vous avez un projet, un outil, un retour d'expérience à partager ? Proposez une présentation de 5 à 10 minutes lors de la scène ouverte du CyberTour.",
-    cfpCta: 'Soumettre une présentation',
-    cfpMailto: 'mailto:evenement@clusir-roi.org?subject=Soumission%20Rumps%20CyberTour%202026',
     coOrganisersTitle: 'Co-organisateurs',
     stagePartnersTitle: "Partenaires de l'étape",
   },
@@ -282,10 +274,6 @@ export const sud: Record<Lang, SudDict> = {
         desc: 'One-to-one meetings with sponsors and an internship search workshop with the companies present.',
       },
     ],
-    cfpTitle: 'Call for submissions — Open stage (Rumps)',
-    cfpText: 'Do you have a project, a tool or lessons learned to share? Submit a 5 to 10 minute talk for the CyberTour open stage.',
-    cfpCta: 'Submit a talk',
-    cfpMailto: 'mailto:evenement@clusir-roi.org?subject=Rumps%20submission%20CyberTour%202026',
     coOrganisersTitle: 'Co-organisers',
     stagePartnersTitle: 'Stage partners',
   },
