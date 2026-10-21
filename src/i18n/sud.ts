@@ -33,8 +33,6 @@ export interface SudDict {
   day2Label: string;
   day2Title: string;
   day2Intro: string;
-  organisationTitle: string;
-  organisationText: string;
   programme2Title: string;
   programme2: ProgrammeSession[];
   ateliersTitle: string;
@@ -109,8 +107,6 @@ export const sud: Record<Lang, SudDict> = {
     day2Label: 'Jour 2 — Vendredi 23 octobre',
     day2Title: 'Ateliers pratiques',
     day2Intro: 'Une journée les mains dans le clavier. Trois ateliers en parallèle pour expérimenter la cybersécurité de manière concrète et ludique.',
-    organisationTitle: 'Organisation',
-    organisationText: 'Sessions en groupes de 4 à 6, matin et après-midi',
     programme2Title: 'Programme du vendredi 23 octobre',
     programme2: [
       {
@@ -225,8 +221,6 @@ export const sud: Record<Lang, SudDict> = {
     day2Label: 'Day 2 — Friday 23 October',
     day2Title: 'Hands-on workshops',
     day2Intro: 'A day with your hands on the keyboard. Three parallel workshops to experience cybersecurity in a concrete and playful way.',
-    organisationTitle: 'Format',
-    organisationText: 'Sessions in groups of 4 to 6, morning and afternoon',
     programme2Title: 'Friday 23 October programme',
     programme2: [
       {
