@@ -35,6 +35,8 @@ export interface SudDict {
   day2Intro: string;
   organisationTitle: string;
   organisationText: string;
+  programme2Title: string;
+  programme2: ProgrammeSession[];
   ateliersTitle: string;
   ctfCta: string;
   ateliers: SudAtelier[];
@@ -113,6 +115,23 @@ export const sud: Record<Lang, SudDict> = {
     day2Intro: 'Une journée les mains dans le clavier. Trois ateliers en parallèle pour expérimenter la cybersécurité de manière concrète et ludique.',
     organisationTitle: 'Organisation',
     organisationText: 'Sessions en groupes de 4 à 6, matin et après-midi',
+    programme2Title: 'Programme du vendredi 23 octobre',
+    programme2: [
+      {
+        slots: [
+          { start: '09:15', title: 'Ouverture et présentation de BSides Réunion' },
+          { start: '09:30', title: 'Début du CTF', kind: 'highlight' },
+          { start: '09:40', title: 'Présentation', speaker: 'Tahiry Razafindralambo' },
+          { start: '10:15', title: 'Présentation', speaker: "Ny Hasina Vagno, étudiant de 5e année à l'ESIROI" },
+          { start: '11:00', title: 'Présentation de Cyber Réunion', speaker: 'Matthieu Druilhe' },
+          { start: '12:00', title: 'Repas', kind: 'break' },
+          { start: '14:00', title: 'Présentation', speaker: "Loïc Fontaine, ancien étudiant de l'ESIROI" },
+          { start: '15:00', title: 'Présentation', speaker: "Lova Rafanomezantsoa, étudiant de 5e année à l'ESIROI" },
+          { start: '16:00', title: 'Fin du CTF', kind: 'highlight' },
+          { start: '16:15', title: 'Clôture et annonce des résultats' },
+        ],
+      },
+    ],
     ateliersTitle: 'Les ateliers',
     ctfCta: 'Inscrivez-vous au CTF ici',
     ateliers: [
@@ -215,6 +234,23 @@ export const sud: Record<Lang, SudDict> = {
     day2Intro: 'A day with your hands on the keyboard. Three parallel workshops to experience cybersecurity in a concrete and playful way.',
     organisationTitle: 'Format',
     organisationText: 'Sessions in groups of 4 to 6, morning and afternoon',
+    programme2Title: 'Friday 23 October programme',
+    programme2: [
+      {
+        slots: [
+          { start: '09:15', title: 'Opening and introduction to BSides Réunion' },
+          { start: '09:30', title: 'CTF starts', kind: 'highlight' },
+          { start: '09:40', title: 'Talk', speaker: 'Tahiry Razafindralambo' },
+          { start: '10:15', title: 'Talk', speaker: 'Ny Hasina Vagno, 5th-year student at ESIROI' },
+          { start: '11:00', title: 'Introducing Cyber Réunion', speaker: 'Matthieu Druilhe' },
+          { start: '12:00', title: 'Lunch', kind: 'break' },
+          { start: '14:00', title: 'Talk', speaker: 'Loïc Fontaine, ESIROI alumnus' },
+          { start: '15:00', title: 'Talk', speaker: 'Lova Rafanomezantsoa, 5th-year student at ESIROI' },
+          { start: '16:00', title: 'CTF ends', kind: 'highlight' },
+          { start: '16:15', title: 'Closing and results announcement' },
+        ],
+      },
+    ],
     ateliersTitle: 'The workshops',
     ctfCta: 'Register for the CTF here',
     ateliers: [
