@@ -119,7 +119,8 @@ export const sud: Record<Lang, SudDict> = {
     programme2: [
       {
         slots: [
-          { start: '09:15', title: 'Ouverture et présentation de BSides Réunion' },
+          { start: '08:00', end: '08:45', title: 'Accueil des participants et petit-déjeuner', kind: 'break' },
+          { start: '09:00', title: 'Ouverture et présentation de BSides Réunion' },
           { start: '09:30', title: 'Début du CTF', kind: 'highlight' },
           { start: '09:40', title: 'Présentation', speaker: 'Tahiry Razafindralambo' },
           { start: '10:15', title: 'Présentation', speaker: "Ny Hasina Vagno, étudiant de 5e année à l'ESIROI" },
@@ -238,7 +239,8 @@ export const sud: Record<Lang, SudDict> = {
     programme2: [
       {
         slots: [
-          { start: '09:15', title: 'Opening and introduction to BSides Réunion' },
+          { start: '08:00', end: '08:45', title: 'Welcome and breakfast', kind: 'break' },
+          { start: '09:00', title: 'Opening and introduction to BSides Réunion' },
           { start: '09:30', title: 'CTF starts', kind: 'highlight' },
           { start: '09:40', title: 'Talk', speaker: 'Tahiry Razafindralambo' },
           { start: '10:15', title: 'Talk', speaker: 'Ny Hasina Vagno, 5th-year student at ESIROI' },
