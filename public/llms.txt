@@ -26,7 +26,8 @@
 
 ### Etapes organisees par des organisateurs locaux
 
-4. **Expernet — mardi 27 octobre** — Le Port. Programme defini par l'hote, a paraitre.
+4. **Expernet — mardi 27 octobre** — Expernet, Parc 2000, 3 avenue Theodore Drouhet, Le Port.
+   Matinee de conferences (8h30-12h) : Erwan Perrin (MDSI), Mickael Mahabot, puis conferences du CLUSIR et de Cyber Reunion, avec des temps d'echange entre chaque intervention.
 5. **Epitech — jeudi 29 octobre** — Saint-Andre. Programme defini par l'hote, a paraitre.
 6. **EDN (Ecole Du Numerique) — vendredi 30 octobre** — Sainte-Clotilde. Etape de cloture. Programme defini par l'hote, a paraitre.
 

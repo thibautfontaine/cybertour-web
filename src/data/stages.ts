@@ -200,7 +200,7 @@ const base: StageBase[] = [
     host: "Expernet",
     venue: "Expernet",
     days: ["2026-10-27"],
-    published: false,
+    published: true,
     text: {
       fr: {
         name: "Étape Expernet",
@@ -209,10 +209,10 @@ const base: StageBase[] = [
         dateShort: "Mardi 27 Oct",
         day: "Jour 5",
         lieu: "Locaux Expernet - Le Port",
-        theme: HOST_FREE_PROGRAMME.fr,
+        theme: "Matinée de conférences",
         description:
-          "Étape accueillie par Expernet dans ses locaux du Port. Le programme est défini par l'hôte et sera publié dès réception de sa fiche d'étape.",
-        highlights: [],
+          "Matinée de conférences accueillie par Expernet dans ses locaux du Port : Erwan Perrin (MDSI), Mickaël Mahabot, puis le CLUSIR et Cyber Réunion, avec des temps d'échange entre chaque intervention.",
+        highlights: ["Conférences", "Temps d'échange", "CLUSIR & Cyber Réunion"],
       },
       en: {
         name: "Expernet Stage",
@@ -221,10 +221,10 @@ const base: StageBase[] = [
         dateShort: "Tuesday 27 Oct",
         day: "Day 5",
         lieu: "Expernet offices - Le Port",
-        theme: HOST_FREE_PROGRAMME.en,
+        theme: "Morning of Talks",
         description:
-          "Stage hosted by Expernet at its offices in Le Port. The programme is set by the host and will be published once its stage sheet is received.",
-        highlights: [],
+          "A morning of talks hosted by Expernet at its offices in Le Port: Erwan Perrin (MDSI), Mickaël Mahabot, then CLUSIR and Cyber Réunion, with time to talk between each session.",
+        highlights: ["Talks", "Networking", "CLUSIR & Cyber Réunion"],
       },
     },
   },

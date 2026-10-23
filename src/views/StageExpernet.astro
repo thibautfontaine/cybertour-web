@@ -1,0 +1,39 @@
+---
+/**
+ * Vue partagée de l'étape Expernet (FR `/expernet`, EN `/en/expernet`).
+ * Toute chaîne visible vient de `src/i18n/expernet.ts`.
+ */
+import StageLayout from '../layouts/StageLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getStage } from '../data/stages';
+import { getLang } from '../i18n';
+import { expernet } from '../i18n/expernet';
+import ProgrammeTimeline from '../components/ProgrammeTimeline.astro';
+
+const lang = getLang(Astro.currentLocale);
+const t = expernet[lang];
+const stage = getStage(lang, 'expernet');
+---
+
+<StageLayout stage={stage}>
+  <Navbar slot="navbar" currentPage="expernet" />
+
+  <!-- Programme section -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="reveal">
+        <span class="font-mono text-cyan-400/60 text-sm tracking-widest uppercase">{t.programmeLabel}</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.programmeTitle}</h2>
+      </div>
+
+      <!-- Programme de la matinée -->
+      <div class="reveal delay-1 mt-12">
+        <h3 class="font-display font-semibold text-2xl mb-6">{t.scheduleTitle}</h3>
+        <ProgrammeTimeline sessions={t.programme} accent="cyan" />
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</StageLayout>
