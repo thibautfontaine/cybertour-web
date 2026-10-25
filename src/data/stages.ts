@@ -268,7 +268,7 @@ const base: StageBase[] = [
   },
   {
     id: "edn",
-    lieuFull: "École Du Numérique, 12 rue Gabriel de Kerveguen, 97490 Sainte-Clotilde",
+    lieuFull: "École Du Numérique, Campus Roger Roland, 12 rue Gabriel de Kerveguen, 97490 Sainte-Clotilde",
     commune: "Sainte-Clotilde",
     capacity: null,
     trackNumber: "07",
@@ -276,7 +276,7 @@ const base: StageBase[] = [
     host: "EDN",
     venue: "EDN",
     days: ["2026-10-30"],
-    published: false,
+    published: true,
     text: {
       fr: {
         name: "Étape EDN",
@@ -285,10 +285,10 @@ const base: StageBase[] = [
         dateShort: "Vendredi 30 Oct",
         day: "Jour 7",
         lieu: "Locaux EDN - Sainte-Clotilde",
-        theme: HOST_FREE_PROGRAMME.fr,
+        theme: "Cyber Vision : retours d'expérience",
         description:
-          "Étape de clôture du CyberTour, accueillie par l'École Du Numérique dans ses locaux de Sainte-Clotilde. Le programme est défini par l'hôte et sera publié dès réception de sa fiche d'étape.",
-        highlights: [],
+          "Après-midi de clôture du CyberTour (13h30-16h30), accueillie par l'École Du Numérique (CCI Réunion) sur le campus Roger Roland : K'fé Cyber Network, les risques liés à l'IA pour votre organisation avec Rémi Voluer (SEYES), ClickFix et l'ingénierie sociale avec Jérémy Scion (SEKOIA), puis l'EDIH pour sécuriser le territoire. Avec la participation du CLUSIR et de Cyber Réunion.",
+        highlights: ["Risques liés à l'IA", "Ingénierie sociale", "EDIH", "K'fé Cyber Network"],
       },
       en: {
         name: "EDN Stage",
@@ -297,10 +297,10 @@ const base: StageBase[] = [
         dateShort: "Friday 30 Oct",
         day: "Day 7",
         lieu: "EDN premises - Sainte-Clotilde",
-        theme: HOST_FREE_PROGRAMME.en,
+        theme: "Cyber Vision: Lessons from the Field",
         description:
-          "Closing stage of the CyberTour, hosted by École Du Numérique at its premises in Sainte-Clotilde. The programme is set by the host and will be published once its stage sheet is received.",
-        highlights: [],
+          "Closing afternoon of the CyberTour (1:30pm-4:30pm), hosted by École Du Numérique (CCI Réunion) at the Roger Roland campus: K'fé Cyber Network, AI risks for your organisation with Rémi Voluer (SEYES), ClickFix and social engineering with Jérémy Scion (SEKOIA), then how the EDIH helps secure the island. With CLUSIR and Cyber Réunion.",
+        highlights: ["AI risks", "Social engineering", "EDIH", "K'fé Cyber Network"],
       },
     },
   },

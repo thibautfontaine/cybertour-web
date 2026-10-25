@@ -29,7 +29,8 @@
 4. **Expernet — mardi 27 octobre** — Expernet, Parc 2000, 3 avenue Theodore Drouhet, Le Port.
    Matinee de conferences (8h30-12h) : Erwan Perrin (MDSI), Mickael Mahabot, puis conferences du CLUSIR et de Cyber Reunion, avec des temps d'echange entre chaque intervention.
 5. **Epitech — jeudi 29 octobre** — Saint-Andre. Programme defini par l'hote, a paraitre.
-6. **EDN (Ecole Du Numerique) — vendredi 30 octobre** — Sainte-Clotilde. Etape de cloture. Programme defini par l'hote, a paraitre.
+6. **EDN (Ecole Du Numerique, CCI Reunion) — vendredi 30 octobre** — Campus Roger Roland, 12 rue Gabriel de Kerveguen, Sainte-Clotilde. Etape de cloture.
+   Apres-midi Cyber Vision (13h30-16h30) : K'fe Cyber Network, les risques lies a l'IA pour votre organisation (Remi Voluer, SEYES), ClickFix et l'ingenierie sociale (Jeremy Scion, SEKOIA), l'EDIH pour securiser le territoire. Avec le CLUSIR et Cyber Reunion. Gratuit, inscription aupres de l'EDN : https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DAp8-KaVIE6UWw2P4wbYM-lYB6bSa0tIurlZCn8rv4xUNzRSODVSOEhTWVZITjRSQTJVNFhVUlhRNy4u
 
 ## Ce qui definit le tour
 
