@@ -107,26 +107,161 @@
   --font-mono: "JetBrains Mono", monospace;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ========== THÈMES CLAIR / SOMBRE ==========
+   Voir docs/plans/2026-10-28-theme-clair-design.md.
+
+   Les vues n'écrivent pas `white` ni `navy-dark` pour le texte et les fonds :
+   elles utilisent des couleurs de rôle (`ink`, `surface`, `surface-2`,
+   `accent`, `brand-text`) dont la valeur dépend du thème. `inline` : la
+   classe Tailwind lit la variable au moment du rendu, pas à la compilation.
+
+   Le thème vient de `data-theme` sur <html>, posé par le script du <head>
+   (Layout.astro). Sans JavaScript, la media query `prefers-color-scheme`
+   prend le relais. Un bloc `.theme-dark` reste sombre dans les deux thèmes
+   (fenêtre terminal). */
+@theme inline {
+  --color-ink: var(--theme-ink);
+  --color-surface: var(--theme-surface);
+  --color-surface-2: var(--theme-surface-2);
+  --color-accent: var(--theme-accent);
+  --color-brand-text: var(--theme-brand-text);
 }
 
-:root {
-  --bg-primary: #0f1a30;
-  --bg-secondary: #192842;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --border-card: rgba(255, 255, 255, 0.06);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --text-faint: rgba(255, 255, 255, 0.55);
-  --text-ghost: rgba(255, 255, 255, 0.45);
-  --nav-scrolled: rgba(15, 26, 48, 0.95);
-  --scrollbar-track: #0f1a30;
+/* `light:` : exceptions propres au thème clair (logos, voiles). */
+@custom-variant light {
+  &:where([data-theme="light"], [data-theme="light"] *):not(:where(.theme-dark, .theme-dark *)) {
+    @slot;
+  }
+  @media (prefers-color-scheme: light) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) *):not(:where(.theme-dark, .theme-dark *)) {
+      @slot;
+    }
+  }
+}
+
+:root,
+.theme-dark {
+  color-scheme: dark;
+  --theme-ink: #ffffff;
+  --theme-surface: #0f1a30;
+  --theme-surface-2: #192842;
+  /* #FFDE59 : 13.09:1 sur #0f1a30. */
+  --theme-accent: #FFDE59;
+  /* Voir --color-clusir-red-bright plus haut : 5.45:1 sur #0f1a30. */
+  --theme-brand-text: #e56b5f;
+  /* Étiquette de section : or à 70 % en sombre. */
+  --theme-label: rgba(255, 222, 89, 0.7);
+  --theme-jobs-accent: #4db6ac;
   --scrollbar-thumb: #2c3e6b;
   --grid-color: rgba(44, 62, 107, 0.12);
   --sponsor-hover-shadow: rgba(255, 222, 89, 0.3);
-  --footer-yt-fill: #0f1a30;
+  --noise-opacity: 0.035;
+  --theme-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* Valeurs claires : écrites deux fois, pour l'attribut et pour le repli
+   sans JavaScript. Garder les deux blocs identiques. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --theme-ink: #0f1a30;
+  --theme-surface: #f4f6fa;
+  --theme-surface-2: #e6ebf3;
+  /* Or assombri (décision D2) : 6.52:1 sur #f4f6fa, 5.90:1 sur #e6ebf3, et
+     4.5:1 tenu sur les teintes bg-gold/10. */
+  --theme-accent: #6f5500;
+  /* 5.48:1 sur #f4f6fa, 4.95:1 sur #e6ebf3. */
+  --theme-brand-text: #b3392e;
+  --theme-label: #6f5500;
+  --theme-jobs-accent: #00695c;
+  --text-secondary: color-mix(in srgb, var(--theme-ink) 85%, transparent);
+  --text-muted: color-mix(in srgb, var(--theme-ink) 76%, transparent);
+  --text-faint: color-mix(in srgb, var(--theme-ink) 74%, transparent);
+  --text-ghost: color-mix(in srgb, var(--theme-ink) 70%, transparent);
+  --scrollbar-thumb: #b8c2d6;
+  --grid-color: rgba(33, 49, 78, 0.06);
+  --sponsor-hover-shadow: rgba(125, 95, 0, 0.25);
+  --noise-opacity: 0.02;
+  --theme-shadow: rgba(15, 26, 48, 0.12);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --theme-ink: #0f1a30;
+    --theme-surface: #f4f6fa;
+    --theme-surface-2: #e6ebf3;
+    --theme-accent: #6f5500;
+    --theme-brand-text: #b3392e;
+    --theme-label: #6f5500;
+    --theme-jobs-accent: #00695c;
+    --text-secondary: color-mix(in srgb, var(--theme-ink) 85%, transparent);
+    --text-muted: color-mix(in srgb, var(--theme-ink) 76%, transparent);
+    --text-faint: color-mix(in srgb, var(--theme-ink) 74%, transparent);
+    --text-ghost: color-mix(in srgb, var(--theme-ink) 70%, transparent);
+    --scrollbar-thumb: #b8c2d6;
+    --grid-color: rgba(33, 49, 78, 0.06);
+    --sponsor-hover-shadow: rgba(125, 95, 0, 0.25);
+    --noise-opacity: 0.02;
+    --theme-shadow: rgba(15, 26, 48, 0.12);
+  }
+}
+
+/* Un îlot sombre dans une page claire : le texte sans classe hérite sinon du
+   navy du <body>. */
+.theme-dark {
+  color: var(--theme-ink);
+}
+
+/* Anciennes variables, gardées comme alias des couleurs de rôle. */
+:root,
+.theme-dark {
+  --bg-primary: var(--theme-surface);
+  --bg-secondary: var(--theme-surface-2);
+  --bg-card: color-mix(in srgb, var(--theme-ink) 3%, transparent);
+  --border-card: color-mix(in srgb, var(--theme-ink) 6%, transparent);
+  --text-primary: var(--theme-ink);
+  --text-secondary: color-mix(in srgb, var(--theme-ink) 75%, transparent);
+  --text-muted: color-mix(in srgb, var(--theme-ink) 60%, transparent);
+  --text-faint: color-mix(in srgb, var(--theme-ink) 55%, transparent);
+  --text-ghost: color-mix(in srgb, var(--theme-ink) 45%, transparent);
+  --nav-scrolled: color-mix(in srgb, var(--theme-surface) 95%, transparent);
+  --scrollbar-track: var(--theme-surface);
+  --footer-yt-fill: var(--theme-surface);
+}
+
+/* Plancher de lisibilité du thème clair. Le navy translucide pâlit plus vite
+   sur fond clair que le blanc sur fond sombre : `ink/50` donne 5.20:1 en
+   sombre mais 3.29:1 en clair. On relève l'opacité du texte, en gardant
+   l'ordre des niveaux, pour rester au-dessus de 4.5:1 sur surface-2.
+   Les opacités sous 0.4 sont décoratives et restent telles quelles. */
+@layer utilities {
+  :root[data-theme="light"] :not(:where(.theme-dark, .theme-dark *)) {
+    &.text-ink\/40 { color: color-mix(in srgb, var(--theme-ink) 68%, transparent); }
+    &.text-ink\/45 { color: color-mix(in srgb, var(--theme-ink) 70%, transparent); }
+    &.text-ink\/50 { color: color-mix(in srgb, var(--theme-ink) 72%, transparent); }
+    &.text-ink\/55 { color: color-mix(in srgb, var(--theme-ink) 74%, transparent); }
+    &.text-ink\/60 { color: color-mix(in srgb, var(--theme-ink) 76%, transparent); }
+    &.text-ink\/70 { color: color-mix(in srgb, var(--theme-ink) 82%, transparent); }
+    &.text-ink\/75 { color: color-mix(in srgb, var(--theme-ink) 85%, transparent); }
+    &.text-ink\/80 { color: color-mix(in srgb, var(--theme-ink) 88%, transparent); }
+    &.text-accent\/70, &.text-accent\/80 { color: var(--theme-accent); }
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) :not(:where(.theme-dark, .theme-dark *)) {
+      &.text-ink\/40 { color: color-mix(in srgb, var(--theme-ink) 68%, transparent); }
+      &.text-ink\/45 { color: color-mix(in srgb, var(--theme-ink) 70%, transparent); }
+      &.text-ink\/50 { color: color-mix(in srgb, var(--theme-ink) 72%, transparent); }
+      &.text-ink\/55 { color: color-mix(in srgb, var(--theme-ink) 74%, transparent); }
+      &.text-ink\/60 { color: color-mix(in srgb, var(--theme-ink) 76%, transparent); }
+      &.text-ink\/70 { color: color-mix(in srgb, var(--theme-ink) 82%, transparent); }
+      &.text-ink\/75 { color: color-mix(in srgb, var(--theme-ink) 85%, transparent); }
+      &.text-ink\/80 { color: color-mix(in srgb, var(--theme-ink) 88%, transparent); }
+    &.text-accent\/70, &.text-accent\/80 { color: var(--theme-accent); }
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -229,7 +364,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.035;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
@@ -289,7 +424,7 @@ body {
 
 .btn-outline {
   border: 2px solid var(--color-clusir-red);
-  color: var(--color-clusir-red-bright);
+  color: var(--theme-brand-text);
   font-weight: 600;
   padding: 0.75rem 2rem;
   letter-spacing: 0.05em;
@@ -354,8 +489,8 @@ body {
 /* REUNION text outline */
 .reunion-outline {
   color: transparent;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.25);
-  text-stroke: 2px rgba(255, 255, 255, 0.25);
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--theme-ink) 25%, transparent);
+  text-stroke: 2px color-mix(in srgb, var(--theme-ink) 25%, transparent);
   transition: -webkit-text-stroke-color 0.4s ease;
 }
 
@@ -399,6 +534,16 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+/* En clair, la pastille blanche se fondrait dans le fond : un contour. */
+:root[data-theme="light"] :is(.partner-bubble, .logo-white-bg):not(:where(.theme-dark *)) {
+  box-shadow: inset 0 0 0 1px rgba(15, 26, 48, 0.1);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) :is(.partner-bubble, .logo-white-bg):not(:where(.theme-dark *)) {
+    box-shadow: inset 0 0 0 1px rgba(15, 26, 48, 0.1);
+  }
+}
+
 /* Terminal window */
 .terminal-window {
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
@@ -434,7 +579,7 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   background: rgba(206, 70, 58, 0.15);
-  color: var(--color-clusir-red-bright);
+  color: var(--theme-brand-text);
   border: 1px solid rgba(206, 70, 58, 0.3);
   padding: 0.2rem 0.6rem;
   border-radius: 0.375rem;
@@ -446,10 +591,10 @@ body {
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.04);
+  background: color-mix(in srgb, var(--theme-ink) 4%, transparent);
   /* 0.3 ne donnait que 2.68:1 sur le fond du badge. 0.6 -> 6.50:1. */
-  color: rgba(255, 255, 255, 0.6);
-  border: 1px dashed rgba(255, 255, 255, 0.18);
+  color: var(--text-muted);
+  border: 1px dashed color-mix(in srgb, var(--theme-ink) 18%, transparent);
   padding: 0.2rem 0.6rem;
   border-radius: 0.375rem;
 }
@@ -535,9 +680,9 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 222, 89, 0.7);
+  color: var(--theme-label);
   padding-left: 0.75rem;
-  border-left: 2px solid rgba(255, 222, 89, 0.35);
+  border-left: 2px solid color-mix(in srgb, var(--theme-accent) 35%, transparent);
   line-height: 1.4;
 }
 
@@ -626,3 +771,12 @@ body {
   .partner-bubble:hover,
   .btn-primary:hover { transform: none; }
 }
+
+/* Bouton de thème (Navbar.astro) : visible seulement quand le script du
+   <head> a tourné (`data-theme-pref` posé). Une icône par état. */
+.theme-toggle { display: none; }
+:root[data-theme-pref] .theme-toggle { display: inline-flex; }
+.theme-icon { display: none; }
+:root[data-theme-pref="auto"] .theme-icon-auto,
+:root[data-theme-pref="light"] .theme-icon-light,
+:root[data-theme-pref="dark"] .theme-icon-dark { display: block; }

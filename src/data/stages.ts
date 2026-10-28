@@ -5,11 +5,14 @@
  *
  * Deux valeurs et non une : #ce463a ne passe pas WCAG AA en texte sur fond
  * sombre (4,44:1 sur #0f1a30). PAINT peint les surfaces, TEXT écrit les mots.
+ * ACCENT_TEXT suit le thème (#e56b5f en sombre, #b3392e en clair, voir
+ * `--theme-brand-text` dans global.css) : il ne prend donc pas de suffixe hexa
+ * d'opacité, passer par color-mix().
  */
 import { localizePath, type Lang } from "../i18n";
 
 export const ACCENT_PAINT = "#ce463a";
-export const ACCENT_TEXT = "#e56b5f";
+export const ACCENT_TEXT = "var(--color-brand-text)";
 
 export interface Stage {
   id: string;
@@ -34,7 +37,7 @@ export interface Stage {
   venue: string;
   /**
    * Jours de l'étape au format ISO. Le Sud en a deux, et chaque jour compte
-   * pour une étape du tour : 6 lieux, 7 étapes.
+   * pour une étape du tour : 5 lieux, 6 étapes.
    */
   days: string[];
   /**
@@ -229,49 +232,11 @@ const base: StageBase[] = [
     },
   },
   {
-    id: "epitech",
-    lieuFull: "Epitech, 234 chemin de la Pente Sassy, 97440 Saint-André",
-    commune: "Saint-André",
-    capacity: null,
-    trackNumber: "06",
-    path: "/epitech",
-    host: "Epitech",
-    venue: "Epitech",
-    days: ["2026-10-29"],
-    published: false,
-    text: {
-      fr: {
-        name: "Étape Epitech",
-        direction: "EST",
-        date: "Jeudi 29 Octobre 2026",
-        dateShort: "Jeudi 29 Oct",
-        day: "Jour 6",
-        lieu: "Locaux Epitech - Saint-André",
-        theme: HOST_FREE_PROGRAMME.fr,
-        description:
-          "Étape accueillie par Epitech dans ses locaux de Saint-André. Le programme est défini par l'hôte et sera publié dès réception de sa fiche d'étape.",
-        highlights: [],
-      },
-      en: {
-        name: "Epitech Stage",
-        direction: "EAST",
-        date: "Thursday 29 October 2026",
-        dateShort: "Thursday 29 Oct",
-        day: "Day 6",
-        lieu: "Epitech campus - Saint-André",
-        theme: HOST_FREE_PROGRAMME.en,
-        description:
-          "Stage hosted by Epitech at its campus in Saint-André. The programme is set by the host and will be published once its stage sheet is received.",
-        highlights: [],
-      },
-    },
-  },
-  {
     id: "edn",
     lieuFull: "École Du Numérique, Campus Roger Roland, 12 rue Gabriel de Kerveguen, 97490 Sainte-Clotilde",
     commune: "Sainte-Clotilde",
     capacity: null,
-    trackNumber: "07",
+    trackNumber: "06",
     path: "/edn",
     host: "EDN",
     venue: "EDN",
@@ -283,7 +248,7 @@ const base: StageBase[] = [
         direction: "NORD",
         date: "Vendredi 30 Octobre 2026",
         dateShort: "Vendredi 30 Oct",
-        day: "Jour 7",
+        day: "Jour 6",
         lieu: "Locaux EDN - Sainte-Clotilde",
         theme: "Cyber Vision : retours d'expérience",
         description:
@@ -295,7 +260,7 @@ const base: StageBase[] = [
         direction: "NORTH",
         date: "Friday 30 October 2026",
         dateShort: "Friday 30 Oct",
-        day: "Day 7",
+        day: "Day 6",
         lieu: "EDN premises - Sainte-Clotilde",
         theme: "Cyber Vision: Lessons from the Field",
         description:
@@ -306,7 +271,7 @@ const base: StageBase[] = [
   },
 ];
 
-/** Les six lieux d'étape (sept étapes : le Sud compte deux jours) dans la langue demandée, `href` déjà localisé. */
+/** Les cinq lieux d'étape (six étapes : le Sud compte deux jours) dans la langue demandée, `href` déjà localisé. */
 export function getStages(lang: Lang): Stage[] {
   return base.map(({ text, path, ...common }) => ({
     ...common,

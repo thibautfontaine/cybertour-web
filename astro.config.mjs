@@ -15,8 +15,8 @@ export default defineConfig({
     locales: ['fr', 'en'],
     routing: { prefixDefaultLocale: false },
   },
-  // /est (et /en/est) est une page de redirection en noindex depuis que
-  // l'étape Est est revenue au programme via Epitech. La laisser dans le
+  // /est (et /en/est) est une page de redirection en noindex : l'étape Est
+  // (Epitech, Saint-André) est annulée, retirée du site le 28/10/2026. La laisser dans le
   // sitemap enverrait aux crawlers un signal contradictoire avec sa propre
   // balise robots.
   integrations: [

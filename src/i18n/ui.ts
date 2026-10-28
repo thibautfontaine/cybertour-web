@@ -30,6 +30,8 @@ export interface UiDict {
     logoPrefectureAlt: string;
     logoCyberReunionAlt: string;
     langSwitcher: string;
+    /** Bouton de thème : « Thème : automatique (sombre) ». `label` porte sa ponctuation. */
+    theme: { label: string; names: { auto: string; light: string; dark: string } };
     langNames: Record<Lang, string>;
   };
   footer: {
@@ -84,21 +86,21 @@ const HOME_ANCHORS = {
   inscription: '/#inscription',
 };
 
-/** Sections de la page « À propos » (src/views/About.astro). */
+/** Liens du menu « À propos » : sections de src/views/About.astro, puis le bilan. */
 const ABOUT_ANCHORS = {
   about: '/a-propos#about',
-  edition2025: '/a-propos#edition-2025',
   contact: '/a-propos#contact',
+  bilan: '/bilan',
 };
 
 export const ui: Record<Lang, UiDict> = {
   fr: {
     layout: {
       defaultDescription:
-        "Cyber Tour Réunion 2026 - 7 étapes, 20-30 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.",
+        "Cyber Tour Réunion 2026 - 6 étapes, 20-30 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.",
       jsonLdDescription:
         "L'événement cybersécurité de référence à La Réunion, organisé par le CLUSIR Réunion Océan Indien.",
-      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-30 Octobre - 7 étapes',
+      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-30 Octobre - 6 étapes',
       keywords:
         'cybersécurité, La Réunion, conférence, cybermois, CLUSIR, sécurité informatique, SOC, IA, souveraineté numérique',
       skipToContent: 'Aller au contenu principal',
@@ -106,8 +108,8 @@ export const ui: Record<Lang, UiDict> = {
         ended: {
           title: 'Édition 2026 terminée',
           subtitle: 'Merci à toutes et tous. Les conférences sont disponibles en rediffusion.',
-          cta: 'Voir les replays',
-          href: ABOUT_ANCHORS.edition2025,
+          cta: 'Voir le bilan et les replays',
+          href: ABOUT_ANCHORS.bilan,
         },
         live: {
           title: "L'événement est en cours",
@@ -125,12 +127,12 @@ export const ui: Record<Lang, UiDict> = {
         label: 'À propos',
         items: [
           { label: 'Le Cyber Tour', href: ABOUT_ANCHORS.about },
-          { label: 'Édition 2025', href: ABOUT_ANCHORS.edition2025 },
+          { label: 'Bilan des éditions', href: ABOUT_ANCHORS.bilan },
           { label: 'Contact', href: ABOUT_ANCHORS.contact },
         ],
       },
       cta: { label: "S'inscrire", href: HOME_ANCHORS.inscription },
-      stagesMenu: { label: 'Les étapes', all: 'Voir les 7 étapes', allHref: HOME_ANCHORS.etapes, soon: 'programme à venir' },
+      stagesMenu: { label: 'Les étapes', all: 'Voir les 6 étapes', allHref: HOME_ANCHORS.etapes, soon: 'programme à venir' },
       soon: 'bientôt',
       openMenu: 'Ouvrir le menu',
       closeMenu: 'Fermer le menu',
@@ -139,11 +141,12 @@ export const ui: Record<Lang, UiDict> = {
       logoPrefectureAlt: 'Préfet de La Réunion',
       logoCyberReunionAlt: 'Cyber Réunion',
       langSwitcher: 'Langue du site',
+      theme: { label: 'Thème :', names: { auto: 'automatique', light: 'clair', dark: 'sombre' } },
       langNames: { fr: 'Français', en: 'English' },
     },
     footer: {
       logoAlt: 'Cyber Tour Réunion 2026',
-      dates: '20 — 30 Octobre 2026 · 7 étapes à La Réunion',
+      dates: '20 — 30 Octobre 2026 · 6 étapes à La Réunion',
       partnersBand: 'Organisateurs et partenaires',
       partnerDeck: 'Demander le dossier partenaire',
       partnerDeckSubject: 'Cyber Tour Réunion 2026 : demande du dossier partenaire',
@@ -179,7 +182,7 @@ export const ui: Record<Lang, UiDict> = {
       registrationContactHint: 'Une question sur cette étape ?',
       pageTitle: (name) => `${name} | Cyber Tour Réunion 2026`,
     },
-    map: { caption: 'Les six lieux du tour' },
+    map: { caption: 'Les cinq lieux du tour' },
     timeline: {
       label: 'Calendrier des étapes, du 20 au 30 octobre',
       clusirGroup: (n) => `CLUSIR · ${n} étapes`,
@@ -190,10 +193,10 @@ export const ui: Record<Lang, UiDict> = {
   en: {
     layout: {
       defaultDescription:
-        'Cyber Tour Réunion 2026 - 7 stages, 20-30 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
+        'Cyber Tour Réunion 2026 - 6 stages, 20-30 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
       jsonLdDescription:
         "Reunion Island's leading cybersecurity event, organised by CLUSIR Réunion Océan Indien.",
-      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-30 October - 7 stages',
+      ogImageAlt: 'Cyber Tour Réunion 2026 - 20-30 October - 6 stages',
       keywords:
         'cybersecurity, Reunion Island, conference, Cybermois, CLUSIR, information security, SOC, AI, digital sovereignty, Indian Ocean',
       skipToContent: 'Skip to main content',
@@ -201,8 +204,8 @@ export const ui: Record<Lang, UiDict> = {
         ended: {
           title: '2026 edition is over',
           subtitle: 'Thank you all. The talks are available on replay.',
-          cta: 'Watch the replays',
-          href: ABOUT_ANCHORS.edition2025,
+          cta: 'See the review and replays',
+          href: ABOUT_ANCHORS.bilan,
         },
         live: {
           title: 'The event is under way',
@@ -220,12 +223,12 @@ export const ui: Record<Lang, UiDict> = {
         label: 'About',
         items: [
           { label: 'Cyber Tour', href: ABOUT_ANCHORS.about },
-          { label: '2025 edition', href: ABOUT_ANCHORS.edition2025 },
+          { label: 'Editions review', href: ABOUT_ANCHORS.bilan },
           { label: 'Contact', href: ABOUT_ANCHORS.contact },
         ],
       },
       cta: { label: 'Register', href: HOME_ANCHORS.inscription },
-      stagesMenu: { label: 'Stages', all: 'See all 7 stages', allHref: HOME_ANCHORS.etapes, soon: 'programme coming soon' },
+      stagesMenu: { label: 'Stages', all: 'See all 6 stages', allHref: HOME_ANCHORS.etapes, soon: 'programme coming soon' },
       soon: 'soon',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
@@ -234,11 +237,12 @@ export const ui: Record<Lang, UiDict> = {
       logoPrefectureAlt: 'Préfet de La Réunion',
       logoCyberReunionAlt: 'Cyber Réunion',
       langSwitcher: 'Site language',
+      theme: { label: 'Theme:', names: { auto: 'automatic', light: 'light', dark: 'dark' } },
       langNames: { fr: 'Français', en: 'English' },
     },
     footer: {
       logoAlt: 'Cyber Tour Réunion 2026',
-      dates: '20 — 30 October 2026 · 7 stages across Reunion Island',
+      dates: '20 — 30 October 2026 · 6 stages across Reunion Island',
       partnersBand: 'Organisers and partners',
       partnerDeck: 'Request the partnership deck',
       partnerDeckSubject: 'Cyber Tour Réunion 2026: partnership deck request',
@@ -274,7 +278,7 @@ export const ui: Record<Lang, UiDict> = {
       registrationContactHint: 'A question about this stage?',
       pageTitle: (name) => `${name} | Cyber Tour Réunion 2026`,
     },
-    map: { caption: 'The six venues of the tour' },
+    map: { caption: 'The five venues of the tour' },
     timeline: {
       label: 'Stage calendar, 20 to 30 October',
       clusirGroup: (n) => `CLUSIR · ${n} stages`,

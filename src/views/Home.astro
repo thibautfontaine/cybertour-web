@@ -32,14 +32,15 @@ const stages = getStages(lang);
 <Layout title={t.metaTitle} description={t.metaDescription}>
 
   <!-- ===== NAVBAR ===== -->
-  <Navbar />
+  <Navbar darkHero />
 
   <!-- ===== HERO ===== -->
-  <section id="main-content" class="relative min-h-dvh flex items-center justify-center overflow-hidden pt-24 pb-24 sm:pb-20">
+  <!-- Ouverture toujours sombre, comme une affiche, quel que soit le thème. -->
+  <section id="main-content" class="theme-dark relative min-h-dvh flex items-center justify-center overflow-hidden pt-24 pb-24 sm:pb-20">
     <!-- Background image with overlay -->
     <div class="absolute inset-0">
       <img src="/assets/hero-bg.jpg" alt="" width="1920" height="1080" class="w-full h-full object-cover" loading="eager" />
-      <div class="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/70 to-navy-dark"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/70 to-surface"></div>
     </div>
 
     <!-- Grid overlay -->
@@ -51,7 +52,7 @@ const stages = getStages(lang);
     </div>
 
     <!-- Glow orbs -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-navy rounded-full animate-pulse-glow"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-navy rounded-full animate-pulse-glow light:opacity-25"></div>
     <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold/20 rounded-full animate-pulse-glow" style="animation-delay: 2s;"></div>
 
     <!-- Floating island silhouette -->
@@ -62,33 +63,33 @@ const stages = getStages(lang);
     <!-- Hero content -->
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
       <!-- Event badge -->
-      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-5" style="animation: slide-up 0.8s ease-out both;">
+      <div class="inline-flex items-center gap-2 bg-ink/5 border border-ink/10 rounded-full px-5 py-2 mb-5" style="animation: slide-up 0.8s ease-out both;">
         <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
-        <span class="text-sm font-mono text-white/60 tracking-widest uppercase">{t.heroBadge}</span>
+        <span class="text-sm font-mono text-ink/60 tracking-widest uppercase">{t.heroBadge}</span>
       </div>
 
       <!-- Main title -->
       <h1 class="font-display font-extrabold leading-[0.95] mb-5" style="animation: slide-up 0.8s ease-out 0.15s both;">
         <span class="glitch-wrapper block">
-          <span class="glitch text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl tracking-tight text-white" data-text="CYBER">CYBER</span>
+          <span class="glitch text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl tracking-tight text-ink" data-text="CYBER">CYBER</span>
         </span>
         <span class="block text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl tracking-tight">
-          <span class="text-gold">TOUR</span>
-          <span class="text-white/20 ml-2 md:ml-4" aria-hidden="true">&#47;&#47;</span>
+          <span class="text-accent">TOUR</span>
+          <span class="text-ink/20 ml-2 md:ml-4" aria-hidden="true">&#47;&#47;</span>
         </span>
         <span class="block text-3xl sm:text-4xl md:text-5xl tracking-[0.2em] mt-4 reunion-outline">REUNION</span>
       </h1>
 
       <!-- Présentation en une phrase : lue juste après le titre, et premier
            texte descriptif de la page pour les moteurs de recherche. -->
-      <p class="max-w-2xl mx-auto mb-7 text-base sm:text-lg text-white/70 leading-relaxed" style="animation: slide-up 0.8s ease-out 0.25s both;">
+      <p class="max-w-2xl mx-auto mb-7 text-base sm:text-lg text-ink/70 leading-relaxed" style="animation: slide-up 0.8s ease-out 0.25s both;">
         {t.heroTagline}
       </p>
 
       <!-- Date & location -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8" style="animation: slide-up 0.8s ease-out 0.3s both;">
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="18" rx="2"/>
             <path d="M16 2v4M8 2v4M3 10h18"/>
           </svg>
@@ -96,7 +97,7 @@ const stages = getStages(lang);
         </div>
         <span class="hidden sm:block w-1 h-1 bg-gold rounded-full"></span>
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
             <circle cx="12" cy="10" r="3"/>
           </svg>
@@ -112,15 +113,15 @@ const stages = getStages(lang);
 
       <!-- Context pills — qualification rapide pour le visiteur -->
       <div class="flex flex-wrap items-center justify-center gap-3 mt-6" style="animation: slide-up 0.8s ease-out 0.55s both;">
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-400">
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-400 light:text-emerald-800">
           <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
           {t.heroPillFree}
         </span>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-gold/25 bg-gold/[0.07] text-gold">
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-accent/25 bg-gold/[0.07] text-accent">
           <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           {t.heroPillSeats}
         </span>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-white/15 bg-white/[0.05] text-white/60">
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-ink/15 bg-ink/[0.05] text-ink/60">
           <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
           {t.heroPillHybrid}
         </span>
@@ -129,52 +130,52 @@ const stages = getStages(lang);
       <!-- Countdown -->
       <div id="countdown" class="mt-10 flex items-center justify-center gap-6 sm:gap-10" style="animation: slide-up 0.8s ease-out 0.6s both;">
         <div class="text-center">
-          <span id="cd-days" class="block font-mono text-3xl sm:text-4xl font-bold text-gold tabular-nums">---</span>
-          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdDays}</span>
+          <span id="cd-days" class="block font-mono text-3xl sm:text-4xl font-bold text-accent tabular-nums">---</span>
+          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdDays}</span>
         </div>
-        <span class="text-white/20 text-2xl font-light" aria-hidden="true">:</span>
+        <span class="text-ink/20 text-2xl font-light" aria-hidden="true">:</span>
         <div class="text-center">
-          <span id="cd-hours" class="block font-mono text-3xl sm:text-4xl font-bold text-white tabular-nums">--</span>
-          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdHours}</span>
+          <span id="cd-hours" class="block font-mono text-3xl sm:text-4xl font-bold text-ink tabular-nums">--</span>
+          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdHours}</span>
         </div>
-        <span class="text-white/20 text-2xl font-light" aria-hidden="true">:</span>
+        <span class="text-ink/20 text-2xl font-light" aria-hidden="true">:</span>
         <div class="text-center">
-          <span id="cd-mins" class="block font-mono text-3xl sm:text-4xl font-bold text-white tabular-nums">--</span>
-          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdMins}</span>
+          <span id="cd-mins" class="block font-mono text-3xl sm:text-4xl font-bold text-ink tabular-nums">--</span>
+          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdMins}</span>
         </div>
-        <span class="text-white/20 text-2xl font-light" aria-hidden="true">:</span>
+        <span class="text-ink/20 text-2xl font-light" aria-hidden="true">:</span>
         <div class="text-center">
-          <span id="cd-secs" class="block font-mono text-3xl sm:text-4xl font-bold text-white/50 tabular-nums">--</span>
-          <span class="text-xs text-white/55 uppercase tracking-widest">{t.cdSecs}</span>
+          <span id="cd-secs" class="block font-mono text-3xl sm:text-4xl font-bold text-ink/50 tabular-nums">--</span>
+          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdSecs}</span>
         </div>
       </div>
     </div>
 
     {/* Sous sm, la barre des partenaires Gold occupe le bas du hero :
         l'indicateur de défilement lui laisse la place. */}
-    <div class="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/50">
+    <div class="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-ink/50">
       <span class="text-xs tracking-widest uppercase">{t.scroll}</span>
-      <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
+      <div class="w-px h-8 bg-gradient-to-b from-ink/30 to-transparent"></div>
     </div>
   </section>
 
   <!-- ===== CARTE DU TOUR / ÉTAPES ===== -->
   <section id="etapes" class="relative py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-surface-2 to-surface"></div>
     <div class="absolute inset-0 cyber-grid opacity-50"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <div class="reveal mb-16 text-center">
         <span class="section-label">{t.routeLabel}</span>
         <h2 class="section-title mt-4" set:html={t.routeTitleHtml}></h2>
-        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+        <p class="text-ink/50 mt-4 max-w-2xl mx-auto text-lg">
           {t.routeIntro}
         </p>
         <!-- C4 — Dates bien visibles -->
-        <div class="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/[0.06]">
-          <svg class="w-4 h-4 text-gold/70 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-full border border-accent/20 bg-gold/[0.06]">
+          <svg class="w-4 h-4 text-accent/70 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
           </svg>
-          <span class="font-mono text-sm text-gold/80 font-bold tracking-wider">{t.routeDates}</span>
+          <span class="font-mono text-sm text-accent/80 font-bold tracking-wider">{t.routeDates}</span>
         </div>
       </div>
 
@@ -195,59 +196,50 @@ const stages = getStages(lang);
 
   <!-- ===== INSCRIPTION ===== -->
   <section id="inscription" class="relative py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-surface via-surface-2 to-surface"></div>
     <div class="absolute inset-0 cyber-grid opacity-30"></div>
 
     <div class="relative z-10 max-w-4xl mx-auto px-6">
       <div class="reveal mb-14 text-center">
         <span class="section-label">{t.regLabel}</span>
         <h2 class="section-title mt-4" set:html={t.regTitleHtml}></h2>
-        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+        <p class="text-ink/50 mt-4 max-w-2xl mx-auto text-lg">
           {t.regIntro}
         </p>
       </div>
 
-      {/* Billetterie Weezevent — simple visuel cliquable vers la page
-          publique my.weezevent.com/cybertour (nouvel onglet). Aucun module
-          tiers chargé sur le site. */}
+      {/* Visuel de l'édition, sans lien : la billetterie s'ouvre depuis le
+          bouton du terminal ci-dessous. Aucun module tiers chargé sur le site. */}
       <div class="reveal delay-1 mx-auto max-w-3xl">
-        <a
-          href={WEEZEVENT_PAGE}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={t.regImageLinkLabel}
-          class="group block overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-navy/50 transition-all hover:border-gold/50 hover:shadow-gold/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-        >
-          <img
-            src="/assets/og-cybertour-2026.png"
-            alt={t.regImageAlt}
-            width="1200"
-            height="630"
-            loading="lazy"
-            class="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-        </a>
+        <img
+          src="/assets/og-cybertour-2026.png"
+          alt={t.regImageAlt}
+          width="1200"
+          height="630"
+          loading="lazy"
+          class="block w-full h-auto overflow-hidden rounded-2xl border border-ink/10 shadow-2xl shadow-navy/50 light:shadow-navy/15"
+        />
       </div>
 
       <!-- Terminal — état réel de la billetterie + actions utiles -->
       <div class="reveal delay-2 mx-auto max-w-2xl mt-10">
-        <div class="terminal-window bg-black/70 backdrop-blur-md border border-gold/20 rounded-xl px-6 py-6 sm:px-8 font-mono text-sm">
-          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
+        <div class="terminal-window theme-dark bg-[#060a14] backdrop-blur-md border border-accent/20 rounded-xl px-6 py-6 sm:px-8 font-mono text-sm">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-ink/10">
             <span class="w-3 h-3 rounded-full bg-red/80" aria-hidden="true"></span>
             <span class="w-3 h-3 rounded-full bg-gold/60" aria-hidden="true"></span>
             <span class="w-3 h-3 rounded-full bg-emerald-400/60" aria-hidden="true"></span>
-            <span class="ml-3 text-white/50 text-xs">{t.regTermFile}</span>
+            <span class="ml-3 text-ink/50 text-xs">{t.regTermFile}</span>
           </div>
 
           <div class="space-y-2">
-            <p class="text-emerald-400/80"><span class="text-gold/80">$</span> {t.regTermCmd}</p>
-            <p class="text-white/70">
-              {t.regEventLabel} <span class="text-gold">{t.regEventValue}</span> {t.regEventSuffix}
+            <p class="text-emerald-400/80 light:text-emerald-800"><span class="text-accent/80">$</span> {t.regTermCmd}</p>
+            <p class="text-ink/70">
+              {t.regEventLabel} <span class="text-accent">{t.regEventValue}</span> {t.regEventSuffix}
             </p>
-            <p class="text-white/70">
-              {t.regTicketLabel} <span class="text-gold">{t.regTicketDate}</span>
+            <p class="text-ink/70">
+              {t.regTicketLabel} <span class="text-accent">{t.regTicketDate}</span>
             </p>
-            <p class="text-white/60">
+            <p class="text-ink/60">
               {t.regHint}
             </p>
           </div>
@@ -258,7 +250,7 @@ const stages = getStages(lang);
               href={WEEZEVENT_PAGE}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-4 py-3 font-display text-sm font-semibold text-gold transition-colors hover:bg-gold/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-accent/40 bg-gold/10 px-4 py-3 font-display text-sm font-semibold text-accent transition-colors hover:bg-gold/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3m-6-8h6m0 0v6m0-6L9 15" />
@@ -272,7 +264,7 @@ const stages = getStages(lang);
               data-description={t.icsDescription}
               data-location={t.icsLocation}
               data-done={t.icsDone}
-              class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/[0.06] px-4 py-3 font-display text-sm font-semibold text-white transition-colors hover:bg-white/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-ink/20 bg-ink/[0.06] px-4 py-3 font-display text-sm font-semibold text-ink transition-colors hover:bg-ink/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/>
@@ -281,7 +273,7 @@ const stages = getStages(lang);
             </button>
           </div>
 
-          <p id="calendar-status" role="status" class="mt-3 text-xs text-white/50">
+          <p id="calendar-status" role="status" class="mt-3 text-xs text-ink/50">
             {t.regCalendarStatus}
           </p>
         </div>
@@ -291,12 +283,12 @@ const stages = getStages(lang);
 
   <!-- ===== PARTENAIRES (Pyramid) ===== -->
   <section id="partenaires" class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-surface via-surface-2 to-surface"></div>
     <div class="relative z-10">
       <div class="reveal mb-12 text-center px-6">
         <span class="section-label">{t.partnersLabel}</span>
         <h2 class="section-title mt-4" set:html={t.partnersTitleHtml}></h2>
-        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+        <p class="text-ink/50 mt-4 max-w-2xl mx-auto text-lg">
           {t.partnersIntro}
         </p>
       </div>
@@ -316,31 +308,31 @@ const stages = getStages(lang);
     <div class="absolute inset-0 noise-overlay"></div>
 
     <div class="relative z-10 max-w-3xl mx-auto px-6">
-      <div class="reveal relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 sm:p-10 overflow-hidden">
+      <div class="reveal relative bg-ink/[0.03] border border-ink/[0.06] rounded-2xl p-8 sm:p-10 overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gold/5 to-transparent" aria-hidden="true"></div>
 
         <span class="section-label">{t.ctfLabel}</span>
         <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4" set:html={t.ctfTitleHtml}></h2>
 
         <div class="flex flex-wrap items-center gap-3 mt-5">
-          <span class="inline-flex items-center gap-1.5 bg-gold/10 border border-gold/20 rounded-full px-3 py-1 text-xs font-mono text-gold tracking-wider uppercase">
+          <span class="inline-flex items-center gap-1.5 bg-gold/10 border border-accent/20 rounded-full px-3 py-1 text-xs font-mono text-accent tracking-wider uppercase">
             <span class="w-1.5 h-1.5 bg-gold rounded-full animate-pulse"></span>
             {t.ctfBadgeMonth}
           </span>
-          <span class="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-mono text-white/60 tracking-wider uppercase">
+          <span class="inline-flex items-center gap-1.5 bg-ink/5 border border-ink/10 rounded-full px-3 py-1 text-xs font-mono text-ink/60 tracking-wider uppercase">
             {t.ctfBadgeAllMonth}
           </span>
         </div>
 
-        <p class="text-white/70 leading-relaxed mt-5" set:html={t.ctfIntroHtml}></p>
-        <p class="text-white/60 leading-relaxed mt-3" set:html={t.ctfBodyHtml}></p>
+        <p class="text-ink/70 leading-relaxed mt-5" set:html={t.ctfIntroHtml}></p>
+        <p class="text-ink/60 leading-relaxed mt-3" set:html={t.ctfBodyHtml}></p>
 
         <div class="mt-6 text-center">
           <a href="https://ctf.inge.re" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block rounded-lg font-display">{t.ctfCta}</a>
         </div>
 
         <div class="flex flex-wrap items-center gap-4 mt-6">
-          <span class="text-xs text-white/50 font-mono tracking-wider">{t.ctfPartnersLabel}</span>
+          <span class="text-xs text-ink/50 font-mono tracking-wider">{t.ctfPartnersLabel}</span>
           <!-- Logo blanc et orange sur fond transparent : pas de pastille blanche. -->
           <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" aria-label="BSides Réunion">
             <img src="/assets/logo-bsides-reunion.webp" alt="BSides Réunion" width="800" height="346" class="h-14 w-auto" loading="lazy" />

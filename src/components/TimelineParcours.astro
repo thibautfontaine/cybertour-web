@@ -15,7 +15,7 @@ const tl = ui[lang].timeline;
    un repère par jour, qu'il s'y passe quelque chose ou non, un point par
    étape. Les jours vides restent visibles : le trou du 24 au 26 et le 28
    sont des faits du calendrier, pas des blancs à tasser. Le Sud occupe deux
-   jours, donc deux points : 6 lieux, 7 étapes. */
+   jours, donc deux points : 5 lieux, 6 étapes. */
 const DAY = 86_400_000;
 const toDate = (iso: string) => new Date(`${iso}T00:00:00Z`);
 const locale = lang === "fr" ? "fr-FR" : "en-GB";
@@ -70,13 +70,13 @@ const groups = [
     <div class="grid" style={cols} aria-hidden="true">
       {calendar.map((c) => (
         <div class="flex flex-col items-center">
-          <span class:list={["font-mono text-[10px] tracking-[0.12em] uppercase", c.hasStage ? "text-white/55" : "text-white/25"]}>
+          <span class:list={["font-mono text-[10px] tracking-[0.12em] uppercase", c.hasStage ? "text-ink/55" : "text-ink/25"]}>
             {c.weekday}
           </span>
-          <span class:list={["font-display font-semibold text-base leading-none mt-1", c.hasStage ? "text-white" : "text-white/25"]}>
+          <span class:list={["font-display font-semibold text-base leading-none mt-1", c.hasStage ? "text-ink" : "text-ink/25"]}>
             {c.dayNum}
           </span>
-          <span class:list={["block w-px h-4 mt-2", c.hasStage ? "bg-white/40" : "bg-white/15"]}></span>
+          <span class:list={["block w-px h-4 mt-2", c.hasStage ? "bg-ink/40" : "bg-ink/15"]}></span>
         </div>
       ))}
     </div>
@@ -85,13 +85,13 @@ const groups = [
       <div
         class="absolute top-[7px] h-px"
         aria-hidden="true"
-        style={`left: calc(100% / ${span * 2}); right: calc(100% / ${span * 2}); background: rgba(255,255,255,.22);`}
+        style={`left: calc(100% / ${span * 2}); right: calc(100% / ${span * 2}); background: color-mix(in srgb, var(--theme-ink) 22%, transparent);`}
       ></div>
       {/* Jours sans étape : un grain sur le rail, pour que le vide se lise. */}
       <div class="absolute inset-x-0 top-0 grid" style={cols} aria-hidden="true">
         {calendar.map((c) => (
           <span class="flex justify-center pt-[5px]">
-            {!c.hasStage && <span class="block w-[5px] h-[5px] rounded-full bg-white/25"></span>}
+            {!c.hasStage && <span class="block w-[5px] h-[5px] rounded-full bg-ink/25"></span>}
           </span>
         ))}
       </div>
@@ -101,20 +101,20 @@ const groups = [
           <li class="flex flex-col items-center text-center px-0.5" style={`grid-column: ${colOf(p.iso)}; grid-row: 1;`}>
             <span
               class="block w-[15px] h-[15px] rounded-full"
-              style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px #0f1a30, 0 0 14px ${ACCENT_PAINT}80;`}
+              style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px var(--theme-surface), 0 0 14px ${ACCENT_PAINT}80;`}
               aria-hidden="true"
             ></span>
             <span class="sr-only">{p.dateLong} —</span>
             <span class="font-mono text-[11px] tracking-[0.16em] font-bold mt-3" style={`color: ${ACCENT_TEXT};`}>
               {p.n}
             </span>
-            <span class="block font-display font-semibold text-sm text-white mt-0.5">
+            <span class="block font-display font-semibold text-sm text-ink mt-0.5">
               {p.stage.direction}
             </span>
             {/* Colonnes d'un jour : « accueillie par » s'y cassait en deux
-                lignes, sept fois. Le pictogramme dit « lieu » sans le mot, le
+                lignes, six fois. Le pictogramme dit « lieu » sans le mot, le
                 libellé complet reste pour les lecteurs d'écran. */}
-            <span class="flex flex-col items-center font-mono text-[11px] text-white/80 leading-snug mt-1.5">
+            <span class="flex flex-col items-center font-mono text-[11px] text-ink/80 leading-snug mt-1.5">
               <svg class="w-3 h-3 mb-0.5" style={`color: ${ACCENT_PAINT}B0;`} fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
                 <circle cx="12" cy="10" r="3"/>
@@ -130,8 +130,8 @@ const groups = [
     <div class="grid mt-6" style={cols}>
       {groups.map((g) => (
         <div class="px-3" style={`grid-column: ${g.from} / ${g.to + 1};`}>
-          <div class="h-2 border-x border-b border-white/25" aria-hidden="true"></div>
-          <p class="font-mono text-[10px] tracking-[0.16em] uppercase text-white/55 text-center mt-2">
+          <div class="h-2 border-x border-b border-ink/25" aria-hidden="true"></div>
+          <p class="font-mono text-[10px] tracking-[0.16em] uppercase text-ink/55 text-center mt-2">
             {g.label}
           </p>
         </div>
@@ -144,26 +144,26 @@ const groups = [
   <div class="md:hidden space-y-8">
     {groups.map((g) => (
       <div>
-        <p class="font-mono text-[10px] tracking-[0.16em] uppercase text-white/55 mb-4">{g.label}</p>
+        <p class="font-mono text-[10px] tracking-[0.16em] uppercase text-ink/55 mb-4">{g.label}</p>
         <div class="relative pl-9">
-          <div class="absolute left-[7px] top-2 bottom-2 w-px bg-white/15" aria-hidden="true"></div>
+          <div class="absolute left-[7px] top-2 bottom-2 w-px bg-ink/15" aria-hidden="true"></div>
           <ol class="list-none m-0 p-0">
             {g.pts.map((p) => (
               <li class="relative pb-6 last:pb-0">
                 <span
                   class="absolute -left-9 top-1 w-[15px] h-[15px] rounded-full"
-                  style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px #0f1a30;`}
+                  style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px var(--theme-surface);`}
                   aria-hidden="true"
                 ></span>
-                <span class="font-mono text-[11px] tracking-[0.1em] text-white/50">{p.dateShort}</span>
-                <span class="block font-display font-semibold text-white mt-0.5">
+                <span class="font-mono text-[11px] tracking-[0.1em] text-ink/50">{p.dateShort}</span>
+                <span class="block font-display font-semibold text-ink mt-0.5">
                   <span class="font-mono text-[11px] tracking-[0.16em] mr-2" style={`color: ${ACCENT_TEXT};`}>
                     {p.n}
                   </span>
                   {p.stage.direction}
                 </span>
-                <span class="block font-mono text-[11px] text-white/40 mt-1">
-                  {t.hostedByLower} <span class="text-white/75">{p.stage.venue}</span>
+                <span class="block font-mono text-[11px] text-ink/40 mt-1">
+                  {t.hostedByLower} <span class="text-ink/75">{p.stage.venue}</span>
                 </span>
               </li>
             ))}

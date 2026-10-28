@@ -82,7 +82,7 @@ const next =
           {!isLast && (
             <span
               class="block rounded-full"
-              style="width:1px;height:22px;margin-left:9px;background:rgba(255,255,255,0.08);"
+              style="width:1px;height:22px;margin-left:9px;background:color-mix(in srgb, var(--theme-ink) 8%, transparent);"
             ></span>
           )}
         </div>
@@ -102,14 +102,14 @@ const next =
 
     /* Indicateur de focus visible — aligné sur .stage-progress-item */
     .snav-item:focus-visible {
-      outline: 2px solid rgba(255, 255, 255, 0.4);
+      outline: 2px solid color-mix(in srgb, var(--theme-ink) 40%, transparent);
       outline-offset: 4px;
       border-radius: 4px;
     }
 
     /* Pastilles de progression mobile — même indicateur de focus */
     .stage-dot-item:focus-visible {
-      outline: 2px solid rgba(255, 255, 255, 0.4);
+      outline: 2px solid color-mix(in srgb, var(--theme-ink) 40%, transparent);
       outline-offset: 2px;
       border-radius: 8px;
     }
@@ -120,10 +120,10 @@ const next =
       transform: scaleX(1.2);
     }
     .stage-progress-item:not([aria-current="page"]):hover span:last-child {
-      color: rgba(255,255,255,0.8) !important;
+      color: color-mix(in srgb, var(--theme-ink) 80%, transparent) !important;
     }
     .stage-progress-item:focus-visible {
-      outline: 2px solid rgba(255,255,255,0.4);
+      outline: 2px solid color-mix(in srgb, var(--theme-ink) 40%, transparent);
       outline-offset: 4px;
       border-radius: 4px;
     }
@@ -133,7 +133,7 @@ const next =
   <nav
     aria-label={t.navBetweenStages}
     class="fixed bottom-0 left-0 right-0 z-40 lg:hidden"
-    style="background: rgba(15, 26, 48, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,0.08);"
+    style="background: color-mix(in srgb, var(--theme-surface) 96%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid color-mix(in srgb, var(--theme-ink) 8%, transparent);"
   >
     <div class="flex items-center justify-between px-5 py-3 max-w-lg mx-auto">
       <!-- Étape précédente -->
@@ -171,7 +171,7 @@ const next =
                   aria-hidden="true"
                   style={isActive
                     ? `width:10px;height:10px;background:${ACCENT_PAINT};box-shadow:0 0 8px ${ACCENT_PAINT}80;`
-                    : 'width:6px;height:6px;background:rgba(255,255,255,0.2);'}
+                    : 'width:6px;height:6px;background:color-mix(in srgb, var(--theme-ink) 20%, transparent);'}
                 ></span>
               </DotTag>
             </li>
@@ -201,7 +201,7 @@ const next =
       <!-- Background gradient with stage accent -->
       <div
         class="absolute inset-0"
-        style={`background: linear-gradient(135deg, #0f1a30 0%, ${ACCENT_PAINT}12 50%, #0f1a30 100%);`}
+        style={`background: linear-gradient(135deg, var(--theme-surface) 0%, ${ACCENT_PAINT}12 50%, var(--theme-surface) 100%);`}
       ></div>
 
       <!-- Cyber grid overlay -->
@@ -216,9 +216,9 @@ const next =
         <!-- Breadcrumb -->
         <nav class="reveal mb-8" aria-label={t.breadcrumb}>
           <ol class="flex items-center gap-2 font-mono text-sm tracking-wide" style="color: var(--text-muted);">
-            <li><a href={p('/')} class="hover:text-white transition-colors">{t.home}</a></li>
+            <li><a href={p('/')} class="hover:text-ink transition-colors">{t.home}</a></li>
             <li class="select-none">&gt;</li>
-            <li><a href={p('/#etapes')} class="hover:text-white transition-colors">{t.stages}</a></li>
+            <li><a href={p('/#etapes')} class="hover:text-ink transition-colors">{t.stages}</a></li>
             <li class="select-none">&gt;</li>
             <li style={`color: ${ACCENT_TEXT};`}>{stage.direction}</li>
           </ol>
@@ -254,7 +254,7 @@ const next =
             <span>{stage.date}</span>
           </div>
 
-          <span class="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true"></span>
+          <span class="hidden sm:block w-px h-4 bg-ink/20" aria-hidden="true"></span>
 
           <!-- Lieu -->
           <div class="flex items-center gap-2 font-body text-base" style="color: var(--text-secondary);">
@@ -266,7 +266,7 @@ const next =
           </div>
 
           {stage.capacity !== null && (<>
-          <span class="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true"></span>
+          <span class="hidden sm:block w-px h-4 bg-ink/20" aria-hidden="true"></span>
 
           <!-- Capacity badge -->
           <div
@@ -316,7 +316,7 @@ const next =
                 class="font-mono text-[11px] tracking-widest uppercase transition-all duration-200"
                 style={isCurrent
                   ? `color:${ACCENT_TEXT};font-weight:700;`
-                  : 'color:rgba(255,255,255,0.5);'}
+                  : 'color:var(--text-muted);'}
               >
                 {s.direction}
               </span>
@@ -326,11 +326,11 @@ const next =
       </div>
 
       <!-- Liens prev / next — contraste amélioré -->
-      <div class="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+      <div class="flex items-center justify-between pt-4 border-t border-ink/[0.06]">
         {prev ? (
           <a
             href={prev.href}
-            class="group flex items-center gap-4 rounded-xl p-4 hover:bg-white/[0.04] transition-all duration-200"
+            class="group flex items-center gap-4 rounded-xl p-4 hover:bg-ink/[0.04] transition-all duration-200"
           >
             <span
               class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border transition-colors duration-200"
@@ -341,8 +341,8 @@ const next =
             </span>
             <div>
               <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${ACCENT_TEXT};`}>{t.prevStage}</span>
-              <span class="font-display font-semibold text-white text-lg leading-tight">{prev.direction}</span>
-              <span class="block text-xs text-white/50 mt-0.5">{prev.dateShort}</span>
+              <span class="font-display font-semibold text-ink text-lg leading-tight">{prev.direction}</span>
+              <span class="block text-xs text-ink/50 mt-0.5">{prev.dateShort}</span>
             </div>
           </a>
         ) : <div></div>}
@@ -350,12 +350,12 @@ const next =
         {next ? (
           <a
             href={next.href}
-            class="group flex items-center gap-4 text-right rounded-xl p-4 hover:bg-white/[0.04] transition-all duration-200"
+            class="group flex items-center gap-4 text-right rounded-xl p-4 hover:bg-ink/[0.04] transition-all duration-200"
           >
             <div>
               <span class="block text-xs font-mono uppercase tracking-wider mb-0.5" style={`color: ${ACCENT_TEXT};`}>{t.nextStage}</span>
-              <span class="font-display font-semibold text-white text-lg leading-tight">{next.direction}</span>
-              <span class="block text-xs text-white/50 mt-0.5">{next.dateShort}</span>
+              <span class="font-display font-semibold text-ink text-lg leading-tight">{next.direction}</span>
+              <span class="block text-xs text-ink/50 mt-0.5">{next.dateShort}</span>
             </div>
             <span
               class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border transition-colors duration-200"
@@ -376,7 +376,7 @@ const next =
           {t.practicalInfo}
         </h2>
 
-        <div class="reveal delay-1 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
+        <div class="reveal delay-1 bg-ink/[0.03] border border-ink/[0.06] rounded-2xl p-8">
           <div class="flex items-start gap-5">
             <!-- Location icon -->
             <div
@@ -399,11 +399,11 @@ const next =
     </section>
 
     <!-- Inscription : la billetterie Weezevent ne couvre que les étapes CLUSIR.
-         Les hôtes (Expernet, Epitech, EDN) gèrent leurs propres inscriptions. -->
+         Les hôtes (Expernet, EDN) gèrent leurs propres inscriptions. -->
     {stage.host === CLUSIR && (
     <section class="py-20 px-6" style="background: var(--bg-secondary);">
       <div class="max-w-3xl mx-auto text-center">
-        <div class="reveal bg-white/[0.03] border border-white/[0.06] rounded-2xl p-12">
+        <div class="reveal bg-ink/[0.03] border border-ink/[0.06] rounded-2xl p-12">
           <div
             class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
             style={`background: ${ACCENT_PAINT}15;`}
@@ -435,7 +435,7 @@ const next =
 
           <p class="mt-4 font-mono text-xs tracking-wide" style="color: var(--text-muted);">
             {t.registrationContactHint}
-            <a href="mailto:evenement@clusir-roi.org" class="hover:text-white transition-colors underline underline-offset-2">evenement@clusir-roi.org</a>
+            <a href="mailto:evenement@clusir-roi.org" class="hover:text-ink transition-colors underline underline-offset-2">evenement@clusir-roi.org</a>
           </p>
         </div>
       </div>

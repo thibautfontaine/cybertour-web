@@ -51,7 +51,7 @@ const tierStyles: Record<
   }
 > = {
   bronze: {
-    text: 'text-amber-500',
+    text: 'text-amber-500 light:text-amber-900',
     border: 'border-amber-700/50',
     bg: 'bg-amber-900/20',
     hover: 'hover:bg-amber-900/30',
@@ -59,7 +59,7 @@ const tierStyles: Record<
     cardBorder: 'border-amber-900/30',
   },
   silver: {
-    text: 'text-gray-300',
+    text: 'text-gray-300 light:text-gray-700',
     border: 'border-gray-400/50',
     bg: 'bg-gray-400/10',
     hover: 'hover:bg-gray-400/20',
@@ -67,12 +67,12 @@ const tierStyles: Record<
     cardBorder: 'border-gray-400/30',
   },
   gold: {
-    text: 'text-gold',
-    border: 'border-gold/50',
+    text: 'text-accent',
+    border: 'border-accent/50',
     bg: 'bg-gold/10',
     hover: 'hover:bg-gold/20',
     bar: 'from-gold-dim to-gold',
-    cardBorder: 'border-gold/30',
+    cardBorder: 'border-accent/30',
   },
 };
 
@@ -83,32 +83,32 @@ const mailtoSubject = (subject: string) =>
 <Layout title={t.partnersPageMetaTitle} description={t.partnersPageMetaDescription}>
   <Navbar currentPage="partenaires" />
 
-  <main id="main-content" class="bg-navy-dark">
+  <main id="main-content" class="bg-surface">
   <section id="sponsors" class="relative pt-36 pb-32 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-surface via-surface-2 to-surface"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       <div class="reveal mb-14 text-center">
         <span class="section-label">{t.sponsorsLabel}</span>
         <h1 class="section-title mt-4" set:html={t.sponsorsTitleHtml}></h1>
-        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
+        <p class="text-ink/50 mt-4 max-w-2xl mx-auto text-lg">
           {t.sponsorsIntro}
         </p>
       </div>
 
       <!-- ── Pourquoi investir — les 4 piliers du dossier partenaire ──────── -->
       <div class="reveal delay-1">
-        <h3 class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-6">
+        <h3 class="font-mono text-xs tracking-widest uppercase text-ink/60 text-center mb-6">
           {t.whyInvestHeading}
         </h3>
         <ul class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
           {t.whyInvest.map(pillar => (
-            <li class="topic-card rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
-              <svg class="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <li class="topic-card rounded-2xl border border-ink/[0.08] bg-ink/[0.03] p-6">
+              <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d={pillarIcons[pillar.key]} />
               </svg>
-              <h4 class="font-display text-lg font-bold text-white mt-4">{pillar.title}</h4>
-              <p class="mt-2 text-sm leading-relaxed text-white/60">{pillar.text}</p>
+              <h4 class="font-display text-lg font-bold text-ink mt-4">{pillar.title}</h4>
+              <p class="mt-2 text-sm leading-relaxed text-ink/60">{pillar.text}</p>
             </li>
           ))}
         </ul>
@@ -117,10 +117,10 @@ const mailtoSubject = (subject: string) =>
       <!-- ── Formules — Soutenir / Être présent / Contribuer ──────────────── -->
       <div class="reveal delay-2 mt-20">
         <div class="text-center mb-10">
-          <h3 class="font-mono text-xs tracking-widest uppercase text-white/60">
+          <h3 class="font-mono text-xs tracking-widest uppercase text-ink/60">
             {t.tiersHeading}
           </h3>
-          <p class="text-white/50 mt-3 max-w-2xl mx-auto">
+          <p class="text-ink/50 mt-3 max-w-2xl mx-auto">
             {t.tiersIntro}
           </p>
         </div>
@@ -130,15 +130,15 @@ const mailtoSubject = (subject: string) =>
             const style = tierStyles[tier.key];
             return (
               <li class="flex">
-                <article class={`sponsor-card relative flex flex-col w-full overflow-hidden rounded-2xl border bg-white/[0.03] p-6 ${style.cardBorder}`}>
+                <article class={`sponsor-card relative flex flex-col w-full overflow-hidden rounded-2xl border bg-ink/[0.03] p-6 ${style.cardBorder}`}>
                   <span class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${style.bar}`} aria-hidden="true"></span>
                   <span class={`font-mono text-xs tracking-widest uppercase ${style.text}`}>{tier.axis}</span>
-                  <h4 class="font-display text-2xl font-bold text-white mt-2">{tier.name}</h4>
+                  <h4 class="font-display text-2xl font-bold text-ink mt-2">{tier.name}</h4>
                   <p class="mt-1 flex items-baseline gap-2 flex-wrap">
-                    <span class="font-mono text-xs text-white/60">{tier.note}</span>
+                    <span class="font-mono text-xs text-ink/60">{tier.note}</span>
                     <span class="font-mono text-xl font-bold text-clusir-red">{tier.price}</span>
                   </p>
-                  <p class="mt-3 text-sm text-white/60">{tier.tagline}</p>
+                  <p class="mt-3 text-sm text-ink/60">{tier.tagline}</p>
                   <ul class="mt-5 space-y-3 flex-1">
                     {tier.includes && (
                       <li class={`flex items-start gap-3 text-sm font-medium ${style.text}`}>
@@ -147,7 +147,7 @@ const mailtoSubject = (subject: string) =>
                       </li>
                     )}
                     {tier.benefits.map(benefit => (
-                      <li class="flex items-start gap-3 text-sm text-white/70">
+                      <li class="flex items-start gap-3 text-sm text-ink/70">
                         <svg class={`mt-0.5 h-5 w-5 shrink-0 ${style.text}`} aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         <span>{benefit}</span>
                       </li>
@@ -166,7 +166,7 @@ const mailtoSubject = (subject: string) =>
           })}
         </ul>
 
-        <p class="mt-6 text-center font-mono text-xs text-white/60">{t.tiersFootnote}</p>
+        <p class="mt-6 text-center font-mono text-xs text-ink/60">{t.tiersFootnote}</p>
       </div>
 
       <div class="reveal delay-3 mt-14 text-center">
@@ -179,21 +179,21 @@ const mailtoSubject = (subject: string) =>
           </svg>
           {t.deckCta}
         </a>
-        <p class="mt-4 font-mono text-xs text-white/60">
+        <p class="mt-4 font-mono text-xs text-ink/60">
           {t.deckNote}
         </p>
       </div>
 
       <!-- Preuve d'audience — chiffres de l'édition précédente, là où est le prix -->
-      <div class="reveal delay-3 mt-14 border-t border-white/10 pt-8">
-        <p class="font-mono text-xs tracking-widest uppercase text-white/60 text-center mb-5">
+      <div class="reveal delay-3 mt-14 border-t border-ink/10 pt-8">
+        <p class="font-mono text-xs tracking-widest uppercase text-ink/60 text-center mb-5">
           {t.audienceHeading}
         </p>
         <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 text-center">
           {t.audience2025.map(stat => (
             <div class="flex flex-col-reverse">
-              <dt class="font-mono text-xs text-white/60 mt-1">{stat.label}</dt>
-              <dd class="font-display font-extrabold text-2xl sm:text-3xl text-gold">{stat.value}</dd>
+              <dt class="font-mono text-xs text-ink/60 mt-1">{stat.label}</dt>
+              <dd class="font-display font-extrabold text-2xl sm:text-3xl text-accent">{stat.value}</dd>
             </div>
           ))}
         </dl>

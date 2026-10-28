@@ -21,7 +21,6 @@ const positions: Record<string, { top: number; left: number }> = {
   sud:      { top: 95, left: 42 },  // IUT / ESIROI, Saint-Pierre
   expernet: { top: 23, left: 17 },  // Le Port
   edn:      { top: 12, left: 52 },  // Sainte-Clotilde
-  epitech:  { top: 26, left: 73 },  // Saint-André
 };
 ---
 
@@ -45,14 +44,14 @@ const positions: Record<string, { top: number; left: number }> = {
         >
           <span
             class="block w-[11px] h-[11px] rounded-full"
-            style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px rgba(15,26,48,.92), 0 0 14px ${ACCENT_PAINT};`}
+            style={`background: ${ACCENT_PAINT}; box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-surface) 92%, transparent), 0 0 14px ${ACCENT_PAINT};`}
           />
           <span class="sr-only">{stage.name} — {stage.commune}</span>
         </span>
       );
     })}
   </div>
-  <p class="text-center font-mono text-[10px] tracking-[0.13em] uppercase text-white/45 mt-3">
+  <p class="text-center font-mono text-[10px] tracking-[0.13em] uppercase text-ink/45 mt-3">
     {t.caption}
   </p>
 </div>
