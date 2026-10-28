@@ -233,18 +233,6 @@ const countdownI18n = {
             "addressRegion": "La Réunion",
             "addressCountry": "FR"
           }
-        },
-        {
-          "@type": "Place",
-          "name": "Epitech Réunion",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "234 chemin de la Pente Sassy",
-            "addressLocality": "Saint-André",
-            "postalCode": "97440",
-            "addressRegion": "La Réunion",
-            "addressCountry": "FR"
-          }
         }
       ],
       "image": "https://cybertour.re/assets/og-cybertour-2026.png",
@@ -297,7 +285,7 @@ const countdownI18n = {
       const EVENT_START = new Date('2026-10-20T08:00:00+04:00').getTime();
       /* Fin du tour = fin de la dernière étape, pas de la dernière étape CLUSIR.
          À 2026-10-23T18:00 le compte à rebours annonçait « Édition 2026 terminée »
-         alors que les étapes Expernet, EDN et Epitech n'avaient pas encore eu lieu.
+         alors que les étapes Expernet et EDN n'avaient pas encore eu lieu.
          Doit rester aligné sur `endDate` du JSON-LD ci-dessus. */
       const EVENT_END = new Date('2026-10-30T18:00:00+04:00').getTime();
 

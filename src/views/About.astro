@@ -1,10 +1,10 @@
 ---
 /**
  * Page « À propos » (FR `/a-propos`, EN `/en/a-propos`) : présentation du
- * Cyber Tour, édition 2025 (chiffres et replay) et contact. Ces trois
- * sections étaient sur l'accueil ; elles ont leur page, ouverte depuis le
- * menu « À propos ». Les chaînes restent dans `src/i18n/home.ts` (clés
- * `about*`, `replay*`, `contact*`).
+ * Cyber Tour, synthèse des éditions (le détail et les replays sont sur
+ * `/bilan`) et contact. Ces sections étaient sur l'accueil ; elles ont leur
+ * page, ouverte depuis le menu « À propos ». Les chaînes restent dans
+ * `src/i18n/home.ts` (clés `about*`, `editions*`, `contact*`).
  */
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
@@ -71,53 +71,34 @@ const contactMail = 'evenement@clusir-roi.org';
     </div>
   </section>
 
-  <!-- ===== RETOUR SUR 2025 ===== -->
+  <!-- ===== NOS ÉDITIONS ===== -->
+  <!-- L'ancre garde son nom : des liens vers #edition-2025 circulent déjà. -->
   <section id="edition-2025" class="relative py-24 overflow-hidden scroll-mt-24">
     <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
     <div class="absolute inset-0 cyber-grid opacity-20"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-6">
-      <div class="reveal text-center mb-14">
-        <span class="section-label">{t.replayLabel}</span>
-        <h2 class="section-title mt-4" set:html={t.replayTitleHtml}></h2>
-        <p class="text-white/50 mt-4 max-w-2xl mx-auto text-lg">
-          {t.replayIntro}
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div class="reveal mb-12">
+        <span class="section-label">{t.editionsLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.editionsTitleHtml}></h2>
+        <p class="text-white/60 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
+          {t.editionsIntro}
         </p>
       </div>
 
-      <!-- Stats 2025 -->
-      <div class="reveal delay-1 grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
-        {t.replayStats.map(stat => (
-          <div class="text-center p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
-            <span class="block font-display font-extrabold text-3xl text-gold">{stat.value}</span>
-            <span class="text-sm text-white/50 mt-1">{stat.label}</span>
+      <dl class="reveal delay-1 grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
+        {t.editionsStats.map(stat => (
+          <div class="flex flex-col-reverse p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+            <dt class="text-sm text-white/60 mt-1">{stat.label}</dt>
+            <dd class="font-display font-extrabold text-3xl text-gold">{stat.value}</dd>
           </div>
         ))}
-      </div>
+      </dl>
 
-      <div class="reveal delay-2">
-        <!-- Façade : vignette locale, aucune requête vers Google avant le clic.
-             Sans JS, le lien ouvre la vidéo sur youtube.com ; avec JS, le
-             script plus bas le remplace par l'iframe youtube-nocookie. -->
-        <div id="replay-player" class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-navy/50 aspect-video bg-navy">
-          <a
-            id="replay-facade"
-            href="https://www.youtube.com/watch?v=uk-gSyaxyWA&t=9748s"
-            data-embed="https://www.youtube-nocookie.com/embed/uk-gSyaxyWA?start=9748&autoplay=1"
-            data-title={t.replayIframeTitle}
-            class="group absolute inset-0 block"
-          >
-            <img src="/assets/replay-2025.webp" alt="" width="1280" height="720" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy" />
-            <span class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy/30">
-              <span class="flex items-center justify-center w-20 h-20 rounded-full bg-gold text-navy shadow-2xl transition-transform group-hover:scale-110 group-focus-visible:scale-110" aria-hidden="true">
-                <svg class="w-9 h-9 ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-              </span>
-              <span class="px-3 py-1 rounded-md bg-navy/80 font-mono text-sm text-white">{t.replayPlayLabel}</span>
-            </span>
-          </a>
-        </div>
-        <p class="mt-3 text-xs text-white/50 text-center">{t.replayPrivacyNote}</p>
-      </div>
+      <a href={p('/bilan')} class="reveal delay-2 btn-primary inline-flex items-center gap-3 rounded-xl">
+        {t.editionsCta}
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+      </a>
     </div>
   </section>
 
@@ -183,23 +164,4 @@ const contactMail = 'evenement@clusir-roi.org';
   </main>
 
   <Footer />
-
-  <script>
-    // ── Replay : l'iframe YouTube n'est injectée qu'au clic sur la vignette.
-    const replayFacade = document.getElementById('replay-facade');
-    if (replayFacade) {
-      replayFacade.addEventListener('click', (event) => {
-        event.preventDefault();
-        const iframe = document.createElement('iframe');
-        iframe.src = replayFacade.dataset.embed || '';
-        iframe.title = replayFacade.dataset.title || '';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.allowFullscreen = true;
-        iframe.className = 'absolute inset-0 w-full h-full';
-        replayFacade.replaceWith(iframe);
-        iframe.focus();
-      });
-    }
-
-  </script>
 </Layout>

@@ -1,0 +1,287 @@
+---
+/**
+ * Page « Bilan 2025-2026 » (FR `/bilan`, EN `/en/bilan`) : la preuve pour les
+ * partenaires et financeurs, l'envie de revenir pour le public, et trois
+ * portes d'entrée vers 2027. Une seule URL à envoyer dans une relance.
+ *
+ * Chaînes : `src/i18n/bilan.ts`. Chiffres, logos et liens : `src/data/bilan.ts`.
+ * Les étapes viennent de `getStages(lang)` ; leur présence du jour vient de
+ * `presencesByDay`, et une étape sans chiffre affiche « bilan à venir ».
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getLang, localizePath } from '../i18n';
+import { bilan } from '../i18n/bilan';
+import { getStages } from '../data/stages';
+import { BILAN_PDF, REPLAY_2025_URL, REPLAY_2026_URL, presencesByDay, media, wall } from '../data/bilan';
+
+const lang = getLang(Astro.currentLocale);
+const t = bilan[lang];
+const p = (path: string) => localizePath(path, lang);
+
+const contactMail = 'evenement@clusir-roi.org';
+const mailtoSubject = (subject: string) => `mailto:${contactMail}?subject=${encodeURIComponent(subject)}`;
+
+/* Une ligne par jour : le Sud tient deux jours et compte deux étapes. Une
+   étape non publiée n'entre pas dans le bilan. */
+const dayFormat = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+  timeZone: 'Indian/Reunion',
+});
+const timeline = getStages(lang)
+  .filter((stage) => stage.published)
+  .flatMap((stage) =>
+    stage.days.map((day) => ({
+      day,
+      label: dayFormat.format(new Date(`${day}T12:00:00+04:00`)),
+      place: `${stage.direction} · ${stage.commune}`,
+      venue: stage.venue,
+      presences: presencesByDay[day] ?? null,
+    })),
+  )
+  .sort((a, b) => a.day.localeCompare(b.day));
+const maxPresences = Math.max(...Object.values(presencesByDay));
+
+const doorIcons: Record<string, string> = {
+  participer: 'M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0',
+  accueillir: 'M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z',
+  soutenir: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z',
+};
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription}>
+  <Navbar currentPage="bilan" />
+
+  <main id="main-content">
+  <!-- ===== OUVERTURE ===== -->
+  <section id="bilan" class="relative pt-36 pb-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0">
+      <img src="/assets/bilan/2026-amphi-iut.webp" alt="" width="1600" height="900" class="w-full h-full object-cover opacity-25" />
+      <div class="absolute inset-0 bg-gradient-to-b from-navy-dark/70 via-navy-dark/85 to-navy-dark"></div>
+    </div>
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal max-w-3xl">
+        <span class="section-label">{t.heroLabel}</span>
+        <h1 class="section-title mt-4" set:html={t.heroTitleHtml}></h1>
+        <p class="mt-6 text-lg text-white/70 leading-relaxed">{t.heroIntro}</p>
+      </div>
+
+      <dl class="reveal delay-1 mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {t.heroStats.map(stat => (
+          <div class="flex flex-col-reverse p-5 bg-white/[0.04] border border-white/[0.08] rounded-xl">
+            <dt class="text-sm text-white/60 mt-2 leading-snug">{stat.label}</dt>
+            <dd class="font-display font-extrabold text-4xl sm:text-5xl text-gold">{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="reveal delay-2 mt-10 flex flex-wrap gap-4">
+        <a href={REPLAY_2026_URL} target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-3 rounded-xl">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          {t.heroCtaReplay}
+        </a>
+        <a href="#rejoindre" class="btn-outline inline-flex items-center gap-3 rounded-xl">
+          {t.heroCtaJoin}
+        </a>
+      </div>
+      <a href={BILAN_PDF} download class="reveal delay-3 mt-6 inline-flex items-center gap-2 font-mono text-sm text-white/70 hover:text-gold transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+        {t.heroPdf}
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== DE 2025 À 2026 ===== -->
+  <section id="progression" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-14">
+        <span class="section-label">{t.progressLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.progressTitleHtml}></h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        {[
+          { title: t.y2025Title, text: t.y2025Text, stats: t.y2025Stats, replay: t.y2025Replay, url: REPLAY_2025_URL },
+          { title: t.y2026Title, text: t.y2026Text, stats: t.y2026Stats, replay: t.y2026Replay, url: REPLAY_2026_URL },
+        ].map((year, i) => (
+          <article class:list={['reveal flex flex-col p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl', i === 1 && 'delay-1 border-gold/20']}>
+            <h3 class="font-display font-bold text-2xl text-white">{year.title}</h3>
+            <p class="mt-3 text-white/60 leading-relaxed">{year.text}</p>
+            <dl class="mt-6 grid grid-cols-2 gap-4 flex-1">
+              {year.stats.map(stat => (
+                <div class="flex flex-col-reverse">
+                  <dt class="text-sm text-white/60 mt-1">{stat.label}</dt>
+                  <dd class="font-display font-extrabold text-3xl text-gold">{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <a href={year.url} target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 font-mono text-sm text-clusir-red-bright hover:text-gold transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+              {year.replay}
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <!-- Frise 2026 : une ligne par jour d'étape -->
+      <div class="reveal delay-2 mt-14">
+        <h3 class="font-mono text-xs tracking-widest uppercase text-white/60 mb-5">{t.timelineHeading}</h3>
+        <ol class="space-y-3">
+          {timeline.map(row => (
+            <li class="grid grid-cols-[5.5rem_1fr] sm:grid-cols-[7rem_14rem_1fr] items-center gap-x-4 gap-y-1 p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+              <span class="font-mono text-sm text-gold">{row.label}</span>
+              <span class="text-white font-semibold">{row.place}<span class="block text-xs font-normal text-white/50">{row.venue}</span></span>
+              <span class="col-span-2 sm:col-span-1 flex items-center gap-3">
+                {row.presences !== null ? (
+                  <>
+                    <span class="h-2 rounded-full bg-clusir-red" style={`width: ${Math.max(8, (row.presences / maxPresences) * 100)}%`} aria-hidden="true"></span>
+                    <span class="shrink-0 font-display font-bold text-white">{row.presences} <span class="text-sm font-normal text-white/60">{t.presencesUnit}</span></span>
+                  </>
+                ) : (
+                  <span class="font-mono text-xs uppercase tracking-wider text-white/50">{t.pending}</span>
+                )}
+              </span>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-4 text-xs text-white/50">{t.presencesNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEMPS FORTS ===== -->
+  <section id="temps-forts" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-14">
+        <span class="section-label">{t.highlightsLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.highlightsTitleHtml}></h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {t.highlights.map((h, i) => (
+          <article class:list={['reveal flex flex-col overflow-hidden bg-white/[0.03] border border-white/[0.08] rounded-2xl', `delay-${(i % 2) + 1}`]}>
+            <img src={h.img} alt={h.imgAlt} width="1600" height="900" class="w-full aspect-video object-cover" loading="lazy" />
+            <div class="p-6">
+              <p class="font-mono text-xs text-clusir-red-bright">{h.when}</p>
+              <h3 class="mt-2 font-display font-bold text-xl text-white">{h.title}</h3>
+              <p class="mt-3 text-white/60 leading-relaxed">{h.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MÉDIAS ===== -->
+  <section id="medias" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-slate-deep to-navy-dark"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-14">
+        <span class="section-label">{t.mediaLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.mediaTitleHtml}></h2>
+      </div>
+
+      <ul class="reveal delay-1 grid grid-cols-2 md:grid-cols-3 gap-4">
+        {media.map(item => {
+          const body = (
+            <>
+              <span class="partner-bubble h-20 w-full">
+                <img src={item.logo} alt={item.name} class="max-h-12 max-w-full w-auto object-contain" loading="lazy" />
+              </span>
+              <span class="mt-3 block text-sm text-white/70">{t.media[item.id]}</span>
+            </>
+          );
+          return (
+            <li class="p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl text-center">
+              {item.url ? <a href={item.url} target="_blank" rel="noopener" class="block hover:opacity-80 transition-opacity">{body}</a> : body}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== ILS ONT FAIT LE CYBER TOUR ===== -->
+  <section id="ils-nous-font-confiance" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="reveal mb-14">
+        <span class="section-label">{t.wallLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.wallTitleHtml}></h2>
+      </div>
+
+      <div class="space-y-10">
+        {wall.map(group => (
+          <div class="reveal">
+            <h3 class="font-mono text-xs tracking-widest uppercase text-white/60 mb-4">{t.wallGroups[group.key]}</h3>
+            <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {group.members.map(m => (
+                <li>
+                  {m.url ? (
+                    <a href={m.url} target="_blank" rel={m.sponsored ? 'sponsored noopener' : 'noopener'} class="partner-bubble h-24 w-full transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+                      <img src={m.logo} alt={m.name} class="max-h-14 max-w-full w-auto object-contain" loading="lazy" />
+                    </a>
+                  ) : (
+                    <span
+                      class:list={['partner-bubble h-24 w-full', m.dark && 'border border-white/15']}
+                      style={m.dark ? 'background: var(--color-navy-dark);' : undefined}
+                    >
+                      <img src={m.logo} alt={m.name} class="max-h-14 max-w-full w-auto object-contain" loading="lazy" />
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2027 ===== -->
+  <section id="rejoindre" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-gradient-to-br from-navy-dark via-slate-deep to-navy-dark"></div>
+    <div class="absolute inset-0 cyber-grid opacity-30"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-14">
+        <span class="section-label">{t.joinLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.joinTitleHtml}></h2>
+        <p class="text-white/60 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">{t.joinIntro}</p>
+      </div>
+
+      <ul class="grid md:grid-cols-3 gap-6">
+        {t.doors.map((door, i) => (
+          <li class:list={['reveal flex flex-col p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl', `delay-${i + 1}`]}>
+            <span class="w-12 h-12 rounded-lg bg-navy flex items-center justify-center">
+              <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d={doorIcons[door.key]} /></svg>
+            </span>
+            <h3 class="mt-5 font-display font-bold text-xl text-white">{door.title}</h3>
+            <p class="mt-3 text-white/60 leading-relaxed flex-1">{door.text}</p>
+            <a
+              href={door.subject ? mailtoSubject(door.subject) : p(door.href ?? '/')}
+              class="mt-6 flex min-h-[44px] items-center justify-center rounded-lg border border-clusir-red/60 px-4 py-3 font-display text-sm font-semibold uppercase tracking-wider text-clusir-red-bright hover:bg-clusir-red hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              {door.cta}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  </main>
+
+  <Footer />
+</Layout>

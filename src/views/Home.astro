@@ -207,26 +207,17 @@ const stages = getStages(lang);
         </p>
       </div>
 
-      {/* Billetterie Weezevent — simple visuel cliquable vers la page
-          publique my.weezevent.com/cybertour (nouvel onglet). Aucun module
-          tiers chargé sur le site. */}
+      {/* Visuel de l'édition, sans lien : la billetterie s'ouvre depuis le
+          bouton du terminal ci-dessous. Aucun module tiers chargé sur le site. */}
       <div class="reveal delay-1 mx-auto max-w-3xl">
-        <a
-          href={WEEZEVENT_PAGE}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={t.regImageLinkLabel}
-          class="group block overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-navy/50 transition-all hover:border-gold/50 hover:shadow-gold/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-        >
-          <img
-            src="/assets/og-cybertour-2026.png"
-            alt={t.regImageAlt}
-            width="1200"
-            height="630"
-            loading="lazy"
-            class="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-        </a>
+        <img
+          src="/assets/og-cybertour-2026.png"
+          alt={t.regImageAlt}
+          width="1200"
+          height="630"
+          loading="lazy"
+          class="block w-full h-auto overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-navy/50"
+        />
       </div>
 
       <!-- Terminal — état réel de la billetterie + actions utiles -->

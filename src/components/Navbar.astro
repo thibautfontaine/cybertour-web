@@ -19,15 +19,15 @@ const p = (path: string) => localizePath(path, lang);
 const navLinks = t.links.map((link) => ({ ...link, href: p(link.href) }));
 const ctaLink = { label: t.cta.label, href: p(t.cta.href) };
 
-// Menu « Les étapes » : les sept étapes dans l'ordre du tour. Celles qui ont
+// Menu « Les étapes » : les six étapes dans l'ordre du tour. Celles qui ont
 // une page (`published`) sont des liens, les autres restent visibles, grisées.
 const stages = getStages(lang);
 const stagesAllHref = p(t.stagesMenu.allHref);
 const onStagePage = stages.some((s) => s.published && s.id === currentPage);
 
-// Menu « À propos » : présentation, édition 2025 et contact, sur /a-propos.
+// Menu « À propos » : présentation, édition 2025 et contact sur /a-propos, bilan sur /bilan.
 const aboutItems = t.aboutMenu.items.map((item) => ({ ...item, href: p(item.href) }));
-const onAboutPage = currentPage === 'a-propos';
+const onAboutPage = currentPage === 'a-propos' || currentPage === 'bilan';
 
 /* Sélecteur de langue : un lien par langue vers la même page dans l'autre
    langue. Le clic écrit localStorage[ct-lang] (voir le script plus bas) — c'est

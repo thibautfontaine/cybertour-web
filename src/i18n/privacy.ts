@@ -156,7 +156,7 @@ export const privacy: Record<Lang, PolicyDict> = {
           },
           {
             kind: 'p',
-            html: "Les étapes portées par Expernet, Epitech et EDN gèrent leurs propres inscriptions. C'est alors la politique de confidentialité de chaque organisateur qui s'applique.",
+            html: "Les étapes portées par Expernet et EDN gèrent leurs propres inscriptions. C'est alors la politique de confidentialité de chaque organisateur qui s'applique.",
           },
         ],
       },
@@ -373,7 +373,7 @@ export const privacy: Record<Lang, PolicyDict> = {
           },
           {
             kind: 'p',
-            html: 'The stages run by Expernet, Epitech and EDN handle their own registrations, under each organiser’s own privacy policy.',
+            html: 'The stages run by Expernet and EDN handle their own registrations, under each organiser’s own privacy policy.',
           },
         ],
       },
