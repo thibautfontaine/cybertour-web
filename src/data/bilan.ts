@@ -73,7 +73,7 @@ export const wall: { key: WallGroupKey; members: WallMember[] }[] = [
   {
     key: 'partners',
     members: [
-      ...fromPartners(['orange-cyberdefense', 'sfr-business', 'youtell', 'iut', 'esiroi', 'edih']),
+      ...fromPartners(['orange-cyberdefense', 'sfr-business', 'youtell', 'edih']),
       { name: 'BSides La Réunion', logo: '/assets/logo-bsides-reunion.webp', dark: true },
       ...fromPartners(['cf-cyber']),
     ],
@@ -81,7 +81,7 @@ export const wall: { key: WallGroupKey; members: WallMember[] }[] = [
   {
     key: 'hosts',
     members: [
-      ...fromPartners(['office-eau']),
+      ...fromPartners(['office-eau', 'iut', 'esiroi']),
       { name: 'Expernet', logo: '/assets/logo-expernet.png' },
       { name: 'EDN, École Du Numérique', logo: '/assets/logo-edn.png' },
     ],

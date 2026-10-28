@@ -30,6 +30,8 @@ export interface UiDict {
     logoPrefectureAlt: string;
     logoCyberReunionAlt: string;
     langSwitcher: string;
+    /** Bouton de thème : « Thème : automatique (sombre) ». `label` porte sa ponctuation. */
+    theme: { label: string; names: { auto: string; light: string; dark: string } };
     langNames: Record<Lang, string>;
   };
   footer: {
@@ -139,6 +141,7 @@ export const ui: Record<Lang, UiDict> = {
       logoPrefectureAlt: 'Préfet de La Réunion',
       logoCyberReunionAlt: 'Cyber Réunion',
       langSwitcher: 'Langue du site',
+      theme: { label: 'Thème :', names: { auto: 'automatique', light: 'clair', dark: 'sombre' } },
       langNames: { fr: 'Français', en: 'English' },
     },
     footer: {
@@ -234,6 +237,7 @@ export const ui: Record<Lang, UiDict> = {
       logoPrefectureAlt: 'Préfet de La Réunion',
       logoCyberReunionAlt: 'Cyber Réunion',
       langSwitcher: 'Site language',
+      theme: { label: 'Theme:', names: { auto: 'automatic', light: 'light', dark: 'dark' } },
       langNames: { fr: 'Français', en: 'English' },
     },
     footer: {

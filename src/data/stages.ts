@@ -5,11 +5,14 @@
  *
  * Deux valeurs et non une : #ce463a ne passe pas WCAG AA en texte sur fond
  * sombre (4,44:1 sur #0f1a30). PAINT peint les surfaces, TEXT écrit les mots.
+ * ACCENT_TEXT suit le thème (#e56b5f en sombre, #b3392e en clair, voir
+ * `--theme-brand-text` dans global.css) : il ne prend donc pas de suffixe hexa
+ * d'opacité, passer par color-mix().
  */
 import { localizePath, type Lang } from "../i18n";
 
 export const ACCENT_PAINT = "#ce463a";
-export const ACCENT_TEXT = "#e56b5f";
+export const ACCENT_TEXT = "var(--color-brand-text)";
 
 export interface Stage {
   id: string;

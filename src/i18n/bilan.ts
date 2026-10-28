@@ -40,7 +40,9 @@ export interface BilanDict {
   heroLabel: string;
   heroTitleHtml: string;
   heroIntro: string;
+  /** Chiffres cumulés de toutes les éditions, en unités comparables. */
   heroStats: Stat[];
+  heroStatsNote: string;
   heroImgAlt: string;
   heroCtaReplay: string;
   heroCtaJoin: string;
@@ -64,6 +66,9 @@ export interface BilanDict {
 
   highlightsLabel: string;
   highlightsTitleHtml: string;
+  /** Encart en tête des temps forts : la preuve d'effet pour un financeur. */
+  conventionLabel: string;
+  conventionText: string;
   highlights: BilanHighlight[];
 
   mediaLabel: string;
@@ -72,7 +77,8 @@ export interface BilanDict {
 
   wallLabel: string;
   wallTitleHtml: string;
-  wallGroups: Record<WallGroupKey, string>;
+  /** Un titre et le rôle du groupe en une ligne : qui fait quoi. */
+  wallGroups: Record<WallGroupKey, { title: string; role: string }>;
 
   joinLabel: string;
   joinTitleHtml: string;
@@ -87,22 +93,27 @@ export const bilan: Record<Lang, BilanDict> = {
       "Deux éditions du Cyber Tour Réunion en chiffres : participants, étapes, temps forts, retombées médias et partenaires. Et comment rejoindre l'édition 2027.",
 
     heroLabel: '01 // Bilan 2025-2026',
-    heroTitleHtml: 'Deux éditions,<br/><span class="text-gold">tout un territoire</span> mobilisé',
+    heroTitleHtml: 'Deux éditions,<br/><span class="text-accent">tout un territoire</span> mobilisé',
     heroIntro:
-      "En 2025, le Cyber Tour a trouvé son public. En 2026, il a fait le tour de l'île avec les institutions, les écoles et les entreprises réunionnaises. Voici ce que ces deux éditions ont produit, et comment construire 2027 ensemble.",
+      "Le Cyber Tour est la tournée gratuite de la cybersécurité à La Réunion, organisée par le CLUSIR Réunion Océan Indien : des conférences, une journée de formation à la crise et un CTF, étape après étape, au plus près des entreprises, des collectivités et des étudiants. En 2025, il a trouvé son public ; en 2026, il a fait le tour de l'île. Voici ce que ces deux éditions ont produit, et comment construire 2027 ensemble.",
+    // Cumul 2025 + 2026 : 150 + 321 présences en salle (2025 tenait en une
+    // journée) ; 600 vues du replay 2025 + 1 500 vues de la vidéo 2026 (direct
+    // compris, compteur YouTube « 1,5 k » au 28/10/2026) ;
+    // 2 + 6 retombées. Pas de « participants » : les unités diffèrent.
     heroStats: [
-      { value: '1 200', label: 'personnes en direct sur YouTube le 22 octobre' },
-      { value: '321', label: 'présences sur les quatre premiers jours' },
-      { value: '9', label: 'intervenants le 22 octobre' },
-      { value: '6', label: 'retombées médias' },
+      { value: '2', label: 'éditions, 2025 et 2026' },
+      { value: '470+', label: 'présences en salle' },
+      { value: '2 100+', label: 'visionnages en direct et en replay' },
+      { value: '8', label: 'retombées médias' },
     ],
+    heroStatsNote: 'Cumul des éditions 2025 et 2026. Pour 2026, première semaine ; la seconde est en cours de bilan.',
     heroImgAlt: "L'amphithéâtre de l'IUT de Saint-Pierre rempli pendant les conférences du 22 octobre 2026",
     heroCtaReplay: 'Revoir les conférences 2026',
     heroCtaJoin: "Rejoindre l'édition 2027",
     heroPdf: 'Télécharger le bilan de la semaine 1 (PDF, 1 page)',
 
-    progressLabel: '02 // De 2025 à 2026',
-    progressTitleHtml: 'Une première édition,<br/><span class="text-gold">puis toute l\'île</span>',
+    progressLabel: '03 // De 2025 à 2026',
+    progressTitleHtml: 'Une première édition,<br/><span class="text-accent">puis toute l\'île</span>',
     y2025Title: 'Édition 2025',
     y2025Text:
       "Organisée par le CLUSIR Réunion Océan Indien avec l'Université de La Réunion, la première édition a montré que le besoin était là.",
@@ -115,11 +126,11 @@ export const bilan: Record<Lang, BilanDict> = {
     y2025Replay: 'Revoir 2025',
     y2026Title: 'Édition 2026',
     y2026Text:
-      "Six étapes du 20 au 30 octobre, du PTU de Sainte-Clotilde à l'IUT de Saint-Pierre : quatre portées par le CLUSIR, deux par des hôtes locaux.",
+      "Six étapes du 20 au 30 octobre, de l'ouverture au PTU de Sainte-Clotilde à la clôture à l'EDN : quatre portées par le CLUSIR, deux par des hôtes locaux.",
     y2026Stats: [
       { value: '6', label: 'étapes' },
       { value: '321', label: 'présences en semaine 1' },
-      { value: '1 200', label: 'en direct sur YouTube' },
+      { value: '1 500+', label: 'vues de la vidéo, direct compris' },
       { value: '6', label: 'retombées médias' },
     ],
     y2026Replay: 'Revoir 2026',
@@ -129,15 +140,18 @@ export const bilan: Record<Lang, BilanDict> = {
     presencesNote:
       'Présences comptées par journée : une personne venue deux jours compte deux fois.',
 
-    highlightsLabel: '03 // Temps forts 2026',
-    highlightsTitleHtml: 'Quatre jours, <span class="text-gold">quatre formats</span>',
+    highlightsLabel: '02 // Temps forts 2026',
+    highlightsTitleHtml: 'La première semaine, <span class="text-accent">quatre formats</span>',
+    conventionLabel: '20 octobre 2026 · Une convention signée au Cyber Tour',
+    conventionText:
+      "La Région Réunion, La Réunion Connectée et la Préfecture de La Réunion ont signé une convention pour accroître la sécurité numérique du territoire : actions concertées, partage d'expériences et d'informations, montée en compétences mutuelle.",
     highlights: [
       {
         key: 'ouverture',
         when: 'Mardi 20 octobre · PTU, Sainte-Clotilde',
         title: 'Ouverture institutionnelle',
         text:
-          "Lancement avec la Préfecture, la Région, l'ANSSI, la DRSD, Cyber Réunion et la FAZSOI, puis une table ronde sur la gestion de crise. À l'issue, la Région Réunion, La Réunion Connectée et la Préfecture ont signé une convention pour la sécurité numérique du territoire.",
+          "Lancement avec la Préfecture, la Région, l'ANSSI, la DRSD, Cyber Réunion et la FAZSOI, puis une table ronde sur la gestion de crise, conclue par la signature de la convention.",
         img: '/assets/bilan/2026-ouverture-table-ronde.webp',
         imgAlt: "Table ronde de l'ouverture institutionnelle devant les kakémonos de la Préfecture et de Cyber Réunion",
       },
@@ -171,7 +185,7 @@ export const bilan: Record<Lang, BilanDict> = {
     ],
 
     mediaLabel: '04 // Dans les médias',
-    mediaTitleHtml: 'Six médias ont <span class="text-gold">relayé l\'événement</span>',
+    mediaTitleHtml: 'Six médias ont <span class="text-accent">relayé l\'événement</span>',
     media: {
       antenne: 'Reportage TV · 21 octobre',
       la1ere: 'Plateau du JT de 19 h · 21 octobre',
@@ -181,17 +195,17 @@ export const bilan: Record<Lang, BilanDict> = {
       podcast: 'Podcast · enregistré sur place',
     },
 
-    wallLabel: '05 // Ils nous font confiance',
-    wallTitleHtml: 'Ils ont fait <span class="text-gold">le Cyber Tour</span>',
+    wallLabel: '05 // Partenaires',
+    wallTitleHtml: 'Ils ont fait <span class="text-accent">le Cyber Tour</span>',
     wallGroups: {
-      organisers: 'Organisateurs',
-      partners: 'Partenaires',
-      hosts: "Hôtes d'étape",
-      speakers: 'Intervenants institutionnels',
+      organisers: { title: 'Organisateurs', role: "portent l'événement et son programme" },
+      partners: { title: 'Partenaires', role: "soutiennent l'édition et animent ses temps forts" },
+      hosts: { title: "Lieux et hôtes d'étape", role: 'accueillent les étapes, ou en portent une' },
+      speakers: { title: 'Intervenants institutionnels', role: "partagent l'expertise de l'État" },
     },
 
     joinLabel: '06 // Édition 2027',
-    joinTitleHtml: 'Construisons <span class="text-gold">2027</span> ensemble',
+    joinTitleHtml: 'Construisons <span class="text-accent">2027</span> ensemble',
     joinIntro:
       'Participer, accueillir une étape ou soutenir l\'événement : il y a une place pour chacun dans la prochaine édition.',
     doors: [
@@ -226,22 +240,23 @@ export const bilan: Record<Lang, BilanDict> = {
       'Two editions of Cyber Tour Réunion in figures: attendance, stages, highlights, media coverage and partners. And how to join the 2027 edition.',
 
     heroLabel: '01 // 2025-2026 review',
-    heroTitleHtml: 'Two editions,<br/><span class="text-gold">a whole island</span> on board',
+    heroTitleHtml: 'Two editions,<br/><span class="text-accent">a whole island</span> on board',
     heroIntro:
-      'In 2025, Cyber Tour found its audience. In 2026, it toured the island with Réunion\'s institutions, schools and businesses. Here is what the two editions achieved, and how we can build 2027 together.',
+      'Cyber Tour is the free cybersecurity tour of Reunion Island, organised by CLUSIR Réunion Océan Indien: talks, a day of crisis training and a CTF, stage after stage, close to businesses, local authorities and students. In 2025 it found its audience; in 2026 it toured the island. Here is what the two editions achieved, and how we can build 2027 together.',
     heroStats: [
-      { value: '1,200', label: 'people watching live on YouTube on 22 October' },
-      { value: '321', label: 'attendances over the first four days' },
-      { value: '9', label: 'speakers on 22 October' },
-      { value: '6', label: 'media features' },
+      { value: '2', label: 'editions, 2025 and 2026' },
+      { value: '470+', label: 'on-site attendances' },
+      { value: '2,100+', label: 'live and replay views' },
+      { value: '8', label: 'media features' },
     ],
+    heroStatsNote: 'Combined 2025 and 2026 editions. For 2026, the first week; the second is still being reviewed.',
     heroImgAlt: 'The IUT lecture hall in Saint-Pierre full during the 22 October 2026 talks',
     heroCtaReplay: 'Watch the 2026 talks',
     heroCtaJoin: 'Join the 2027 edition',
     heroPdf: 'Download the week 1 review (PDF, 1 page, in French)',
 
-    progressLabel: '02 // From 2025 to 2026',
-    progressTitleHtml: 'A first edition,<br/><span class="text-gold">then the whole island</span>',
+    progressLabel: '03 // From 2025 to 2026',
+    progressTitleHtml: 'A first edition,<br/><span class="text-accent">then the whole island</span>',
     y2025Title: '2025 edition',
     y2025Text:
       'Organised by CLUSIR Réunion Océan Indien with the University of La Réunion, the first edition showed the need was there.',
@@ -254,11 +269,11 @@ export const bilan: Record<Lang, BilanDict> = {
     y2025Replay: 'Watch 2025',
     y2026Title: '2026 edition',
     y2026Text:
-      'Six stages from 20 to 30 October, from the PTU in Sainte-Clotilde to the IUT in Saint-Pierre: four run by CLUSIR, two by local hosts.',
+      'Six stages from 20 to 30 October, from the opening at the PTU in Sainte-Clotilde to the closing at EDN: four run by CLUSIR, two by local hosts.',
     y2026Stats: [
       { value: '6', label: 'stages' },
       { value: '321', label: 'attendances in week 1' },
-      { value: '1,200', label: 'watching live on YouTube' },
+      { value: '1,500+', label: 'video views, live included' },
       { value: '6', label: 'media features' },
     ],
     y2026Replay: 'Watch 2026',
@@ -267,15 +282,18 @@ export const bilan: Record<Lang, BilanDict> = {
     pending: 'review to come',
     presencesNote: 'Attendance is counted per day: someone who came on two days counts twice.',
 
-    highlightsLabel: '03 // 2026 highlights',
-    highlightsTitleHtml: 'Four days, <span class="text-gold">four formats</span>',
+    highlightsLabel: '02 // 2026 highlights',
+    highlightsTitleHtml: 'The first week, <span class="text-accent">four formats</span>',
+    conventionLabel: '20 October 2026 · An agreement signed at Cyber Tour',
+    conventionText:
+      "The Réunion Region, La Réunion Connectée and the Prefecture of La Réunion signed an agreement to strengthen the island's digital security: joint action, shared experience and information, and mutual upskilling.",
     highlights: [
       {
         key: 'ouverture',
         when: 'Tuesday 20 October · PTU, Sainte-Clotilde',
         title: 'Institutional opening',
         text:
-          'Launch with the Prefecture, the Region, ANSSI, DRSD, Cyber Réunion and FAZSOI, followed by a round table on crisis management. Afterwards, the Réunion Region, La Réunion Connectée and the Prefecture signed an agreement on the island\'s digital security.',
+          'Launch with the Prefecture, the Region, ANSSI, DRSD, Cyber Réunion and FAZSOI, followed by a round table on crisis management that ended with the signing of the agreement.',
         img: '/assets/bilan/2026-ouverture-table-ronde.webp',
         imgAlt: 'Opening round table in front of the Prefecture and Cyber Réunion banners',
       },
@@ -309,7 +327,7 @@ export const bilan: Record<Lang, BilanDict> = {
     ],
 
     mediaLabel: '04 // In the media',
-    mediaTitleHtml: 'Six media outlets <span class="text-gold">covered the event</span>',
+    mediaTitleHtml: 'Six media outlets <span class="text-accent">covered the event</span>',
     media: {
       antenne: 'TV report · 21 October',
       la1ere: '7pm news studio guest · 21 October',
@@ -319,17 +337,17 @@ export const bilan: Record<Lang, BilanDict> = {
       podcast: 'Podcast · recorded on site',
     },
 
-    wallLabel: '05 // They trust us',
-    wallTitleHtml: 'They made <span class="text-gold">Cyber Tour</span> happen',
+    wallLabel: '05 // Partners',
+    wallTitleHtml: 'They made <span class="text-accent">Cyber Tour</span> happen',
     wallGroups: {
-      organisers: 'Organisers',
-      partners: 'Partners',
-      hosts: 'Stage hosts',
-      speakers: 'Institutional speakers',
+      organisers: { title: 'Organisers', role: 'run the event and its programme' },
+      partners: { title: 'Partners', role: 'support the edition and run its highlights' },
+      hosts: { title: 'Venues and stage hosts', role: 'welcome the stages, or run one' },
+      speakers: { title: 'Institutional speakers', role: 'share government expertise' },
     },
 
     joinLabel: '06 // 2027 edition',
-    joinTitleHtml: "Let's build <span class=\"text-gold\">2027</span> together",
+    joinTitleHtml: "Let's build <span class=\"text-accent\">2027</span> together",
     joinIntro:
       'Attend, host a stage or support the event: there is a place for everyone in the next edition.',
     doors: [

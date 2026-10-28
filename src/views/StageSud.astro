@@ -33,13 +33,13 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
     {t.dayNavItems.map((item, i) => (
       <div class="flex flex-col items-center">
         <a href={item.href} class="dnav-item group relative flex items-center pointer-events-auto">
-          <span class="dnav-dot block w-2 h-2 rounded-full transition-all duration-200" style="background:rgba(255,255,255,0.15);"></span>
-          <span class="pointer-events-none absolute left-5 whitespace-nowrap font-mono text-[11px] tracking-widest uppercase px-3 py-1.5 rounded-lg border border-white/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-            style="color:rgba(255,255,255,0.6);background:rgba(10,18,32,0.95);">
+          <span class="dnav-dot block w-2 h-2 rounded-full transition-all duration-200" style="background:color-mix(in srgb, var(--theme-ink) 15%, transparent);"></span>
+          <span class="pointer-events-none absolute left-5 whitespace-nowrap font-mono text-[11px] tracking-widest uppercase px-3 py-1.5 rounded-lg border border-ink/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+            style="color:color-mix(in srgb, var(--theme-ink) 60%, transparent);background:color-mix(in srgb, var(--theme-surface) 95%, transparent);">
             {item.label}
           </span>
         </a>
-        {i === 0 && <span class="block w-px my-1.5 rounded-full" style="height:16px;background:rgba(255,255,255,0.08);"></span>}
+        {i === 0 && <span class="block w-px my-1.5 rounded-full" style="height:16px;background:color-mix(in srgb, var(--theme-ink) 8%, transparent);"></span>}
       </div>
     ))}
   </nav>
@@ -51,9 +51,9 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
       <!-- Jour 1: Conférences techniques -->
       <div class="day-section" id="day-1">
         <div class="reveal">
-          <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">{t.day1Label}</span>
+          <span class="font-mono text-red-400/60 light:text-red-700 text-sm tracking-widest uppercase">{t.day1Label}</span>
           <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.day1Title}</h2>
-          <p class="text-white/50 mt-4 text-lg max-w-3xl">
+          <p class="text-ink/50 mt-4 text-lg max-w-3xl">
             {t.day1Intro}
           </p>
         </div>
@@ -68,12 +68,12 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
               <path fill="#FFFFFF" d="M11.2 14.3 18.5 10l-7.3-4.3z" />
             </svg>
             <div class="flex-1">
-              <span class="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-red-300">
+              <span class="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-red-300 light:text-red-700">
                 <span class="live-dot block w-2.5 h-2.5 rounded-full bg-red-500" aria-hidden="true"></span>
                 {t.liveBadge}
               </span>
               <h3 class="font-display font-bold text-2xl sm:text-3xl mt-2">{t.liveTitle}</h3>
-              <p class="text-white/70 font-body mt-2">{t.liveText}</p>
+              <p class="text-ink/70 font-body mt-2">{t.liveText}</p>
             </div>
             <span class="btn-primary inline-flex items-center gap-2 rounded-xl font-display self-start sm:self-auto whitespace-nowrap">
               {t.liveCta}
@@ -88,18 +88,18 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
         <div class="reveal delay-2 mt-8">
           <div class="bg-red-400/[0.06] border border-red-400/[0.15] rounded-xl p-5 flex items-start gap-4">
             <div class="shrink-0 w-10 h-10 rounded-lg bg-red-400/10 flex items-center justify-center">
-              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-5 h-5 text-red-400 light:text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
             <div>
-              <h4 class="font-display font-semibold text-sm mb-1 text-red-400">{t.audienceTitle}</h4>
-              <p class="text-white/60 text-sm font-body">
-                <strong class="text-white/80">{t.audienceMorningStrong}</strong>{' '}
+              <h4 class="font-display font-semibold text-sm mb-1 text-red-400 light:text-red-700">{t.audienceTitle}</h4>
+              <p class="text-ink/60 text-sm font-body">
+                <strong class="text-ink/80">{t.audienceMorningStrong}</strong>{' '}
                 {t.audienceMorningText}
               </p>
-              <p class="text-white/60 text-sm font-body mt-2">
-                <strong class="text-white/80">{t.audienceAfternoonStrong}</strong>{' '}
+              <p class="text-ink/60 text-sm font-body mt-2">
+                <strong class="text-ink/80">{t.audienceAfternoonStrong}</strong>{' '}
                 {t.audienceAfternoonText}
               </p>
             </div>
@@ -115,10 +115,10 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
               </svg>
               {t.programmePdfCta}
-              <span class="font-mono text-[10px] text-white/50 normal-case">{t.programmePdfMeta}</span>
+              <span class="font-mono text-[10px] text-ink/50 normal-case">{t.programmePdfMeta}</span>
             </a>
           </div>
-          <p class="flex items-start gap-2 text-sm text-amber-200/80 bg-amber-300/[0.06] border border-amber-300/20 rounded-lg px-4 py-3 mb-8">
+          <p class="flex items-start gap-2 text-sm text-amber-200/80 light:text-amber-900 bg-amber-300/[0.06] border border-amber-300/20 rounded-lg px-4 py-3 mb-8">
             <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" />
             </svg>
@@ -131,21 +131,21 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
 
       <!-- Day separator -->
       <div class="reveal my-24 flex items-center gap-6">
-        <div class="flex-1 h-px bg-white/[0.06]" aria-hidden="true"></div>
+        <div class="flex-1 h-px bg-ink/[0.06]" aria-hidden="true"></div>
         <div class="flex items-center gap-3">
           <div class="w-1.5 h-1.5 rounded-full bg-red-400/40" aria-hidden="true"></div>
-          <span class="font-mono text-xs text-white/50 tracking-widest uppercase">{t.separatorLabel}</span>
+          <span class="font-mono text-xs text-ink/50 tracking-widest uppercase">{t.separatorLabel}</span>
           <div class="w-1.5 h-1.5 rounded-full bg-red-400/40" aria-hidden="true"></div>
         </div>
-        <div class="flex-1 h-px bg-white/[0.06]" aria-hidden="true"></div>
+        <div class="flex-1 h-px bg-ink/[0.06]" aria-hidden="true"></div>
       </div>
 
       <!-- Jour 2: Ateliers pratiques -->
       <div class="day-section" id="day-2">
         <div class="reveal">
-          <span class="font-mono text-red-400/60 text-sm tracking-widest uppercase">{t.day2Label}</span>
+          <span class="font-mono text-red-400/60 light:text-red-700 text-sm tracking-widest uppercase">{t.day2Label}</span>
           <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.day2Title}</h2>
-          <p class="text-white/50 mt-4 text-lg max-w-3xl">
+          <p class="text-ink/50 mt-4 text-lg max-w-3xl">
             {t.day2Intro}
           </p>
         </div>
@@ -164,10 +164,10 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
             {t.ateliers.map(atelier => (
-              <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">
+              <div class="bg-ink/[0.03] border border-ink/[0.06] rounded-2xl p-6 hover:border-red-400/20 transition-colors">
                 <div class="text-3xl mb-4">{atelier.icon}</div>
                 <h3 class="font-display font-semibold text-lg mb-2">{atelier.title}</h3>
-                <p class="text-white/50 text-sm font-body">{atelier.desc}</p>
+                <p class="text-ink/50 text-sm font-body">{atelier.desc}</p>
               </div>
             ))}
           </div>
@@ -200,13 +200,13 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
 
 <style>
   .dnav-item:hover .dnav-dot,
-  .dnav-item:focus-visible .dnav-dot { background: rgba(255,255,255,0.45) !important; }
+  .dnav-item:focus-visible .dnav-dot { background: color-mix(in srgb, var(--theme-ink) 45%, transparent) !important; }
   .dnav-item.active .dnav-dot {
     background: #DF3C37 !important;
     box-shadow: 0 0 8px rgba(223,60,55,0.5);
   }
   .live-card:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline: 2px solid color-mix(in srgb, var(--theme-ink) 50%, transparent);
     outline-offset: 4px;
   }
   .live-dot { animation: live-pulse 1.6s ease-in-out infinite; }
@@ -218,7 +218,7 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
     .live-dot { animation: none; }
   }
   .dnav-item:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.4);
+    outline: 2px solid color-mix(in srgb, var(--theme-ink) 40%, transparent);
     outline-offset: 4px;
     border-radius: 4px;
   }

@@ -27,7 +27,7 @@ const { partner, size, pad = 'px-6 py-3', box, class: extra } = Astro.props;
   href={partner.url}
   target="_blank"
   rel={partnerRel(partner)}
-  class:list={['partner-bubble inline-flex items-center justify-center transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold', pad, box, extra]}
+  class:list={['partner-bubble inline-flex items-center justify-center transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent', pad, box, extra]}
 >
   <img src={partner.logo} alt={partner.name} class:list={['w-auto object-contain', size, box && 'max-w-full max-h-full', partner.imgClass]} loading="lazy" />
 </a>

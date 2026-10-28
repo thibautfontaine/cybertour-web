@@ -25,8 +25,8 @@ const rootProps = stage.published
   {...rootProps}
   class:list={[
     stage.published ? "group topic-card" : "cursor-default",
-    "relative block overflow-hidden rounded-2xl border border-white/[0.08] transition-all duration-400",
-    stage.published ? "hover:border-white/[0.15]" : "opacity-90",
+    "relative block overflow-hidden rounded-2xl border border-ink/[0.08] transition-all duration-400",
+    stage.published ? "hover:border-ink/[0.15]" : "opacity-90",
   ]}
 >
   <!-- Gradient accent top bar -->
@@ -50,7 +50,7 @@ const rootProps = stage.published
           style={`background: ${ACCENT_PAINT}15; color: ${ACCENT_TEXT}; border: 1px solid ${ACCENT_PAINT}30;`}
         >{stage.trackNumber}</span>
         <div>
-          <h3 class="font-display font-bold text-xl sm:text-2xl text-white leading-tight">
+          <h3 class="font-display font-bold text-xl sm:text-2xl text-ink leading-tight">
             {stage.direction}
           </h3>
           <p class="font-mono text-xs tracking-wider uppercase font-bold" style={`color: ${ACCENT_TEXT};`}>
@@ -69,10 +69,10 @@ const rootProps = stage.published
     </div>
 
     <!-- Theme -->
-    <p class="text-white/80 text-base font-semibold mb-2">{stage.theme}</p>
+    <p class="text-ink/80 text-base font-semibold mb-2">{stage.theme}</p>
 
     <!-- Lieu -->
-    <div class="flex items-center gap-2 text-white/55 text-sm mb-5">
+    <div class="flex items-center gap-2 text-ink/55 text-sm mb-5">
       <svg class="w-4 h-4 shrink-0" style={`color: ${ACCENT_PAINT}80;`} fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
         <circle cx="12" cy="10" r="3"/>
@@ -91,7 +91,7 @@ const rootProps = stage.published
         {stage.highlights.map((tag) => (
           <span
             class="px-2.5 py-1 rounded-md text-xs font-mono"
-            style={`background: ${ACCENT_PAINT}10; color: ${ACCENT_TEXT}CC;`}
+            style={`background: ${ACCENT_PAINT}10; color: ${ACCENT_TEXT};`}
           >
             {tag}
           </span>
@@ -104,11 +104,11 @@ const rootProps = stage.published
         CLUSIR compris : la distinction est factuelle, jamais hiérarchique.
         Commentaire en accolades et non en HTML : le raisonnement de gouvernance
         reste dans le source, il ne part pas dans le view-source public. */}
-    <div class="pt-5 border-t border-white/[0.08]">
-      <p class="font-mono text-[10px] tracking-[0.19em] uppercase text-white/40">
+    <div class="pt-5 border-t border-ink/[0.08]">
+      <p class="font-mono text-[10px] tracking-[0.19em] uppercase text-ink/40">
         {t.hostedBy}
       </p>
-      <p class="font-display font-semibold text-white/90 mt-1">{stage.host}</p>
+      <p class="font-display font-semibold text-ink/90 mt-1">{stage.host}</p>
     </div>
 
     {stage.published ? (
@@ -122,7 +122,7 @@ const rootProps = stage.published
         </span>
       </div>
     ) : (
-      <p class="mt-5 font-mono text-xs uppercase tracking-wider text-white/40">
+      <p class="mt-5 font-mono text-xs uppercase tracking-wider text-ink/40">
         {t.programmeSoon}
       </p>
     )}

@@ -6,14 +6,19 @@ import { ui } from '../i18n/ui';
    (import `?raw` de Vite) : il doit tourner avant le premier rendu, sans
    attendre un bundle. Fonction pure `decide()` + IIFE — voir le fichier. */
 import redirectRaw from '../i18n/redirect.js?raw';
+/* Thème clair / sombre, même principe : posé avant le premier rendu. */
+import themeRaw from '../scripts/theme.js?raw';
 
 /* Les commentaires du fichier source (documentation en français) ne partent
    pas dans le HTML public : on ne garde que le code. */
-const redirectSrc = redirectRaw
-  .replace(/\/\*[\s\S]*?\*\//g, '')
-  .replace(/^\s*\/\/.*$/gm, '')
-  .replace(/\n\s*\n+/g, '\n')
-  .trim();
+const stripComments = (src: string) =>
+  src
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^\s*\/\/.*$/gm, '')
+    .replace(/\n\s*\n+/g, '\n')
+    .trim();
+const redirectSrc = stripComments(redirectRaw);
+const themeSrc = stripComments(themeRaw);
 
 interface Props {
   title: string;
@@ -52,6 +57,7 @@ const countdownI18n = {
     <script is:inline set:html={redirectSrc}></script>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0f1a30" />
+    <script is:inline set:html={themeSrc}></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
@@ -324,12 +330,12 @@ const countdownI18n = {
           box.setAttribute('role', 'status');
 
           const h = document.createElement('p');
-          h.className = 'font-mono text-xl sm:text-2xl font-bold uppercase tracking-widest text-gold';
+          h.className = 'font-mono text-xl sm:text-2xl font-bold uppercase tracking-widest text-accent';
           h.textContent = status.title;
           box.appendChild(h);
 
           const p = document.createElement('p');
-          p.className = 'mt-2 text-sm text-white/70';
+          p.className = 'mt-2 text-sm text-ink/70';
           p.textContent = status.subtitle;
           box.appendChild(p);
 

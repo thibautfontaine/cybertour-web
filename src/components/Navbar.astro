@@ -5,9 +5,13 @@ import { getStages } from '../data/stages';
 
 interface Props {
   currentPage?: string;
+  /** La page s'ouvre sur une section toujours sombre (`.theme-dark`) : en haut
+      de page, la barre transparente reste en clair sur sombre, puis suit le
+      thème dès qu'on défile (script plus bas). */
+  darkHero?: boolean;
 }
 
-const { currentPage } = Astro.props;
+const { currentPage, darkHero = false } = Astro.props;
 
 const lang = getLang(Astro.currentLocale);
 const t = ui[lang].nav;
@@ -45,7 +49,7 @@ const isCurrent = (href: string) =>
   Boolean(currentPage) && href.startsWith(p(`/${currentPage}`));
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300" data-scrolled="false">
+<nav id="main-nav" class:list={["fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300", darkHero && "theme-dark"]} data-scrolled="false" data-dark-hero={darkHero ? "true" : undefined}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-2">
     <!-- shrink-0 obligatoire : sans lui, flexbox comprime le logo en largeur
          quand la barre de liens deborde, ce qui l'ecrase en un trait vertical -->
@@ -80,8 +84,8 @@ const isCurrent = (href: string) =>
             aria-expanded="false"
             aria-controls="stages-menu"
             class:list={[
-              "inline-flex items-center gap-1.5 text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
-              onStagePage ? "text-gold" : "text-white/70",
+              "inline-flex items-center gap-1.5 text-xs xl:text-sm font-medium hover:text-accent transition-colors tracking-wider uppercase whitespace-nowrap",
+              onStagePage ? "text-accent" : "text-ink/70",
             ]}
           >
             {t.stagesMenu.label}
@@ -92,7 +96,7 @@ const isCurrent = (href: string) =>
           <!-- pt-3 : pont invisible entre le bouton et le panneau, pour que le
                survol ne se perde pas en descendant la souris. -->
           <div id="stages-menu" data-dropdown-menu class="hidden absolute left-1/2 -translate-x-1/2 top-full pt-3 w-96">
-            <div class="rounded-xl border border-white/10 bg-navy-dark/95 backdrop-blur-lg shadow-2xl p-2">
+            <div class="rounded-xl border border-ink/10 bg-surface/95 backdrop-blur-lg shadow-2xl p-2">
               <ul class="list-none m-0 p-0">
                 {stages.map((stage) => (
                   <li>
@@ -101,29 +105,29 @@ const isCurrent = (href: string) =>
                         href={stage.href}
                         aria-current={stage.id === currentPage ? 'page' : undefined}
                         class:list={[
-                          "flex items-baseline justify-between gap-3 rounded-lg px-3 py-2 hover:bg-white/[0.06] focus-visible:bg-white/[0.06] transition-colors",
-                          stage.id === currentPage && "bg-white/[0.04]",
+                          "flex items-baseline justify-between gap-3 rounded-lg px-3 py-2 hover:bg-ink/[0.06] focus-visible:bg-ink/[0.06] transition-colors",
+                          stage.id === currentPage && "bg-ink/[0.04]",
                         ]}
                       >
                         <span>
-                          <span class:list={["block text-sm font-semibold", stage.id === currentPage ? "text-gold" : "text-white"]}>{stage.direction} · {stage.commune}</span>
-                          <span class="block text-xs text-white/50">{stage.host}</span>
+                          <span class:list={["block text-sm font-semibold", stage.id === currentPage ? "text-accent" : "text-ink"]}>{stage.direction} · {stage.commune}</span>
+                          <span class="block text-xs text-ink/50">{stage.host}</span>
                         </span>
-                        <span class="font-mono text-[11px] text-white/60 whitespace-nowrap">{stage.dateShort}</span>
+                        <span class="font-mono text-[11px] text-ink/60 whitespace-nowrap">{stage.dateShort}</span>
                       </a>
                     ) : (
                       <span class="flex items-baseline justify-between gap-3 px-3 py-2 cursor-default">
                         <span>
-                          <span class="block text-sm font-semibold text-white/40">{stage.direction} · {stage.commune}</span>
-                          <span class="block text-xs text-white/35">{stage.host} · {t.stagesMenu.soon}</span>
+                          <span class="block text-sm font-semibold text-ink/40">{stage.direction} · {stage.commune}</span>
+                          <span class="block text-xs text-ink/35">{stage.host} · {t.stagesMenu.soon}</span>
                         </span>
-                        <span class="font-mono text-[11px] text-white/35 whitespace-nowrap">{stage.dateShort}</span>
+                        <span class="font-mono text-[11px] text-ink/35 whitespace-nowrap">{stage.dateShort}</span>
                       </span>
                     )}
                   </li>
                 ))}
               </ul>
-              <a href={stagesAllHref} class="mt-1 block border-t border-white/10 px-3 pt-3 pb-2 text-xs font-mono uppercase tracking-wider text-gold hover:text-white transition-colors">
+              <a href={stagesAllHref} class="mt-1 block border-t border-ink/10 px-3 pt-3 pb-2 text-xs font-mono uppercase tracking-wider text-accent hover:text-ink transition-colors">
                 {t.stagesMenu.all} →
               </a>
             </div>
@@ -133,15 +137,15 @@ const isCurrent = (href: string) =>
           <>
             {link.soon ? (
               <span class="inline-flex items-center gap-2 cursor-default select-none">
-                <span class="text-xs xl:text-sm font-medium tracking-wider uppercase text-white/50">{link.label}</span>
-                <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-gold/40 bg-gold/10 text-gold">{t.soon}</span>
+                <span class="text-xs xl:text-sm font-medium tracking-wider uppercase text-ink/50">{link.label}</span>
+                <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-accent/40 bg-gold/10 text-accent">{t.soon}</span>
               </span>
             ) : (
               <a
                 href={link.href}
                 class:list={[
-                  "text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
-                  isCurrent(link.href) ? "text-gold" : "text-white/70",
+                  "text-xs xl:text-sm font-medium hover:text-accent transition-colors tracking-wider uppercase whitespace-nowrap",
+                  isCurrent(link.href) ? "text-accent" : "text-ink/70",
                 ]}
               >
                 {link.label}
@@ -157,8 +161,8 @@ const isCurrent = (href: string) =>
             aria-expanded="false"
             aria-controls="about-menu"
             class:list={[
-              "inline-flex items-center gap-1.5 text-xs xl:text-sm font-medium hover:text-gold transition-colors tracking-wider uppercase whitespace-nowrap",
-              onAboutPage ? "text-gold" : "text-white/70",
+              "inline-flex items-center gap-1.5 text-xs xl:text-sm font-medium hover:text-accent transition-colors tracking-wider uppercase whitespace-nowrap",
+              onAboutPage ? "text-accent" : "text-ink/70",
             ]}
           >
             {t.aboutMenu.label}
@@ -167,10 +171,10 @@ const isCurrent = (href: string) =>
             </svg>
           </button>
           <div id="about-menu" data-dropdown-menu class="hidden absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56">
-            <ul class="list-none m-0 rounded-xl border border-white/10 bg-navy-dark/95 backdrop-blur-lg shadow-2xl p-2">
+            <ul class="list-none m-0 rounded-xl border border-ink/10 bg-surface/95 backdrop-blur-lg shadow-2xl p-2">
               {aboutItems.map((item) => (
                 <li>
-                  <a href={item.href} class="block rounded-lg px-3 py-2 text-sm font-semibold text-white hover:bg-white/[0.06] focus-visible:bg-white/[0.06] hover:text-gold transition-colors">
+                  <a href={item.href} class="block rounded-lg px-3 py-2 text-sm font-semibold text-ink hover:bg-ink/[0.06] focus-visible:bg-ink/[0.06] hover:text-accent transition-colors">
                     {item.label}
                   </a>
                 </li>
@@ -181,15 +185,33 @@ const isCurrent = (href: string) =>
         <a href={ctaLink.href} class="btn-outline text-xs py-2 px-5">{ctaLink.label}</a>
       </div>
 
+      <!-- Bouton de thème — cycle automatique → clair → sombre. Caché sans
+           JavaScript (global.css) : le site suit alors l'ordinateur seul. -->
+      <button
+        id="theme-toggle"
+        type="button"
+        class="theme-toggle items-center justify-center w-11 h-11 -mx-1 shrink-0 text-ink/70 hover:text-accent transition-colors"
+        data-label={t.theme.label}
+        data-names={JSON.stringify(t.theme.names)}
+        aria-label={`${t.theme.label} ${t.theme.names.auto}`}
+        title={`${t.theme.label} ${t.theme.names.auto}`}
+      >
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-ink/15 bg-ink/[0.04]">
+          <svg class="theme-icon theme-icon-auto w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 010 18z" fill="currentColor" /></svg>
+          <svg class="theme-icon theme-icon-light w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+          <svg class="theme-icon theme-icon-dark w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+        </span>
+      </button>
+
       <!-- Sélecteur de langue — visible à toutes les largeurs -->
       <div
-        class="inline-flex items-center rounded-full border border-white/15 bg-white/[0.04] font-mono text-[11px] tracking-wider uppercase"
+        class="inline-flex items-center rounded-full border border-ink/15 bg-ink/[0.04] font-mono text-[11px] tracking-wider uppercase"
         role="group"
         aria-label={t.langSwitcher}
       >
         {langLinks.map((l, i) => (
           <>
-            {i > 0 && <span class="text-white/15 select-none" aria-hidden="true">|</span>}
+            {i > 0 && <span class="text-ink/15 select-none" aria-hidden="true">|</span>}
             <a
               href={l.href}
               hreflang={l.lang}
@@ -199,7 +221,7 @@ const isCurrent = (href: string) =>
               aria-label={l.name}
               class:list={[
                 "px-1.5 sm:px-2.5 py-1 transition-colors",
-                l.current ? "text-gold font-bold" : "text-white/60 hover:text-white",
+                l.current ? "text-accent font-bold" : "text-ink/60 hover:text-ink",
               ]}
             >
               {l.code}
@@ -211,7 +233,7 @@ const isCurrent = (href: string) =>
       <!-- Mobile burger -->
       <button
         id="menu-toggle"
-        class="lg:hidden text-white"
+        class="lg:hidden text-ink"
         aria-label={t.openMenu}
         data-label-open={t.openMenu}
         data-label-close={t.closeMenu}
@@ -226,39 +248,39 @@ const isCurrent = (href: string) =>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden lg:hidden bg-navy-dark/95 backdrop-blur-lg border-t border-white/10">
+  <div id="mobile-menu" class="hidden lg:hidden bg-surface/95 backdrop-blur-lg border-t border-ink/10">
     <div class="px-6 py-4 flex flex-col gap-4">
       <div>
-        <span class="text-sm font-medium uppercase text-white/50">{t.stagesMenu.label}</span>
-        <ul class="list-none m-0 mt-2 p-0 flex flex-col gap-2 border-l border-white/10 pl-4">
+        <span class="text-sm font-medium uppercase text-ink/50">{t.stagesMenu.label}</span>
+        <ul class="list-none m-0 mt-2 p-0 flex flex-col gap-2 border-l border-ink/10 pl-4">
           {stages.map((stage) => (
             <li>
               {stage.published ? (
-                <a href={stage.href} class:list={["text-sm hover:text-gold transition-colors", stage.id === currentPage ? "text-gold" : "text-white/80"]}>
-                  {stage.direction} · {stage.commune} <span class="font-mono text-[11px] text-white/50 ml-1">{stage.dateShort}</span>
+                <a href={stage.href} class:list={["text-sm hover:text-accent transition-colors", stage.id === currentPage ? "text-accent" : "text-ink/80"]}>
+                  {stage.direction} · {stage.commune} <span class="font-mono text-[11px] text-ink/50 ml-1">{stage.dateShort}</span>
                 </a>
               ) : (
-                <span class="text-sm text-white/35">
+                <span class="text-sm text-ink/35">
                   {stage.direction} · {stage.commune} <span class="font-mono text-[11px] ml-1">{stage.dateShort}</span>
                 </span>
               )}
             </li>
           ))}
-          <li><a href={stagesAllHref} class="text-xs font-mono uppercase tracking-wider text-gold">{t.stagesMenu.all} →</a></li>
+          <li><a href={stagesAllHref} class="text-xs font-mono uppercase tracking-wider text-accent">{t.stagesMenu.all} →</a></li>
         </ul>
       </div>
       {navLinks.map((link) => (
         link.soon ? (
           <span class="inline-flex items-center gap-2 cursor-default select-none">
-            <span class="text-sm font-medium uppercase text-white/50">{link.label}</span>
-            <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-gold/40 bg-gold/10 text-gold">{t.soon}</span>
+            <span class="text-sm font-medium uppercase text-ink/50">{link.label}</span>
+            <span class="text-[10px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border border-accent/40 bg-gold/10 text-accent">{t.soon}</span>
           </span>
         ) : (
           <a
             href={link.href}
             class:list={[
-              "text-sm font-medium hover:text-gold transition-colors uppercase",
-              isCurrent(link.href) ? "text-gold" : "text-white/70",
+              "text-sm font-medium hover:text-accent transition-colors uppercase",
+              isCurrent(link.href) ? "text-accent" : "text-ink/70",
             ]}
           >
             {link.label}
@@ -266,14 +288,14 @@ const isCurrent = (href: string) =>
         )
       ))}
       <div>
-        <span class="text-sm font-medium uppercase text-white/50">{t.aboutMenu.label}</span>
-        <ul class="list-none m-0 mt-2 p-0 flex flex-col gap-2 border-l border-white/10 pl-4">
+        <span class="text-sm font-medium uppercase text-ink/50">{t.aboutMenu.label}</span>
+        <ul class="list-none m-0 mt-2 p-0 flex flex-col gap-2 border-l border-ink/10 pl-4">
           {aboutItems.map((item) => (
-            <li><a href={item.href} class="text-sm text-white/80 hover:text-gold transition-colors">{item.label}</a></li>
+            <li><a href={item.href} class="text-sm text-ink/80 hover:text-accent transition-colors">{item.label}</a></li>
           ))}
         </ul>
       </div>
-      <a href={ctaLink.href} class="text-sm font-medium text-white/70 hover:text-gold transition-colors uppercase">{ctaLink.label}</a>
+      <a href={ctaLink.href} class="text-sm font-medium text-ink/70 hover:text-accent transition-colors uppercase">{ctaLink.label}</a>
     </div>
   </div>
 </nav>
@@ -300,12 +322,46 @@ const isCurrent = (href: string) =>
     const scrolled = window.scrollY > 60;
     nav.style.backgroundColor = scrolled ? 'var(--nav-scrolled)' : 'transparent';
     nav.style.backdropFilter = scrolled ? 'blur(12px)' : 'none';
-    nav.style.borderBottom = scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none';
+    nav.style.borderBottom = scrolled ? '1px solid color-mix(in srgb, var(--theme-ink) 6%, transparent)' : 'none';
     nav.dataset.scrolled = String(scrolled);
+    if (nav.dataset.darkHero) nav.classList.toggle('theme-dark', !scrolled);
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run on page load in case of direct anchor navigation
+
+  // Thème — automatique → clair → sombre. Seul endroit du site qui écrit
+  // localStorage[ct-theme] (cf. src/scripts/theme.js, qui l'applique).
+  const themeToggle = document.getElementById('theme-toggle');
+  const THEME_ORDER = ['auto', 'light', 'dark'] as const;
+  type ThemePref = (typeof THEME_ORDER)[number];
+  const themeApi = (window as unknown as { ctTheme?: { KEY: string; apply: () => void } }).ctTheme;
+
+  function themeLabel(): void {
+    if (!themeToggle) return;
+    const root = document.documentElement;
+    const pref = (root.dataset.themePref ?? 'auto') as ThemePref;
+    const names = JSON.parse(themeToggle.dataset.names ?? '{}') as Record<string, string>;
+    // En automatique, on dit aussi ce que l'ordinateur a choisi.
+    const resolved = pref === 'auto' ? ` (${names[root.dataset.theme ?? 'dark']})` : '';
+    const text = `${themeToggle.dataset.label} ${names[pref]}${resolved}`;
+    themeToggle.setAttribute('aria-label', text);
+    themeToggle.setAttribute('title', text);
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    if (!themeApi) return;
+    const current = (document.documentElement.dataset.themePref ?? 'auto') as ThemePref;
+    const next = THEME_ORDER[(THEME_ORDER.indexOf(current) + 1) % THEME_ORDER.length];
+    try {
+      if (next === 'auto') window.localStorage.removeItem(themeApi.KEY);
+      else window.localStorage.setItem(themeApi.KEY, next);
+    } catch (_) {}
+    themeApi.apply();
+    themeLabel();
+  });
+  window.matchMedia?.('(prefers-color-scheme: light)').addEventListener?.('change', themeLabel);
+  themeLabel();
 
   // Mobile menu — unique propriétaire du toggle (aucun autre listener sur
   // #menu-toggle ailleurs dans le site, sinon les bascules s'annulent).
