@@ -6,7 +6,7 @@
  * Ce fichier ne porte plus que la structure, les classes Tailwind et les
  * tracés SVG — les seuls littéraux qui restent sont des noms propres de
  * marque (« CYBER », « TOUR », « REUNION »), des adresses et des identifiants
- * techniques (ids d'ancre, chemins d'assets, UID du .ics).
+ * techniques (ids d'ancre, chemins d'assets).
  */
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
@@ -17,7 +17,7 @@ import StageCard from '../components/StageCard.astro';
 import PartnerPyramid from '../components/PartnerPyramid.astro';
 import SponsorsFloating from '../components/SponsorsFloating.astro';
 import { getStages } from '../data/stages';
-import { WEEZEVENT_PAGE } from '../data/ticketing';
+import { REPLAY_2026_URL } from '../data/bilan';
 import { getLang, localizePath } from '../i18n';
 import { home } from '../i18n/home';
 
@@ -26,6 +26,7 @@ const t = home[lang];
 const p = (path: string) => localizePath(path, lang);
 
 const stages = getStages(lang);
+const statFormat = new Intl.NumberFormat(lang === 'fr' ? 'fr-FR' : 'en-GB');
 
 ---
 
@@ -34,6 +35,7 @@ const stages = getStages(lang);
   <!-- ===== NAVBAR ===== -->
   <Navbar darkHero />
 
+  <main>
   <!-- ===== HERO ===== -->
   <!-- Ouverture toujours sombre, comme une affiche, quel que soit le thème. -->
   <section id="main-content" class="theme-dark relative min-h-dvh flex items-center justify-center overflow-hidden pt-24 pb-24 sm:pb-20">
@@ -57,15 +59,15 @@ const stages = getStages(lang);
 
     <!-- Floating island silhouette -->
     <div class="absolute right-0 bottom-0 w-[500px] h-[500px] opacity-[0.06] animate-float pointer-events-none">
-      <img src="/assets/reunion-silhouette.png" alt="" class="w-full h-full object-contain" />
+      <img src="/assets/reunion-silhouette.png" alt="" width="500" height="500" class="w-full h-full object-contain" />
     </div>
 
     <!-- Hero content -->
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
       <!-- Event badge -->
       <div class="inline-flex items-center gap-2 bg-ink/5 border border-ink/10 rounded-full px-5 py-2 mb-5" style="animation: slide-up 0.8s ease-out both;">
-        <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
-        <span class="text-sm font-mono text-ink/60 tracking-widest uppercase">{t.heroBadge}</span>
+        <span class="w-2 h-2 bg-gold rounded-full"></span>
+        <span class="text-sm font-mono text-ink/70 tracking-widest uppercase">{t.heroBadge}</span>
       </div>
 
       <!-- Main title -->
@@ -106,49 +108,25 @@ const stages = getStages(lang);
       </div>
 
       <!-- CTA buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="animation: slide-up 0.8s ease-out 0.45s both;">
-        <a href={p('/#inscription')} class="btn-primary rounded-lg font-display">{t.heroCtaRegister}</a>
-        <a href={p('/#etapes')} class="btn-outline rounded-lg font-display text-sm">{t.heroCtaRoute}</a>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="animation: slide-up 0.8s ease-out 0.4s both;">
+        <a href={p('/bilan')} class="btn-primary rounded-lg font-display">{t.heroCtaBilan}</a>
+        <a href={REPLAY_2026_URL} target="_blank" rel="noopener" class="btn-outline inline-flex items-center gap-2 rounded-lg font-display text-sm">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          {t.heroCtaReplay}
+        </a>
       </div>
 
-      <!-- Context pills — qualification rapide pour le visiteur -->
-      <div class="flex flex-wrap items-center justify-center gap-3 mt-6" style="animation: slide-up 0.8s ease-out 0.55s both;">
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-400 light:text-emerald-800">
-          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
-          {t.heroPillFree}
-        </span>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-accent/25 bg-gold/[0.07] text-accent">
-          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          {t.heroPillSeats}
-        </span>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono tracking-wider border border-ink/15 bg-ink/[0.05] text-ink/60">
-          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-          {t.heroPillHybrid}
-        </span>
-      </div>
-
-      <!-- Countdown -->
-      <div id="countdown" class="mt-10 flex items-center justify-center gap-6 sm:gap-10" style="animation: slide-up 0.8s ease-out 0.6s both;">
-        <div class="text-center">
-          <span id="cd-days" class="block font-mono text-3xl sm:text-4xl font-bold text-accent tabular-nums">---</span>
-          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdDays}</span>
-        </div>
-        <span class="text-ink/20 text-2xl font-light" aria-hidden="true">:</span>
-        <div class="text-center">
-          <span id="cd-hours" class="block font-mono text-3xl sm:text-4xl font-bold text-ink tabular-nums">--</span>
-          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdHours}</span>
-        </div>
-        <span class="text-ink/20 text-2xl font-light" aria-hidden="true">:</span>
-        <div class="text-center">
-          <span id="cd-mins" class="block font-mono text-3xl sm:text-4xl font-bold text-ink tabular-nums">--</span>
-          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdMins}</span>
-        </div>
-        <span class="text-ink/20 text-2xl font-light" aria-hidden="true">:</span>
-        <div class="text-center">
-          <span id="cd-secs" class="block font-mono text-3xl sm:text-4xl font-bold text-ink/50 tabular-nums">--</span>
-          <span class="text-xs text-ink/55 uppercase tracking-widest">{t.cdSecs}</span>
-        </div>
-      </div>
+      <!-- L'ancien compte à rebours devient le décompte de l'édition. Les valeurs
+           finales sont dans le HTML : sans JavaScript, ou avec le mouvement
+           réduit, elles s'affichent directement. -->
+      <dl class="grid grid-cols-3 gap-4 sm:gap-10 max-w-xl mx-auto mt-9" style="animation: slide-up 0.8s ease-out 0.5s both;">
+        {t.heroStats.map(stat => (
+          <div class="flex flex-col-reverse items-center gap-1 text-center">
+            <dt class="text-xs sm:text-sm text-ink/70 leading-snug">{stat.label}</dt>
+            <dd class="font-mono text-3xl sm:text-4xl font-bold text-accent tabular-nums" data-count={stat.count} data-suffix={stat.suffix}>{statFormat.format(stat.count)}{stat.suffix}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
 
     {/* Sous sm, la barre des partenaires Gold occupe le bas du hero :
@@ -194,88 +172,69 @@ const stages = getStages(lang);
     </div>
   </section>
 
-  <!-- ===== INSCRIPTION ===== -->
-  <section id="inscription" class="relative py-32 overflow-hidden">
+  <!-- ===== REPLAY ===== -->
+  <!-- #inscription reste une ancre : d'anciens liens partagés y pointent. -->
+  <section id="replay" class="relative py-32 overflow-hidden scroll-mt-16">
+    <span id="inscription" class="absolute -top-16" aria-hidden="true"></span>
     <div class="absolute inset-0 bg-gradient-to-b from-surface via-surface-2 to-surface"></div>
     <div class="absolute inset-0 cyber-grid opacity-30"></div>
 
     <div class="relative z-10 max-w-4xl mx-auto px-6">
       <div class="reveal mb-14 text-center">
-        <span class="section-label">{t.regLabel}</span>
-        <h2 class="section-title mt-4" set:html={t.regTitleHtml}></h2>
-        <p class="text-ink/50 mt-4 max-w-2xl mx-auto text-lg">
-          {t.regIntro}
+        <span class="section-label">{t.replayLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.replayTitleHtml}></h2>
+        <p class="text-ink/60 mt-4 max-w-2xl mx-auto text-lg">
+          {t.replayIntro}
         </p>
       </div>
 
-      {/* Visuel de l'édition, sans lien : la billetterie s'ouvre depuis le
-          bouton du terminal ci-dessous. Aucun module tiers chargé sur le site. */}
-      <div class="reveal delay-1 mx-auto max-w-3xl">
-        <img
-          src="/assets/og-cybertour-2026.png"
-          alt={t.regImageAlt}
-          width="1200"
-          height="630"
-          loading="lazy"
-          class="block w-full h-auto overflow-hidden rounded-2xl border border-ink/10 shadow-2xl shadow-navy/50 light:shadow-navy/15"
-        />
-      </div>
+      {/* Lien vers YouTube plutôt qu'un lecteur intégré : aucun module tiers
+          chargé sur le site. */}
+      <a
+        href={REPLAY_2026_URL}
+        target="_blank"
+        rel="noopener"
+        aria-label={t.replayPlay}
+        class="replay-poster reveal delay-1 group relative block mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink/10 shadow-2xl shadow-navy/50 light:shadow-navy/15"
+      >
+        <img src="/assets/bilan/2026-conferences-amphi.webp" alt={t.replayPosterAlt} width="1600" height="900" loading="lazy" class="block w-full h-auto" />
+        <span class="absolute inset-0 flex items-center justify-center bg-navy-dark/30 transition-colors duration-300 group-hover:bg-navy-dark/10" aria-hidden="true">
+          <span class="replay-play flex items-center justify-center w-20 h-20 rounded-full bg-clusir-red text-white shadow-lg shadow-navy-dark/40">
+            <svg class="w-9 h-9 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+          </span>
+        </span>
+      </a>
 
-      <!-- Terminal — état réel de la billetterie + actions utiles -->
       <div class="reveal delay-2 mx-auto max-w-2xl mt-10">
         <div class="terminal-window theme-dark bg-[#060a14] backdrop-blur-md border border-accent/20 rounded-xl px-6 py-6 sm:px-8 font-mono text-sm">
           <div class="flex items-center gap-2 mb-4 pb-3 border-b border-ink/10">
             <span class="w-3 h-3 rounded-full bg-red/80" aria-hidden="true"></span>
             <span class="w-3 h-3 rounded-full bg-gold/60" aria-hidden="true"></span>
             <span class="w-3 h-3 rounded-full bg-emerald-400/60" aria-hidden="true"></span>
-            <span class="ml-3 text-ink/50 text-xs">{t.regTermFile}</span>
+            <span class="ml-3 text-ink/50 text-xs">{t.replayTermFile}</span>
           </div>
 
           <div class="space-y-2">
-            <p class="text-emerald-400/80 light:text-emerald-800"><span class="text-accent/80">$</span> {t.regTermCmd}</p>
-            <p class="text-ink/70">
-              {t.regEventLabel} <span class="text-accent">{t.regEventValue}</span> {t.regEventSuffix}
-            </p>
-            <p class="text-ink/70">
-              {t.regTicketLabel} <span class="text-accent">{t.regTicketDate}</span>
-            </p>
-            <p class="text-ink/60">
-              {t.regHint}
-            </p>
+            <p class="text-emerald-400/80"><span class="text-accent/80">$</span> {t.replayTermCmd}</p>
+            {t.replayTermLines.map(line => (
+              <p class="text-ink/70">{line.label} <span class="text-accent">{line.value}</span></p>
+            ))}
           </div>
 
-          <!-- Actions -->
           <div class="mt-6 flex flex-col sm:flex-row gap-3">
             <a
-              href={WEEZEVENT_PAGE}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={p('/bilan')}
               class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-accent/40 bg-gold/10 px-4 py-3 font-display text-sm font-semibold text-accent transition-colors hover:bg-gold/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3m-6-8h6m0 0v6m0-6L9 15" />
-              </svg>
-              {t.regOpenCta}
+              {t.replayBilanCta}
             </a>
-            <button
-              type="button"
-              id="add-to-calendar"
-              data-summary={t.icsSummary}
-              data-description={t.icsDescription}
-              data-location={t.icsLocation}
-              data-done={t.icsDone}
+            <a
+              href={p('/bilan#rejoindre')}
               class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-ink/20 bg-ink/[0.06] px-4 py-3 font-display text-sm font-semibold text-ink transition-colors hover:bg-ink/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <svg class="w-4 h-4 shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/>
-              </svg>
-              {t.regCalendarCta}
-            </button>
+              {t.replayJoinCta}
+            </a>
           </div>
-
-          <p id="calendar-status" role="status" class="mt-3 text-xs text-ink/50">
-            {t.regCalendarStatus}
-          </p>
         </div>
       </div>
     </div>
@@ -316,7 +275,7 @@ const stages = getStages(lang);
 
         <div class="flex flex-wrap items-center gap-3 mt-5">
           <span class="inline-flex items-center gap-1.5 bg-gold/10 border border-accent/20 rounded-full px-3 py-1 text-xs font-mono text-accent tracking-wider uppercase">
-            <span class="w-1.5 h-1.5 bg-gold rounded-full animate-pulse"></span>
+            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
             {t.ctfBadgeMonth}
           </span>
           <span class="inline-flex items-center gap-1.5 bg-ink/5 border border-ink/10 rounded-full px-3 py-1 text-xs font-mono text-ink/60 tracking-wider uppercase">
@@ -328,7 +287,7 @@ const stages = getStages(lang);
         <p class="text-ink/60 leading-relaxed mt-3" set:html={t.ctfBodyHtml}></p>
 
         <div class="mt-6 text-center">
-          <a href="https://ctf.inge.re" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block rounded-lg font-display">{t.ctfCta}</a>
+          <a href={p('/bilan#temps-forts')} class="btn-outline inline-block rounded-lg font-display text-sm">{t.ctfCta}</a>
         </div>
 
         <div class="flex flex-wrap items-center gap-4 mt-6">
@@ -342,104 +301,32 @@ const stages = getStages(lang);
     </div>
   </section>
 
+  </main>
+
   <!-- ===== FOOTER ===== -->
   <Footer />
 
   <script>
-    // ── « Ajouter à mon agenda » — génération d'un .ics côté client.
-    //    Aucune dépendance : Blob + lien de téléchargement éphémère.
-    //    Dates issues du JSON-LD de Layout.astro (fuseau Indien/Réunion, UTC+4)
-    //    converties en UTC, conformément à la RFC 5545.
-    //
-    //    Ce script est bundlé : il ne voit pas le dictionnaire i18n. Les
-    //    chaînes localisées (SUMMARY, DESCRIPTION, LOCATION, message de fin)
-    //    lui sont passées par les attributs data du bouton.
-    const calendarBtn = document.getElementById('add-to-calendar');
-    const calendarStatus = document.getElementById('calendar-status');
-
-    if (calendarBtn) {
-      // Repli le champ sur 75 octets max, comme l'exige la RFC 5545 §3.1.
-      function foldIcsLine(line) {
-        const bytes = new TextEncoder().encode(line);
-        if (bytes.length <= 75) return line;
-        const out = [];
-        let current = '';
-        let currentBytes = 0;
-        let limit = 75;
-        for (const char of line) {
-          const size = new TextEncoder().encode(char).length;
-          if (currentBytes + size > limit) {
-            out.push(current);
-            current = ' ' + char;
-            currentBytes = 1 + size;
-            limit = 75;
-          } else {
-            current += char;
-            currentBytes += size;
-          }
-        }
-        out.push(current);
-        return out.join('\r\n');
-      }
-
-      function toIcsDate(date) {
-        return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-      }
-
-      function escapeIcsText(text) {
-        return text
-          .replace(/\\/g, '\\\\')
-          .replace(/;/g, '\\;')
-          .replace(/,/g, '\\,')
-          .replace(/\n/g, '\\n');
-      }
-
-      calendarBtn.addEventListener('click', () => {
-        const summary = calendarBtn.dataset.summary || '';
-        const description = calendarBtn.dataset.description || '';
-        const location = calendarBtn.dataset.location || '';
-
-        const lines = [
-          'BEGIN:VCALENDAR',
-          'VERSION:2.0',
-          'PRODID:-//CLUSIR Reunion Ocean Indien//Cyber Tour Reunion 2026//FR',
-          'CALSCALE:GREGORIAN',
-          'METHOD:PUBLISH',
-          'BEGIN:VEVENT',
-          'UID:cyber-tour-reunion-2026@cybertour.re',
-          'DTSTAMP:' + toIcsDate(new Date()),
-          'DTSTART:' + toIcsDate(new Date('2026-10-20T08:00:00+04:00')),
-          'DTEND:' + toIcsDate(new Date('2026-10-23T18:00:00+04:00')),
-          'SUMMARY:' + escapeIcsText(summary),
-          'DESCRIPTION:' + escapeIcsText(description),
-          'LOCATION:' + escapeIcsText(location),
-          'URL:https://cybertour.re/',
-          'END:VEVENT',
-          'END:VCALENDAR',
-        ];
-
-        const ics = lines.map(foldIcsLine).join('\r\n') + '\r\n';
-        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'cyber-tour-reunion-2026.ics';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-
-        // Un blob: n'a pas d'extension : l'option fileDownloads de Plausible
-        // ne le voit pas, on déclare l'événement à la main.
-        const plausible = window.plausible;
-        if (typeof plausible === 'function') {
-          plausible('Agenda ics', { props: { fichier: 'cyber-tour-reunion-2026.ics' } });
-        }
-
-        if (calendarStatus) {
-          calendarStatus.textContent = calendarBtn.dataset.done || '';
-        }
-      });
+    // Le décompte du hero monte jusqu'à sa valeur finale, en expo-out comme
+    // les révélations du site. Le HTML porte déjà le chiffre final.
+    const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const format = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-GB' : 'fr-FR');
+      const duration = 1600;
+      const start = performance.now() + 500;
+      const write = (el: HTMLElement, progress: number) => {
+        const target = Number(el.dataset.count);
+        el.textContent = format.format(Math.round(target * progress)) + (progress === 1 ? el.dataset.suffix : '');
+      };
+      // Rien n'est écrit hors d'une image rendue : si requestAnimationFrame est
+      // suspendu (onglet en arrière-plan), le chiffre final du HTML reste.
+      const tick = (now: number) => {
+        const t = Math.min(Math.max(now - start, 0) / duration, 1);
+        const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        counters.forEach((el) => write(el, eased));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
     }
   </script>
 

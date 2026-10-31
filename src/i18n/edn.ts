@@ -2,22 +2,12 @@
 import type { Lang } from './index';
 import type { ProgrammeSession } from './programme';
 
-/** Inscription gérée par l'EDN (CCI Réunion), hors billetterie Weezevent du CLUSIR. */
-export const EDN_REGISTRATION =
-  'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DAp8-KaVIE6UWw2P4wbYM-lYB6bSa0tIurlZCn8rv4xUNzRSODVSOEhTWVZITjRSQTJVNFhVUlhRNy4u';
-export const EDN_EMAIL = 'edn@reunion.cci.fr';
-export const EDN_PHONE = '0262 94 22 22';
-
 export interface EdnDict {
   programmeLabel: string;
   programmeTitle: string;
   programmeIntro: string;
   scheduleTitle: string;
   programme: ProgrammeSession[];
-  registrationTitle: string;
-  registrationText: string;
-  registrationCta: string;
-  registrationContactHint: string;
 }
 
 export const edn: Record<Lang, EdnDict> = {
@@ -25,7 +15,7 @@ export const edn: Record<Lang, EdnDict> = {
     programmeLabel: 'Programme',
     programmeTitle: 'Cyber Vision : votre entreprise est-elle prête pour la suite ?',
     programmeIntro:
-      "Intelligence artificielle, ingénierie sociale, nouvelles menaces : un après-midi riche en retours d'expérience, dédié aux entreprises et aux professionnels. Dirigeants, DSI, professionnels de la sécurité ou passionnés du numérique, venez échanger avec des experts de référence. Avec la participation du CLUSIR et de Cyber Réunion.",
+      "Intelligence artificielle, ingénierie sociale, nouvelles menaces : un après-midi riche en retours d'expérience, dédié aux entreprises et aux professionnels. Dirigeants, DSI, professionnels de la sécurité ou passionnés du numérique ont échangé avec des experts de référence. Avec la participation du CLUSIR et de Cyber Réunion.",
     scheduleTitle: 'Programme du vendredi 30 octobre',
     programme: [
       {
@@ -40,17 +30,12 @@ export const edn: Record<Lang, EdnDict> = {
         ],
       },
     ],
-    registrationTitle: 'Inscription',
-    registrationText:
-      "Gratuit et ouvert à tous, sur inscription. Les inscriptions de cette étape sont gérées par l'École Du Numérique.",
-    registrationCta: "S'inscrire auprès de l'EDN",
-    registrationContactHint: 'Une question ?',
   },
   en: {
     programmeLabel: 'Programme',
     programmeTitle: 'Cyber Vision: is your business ready for what comes next?',
     programmeIntro:
-      'Artificial intelligence, social engineering, new threats: an afternoon of lessons from the field, for businesses and professionals. Business leaders, IT managers, security professionals or anyone keen on digital technology, come and talk with leading experts. With CLUSIR and Cyber Réunion.',
+      'Artificial intelligence, social engineering, new threats: an afternoon of lessons from the field, for businesses and professionals. Business leaders, IT managers, security professionals or anyone keen on digital technology met and talked with leading experts. With CLUSIR and Cyber Réunion.',
     scheduleTitle: 'Programme for Friday 30 October',
     programme: [
       {
@@ -65,10 +50,5 @@ export const edn: Record<Lang, EdnDict> = {
         ],
       },
     ],
-    registrationTitle: 'Registration',
-    registrationText:
-      'Free and open to all, registration required. Registration for this stage is handled by École Du Numérique.',
-    registrationCta: 'Register with EDN',
-    registrationContactHint: 'Any questions?',
   },
 };

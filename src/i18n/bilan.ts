@@ -110,7 +110,7 @@ export const bilan: Record<Lang, BilanDict> = {
     heroImgAlt: "L'amphithéâtre de l'IUT de Saint-Pierre rempli pendant les conférences du 22 octobre 2026",
     heroCtaReplay: 'Revoir les conférences 2026',
     heroCtaJoin: "Rejoindre l'édition 2027",
-    heroPdf: 'Télécharger le bilan de la semaine 1 (PDF, 1 page)',
+    heroPdf: 'Télécharger le bilan Cyber Tour 2026 (PDF, 1 page)',
 
     progressLabel: '03 // De 2025 à 2026',
     progressTitleHtml: 'Une première édition,<br/><span class="text-accent">puis toute l\'île</span>',
@@ -253,7 +253,7 @@ export const bilan: Record<Lang, BilanDict> = {
     heroImgAlt: 'The IUT lecture hall in Saint-Pierre full during the 22 October 2026 talks',
     heroCtaReplay: 'Watch the 2026 talks',
     heroCtaJoin: 'Join the 2027 edition',
-    heroPdf: 'Download the week 1 review (PDF, 1 page, in French)',
+    heroPdf: 'Download the Cyber Tour 2026 review (PDF, 1 page, in French)',
 
     progressLabel: '03 // From 2025 to 2026',
     progressTitleHtml: 'A first edition,<br/><span class="text-accent">then the whole island</span>',

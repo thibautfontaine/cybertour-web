@@ -13,8 +13,8 @@ import { getPartners, type Partner } from './partners';
 export const REPLAY_2025_URL = 'https://www.youtube.com/watch?v=uk-gSyaxyWA';
 export const REPLAY_2026_URL = 'https://www.youtube.com/watch?v=fnjLhNorXSk';
 
-/** Bilan A4 de la semaine 1, export du one-pager (en français seulement). */
-export const BILAN_PDF = '/assets/bilan/bilan-cybertour-2026-semaine-1.pdf';
+/** Bilan A4 paysage de l'édition, export du one-pager (en français seulement). */
+export const BILAN_PDF = '/assets/bilan/bilan-cybertour-2026.pdf';
 
 /**
  * Présences comptées par journée, 388 au total. Une personne venue

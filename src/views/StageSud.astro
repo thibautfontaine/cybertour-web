@@ -4,6 +4,7 @@
  * Toute chaîne visible vient de `src/i18n/sud.ts`.
  */
 import StageLayout from '../layouts/StageLayout.astro';
+import { REPLAY_2026_URL } from '../data/bilan';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { getStage } from '../data/stages';
@@ -22,7 +23,6 @@ const coOrganisers = getPartners(['univ', 'clusir']);
 const stagePartners = getPartners(['edih', 'orange-cyberdefense', 'sfr-business', 'youtell', 'cf-cyber']);
 
 const PROGRAMME_PDF = '/assets/programme-sud-22-octobre-2026.pdf';
-const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
 ---
 
 <StageLayout stage={stage}>
@@ -51,16 +51,16 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
       <!-- Jour 1: Conférences techniques -->
       <div class="day-section" id="day-1">
         <div class="reveal">
-          <span class="font-mono text-red-400/60 light:text-red-700 text-sm tracking-widest uppercase">{t.day1Label}</span>
+          <span class="font-mono text-red-400 light:text-red-700 text-sm tracking-widest uppercase">{t.day1Label}</span>
           <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.day1Title}</h2>
           <p class="text-ink/50 mt-4 text-lg max-w-3xl">
             {t.day1Intro}
           </p>
         </div>
 
-        <!-- Diffusion en direct des conférences : lien sortant, pas d'iframe (aucun appel à Google avant le clic) -->
+        <!-- Replay des conférences : lien sortant, pas d'iframe (aucun appel à Google avant le clic) -->
         <div class="reveal delay-1 mt-8">
-          <a href={LIVE_URL} target="_blank" rel="noopener noreferrer"
+          <a href={REPLAY_2026_URL} target="_blank" rel="noopener noreferrer"
             class="live-card group flex flex-col sm:flex-row sm:items-center gap-6 rounded-2xl p-6 sm:p-8 border border-red-400/40 transition-colors hover:border-red-400/70"
             style="background:linear-gradient(135deg, rgba(223,60,55,0.18), rgba(223,60,55,0.04));">
             <svg class="shrink-0 w-16 h-16 sm:w-20 sm:h-20 transition-transform duration-200 group-hover:scale-105" viewBox="0 0 28 20" aria-hidden="true">
@@ -69,7 +69,6 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
             </svg>
             <div class="flex-1">
               <span class="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-red-300 light:text-red-700">
-                <span class="live-dot block w-2.5 h-2.5 rounded-full bg-red-500" aria-hidden="true"></span>
                 {t.liveBadge}
               </span>
               <h3 class="font-display font-bold text-2xl sm:text-3xl mt-2">{t.liveTitle}</h3>
@@ -118,13 +117,6 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
               <span class="font-mono text-[10px] text-ink/50 normal-case">{t.programmePdfMeta}</span>
             </a>
           </div>
-          <p class="flex items-start gap-2 text-sm text-amber-200/80 light:text-amber-900 bg-amber-300/[0.06] border border-amber-300/20 rounded-lg px-4 py-3 mb-8">
-            <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" />
-            </svg>
-            {t.programmeDraftNote}
-          </p>
-
           <ProgrammeTimeline sessions={t.programme} remoteLabel={t.remoteLabel} accent="red" />
         </div>
       </div>
@@ -143,7 +135,7 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
       <!-- Jour 2: Ateliers pratiques -->
       <div class="day-section" id="day-2">
         <div class="reveal">
-          <span class="font-mono text-red-400/60 light:text-red-700 text-sm tracking-widest uppercase">{t.day2Label}</span>
+          <span class="font-mono text-red-400 light:text-red-700 text-sm tracking-widest uppercase">{t.day2Label}</span>
           <h2 class="font-display font-bold text-3xl sm:text-4xl mt-4">{t.day2Title}</h2>
           <p class="text-ink/50 mt-4 text-lg max-w-3xl">
             {t.day2Intro}
@@ -208,14 +200,6 @@ const LIVE_URL = 'https://www.youtube.com/live/fnjLhNorXSk';
   .live-card:focus-visible {
     outline: 2px solid color-mix(in srgb, var(--theme-ink) 50%, transparent);
     outline-offset: 4px;
-  }
-  .live-dot { animation: live-pulse 1.6s ease-in-out infinite; }
-  @keyframes live-pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.6); }
-    50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(239,68,68,0); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .live-dot { animation: none; }
   }
   .dnav-item:focus-visible {
     outline: 2px solid color-mix(in srgb, var(--theme-ink) 40%, transparent);

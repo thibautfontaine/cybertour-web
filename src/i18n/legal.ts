@@ -1,7 +1,5 @@
 /**
- * Chaînes des mentions légales. Le FR reprend mot pour mot la page d'origine,
- * y compris les accents manquants du texte historique (« Editeur », « Siege »,
- * « Hebergement », « Propriete »…), pour un rendu FR strictement identique.
+ * Chaînes des mentions légales.
  */
 import type { Lang } from './index';
 
@@ -61,30 +59,30 @@ export const legal: Record<Lang, LegalDict> = {
     metaDescription: 'Mentions légales du site Cyber Tour Réunion 2026.',
     pageTitle: 'Mentions légales',
 
-    publisherTitle: 'Editeur du site',
+    publisherTitle: 'Éditeur du site',
     publisherName: 'CLUSIR ROI',
-    publisherDescription: "— Club de la Sécurité de l'Information en Reseau — Reunion et Océan Indien",
+    publisherDescription: "— Club de la Sécurité de l'Information en Réseau — Réunion et Océan Indien",
     publisherLegalForm: 'Association loi 1901',
     publisherIds: 'SIREN : 539 437 426 | SIRET : 539 437 426 00023',
     publisherRna: 'RNA : W9R1003737',
-    publisherAddress: 'Siege social : Immeuble Altea, 41 rue de la Pepiniere, 97438 Sainte-Marie, La Réunion',
+    publisherAddress: 'Siège social : Immeuble Altea, 41 rue de la Pépinière, 97438 Sainte-Marie, La Réunion',
     publisherContactLabel: "Comite d'organisation :",
 
     directorTitle: 'Directeur de la publication',
-    directorText: 'Le directeur de la publication est le President du CLUSIR Réunion Océan Indien.',
+    directorText: 'Le directeur de la publication est le Président du CLUSIR Réunion Océan Indien.',
 
-    hostingTitle: 'Hebergement',
+    hostingTitle: 'Hébergement',
     hostingProvider: 'GitHub Pages',
     hostingAddress: '88 Colin P. Kelly Jr St, San Francisco, CA 94107, United States',
     hostingSourceLabel: 'Code source :',
     hostingSourceLinkText: 'github.com/thibautfontaine/cybertour-web',
 
-    designTitle: 'Conception et developpement',
+    designTitle: 'Conception et développement',
     designName: 'Thibaut Fontaine',
     designRole: 'Membre du bureau du CLUSIR Réunion Océan Indien.',
 
-    ipTitle: 'Propriete intellectuelle',
-    ipText: "L'ensemble des contenus de ce site (textes, images, logos, elements graphiques, videos) est protege par le Code de la propriete intellectuelle. Toute reproduction ou représentation, totale ou partielle, est interdite sans autorisation ecrite du CLUSIR Réunion Océan Indien.",
+    ipTitle: 'Propriété intellectuelle',
+    ipText: "L'ensemble des contenus de ce site (textes, images, logos, éléments graphiques, vidéos) est protégé par le Code de la propriété intellectuelle. Toute reproduction ou représentation, totale ou partielle, est interdite sans autorisation ecrite du CLUSIR Réunion Océan Indien.",
 
     dataTitle: 'Données personnelles et cookies',
     dataText: 'Le site ne dépose aucun cookie et ne comporte aucun formulaire. Les traitements de données liés au site et aux inscriptions sont décrits dans deux pages dédiées :',
@@ -92,10 +90,10 @@ export const legal: Record<Lang, LegalDict> = {
     cookiesLinkText: 'Politique de cookies',
 
     externalLinksTitle: 'Liens externes',
-    externalLinksText: 'Ce site peut contenir des liens vers des sites tiers. Le CLUSIR Réunion Océan Indien ne saurait etre tenu responsable du contenu de ces sites externes ni de leur politique de protection des donnees personnelles.',
+    externalLinksText: 'Ce site peut contenir des liens vers des sites tiers. Le CLUSIR Réunion Océan Indien ne saurait être tenu responsable du contenu de ces sites externes ni de leur politique de protection des donnees personnelles.',
 
     contactTitle: 'Contact',
-    contactText: "Pour toute question relative au site ou a l'événement :",
+    contactText: "Pour toute question relative au site ou à l'événement :",
 
     email: EMAIL,
     sourceUrl: SOURCE_URL,
@@ -108,11 +106,11 @@ export const legal: Record<Lang, LegalDict> = {
 
     publisherTitle: 'Site publisher',
     publisherName: 'CLUSIR ROI',
-    publisherDescription: '— Club de la Sécurité de l\'Information en Reseau — Reunion et Océan Indien (Information Security Club — Reunion Island and Indian Ocean)',
+    publisherDescription: '— Club de la Sécurité de l\'Information en Réseau — Réunion et Océan Indien (Information Security Club — Reunion Island and Indian Ocean)',
     publisherLegalForm: 'Non-profit association (French « loi 1901 »)',
     publisherIds: 'SIREN: 539 437 426 | SIRET: 539 437 426 00023',
     publisherRna: 'RNA: W9R1003737',
-    publisherAddress: 'Registered office: Immeuble Altea, 41 rue de la Pepiniere, 97438 Sainte-Marie, Reunion Island',
+    publisherAddress: 'Registered office: Immeuble Altea, 41 rue de la Pépinière, 97438 Sainte-Marie, Reunion Island',
     publisherContactLabel: 'Organising committee:',
 
     directorTitle: 'Publishing director',

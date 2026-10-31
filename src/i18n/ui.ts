@@ -12,10 +12,6 @@ export interface UiDict {
     ogImageAlt: string;
     keywords: string;
     skipToContent: string;
-    countdown: {
-      ended: { title: string; subtitle: string; cta: string; href: string };
-      live: { title: string; subtitle: string; cta: string; href: string };
-    };
   };
   nav: {
     links: { label: string; href: string; soon?: boolean }[];
@@ -83,7 +79,6 @@ export interface UiDict {
 const HOME_ANCHORS = {
   etapes: '/#etapes',
   ctf: '/#ctf',
-  inscription: '/#inscription',
 };
 
 /** Liens du menu « À propos » : sections de src/views/About.astro, puis le bilan. */
@@ -104,20 +99,6 @@ export const ui: Record<Lang, UiDict> = {
       keywords:
         'cybersécurité, La Réunion, conférence, cybermois, CLUSIR, sécurité informatique, SOC, IA, souveraineté numérique',
       skipToContent: 'Aller au contenu principal',
-      countdown: {
-        ended: {
-          title: 'Édition 2026 terminée',
-          subtitle: 'Merci à toutes et tous. Les conférences sont disponibles en rediffusion.',
-          cta: 'Voir le bilan et les replays',
-          href: ABOUT_ANCHORS.bilan,
-        },
-        live: {
-          title: "L'événement est en cours",
-          subtitle: 'Du 20 au 30 octobre 2026 — rejoignez-nous sur place ou en streaming.',
-          cta: 'Voir les étapes',
-          href: HOME_ANCHORS.etapes,
-        },
-      },
     },
     nav: {
       links: [
@@ -131,7 +112,7 @@ export const ui: Record<Lang, UiDict> = {
           { label: 'Contact', href: ABOUT_ANCHORS.contact },
         ],
       },
-      cta: { label: "S'inscrire", href: HOME_ANCHORS.inscription },
+      cta: { label: 'Voir le bilan', href: ABOUT_ANCHORS.bilan },
       stagesMenu: { label: 'Les étapes', all: 'Voir les 6 étapes', allHref: HOME_ANCHORS.etapes, soon: 'programme à venir' },
       soon: 'bientôt',
       openMenu: 'Ouvrir le menu',
@@ -175,10 +156,10 @@ export const ui: Record<Lang, UiDict> = {
       stages: 'Les Étapes',
       practicalInfo: 'Infos Pratiques',
       address: 'Adresse',
-      registrationTitle: 'Réservez votre place',
+      registrationTitle: 'Cette étape a eu lieu',
       registrationText:
-        "L'inscription est gratuite mais obligatoire, et les places sont limitées. La billetterie regroupe les étapes portées par le CLUSIR : choisissez la vôtre, un billet par étape.",
-      registrationCta: 'Réserver ma place',
+        "Merci à toutes et tous. Les chiffres de l'édition 2026, les temps forts et les replays sont dans le bilan.",
+      registrationCta: 'Voir le bilan',
       registrationContactHint: 'Une question sur cette étape ?',
       pageTitle: (name) => `${name} | Cyber Tour Réunion 2026`,
     },
@@ -200,20 +181,6 @@ export const ui: Record<Lang, UiDict> = {
       keywords:
         'cybersecurity, Reunion Island, conference, Cybermois, CLUSIR, information security, SOC, AI, digital sovereignty, Indian Ocean',
       skipToContent: 'Skip to main content',
-      countdown: {
-        ended: {
-          title: '2026 edition is over',
-          subtitle: 'Thank you all. The talks are available on replay.',
-          cta: 'See the review and replays',
-          href: ABOUT_ANCHORS.bilan,
-        },
-        live: {
-          title: 'The event is under way',
-          subtitle: '20 to 30 October 2026 — join us on site or via live stream.',
-          cta: 'See the stages',
-          href: HOME_ANCHORS.etapes,
-        },
-      },
     },
     nav: {
       links: [
@@ -227,7 +194,7 @@ export const ui: Record<Lang, UiDict> = {
           { label: 'Contact', href: ABOUT_ANCHORS.contact },
         ],
       },
-      cta: { label: 'Register', href: HOME_ANCHORS.inscription },
+      cta: { label: 'See the review', href: ABOUT_ANCHORS.bilan },
       stagesMenu: { label: 'Stages', all: 'See all 6 stages', allHref: HOME_ANCHORS.etapes, soon: 'programme coming soon' },
       soon: 'soon',
       openMenu: 'Open menu',
@@ -271,10 +238,10 @@ export const ui: Record<Lang, UiDict> = {
       stages: 'The Stages',
       practicalInfo: 'Practical information',
       address: 'Address',
-      registrationTitle: 'Book your seat',
+      registrationTitle: 'This stage has taken place',
       registrationText:
-        'Registration is free but required, and seats are limited. The ticketing page covers the stages run by CLUSIR: pick yours, one ticket per stage.',
-      registrationCta: 'Book my seat',
+        'Thank you all. The 2026 figures, highlights and replays are in the review.',
+      registrationCta: 'See the review',
       registrationContactHint: 'A question about this stage?',
       pageTitle: (name) => `${name} | Cyber Tour Réunion 2026`,
     },

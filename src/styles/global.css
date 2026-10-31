@@ -269,6 +269,13 @@ body {
   color: var(--text-primary);
 }
 
+p { text-wrap: pretty; }
+
+/* Liens de texte courant venus des dictionnaires (pages légales) : le soulignement
+   les distingue du texte sans compter sur la seule couleur. */
+main p a:not([class]),
+main li a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
+
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
@@ -419,8 +426,21 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  animation: shimmer 3s infinite;
 }
+.btn-primary:hover::after { animation: shimmer 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.btn-primary:active,
+.btn-outline:active { transform: translateY(0) scale(0.98); }
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.replay-poster:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 3px;
+}
+
+/* Affiche du replay (Home.astro) : le bouton lecture répond au survol. */
+.replay-play { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.replay-poster:hover .replay-play,
+.replay-poster:focus-visible .replay-play { transform: scale(1.12); }
 
 .btn-outline {
   border: 2px solid var(--color-clusir-red);
@@ -429,7 +449,7 @@ body {
   padding: 0.75rem 2rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 .btn-outline:hover {
   background: var(--color-clusir-red);
@@ -489,8 +509,8 @@ body {
 /* REUNION text outline */
 .reunion-outline {
   color: transparent;
-  -webkit-text-stroke: 2px color-mix(in srgb, var(--theme-ink) 25%, transparent);
-  text-stroke: 2px color-mix(in srgb, var(--theme-ink) 25%, transparent);
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--theme-ink) 55%, transparent);
+  text-stroke: 2px color-mix(in srgb, var(--theme-ink) 55%, transparent);
   transition: -webkit-text-stroke-color 0.4s ease;
 }
 
@@ -769,7 +789,12 @@ body {
   }
   .sponsor-card:hover,
   .partner-bubble:hover,
-  .btn-primary:hover { transform: none; }
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-outline:active { transform: none; }
+  .replay-play { transition-duration: 0.01ms; }
+  .replay-poster:hover .replay-play,
+  .replay-poster:focus-visible .replay-play { transform: none; }
 }
 
 /* Bouton de thème (Navbar.astro) : visible seulement quand le script du

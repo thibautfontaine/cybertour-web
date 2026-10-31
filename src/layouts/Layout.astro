@@ -41,12 +41,6 @@ const alternates = LANGS.map((l) => ({
 }));
 const xDefault = new URL(alternatePath(Astro.url.pathname, DEFAULT_LANG), Astro.site).href;
 
-/* Chaînes du compte à rebours pour le script bundlé en bas de page (qui ne
-   peut pas lire le dictionnaire au build). Sérialisées en JSON dans le DOM. */
-const countdownI18n = {
-  ended: { ...t.countdown.ended, href: localizePath(t.countdown.ended.href, lang) },
-  live:  { ...t.countdown.live,  href: localizePath(t.countdown.live.href, lang) },
-};
 ---
 
 <!doctype html>
@@ -257,7 +251,6 @@ const countdownI18n = {
     </a>
     <slot />
 
-    <script type="application/json" id="countdown-i18n" set:html={JSON.stringify(countdownI18n)}></script>
     <script>
       // ── Scroll reveal — IntersectionObserver only (aucun listener scroll,
       //    donc aucun reflow synchrone forcé par getBoundingClientRect).
@@ -284,127 +277,6 @@ const countdownI18n = {
         revealEls.forEach((el) => el.classList.add('visible'));
       }
 
-      // ── Compte à rebours (présent uniquement sur la home)
-      // Les effets navbar (scroll + menu mobile) sont gérés dans Navbar.astro.
-      // Les textes viennent du JSON #countdown-i18n rendu par le layout dans la
-      // langue de la page.
-      const EVENT_START = new Date('2026-10-20T08:00:00+04:00').getTime();
-      /* Fin du tour = fin de la dernière étape, pas de la dernière étape CLUSIR.
-         À 2026-10-23T18:00 le compte à rebours annonçait « Édition 2026 terminée »
-         alors que les étapes Expernet et EDN n'avaient pas encore eu lieu.
-         Doit rester aligné sur `endDate` du JSON-LD ci-dessus. */
-      const EVENT_END = new Date('2026-10-30T18:00:00+04:00').getTime();
-
-      type CountdownStatus = { title: string; subtitle: string; cta: string; href: string };
-      let i18n: { ended: CountdownStatus; live: CountdownStatus } | null = null;
-      try {
-        i18n = JSON.parse(document.getElementById('countdown-i18n')?.textContent || 'null');
-      } catch (_) {
-        i18n = null;
-      }
-
-      const dEl = document.getElementById('cd-days');
-      const hEl = document.getElementById('cd-hours');
-      const mEl = document.getElementById('cd-mins');
-      const sEl = document.getElementById('cd-secs');
-
-      if (dEl && hEl && mEl && sEl && i18n) {
-        const strings = i18n;
-        // Conteneur du compte à rebours ; repli sur la remontée DOM si l'id manque
-        const cdWrapper = document.getElementById('countdown')
-          || (dEl.parentElement && dEl.parentElement.parentElement);
-        let timerId: ReturnType<typeof setInterval> | null = null;
-        let settled = false; // true dès que l'état « en cours » / « terminé » est affiché
-
-        function stopCountdown() {
-          if (timerId !== null) {
-            clearInterval(timerId);
-            timerId = null;
-          }
-        }
-
-        function renderStatus(status: CountdownStatus) {
-          if (!cdWrapper) return;
-          const box = document.createElement('div');
-          box.className = 'mx-auto max-w-xl text-center';
-          box.setAttribute('role', 'status');
-
-          const h = document.createElement('p');
-          h.className = 'font-mono text-xl sm:text-2xl font-bold uppercase tracking-widest text-accent';
-          h.textContent = status.title;
-          box.appendChild(h);
-
-          const p = document.createElement('p');
-          p.className = 'mt-2 text-sm text-ink/70';
-          p.textContent = status.subtitle;
-          box.appendChild(p);
-
-          if (status.cta && status.href) {
-            const a = document.createElement('a');
-            a.className = 'btn-outline text-xs py-2 px-5 mt-6 inline-block';
-            a.href = status.href;
-            a.textContent = status.cta;
-            box.appendChild(a);
-          }
-
-          cdWrapper.replaceChildren(box);
-          cdWrapper.classList.remove('flex', 'items-center', 'justify-center', 'gap-6', 'sm:gap-10');
-          cdWrapper.classList.add('block');
-        }
-
-        function updateCountdown() {
-          if (settled) return;
-          const now = Date.now();
-
-          if (now >= EVENT_END) {
-            settled = true;
-            stopCountdown();
-            renderStatus(strings.ended);
-            return;
-          }
-
-          if (now >= EVENT_START) {
-            settled = true;
-            stopCountdown();
-            renderStatus(strings.live);
-            return;
-          }
-
-          const diff = EVENT_START - now;
-          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-          const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-          dEl.textContent = String(days).padStart(3, '0');
-          hEl.textContent = String(hours).padStart(2, '0');
-          mEl.textContent = String(mins).padStart(2, '0');
-          sEl.textContent = String(secs).padStart(2, '0');
-        }
-
-        function startCountdown() {
-          updateCountdown();
-          // updateCountdown() a pu arrêter le compteur (états « en cours » / « terminé »)
-          if (timerId === null && !settled) {
-            timerId = setInterval(updateCountdown, 1000);
-          }
-        }
-
-        // Onglet caché : on suspend le tick (inutile et coûteux en batterie)
-        document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'hidden') {
-            stopCountdown();
-          } else {
-            startCountdown();
-          }
-        });
-
-        if (document.visibilityState !== 'hidden') {
-          startCountdown();
-        } else {
-          updateCountdown();
-        }
-      }
     </script>
   </body>
 </html>

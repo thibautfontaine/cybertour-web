@@ -12,20 +12,22 @@ const t = ui[lang].map;
    désormais un encart. Le jour où le tour sort de La Réunion (art. 15 de la
    charte), on retire ce composant sans toucher à la structure de la page.
 
-   Positions en pourcentage sur la silhouette, relevées sur les communes
-   réelles. Deux étapes au Nord et deux à l'Ouest : les doublons sont assumés
-   (décision D7), les pastilles sont donc volontairement décalées. */
+   Positions en pourcentage de l'image, calculées depuis les coordonnées GPS
+   des lieux (la silhouette remplit son image : longitude 55.216 à 55.837,
+   latitude -20.871 à -21.389). Le cadre garde le ratio de l'image, sinon les
+   pourcentages ne tombent plus sur l'île. Les deux étapes de Sainte-Clotilde
+   sont volontairement écartées pour rester distinctes (décision D7). */
 const positions: Record<string, { top: number; left: number }> = {
-  nord:     { top: 8,  left: 42 },  // PTU, Sainte-Clotilde
-  ouest:    { top: 33, left: 13 },  // Office de l'Eau Réunion, Saint-Paul
-  sud:      { top: 95, left: 42 },  // IUT / ESIROI, Saint-Pierre
-  expernet: { top: 23, left: 17 },  // Le Port
-  edn:      { top: 12, left: 52 },  // Sainte-Clotilde
+  nord:     { top: 7.2,  left: 42.5 },  // PTU, Sainte-Clotilde
+  edn:      { top: 6.9,  left: 50 },    // Campus Roger Roland, Sainte-Clotilde
+  expernet: { top: 14.8, left: 14 },    // Parc 2000, Le Port
+  ouest:    { top: 27.5, left: 11 },    // Office de l'Eau Réunion, Saint-Paul
+  sud:      { top: 88.5, left: 43.8 },  // IUT / ESIROI, Saint-Pierre
 };
 ---
 
 <div class="relative w-full max-w-[280px] mx-auto">
-  <div class="relative aspect-[4/3]">
+  <div class="relative aspect-[1600/1452]">
     <img
       src="/assets/reunion-silhouette.png"
       alt=""

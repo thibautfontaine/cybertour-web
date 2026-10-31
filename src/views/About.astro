@@ -1,73 +1,121 @@
 ---
 /**
- * Page « À propos » (FR `/a-propos`, EN `/en/a-propos`) : présentation du
- * Cyber Tour, synthèse des éditions (le détail et les replays sont sur
- * `/bilan`) et contact. Ces sections étaient sur l'accueil ; elles ont leur
- * page, ouverte depuis le menu « À propos ». Les chaînes restent dans
- * `src/i18n/home.ts` (clés `about*`, `editions*`, `contact*`).
+ * Page « À propos » (FR `/a-propos`, EN `/en/a-propos`) : ce qu'est le Cyber
+ * Tour, ses formats, qui le porte, ses deux éditions et comment rejoindre 2027.
+ *
+ * Chaînes : `src/i18n/home.ts` (clés `about*`, `formats*`, `org*`, `editions*`,
+ * `contact*`). Les chiffres des éditions et les logos viennent du bilan, pour
+ * qu'une seule source fasse foi.
  */
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { getLang, localizePath } from '../i18n';
 import { home } from '../i18n/home';
+import { bilan } from '../i18n/bilan';
+import { REPLAY_2025_URL, REPLAY_2026_URL, wall } from '../data/bilan';
 
 const lang = getLang(Astro.currentLocale);
 const t = home[lang];
+const b = bilan[lang];
 const p = (path: string) => localizePath(path, lang);
 
 const contactMail = 'evenement@clusir-roi.org';
+const organisers = wall.find((group) => group.key === 'organisers')?.members ?? [];
+const editions = [
+  { title: b.y2025Title, text: b.y2025Text, stats: b.y2025Stats, replay: b.y2025Replay, url: REPLAY_2025_URL },
+  { title: b.y2026Title, text: b.y2026Text, stats: b.y2026Stats, replay: b.y2026Replay, url: REPLAY_2026_URL },
+];
 ---
 
 <Layout title={t.aboutPageMetaTitle} description={t.aboutPageMetaDescription}>
   <Navbar currentPage="a-propos" />
 
   <main id="main-content">
-  <!-- ===== ABOUT ===== -->
+  <!-- ===== À PROPOS ===== -->
   <section id="about" class="relative pt-36 pb-24 overflow-hidden scroll-mt-24">
     <div class="absolute inset-0 noise-overlay"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-      <!-- Section header -->
-      <div class="reveal mb-20">
-        <span class="section-label">{t.aboutLabel}</span>
-        <h1 class="section-title mt-4" set:html={t.aboutTitleHtml}></h1>
-      </div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-20 items-center">
+      <div>
+        <div class="reveal">
+          <span class="section-label">{t.aboutLabel}</span>
+          <h1 class="section-title mt-4" set:html={t.aboutTitleHtml}></h1>
+        </div>
 
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <!-- Text block -->
-        <div class="space-y-8">
+        <div class="mt-8 space-y-6">
           <p class="reveal delay-1 text-lg text-ink/70 leading-relaxed" set:html={t.aboutP1Html}></p>
           <p class="reveal delay-2 text-lg text-ink/70 leading-relaxed" set:html={t.aboutP2Html}></p>
-
-          <!-- Stats -->
-          <div class="reveal delay-3 grid grid-cols-3 gap-6 pt-6">
-            {t.aboutStats.map(stat => (
-              <div class="text-center p-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl">
-                <span class="block font-display font-extrabold text-3xl text-accent">{stat.value}</span>
-                <span class="text-sm text-ink/50 mt-1">{stat.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <!-- Visual block -->
-        <div class="reveal-right delay-2 relative">
-          <div class="relative rounded-2xl overflow-hidden border border-ink/10">
-            <img src="/assets/cybertour-asset-web-site.png" alt={t.aboutImgAlt} class="w-full h-auto" loading="lazy" />
-            <div class="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent"></div>
-          </div>
-          <!-- Decorative shield -->
-          <div class="absolute -top-8 -right-8 w-24 h-24 text-accent/20 animate-float" style="animation-delay: 1s;">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
-            </svg>
-          </div>
-          <!-- Glow -->
-          <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-navy rounded-full blur-[80px] opacity-60 light:opacity-20"></div>
-        </div>
+        <dl class="reveal delay-3 mt-10 grid grid-cols-3 items-start gap-4 sm:gap-8">
+          {t.aboutStats.map(stat => (
+            <div class="flex flex-col-reverse gap-1">
+              <dt class="text-sm text-ink/60 leading-snug">{stat.label}</dt>
+              <dd class="font-display font-extrabold text-3xl sm:text-4xl text-accent">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
+      <figure class="reveal-right delay-2 mx-auto w-full max-w-md lg:max-w-none">
+        <img
+          src="/assets/about-amphi-iut.jpg"
+          alt={t.aboutImgAlt}
+          width="1200"
+          height="1600"
+          class="w-full aspect-[3/4] object-cover rounded-2xl border border-ink/10 shadow-2xl shadow-navy/50 light:shadow-navy/15"
+        />
+        <figcaption class="mt-3 text-sm text-ink/60">{t.aboutImgCaption}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== LES FORMATS ===== -->
+  <section id="formats" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-gradient-to-b from-surface via-surface-2 to-surface"></div>
+    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <div class="reveal mb-10">
+        <span class="section-label">{t.formatsLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.formatsTitleHtml}></h2>
+      </div>
+
+      <ul class="reveal delay-1 border-t border-ink/10">
+        {t.formats.map(format => (
+          <li class="border-b border-ink/10">
+            <a href={p(format.href)} class="group grid sm:grid-cols-[14rem_1fr_auto] items-baseline gap-x-8 gap-y-1 py-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+              <span class="font-display font-bold text-xl text-ink group-hover:text-accent transition-colors">{format.title}</span>
+              <span class="text-ink/70 leading-relaxed">{format.text}</span>
+              <span class="hidden sm:inline text-accent transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== ORGANISATION ===== -->
+  <section id="organisation" class="relative py-24 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <div class="reveal mb-10 max-w-3xl">
+        <span class="section-label">{t.orgLabel}</span>
+        <h2 class="section-title mt-4" set:html={t.orgTitleHtml}></h2>
+        <p class="text-ink/70 mt-6 text-lg leading-relaxed">{t.orgIntro}</p>
+      </div>
+
+      <ul class="reveal delay-1 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {organisers.map(member => (
+          <li>
+            <a href={member.url} target="_blank" rel="noopener" class="partner-bubble h-24 w-full transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+              <img src={member.logo} alt={member.name} class="max-h-14 max-w-full w-auto object-contain" loading="lazy" />
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -77,28 +125,39 @@ const contactMail = 'evenement@clusir-roi.org';
     <div class="absolute inset-0 bg-gradient-to-b from-surface via-surface-2 to-surface"></div>
     <div class="absolute inset-0 cyber-grid opacity-20"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
       <div class="reveal mb-12">
         <span class="section-label">{t.editionsLabel}</span>
         <h2 class="section-title mt-4" set:html={t.editionsTitleHtml}></h2>
-        <p class="text-ink/60 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
-          {t.editionsIntro}
-        </p>
       </div>
 
-      <dl class="reveal delay-1 grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
-        {t.editionsStats.map(stat => (
-          <div class="flex flex-col-reverse p-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl">
-            <dt class="text-sm text-ink/60 mt-1">{stat.label}</dt>
-            <dd class="font-display font-extrabold text-3xl text-accent">{stat.value}</dd>
-          </div>
+      <div class="grid md:grid-cols-2 gap-12">
+        {editions.map((edition, i) => (
+          <article class:list={['reveal flex flex-col', i === 1 && 'delay-1']}>
+            <h3 class="font-display font-bold text-2xl text-ink">{edition.title}</h3>
+            <p class="mt-3 text-ink/70 leading-relaxed">{edition.text}</p>
+            <dl class="mt-6 grid grid-cols-2 items-start gap-x-6 gap-y-4 flex-1 content-start">
+              {edition.stats.map(stat => (
+                <div class="flex flex-col-reverse">
+                  <dt class="text-sm text-ink/60 mt-1">{stat.label}</dt>
+                  <dd class="font-display font-extrabold text-3xl text-accent">{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <a href={edition.url} target="_blank" rel="noopener" class="mt-6 inline-flex min-h-[44px] items-center gap-2 self-start font-mono text-sm text-brand-text hover:text-accent transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+              {edition.replay}
+            </a>
+          </article>
         ))}
-      </dl>
+      </div>
 
-      <a href={p('/bilan')} class="reveal delay-2 btn-primary inline-flex items-center gap-3 rounded-xl">
-        {t.editionsCta}
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-      </a>
+      <div class="reveal mt-12">
+        <a href={p('/bilan')} class="btn-primary inline-flex items-center gap-3 rounded-xl">
+          {t.editionsCta}
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -107,57 +166,46 @@ const contactMail = 'evenement@clusir-roi.org';
     <div class="absolute inset-0 bg-gradient-to-br from-surface via-surface-2 to-surface"></div>
     <div class="absolute inset-0 cyber-grid opacity-30"></div>
 
-    <!-- Decorative island -->
-    <div class="absolute left-0 bottom-0 w-[400px] h-[400px] opacity-[0.04] pointer-events-none">
-      <img src="/assets/reunion-silhouette.png" alt="" class="w-full h-full object-contain" />
-    </div>
-
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
       <div class="reveal">
         <span class="section-label">{t.contactLabel}</span>
         <h2 class="section-title mt-4" set:html={t.contactTitleHtml}></h2>
-        <p class="text-ink/50 mt-6 max-w-xl mx-auto text-lg leading-relaxed">
+        <p class="text-ink/70 mt-6 max-w-xl mx-auto text-lg leading-relaxed">
           {t.contactIntro}
         </p>
       </div>
 
-      <div class="reveal delay-2 mt-12 grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-        <!-- Email -->
+      <div class="reveal delay-1 mt-12 grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
         <a href={`mailto:${contactMail}`} class="group flex items-center gap-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl p-6 hover:border-accent/30 transition-all">
           <div class="shrink-0 w-12 h-12 rounded-lg bg-surface-2 flex items-center justify-center group-hover:bg-gold/10 transition-colors">
-            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
             </svg>
           </div>
-          <div class="text-left">
-            <span class="text-xs text-ink/55 uppercase tracking-wider">{t.contactEmailLabel}</span>
-            <span class="block font-display font-semibold text-ink group-hover:text-accent transition-colors">{contactMail}</span>
+          <div class="text-left min-w-0">
+            <span class="text-xs text-ink/60 uppercase tracking-wider">{t.contactEmailLabel}</span>
+            <span class="block font-display font-semibold text-ink group-hover:text-accent transition-colors break-words">{contactMail}</span>
           </div>
         </a>
 
-        <!-- Location — lien réel vers le détail du parcours -->
-        <a href={p('/#etapes')} class="group flex items-center gap-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl p-6 hover:border-accent/30 transition-all">
+        <a href={p('/bilan#rejoindre')} class="group flex items-center gap-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl p-6 hover:border-accent/30 transition-all">
           <div class="shrink-0 w-12 h-12 rounded-lg bg-surface-2 flex items-center justify-center group-hover:bg-gold/10 transition-colors">
-            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
             </svg>
           </div>
-          <div class="text-left">
-            <span class="text-xs text-ink/55 uppercase tracking-wider">{t.contactPlacesLabel}</span>
-            <span class="block font-display font-semibold text-ink group-hover:text-accent transition-colors">{t.contactPlacesValue}</span>
-            <span class="block font-mono text-[11px] text-ink/50 mt-0.5">{t.contactPlacesLink}</span>
+          <div class="text-left min-w-0">
+            <span class="text-xs text-ink/60 uppercase tracking-wider">{t.contactJoinLabel}</span>
+            <span class="block font-display font-semibold text-ink group-hover:text-accent transition-colors">{t.contactJoinValue}</span>
+            <span class="block font-mono text-[11px] text-ink/60 mt-0.5">{t.contactJoinLink}</span>
           </div>
         </a>
       </div>
 
-      <!-- Streaming note -->
-      <div class="reveal delay-4 mt-10">
-        <p class="text-brand-text text-sm font-mono font-semibold">
-          <svg class="inline w-4 h-4 mr-1 -mt-0.5" viewBox="0 0 24 24"><path fill="#ce463a" d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418A2.477 2.477 0 002.418 6.186C2 7.746 2 12 2 12s0 4.254.418 5.814a2.477 2.477 0 001.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814z"/><path fill="white" d="M10 15.5l5.5-3.5L10 8.5v7z"/></svg>
-          {t.contactStreaming}
-        </p>
-      </div>
+      <a href={REPLAY_2026_URL} target="_blank" rel="noopener" class="reveal delay-2 mt-8 inline-flex min-h-[44px] items-center gap-2 font-mono text-sm font-semibold text-brand-text hover:text-accent transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+        {t.contactReplay}
+      </a>
     </div>
   </section>
 
