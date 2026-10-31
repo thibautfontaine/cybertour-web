@@ -178,7 +178,7 @@ const fr: HomeDict = {
     { value: '6', label: 'étapes en 2026' },
     { value: '388', label: 'présences en 2026' },
   ],
-  aboutImgAlt: "L'amphithéâtre de l'IUT de Saint-Pierre pendant l'intervention de Leslie Fornero, devant la banderole du Cyber Tour",
+  aboutImgAlt: "Le public dans l'amphithéâtre de l'IUT de Saint-Pierre, face à l'écran « Mettre la cyber en lumière » et à la banderole du Cyber Tour",
   aboutImgCaption: "22 octobre 2026, amphithéâtre de l'IUT, Saint-Pierre",
 
   formatsLabel: '02 // Les formats',
@@ -392,7 +392,7 @@ const en: HomeDict = {
     { value: '6', label: 'stages in 2026' },
     { value: '388', label: 'attendances in 2026' },
   ],
-  aboutImgAlt: 'The IUT lecture hall in Saint-Pierre during Leslie Fornero’s talk, in front of the Cyber Tour banner',
+  aboutImgAlt: 'The audience in the IUT lecture hall in Saint-Pierre, facing the screen and the Cyber Tour banner',
   aboutImgCaption: '22 October 2026, IUT lecture hall, Saint-Pierre',
 
   formatsLabel: '02 // Formats',
