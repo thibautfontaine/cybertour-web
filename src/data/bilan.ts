@@ -42,10 +42,25 @@ export interface MediaItem {
 
 export const media: MediaItem[] = [
   { id: 'antenne', name: 'Antenne Réunion', logo: '/assets/bilan/media-antenne-reunion.png' },
-  { id: 'la1ere', name: 'Réunion La 1ère', logo: '/assets/bilan/media-reunion-la-1ere.png' },
+  {
+    id: 'la1ere',
+    name: 'Réunion La 1ère',
+    logo: '/assets/bilan/media-reunion-la-1ere.png',
+    url: 'https://la1ere.franceinfo.fr/reunion/cyberattaque-une-deuxieme-enseigne-victime-1750338.html',
+  },
   { id: 'quotidien', name: 'Le Quotidien de La Réunion', logo: '/assets/bilan/media-le-quotidien.png' },
-  { id: 'imaz', name: 'Imaz Press', logo: '/assets/bilan/media-imaz-press.png' },
-  { id: 'clicanoo', name: 'Clicanoo', logo: '/assets/bilan/media-clicanoo.png' },
+  {
+    id: 'imaz',
+    name: 'Imaz Press',
+    logo: '/assets/bilan/media-imaz-press.png',
+    url: 'https://imazpress.com/toute-l-actu/cyber-tour-reunion-2026-sept-etapes-et-six-lieux-autour-de-la-reunion',
+  },
+  {
+    id: 'clicanoo',
+    name: 'Clicanoo',
+    logo: '/assets/bilan/media-clicanoo.png',
+    url: 'https://www.clicanoo.re/article/societe/2026/10/12/cybersecurite-le-cyber-tour-reunion-fait-etape-dans-six-lieux-du-20-au-30-octobre',
+  },
   { id: 'podcast', name: 'Le monde de la cyber', logo: '/assets/bilan/media-le-monde-de-la-cyber.png' },
 ];
 
