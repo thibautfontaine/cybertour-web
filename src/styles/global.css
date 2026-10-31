@@ -151,7 +151,6 @@
   --theme-brand-text: #e56b5f;
   /* Étiquette de section : or à 70 % en sombre. */
   --theme-label: rgba(255, 222, 89, 0.7);
-  --theme-jobs-accent: #4db6ac;
   --scrollbar-thumb: #2c3e6b;
   --grid-color: rgba(44, 62, 107, 0.12);
   --sponsor-hover-shadow: rgba(255, 222, 89, 0.3);
@@ -172,7 +171,6 @@
   /* 5.48:1 sur #f4f6fa, 4.95:1 sur #e6ebf3. */
   --theme-brand-text: #b3392e;
   --theme-label: #6f5500;
-  --theme-jobs-accent: #00695c;
   --text-secondary: color-mix(in srgb, var(--theme-ink) 85%, transparent);
   --text-muted: color-mix(in srgb, var(--theme-ink) 76%, transparent);
   --text-faint: color-mix(in srgb, var(--theme-ink) 74%, transparent);
@@ -192,7 +190,6 @@
     --theme-accent: #6f5500;
     --theme-brand-text: #b3392e;
     --theme-label: #6f5500;
-    --theme-jobs-accent: #00695c;
     --text-secondary: color-mix(in srgb, var(--theme-ink) 85%, transparent);
     --text-muted: color-mix(in srgb, var(--theme-ink) 76%, transparent);
     --text-faint: color-mix(in srgb, var(--theme-ink) 74%, transparent);
