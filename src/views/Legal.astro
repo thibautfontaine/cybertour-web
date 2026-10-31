@@ -33,7 +33,7 @@ const p = (path: string) => localizePath(path, lang);
           <p>{t.publisherIds}</p>
           <p>{t.publisherRna}</p>
           <p>{t.publisherAddress}</p>
-          <p>{t.publisherContactLabel} <a href={`mailto:${t.email}`} class="text-accent hover:underline">{t.email}</a></p>
+          <p>{t.publisherContactLabel} <a href={`mailto:${t.email}`} class="text-accent underline underline-offset-2">{t.email}</a></p>
         </div>
       </section>
 
@@ -51,7 +51,7 @@ const p = (path: string) => localizePath(path, lang);
         <div class="text-ink/70 leading-relaxed space-y-1">
           <p><strong class="text-ink">{t.hostingProvider}</strong> — GitHub, Inc.</p>
           <p>{t.hostingAddress}</p>
-          <p>{t.hostingSourceLabel} <a href={t.sourceUrl} target="_blank" rel="noopener" class="text-accent hover:underline">{t.hostingSourceLinkText}</a></p>
+          <p>{t.hostingSourceLabel} <a href={t.sourceUrl} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">{t.hostingSourceLinkText}</a></p>
         </div>
       </section>
 
@@ -59,7 +59,7 @@ const p = (path: string) => localizePath(path, lang);
       <section class="border-b border-ink/[0.06] pb-8 mb-8 reveal">
         <h2 class="font-display text-xl font-semibold text-ink mb-4">{t.designTitle}</h2>
         <p class="text-ink/70 leading-relaxed">
-          <a href={t.linkedinUrl} target="_blank" rel="noopener" class="text-accent hover:underline">{t.designName}</a> — {t.designRole}
+          <a href={t.linkedinUrl} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">{t.designName}</a> — {t.designRole}
         </p>
       </section>
 
@@ -78,8 +78,8 @@ const p = (path: string) => localizePath(path, lang);
           {t.dataText}
         </p>
         <ul class="text-ink/70 leading-relaxed space-y-2 list-disc list-inside">
-          <li><a href={p('/confidentialite')} class="text-accent hover:underline">{t.privacyLinkText}</a></li>
-          <li><a href={p('/cookies')} class="text-accent hover:underline">{t.cookiesLinkText}</a></li>
+          <li><a href={p('/confidentialite')} class="text-accent underline underline-offset-2">{t.privacyLinkText}</a></li>
+          <li><a href={p('/cookies')} class="text-accent underline underline-offset-2">{t.cookiesLinkText}</a></li>
         </ul>
       </section>
 
@@ -96,7 +96,7 @@ const p = (path: string) => localizePath(path, lang);
         <h2 class="font-display text-xl font-semibold text-ink mb-4">{t.contactTitle}</h2>
         <p class="text-ink/70 leading-relaxed">
           {t.contactText}
-          <a href={`mailto:${t.email}`} class="text-accent hover:underline">{t.email}</a>
+          <a href={`mailto:${t.email}`} class="text-accent underline underline-offset-2">{t.email}</a>
         </p>
       </section>
 

@@ -166,7 +166,7 @@ const fr: HomeDict = {
   aboutP1Html:
     '<strong class="text-ink font-semibold">Six étapes. Cinq lieux. Toute l\'île.</strong> Le <strong class="text-ink font-semibold">Cyber Tour Réunion</strong> est le rendez-vous annuel de la cybersécurité à La Réunion. Organisé dans le cadre du <strong class="text-accent font-semibold">Cybermois</strong> par le <strong class="text-ink font-semibold">CLUSIR Réunion Océan Indien</strong>, il réunit décideurs, professionnels et étudiants autour d\'un objectif commun : renforcer la résilience numérique du territoire.',
   aboutP2Html:
-    'En 2025 : <strong class="text-ink font-semibold">220 participants</strong>, <strong class="text-ink font-semibold">600 vues</strong> en replay, <strong class="text-ink font-semibold">2 articles</strong> dans Le Quotidien. En 2026, le format s\'élargit : 6 étapes sur les façades de l\'île, dont 4 portées par le CLUSIR et 2 par des organisateurs locaux.',
+    'En 2025 : <strong class="text-ink font-semibold">220 participants</strong>, <strong class="text-ink font-semibold">600 vues</strong> en replay, <strong class="text-ink font-semibold">2 articles</strong> dans Le Quotidien. En 2026, le format s\'est élargi : 6 étapes sur les façades de l\'île, dont 4 portées par le CLUSIR et 2 par des organisateurs locaux.',
   aboutStats: [
     { value: '6', label: 'Étapes' },
     { value: '5', label: 'Lieux' },
@@ -195,11 +195,11 @@ const fr: HomeDict = {
   ctfTitleHtml:
     'Championnat Réunionnais<br/>de <span class="text-accent">Cybersécurité</span>',
   ctfIntroHtml:
-    'Un CTF a réuni 38 participants en 16 équipes le vendredi 23 octobre pour le <strong class="text-accent font-semibold">Cybermois 2026</strong>, pendant l\'étape Sud sur le campus IUT / ESIROI de Saint-Pierre, en partenariat avec l\'association <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:text-accent/80 transition-colors">BSides Réunion</a>.',
+    'Un CTF a réuni 38 participants en 16 équipes le vendredi 23 octobre pour le <strong class="text-accent font-semibold">Cybermois 2026</strong>, pendant l\'étape Sud sur le campus IUT / ESIROI de Saint-Pierre, en partenariat avec l\'association <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold underline underline-offset-2 hover:text-accent/80 transition-colors">BSides Réunion</a>.',
   ctfBadgeMonth: 'Vendredi 23 octobre',
   ctfBadgeAllMonth: 'Jeopardy · équipes de 4',
   ctfBodyHtml:
-    'Format Jeopardy, par équipes de 4. Des lots ont été offerts par nos partenaires, dont <strong class="text-ink font-semibold">SFR Business</strong>. Contact : <a href="mailto:contact@bsides-reunion.re" class="text-accent hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
+    'Format Jeopardy, par équipes de 4. Des lots ont été offerts par nos partenaires, dont <strong class="text-ink font-semibold">SFR Business</strong>. Contact : <a href="mailto:contact@bsides-reunion.re" class="text-accent underline underline-offset-2 hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
   ctfCta: 'Voir les temps forts',
   ctfPartnersLabel: 'En partenariat avec',
 
@@ -336,12 +336,12 @@ const fr: HomeDict = {
   contactLabel: '03 // Contact',
   contactTitleHtml: 'Rejoignez <span class="text-accent">l\'aventure</span>',
   contactIntro:
-    'Que vous soyez participant, speaker ou sponsor, contactez-nous pour faire partie du Cyber Tour Réunion 2026.',
+    'Que vous soyez participant, speaker ou sponsor, contactez-nous pour faire partie du Cyber Tour Réunion 2027.',
   contactEmailLabel: 'Email',
   contactPlacesLabel: 'Lieux',
   contactPlacesValue: '6 étapes · La Réunion',
   contactPlacesLink: 'Voir le parcours →',
-  contactStreaming: 'Également accessible en streaming YouTube',
+  contactStreaming: 'Conférences 2026 disponibles en replay sur YouTube',
 };
 
 const en: HomeDict = {
@@ -401,11 +401,11 @@ const en: HomeDict = {
   ctfTitleHtml:
     'Reunion Island<br/><span class="text-accent">Cybersecurity</span> Championship',
   ctfIntroHtml:
-    'A CTF brought together 38 participants in 16 teams on Friday 23 October for <strong class="text-accent font-semibold">Cybermois 2026</strong>, during the South stage at the IUT / ESIROI campus in Saint-Pierre, in partnership with the <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:text-accent/80 transition-colors">BSides Réunion</a> association.',
+    'A CTF brought together 38 participants in 16 teams on Friday 23 October for <strong class="text-accent font-semibold">Cybermois 2026</strong>, during the South stage at the IUT / ESIROI campus in Saint-Pierre, in partnership with the <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold underline underline-offset-2 hover:text-accent/80 transition-colors">BSides Réunion</a> association.',
   ctfBadgeMonth: 'Friday 23 October',
   ctfBadgeAllMonth: 'Jeopardy · teams of 4',
   ctfBodyHtml:
-    'Jeopardy format, in teams of 4. Prizes were offered by our partners, including <strong class="text-ink font-semibold">SFR Business</strong>. Contact: <a href="mailto:contact@bsides-reunion.re" class="text-accent hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
+    'Jeopardy format, in teams of 4. Prizes were offered by our partners, including <strong class="text-ink font-semibold">SFR Business</strong>. Contact: <a href="mailto:contact@bsides-reunion.re" class="text-accent underline underline-offset-2 hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
   ctfCta: 'See the highlights',
   ctfPartnersLabel: 'In partnership with',
 
@@ -542,12 +542,12 @@ const en: HomeDict = {
   contactLabel: '03 // Contact',
   contactTitleHtml: 'Join <span class="text-accent">the adventure</span>',
   contactIntro:
-    'Whether you come as an attendee, a speaker or a sponsor, get in touch to be part of the Cyber Tour Réunion 2026.',
+    'Whether you come as an attendee, a speaker or a sponsor, get in touch to be part of the Cyber Tour Réunion 2027.',
   contactEmailLabel: 'Email',
   contactPlacesLabel: 'Venues',
   contactPlacesValue: '6 stages · Reunion Island',
   contactPlacesLink: 'See the route →',
-  contactStreaming: 'Also available as a YouTube stream',
+  contactStreaming: '2026 talks available on replay on YouTube',
 };
 
 export const home: Record<Lang, HomeDict> = { fr, en };

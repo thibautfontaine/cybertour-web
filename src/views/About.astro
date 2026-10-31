@@ -41,10 +41,10 @@ const contactMail = 'evenement@clusir-roi.org';
           <p class="reveal delay-2 text-lg text-ink/70 leading-relaxed" set:html={t.aboutP2Html}></p>
 
           <!-- Stats -->
-          <div class="reveal delay-3 grid grid-cols-3 gap-6 pt-6">
+          <div class="reveal delay-3 grid grid-cols-3 gap-3 sm:gap-6 pt-6">
             {t.aboutStats.map(stat => (
-              <div class="text-center p-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl">
-                <span class="block font-display font-extrabold text-3xl text-accent">{stat.value}</span>
+              <div class="text-center px-2 py-4 sm:p-4 bg-ink/[0.03] border border-ink/[0.06] rounded-xl">
+                <span class="block font-display font-extrabold text-2xl sm:text-3xl text-accent">{stat.value}</span>
                 <span class="text-sm text-ink/50 mt-1">{stat.label}</span>
               </div>
             ))}

@@ -271,6 +271,11 @@ body {
 
 p { text-wrap: pretty; }
 
+/* Liens de texte courant venus des dictionnaires (pages légales) : le soulignement
+   les distingue du texte sans compter sur la seule couleur. */
+main p a:not([class]),
+main li a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
+
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }

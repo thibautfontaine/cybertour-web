@@ -24,7 +24,6 @@ export interface SudDict {
   liveText: string;
   liveCta: string;
   programmeTitle: string;
-  programmeDraftNote: string;
   programmePdfCta: string;
   programmePdfMeta: string;
   remoteLabel: string;
@@ -57,12 +56,11 @@ export const sud: Record<Lang, SudDict> = {
     audienceMorningText: 'Enjeux cyber pour les TPE, PME et collectivités, sans prérequis technique.',
     audienceAfternoonStrong: 'Après-midi — profils techniques.',
     audienceAfternoonText: "Étudiants et professionnels de l'IT.",
-    liveBadge: 'En direct · jeudi 22 octobre',
-    liveTitle: 'Suivez les conférences en direct',
-    liveText: 'Les conférences du jeudi 22 octobre sont retransmises en direct sur YouTube.',
-    liveCta: 'Suivre le live sur YouTube',
+    liveBadge: 'Replay · jeudi 22 octobre',
+    liveTitle: 'Revoyez les conférences',
+    liveText: 'Les conférences du jeudi 22 octobre sont en ligne sur YouTube, en vidéo chapitrée.',
+    liveCta: 'Voir le replay sur YouTube',
     programmeTitle: 'Programme du jeudi 22 octobre',
-    programmeDraftNote: "Programme provisoire : il peut encore évoluer d'ici l'événement (horaires, intervenants, sujets).",
     programmePdfCta: 'Télécharger le programme',
     programmePdfMeta: 'PDF, 2,2 Mo',
     remoteLabel: 'à distance',
@@ -171,12 +169,11 @@ export const sud: Record<Lang, SudDict> = {
     audienceMorningText: 'Cyber stakes for small businesses, SMEs and local authorities, with no technical prerequisites.',
     audienceAfternoonStrong: 'Afternoon — technical profiles.',
     audienceAfternoonText: 'Students and IT professionals.',
-    liveBadge: 'Live · Thursday 22 October',
-    liveTitle: 'Watch the talks live',
-    liveText: 'The talks on Thursday 22 October are streamed live on YouTube.',
-    liveCta: 'Watch the live stream on YouTube',
+    liveBadge: 'Replay · Thursday 22 October',
+    liveTitle: 'Watch the talks again',
+    liveText: 'The talks from Thursday 22 October are online on YouTube, in a chaptered video.',
+    liveCta: 'Watch the replay on YouTube',
     programmeTitle: 'Programme for Thursday 22 October',
-    programmeDraftNote: 'Provisional programme: times, speakers and topics may still change before the event.',
     programmePdfCta: 'Download the programme',
     programmePdfMeta: 'PDF in French, 2.2 MB',
     remoteLabel: 'remote',
