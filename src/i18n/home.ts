@@ -51,15 +51,10 @@ export interface HomeDict {
   heroPlaces: string;
   /** Phrase de présentation sous le titre : ce qu'est l'événement, pour le visiteur et le référencement. */
   heroTagline: string;
-  heroCtaRegister: string;
-  heroCtaRoute: string;
-  heroPillFree: string;
-  heroPillSeats: string;
-  heroPillHybrid: string;
-  cdDays: string;
-  cdHours: string;
-  cdMins: string;
-  cdSecs: string;
+  heroCtaBilan: string;
+  heroCtaReplay: string;
+  /** Chiffres de l'édition : `count` est la valeur finale, rendue au build puis animée au chargement. */
+  heroStats: { count: number; suffix: string; label: string }[];
   scroll: string;
 
   // ── À propos ────────────────────────────────────────────────────────
@@ -121,28 +116,16 @@ export interface HomeDict {
   audience2025: Stat[];
 
   // ── Inscription ─────────────────────────────────────────────────────
-  regLabel: string;
-  regTitleHtml: string;
-  regIntro: string;
-  regTermFile: string;
-  regTermCmd: string;
-  regEventLabel: string;
-  regEventValue: string;
-  regEventSuffix: string;
-  regTicketLabel: string;
-  regTicketDate: string;
-  regHint: string;
-  /** Texte alternatif du visuel de l'édition. */
-  regImageAlt: string;
-  /** Nom accessible du lien porté par le visuel (nouvel onglet). */
-  regOpenCta: string;
-  regCalendarCta: string;
-  regCalendarStatus: string;
-  /** Chaînes lues par le script `.ics` via les attributs data du bouton. */
-  icsSummary: string;
-  icsDescription: string;
-  icsLocation: string;
-  icsDone: string;
+  replayLabel: string;
+  replayTitleHtml: string;
+  replayIntro: string;
+  replayPosterAlt: string;
+  replayPlay: string;
+  replayTermFile: string;
+  replayTermCmd: string;
+  replayTermLines: { label: string; value: string }[];
+  replayBilanCta: string;
+  replayJoinCta: string;
 
   // ── Contact ─────────────────────────────────────────────────────────
   contactLabel: string;
@@ -158,22 +141,20 @@ export interface HomeDict {
 const fr: HomeDict = {
   metaTitle: 'Cyber Tour Réunion 2026 | 20-30 Octobre - 6 Étapes',
   metaDescription:
-    'Cyber Tour Réunion 2026 - 6 étapes, 20-30 Octobre 2026. Organisé par le CLUSIR Réunion Océan Indien et par des organisateurs locaux.',
+    "Bilan et replays du Cyber Tour Réunion 2026 : 6 étapes du 20 au 30 octobre, 388 présences, organisé par le CLUSIR Réunion Océan Indien et des organisateurs locaux.",
 
-  heroBadge: 'Cybermois 2026 — La Réunion',
+  heroBadge: 'Édition 2026 terminée',
   heroDates: '20 — 30 OCTOBRE 2026',
   heroPlaces: "6 ÉTAPES · TOUTE L'ÎLE",
   heroTagline:
-    "Six étapes gratuites autour de l'île pour faire le point sur la cybersécurité : conférences, ateliers pratiques et CTF, pour les décideurs, les professionnels de l'IT et les étudiants. Organisé par le CLUSIR Réunion Océan Indien.",
-  heroCtaRegister: "S'inscrire",
-  heroCtaRoute: 'Voir les 6 étapes',
-  heroPillFree: 'Entrée gratuite',
-  heroPillSeats: 'Places limitées',
-  heroPillHybrid: 'Présentiel + streaming',
-  cdDays: 'Jours',
-  cdHours: 'Heures',
-  cdMins: 'Min',
-  cdSecs: 'Sec',
+    "Six étapes gratuites ont fait le tour de l'île pour parler cybersécurité : conférences, ateliers pratiques et CTF, avec les décideurs, les professionnels de l'IT et les étudiants. Organisé par le CLUSIR Réunion Océan Indien.",
+  heroCtaBilan: 'Voir le bilan',
+  heroCtaReplay: 'Revoir les conférences',
+  heroStats: [
+    { count: 388, suffix: '', label: 'présences en salle' },
+    { count: 1500, suffix: '+', label: 'vues de la vidéo' },
+    { count: 6, suffix: '', label: 'retombées médias' },
+  ],
   scroll: 'Scroll',
 
   aboutLabel: '01 // À propos',
@@ -208,18 +189,18 @@ const fr: HomeDict = {
   routeTitleHtml:
     '6 étapes, <span class="text-accent">un seul tour</span>',
   routeIntro:
-    "Du 20 au 30 octobre, la cybersécurité fait le tour de l'île — portée par le CLUSIR sur quatre étapes, par des organisateurs locaux sur deux autres. Même label, même exigence, même agenda. Le Cyber Tour est organisé par le CLUSIR Réunion Océan Indien, en partenariat avec l'Université de La Réunion ; l'édition 2025 a réuni 220 participants.",
+    "Du 20 au 30 octobre, la cybersécurité a fait le tour de l'île, portée par le CLUSIR sur quatre étapes et par des organisateurs locaux sur deux autres. Même label, même exigence, même agenda. Le Cyber Tour est organisé par le CLUSIR Réunion Océan Indien, en partenariat avec l'Université de La Réunion.",
   routeDates: '20 — 30 OCTOBRE 2026',
   ctfLabel: '04 // CTF',
   ctfTitleHtml:
     'Championnat Réunionnais<br/>de <span class="text-accent">Cybersécurité</span>',
   ctfIntroHtml:
-    'Un CTF le vendredi 23 octobre pour le <strong class="text-accent font-semibold">Cybermois 2026</strong>, pendant l\'étape Sud sur le campus IUT / ESIROI de Saint-Pierre, en partenariat avec l\'association <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:text-accent/80 transition-colors">BSides Réunion</a>.',
+    'Un CTF a réuni 38 participants en 16 équipes le vendredi 23 octobre pour le <strong class="text-accent font-semibold">Cybermois 2026</strong>, pendant l\'étape Sud sur le campus IUT / ESIROI de Saint-Pierre, en partenariat avec l\'association <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:text-accent/80 transition-colors">BSides Réunion</a>.',
   ctfBadgeMonth: 'Vendredi 23 octobre',
   ctfBadgeAllMonth: 'Jeopardy · équipes de 4',
   ctfBodyHtml:
-    'Format Jeopardy, par équipes de 4. Des lots sont offerts par nos partenaires, dont <strong class="text-ink font-semibold">SFR Business</strong>. Contact : <a href="mailto:contact@bsides-reunion.re" class="text-accent hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
-  ctfCta: 'Inscrivez-vous au CTF ici',
+    'Format Jeopardy, par équipes de 4. Des lots ont été offerts par nos partenaires, dont <strong class="text-ink font-semibold">SFR Business</strong>. Contact : <a href="mailto:contact@bsides-reunion.re" class="text-accent hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
+  ctfCta: 'Voir les temps forts',
   ctfPartnersLabel: 'En partenariat avec',
 
 
@@ -336,30 +317,21 @@ const fr: HomeDict = {
     { value: '2', label: 'Retombées presse' },
   ],
 
-  regLabel: '02 // Inscription',
-  regTitleHtml: 'Réservez votre <span class="text-accent">place</span>',
-  regIntro:
-    "L'événement est gratuit mais les places sont limitées sur chaque étape.",
-  regTermFile: 'inscription.status',
-  regTermCmd: './inscription --status',
-  regEventLabel: 'Événement :',
-  regEventValue: '20 — 30 octobre 2026',
-  regEventSuffix: '· 6 étapes · La Réunion',
-  regTicketLabel: 'Billetterie :',
-  regTicketDate: 'ouverte — gratuite, inscription obligatoire',
-  regHint:
-    'Ouvrez la billetterie avec le bouton ci-dessous et choisissez votre étape, un billet par étape. La confirmation arrive par email. Pensez aussi à bloquer les dates dans votre agenda.',
-  regImageAlt: 'Cyber Tour Réunion 2026, du 20 au 30 octobre : 6 étapes, 5 lieux, toute l\'île',
-  regOpenCta: 'Ouvrir la billetterie',
-  regCalendarCta: 'Ajouter à mon agenda',
-  regCalendarStatus:
-    '// Fichier .ics — compatible Apple Calendar, Google Agenda, Outlook.',
-  icsSummary: 'Cyber Tour Réunion 2026',
-  icsDescription:
-    "L'événement cybersécurité de référence à La Réunion, organisé par le CLUSIR Réunion Océan Indien. Programme et inscriptions : https://cybertour.re/",
-  icsLocation: 'IUT / ESIROI, Saint-Pierre, La Réunion',
-  icsDone:
-    "// Fichier cyber-tour-reunion-2026.ics téléchargé — ouvrez-le pour l'ajouter.",
+  replayLabel: '02 // Replay',
+  replayTitleHtml: 'Revoyez <span class="text-accent">les conférences</span>',
+  replayIntro:
+    "La journée du 22 octobre à l'IUT de Saint-Pierre est en ligne, en vidéo chapitrée : neuf intervenants, dont Leslie Fornero, invitée d'honneur.",
+  replayPosterAlt: "L'amphithéâtre de l'IUT rempli pendant l'intervention de Leslie Fornero",
+  replayPlay: 'Lancer le replay sur YouTube',
+  replayTermFile: 'edition.status',
+  replayTermCmd: './cybertour --status',
+  replayTermLines: [
+    { label: 'Édition 2026 :', value: 'terminée, 6 étapes, 5 lieux' },
+    { label: 'Bilan :', value: 'chiffres, temps forts, médias, partenaires' },
+    { label: 'Édition 2027 :', value: 'en préparation, rejoignez-nous' },
+  ],
+  replayBilanCta: 'Lire le bilan',
+  replayJoinCta: "Rejoindre l'édition 2027",
 
   contactLabel: '03 // Contact',
   contactTitleHtml: 'Rejoignez <span class="text-accent">l\'aventure</span>',
@@ -375,22 +347,20 @@ const fr: HomeDict = {
 const en: HomeDict = {
   metaTitle: 'Cyber Tour Réunion 2026 | 20-30 October - 6 Stages',
   metaDescription:
-    'Cyber Tour Réunion 2026 - 6 stages, 20-30 October 2026. Organised by CLUSIR Réunion Océan Indien and local hosts.',
+    'Review and replays of Cyber Tour Réunion 2026: 6 stages from 20 to 30 October, 388 attendances, organised by CLUSIR Réunion Océan Indien and local hosts.',
 
-  heroBadge: 'Cybermois (European Cybersecurity Month) 2026 — Reunion Island',
+  heroBadge: '2026 edition complete',
   heroDates: '20 — 30 OCTOBER 2026',
   heroPlaces: '6 STAGES · ACROSS THE ISLAND',
   heroTagline:
-    'Six free stages around the island to take stock of cybersecurity: talks, hands-on workshops and a CTF, for decision-makers, IT professionals and students. Organised by CLUSIR Réunion Océan Indien.',
-  heroCtaRegister: 'Register',
-  heroCtaRoute: 'See the 6 stages',
-  heroPillFree: 'Free entry',
-  heroPillSeats: 'Limited seats',
-  heroPillHybrid: 'On site + streaming',
-  cdDays: 'Days',
-  cdHours: 'Hours',
-  cdMins: 'Min',
-  cdSecs: 'Sec',
+    'Six free stages toured the island to talk cybersecurity: talks, hands-on workshops and a CTF, with decision-makers, IT professionals and students. Organised by CLUSIR Réunion Océan Indien.',
+  heroCtaBilan: 'See the review',
+  heroCtaReplay: 'Watch the talks',
+  heroStats: [
+    { count: 388, suffix: '', label: 'on-site attendances' },
+    { count: 1500, suffix: '+', label: 'video views' },
+    { count: 6, suffix: '', label: 'media features' },
+  ],
   scroll: 'Scroll',
 
   aboutLabel: '01 // About',
@@ -425,18 +395,18 @@ const en: HomeDict = {
   routeTitleHtml:
     '6 stages, <span class="text-accent">one single tour</span>',
   routeIntro:
-    'From 20 to 30 October, cybersecurity tours the island — four stages run by CLUSIR, two more by local hosts. Same label, same standards, same schedule. Cyber Tour is organised by CLUSIR Réunion Océan Indien, in partnership with the University of La Réunion; the 2025 edition brought together 220 participants.',
+    'From 20 to 30 October, cybersecurity toured the island: four stages run by CLUSIR, two more by local hosts. Same label, same standards, same schedule. Cyber Tour is organised by CLUSIR Réunion Océan Indien, in partnership with the University of La Réunion.',
   routeDates: '20 — 30 OCTOBER 2026',
   ctfLabel: '04 // CTF',
   ctfTitleHtml:
     'Reunion Island<br/><span class="text-accent">Cybersecurity</span> Championship',
   ctfIntroHtml:
-    'A CTF on Friday 23 October for <strong class="text-accent font-semibold">Cybermois 2026</strong>, during the South stage at the IUT / ESIROI campus in Saint-Pierre, in partnership with the <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:text-accent/80 transition-colors">BSides Réunion</a> association.',
+    'A CTF brought together 38 participants in 16 teams on Friday 23 October for <strong class="text-accent font-semibold">Cybermois 2026</strong>, during the South stage at the IUT / ESIROI campus in Saint-Pierre, in partnership with the <a href="https://bsides-reunion.re" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:text-accent/80 transition-colors">BSides Réunion</a> association.',
   ctfBadgeMonth: 'Friday 23 October',
   ctfBadgeAllMonth: 'Jeopardy · teams of 4',
   ctfBodyHtml:
-    'Jeopardy format, in teams of 4. Prizes are offered by our partners, including <strong class="text-ink font-semibold">SFR Business</strong>. Contact: <a href="mailto:contact@bsides-reunion.re" class="text-accent hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
-  ctfCta: 'Register for the CTF here',
+    'Jeopardy format, in teams of 4. Prizes were offered by our partners, including <strong class="text-ink font-semibold">SFR Business</strong>. Contact: <a href="mailto:contact@bsides-reunion.re" class="text-accent hover:text-accent/80 transition-colors">contact@bsides-reunion.re</a>.',
+  ctfCta: 'See the highlights',
   ctfPartnersLabel: 'In partnership with',
 
 
@@ -553,29 +523,21 @@ const en: HomeDict = {
     { value: '2', label: 'Press coverage' },
   ],
 
-  regLabel: '02 // Registration',
-  regTitleHtml: 'Book your <span class="text-accent">seat</span>',
-  regIntro: 'The event is free, but seats are limited at every stage. Talks are mainly given in French; international attendees are welcome.',
-  regTermFile: 'registration.status',
-  regTermCmd: './registration --status',
-  regEventLabel: 'Event:',
-  regEventValue: '20 — 30 October 2026',
-  regEventSuffix: '· 6 stages · Reunion Island',
-  regTicketLabel: 'Ticketing:',
-  regTicketDate: 'open — free, registration required',
-  regHint:
-    'Open the ticketing page with the button below and pick your stage, one ticket per stage. Confirmation arrives by email. Remember to block the dates in your calendar too.',
-  regImageAlt: 'Cyber Tour Réunion 2026, 20 to 30 October: 6 stages, 5 venues, all over the island',
-  regOpenCta: 'Open ticketing',
-  regCalendarCta: 'Add to my calendar',
-  regCalendarStatus:
-    '// .ics file — works with Apple Calendar, Google Calendar, Outlook.',
-  icsSummary: 'Cyber Tour Réunion 2026',
-  icsDescription:
-    'The leading cybersecurity event in Reunion Island, organised by CLUSIR Réunion Océan Indien. Programme and registration: https://cybertour.re/en/',
-  icsLocation: 'IUT / ESIROI, Saint-Pierre, Reunion Island',
-  icsDone:
-    '// File cyber-tour-reunion-2026.ics downloaded — open it to add the event.',
+  replayLabel: '02 // Replay',
+  replayTitleHtml: 'Watch <span class="text-accent">the talks</span>',
+  replayIntro:
+    'The 22 October day at the IUT in Saint-Pierre is online, in a chaptered video: nine speakers, including guest of honour Leslie Fornero. Talks are in French.',
+  replayPosterAlt: 'The IUT lecture hall full during Leslie Fornero’s talk',
+  replayPlay: 'Play the replay on YouTube',
+  replayTermFile: 'edition.status',
+  replayTermCmd: './cybertour --status',
+  replayTermLines: [
+    { label: '2026 edition:', value: 'over, 6 stages, 5 venues' },
+    { label: 'Review:', value: 'figures, highlights, media, partners' },
+    { label: '2027 edition:', value: 'in preparation, join us' },
+  ],
+  replayBilanCta: 'Read the review',
+  replayJoinCta: 'Join the 2027 edition',
 
   contactLabel: '03 // Contact',
   contactTitleHtml: 'Join <span class="text-accent">the adventure</span>',

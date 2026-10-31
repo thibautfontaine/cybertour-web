@@ -2,22 +2,12 @@
 import type { Lang } from './index';
 import type { ProgrammeSession } from './programme';
 
-/** Inscription gérée par l'EDN (CCI Réunion), hors billetterie Weezevent du CLUSIR. */
-export const EDN_REGISTRATION =
-  'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DAp8-KaVIE6UWw2P4wbYM-lYB6bSa0tIurlZCn8rv4xUNzRSODVSOEhTWVZITjRSQTJVNFhVUlhRNy4u';
-export const EDN_EMAIL = 'edn@reunion.cci.fr';
-export const EDN_PHONE = '0262 94 22 22';
-
 export interface EdnDict {
   programmeLabel: string;
   programmeTitle: string;
   programmeIntro: string;
   scheduleTitle: string;
   programme: ProgrammeSession[];
-  registrationTitle: string;
-  registrationText: string;
-  registrationCta: string;
-  registrationContactHint: string;
 }
 
 export const edn: Record<Lang, EdnDict> = {
@@ -40,11 +30,6 @@ export const edn: Record<Lang, EdnDict> = {
         ],
       },
     ],
-    registrationTitle: 'Inscription',
-    registrationText:
-      "Gratuit et ouvert à tous, sur inscription. Les inscriptions de cette étape sont gérées par l'École Du Numérique.",
-    registrationCta: "S'inscrire auprès de l'EDN",
-    registrationContactHint: 'Une question ?',
   },
   en: {
     programmeLabel: 'Programme',
@@ -65,10 +50,5 @@ export const edn: Record<Lang, EdnDict> = {
         ],
       },
     ],
-    registrationTitle: 'Registration',
-    registrationText:
-      'Free and open to all, registration required. Registration for this stage is handled by École Du Numérique.',
-    registrationCta: 'Register with EDN',
-    registrationContactHint: 'Any questions?',
   },
 };

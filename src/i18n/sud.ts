@@ -126,7 +126,7 @@ export const sud: Record<Lang, SudDict> = {
       },
     ],
     ateliersTitle: 'Les ateliers',
-    ctfCta: 'Inscrivez-vous au CTF ici',
+    ctfCta: 'Voir le site du CTF',
     ateliers: [
       {
         icon: '\u{1F3F4}',
@@ -240,7 +240,7 @@ export const sud: Record<Lang, SudDict> = {
       },
     ],
     ateliersTitle: 'The workshops',
-    ctfCta: 'Register for the CTF here',
+    ctfCta: 'Visit the CTF site',
     ateliers: [
       {
         icon: '\u{1F3F4}',
