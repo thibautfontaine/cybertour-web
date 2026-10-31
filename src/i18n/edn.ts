@@ -15,7 +15,7 @@ export const edn: Record<Lang, EdnDict> = {
     programmeLabel: 'Programme',
     programmeTitle: 'Cyber Vision : votre entreprise est-elle prête pour la suite ?',
     programmeIntro:
-      "Intelligence artificielle, ingénierie sociale, nouvelles menaces : un après-midi riche en retours d'expérience, dédié aux entreprises et aux professionnels. Dirigeants, DSI, professionnels de la sécurité ou passionnés du numérique, venez échanger avec des experts de référence. Avec la participation du CLUSIR et de Cyber Réunion.",
+      "Intelligence artificielle, ingénierie sociale, nouvelles menaces : un après-midi riche en retours d'expérience, dédié aux entreprises et aux professionnels. Dirigeants, DSI, professionnels de la sécurité ou passionnés du numérique ont échangé avec des experts de référence. Avec la participation du CLUSIR et de Cyber Réunion.",
     scheduleTitle: 'Programme du vendredi 30 octobre',
     programme: [
       {
@@ -35,7 +35,7 @@ export const edn: Record<Lang, EdnDict> = {
     programmeLabel: 'Programme',
     programmeTitle: 'Cyber Vision: is your business ready for what comes next?',
     programmeIntro:
-      'Artificial intelligence, social engineering, new threats: an afternoon of lessons from the field, for businesses and professionals. Business leaders, IT managers, security professionals or anyone keen on digital technology, come and talk with leading experts. With CLUSIR and Cyber Réunion.',
+      'Artificial intelligence, social engineering, new threats: an afternoon of lessons from the field, for businesses and professionals. Business leaders, IT managers, security professionals or anyone keen on digital technology met and talked with leading experts. With CLUSIR and Cyber Réunion.',
     scheduleTitle: 'Programme for Friday 30 October',
     programme: [
       {

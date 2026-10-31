@@ -129,12 +129,12 @@ export const sud: Record<Lang, SudDict> = {
       {
         icon: '\u{1F3F4}',
         title: 'CTF par BSides La Réunion',
-        desc: "CTF au format Jeopardy, par équipes de 4. Des lots sont offerts par nos partenaires, dont SFR Business.",
+        desc: "CTF au format Jeopardy, par équipes de 4. Des lots ont été offerts par nos partenaires, dont SFR Business.",
       },
       {
         icon: '\u{1F510}',
-        title: 'Escape Game Cyber Reunion',
-        desc: 'Escape game immersif sur le thème de la cybersécurité, conçu par Cyber Reunion.',
+        title: 'Escape Game Cyber Réunion',
+        desc: 'Escape game immersif sur le thème de la cybersécurité, conçu par Cyber Réunion.',
       },
       {
         icon: '\u{1F50D}',
@@ -144,7 +144,7 @@ export const sud: Record<Lang, SudDict> = {
       {
         icon: '\u{1F3A4}',
         title: 'Rumps — Scène ouverte',
-        desc: "Présentations libres de 5 à 10 minutes. Partagez un projet, un outil, un retour d'expérience.",
+        desc: "Des présentations libres de 5 à 10 minutes : un projet, un outil, un retour d'expérience.",
       },
       {
         icon: '\u{1F4BC}',
@@ -242,12 +242,12 @@ export const sud: Record<Lang, SudDict> = {
       {
         icon: '\u{1F3F4}',
         title: 'CTF by BSides La Réunion',
-        desc: 'A Jeopardy-style CTF in teams of 4. Prizes are offered by our partners, including SFR Business.',
+        desc: 'A Jeopardy-style CTF in teams of 4. Prizes were offered by our partners, including SFR Business.',
       },
       {
         icon: '\u{1F510}',
-        title: 'Escape Game Cyber Reunion',
-        desc: 'An immersive escape game on the theme of cybersecurity, designed by Cyber Reunion.',
+        title: 'Escape Game Cyber Réunion',
+        desc: 'An immersive escape game on the theme of cybersecurity, designed by Cyber Réunion.',
       },
       {
         icon: '\u{1F50D}',
@@ -257,7 +257,7 @@ export const sud: Record<Lang, SudDict> = {
       {
         icon: '\u{1F3A4}',
         title: 'Rumps — Open stage',
-        desc: 'Free-form 5 to 10 minute talks. Share a project, a tool, or lessons learned (RETEX).',
+        desc: 'Free-form 5 to 10 minute talks: a project, a tool, or lessons learned.',
       },
       {
         icon: '\u{1F4BC}',
