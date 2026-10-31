@@ -96,17 +96,17 @@ export const bilan: Record<Lang, BilanDict> = {
     heroTitleHtml: 'Deux éditions,<br/><span class="text-accent">tout un territoire</span> mobilisé',
     heroIntro:
       "Le Cyber Tour est la tournée gratuite de la cybersécurité à La Réunion, organisée par le CLUSIR Réunion Océan Indien : des conférences, une journée de formation à la crise et un CTF, étape après étape, au plus près des entreprises, des collectivités et des étudiants. En 2025, il a trouvé son public ; en 2026, il a fait le tour de l'île. Voici ce que ces deux éditions ont produit, et comment construire 2027 ensemble.",
-    // Cumul 2025 + 2026 : 150 + 321 présences en salle (2025 tenait en une
+    // Cumul 2025 + 2026 : 150 + 388 présences en salle (2025 tenait en une
     // journée) ; 600 vues du replay 2025 + 1 500 vues de la vidéo 2026 (direct
     // compris, compteur YouTube « 1,5 k » au 28/10/2026) ;
     // 2 + 6 retombées. Pas de « participants » : les unités diffèrent.
     heroStats: [
       { value: '2', label: 'éditions, 2025 et 2026' },
-      { value: '470+', label: 'présences en salle' },
+      { value: '530+', label: 'présences en salle' },
       { value: '2 100+', label: 'visionnages en direct et en replay' },
       { value: '8', label: 'retombées médias' },
     ],
-    heroStatsNote: 'Cumul des éditions 2025 et 2026. Pour 2026, première semaine ; la seconde est en cours de bilan.',
+    heroStatsNote: 'Cumul des éditions 2025 et 2026.',
     heroImgAlt: "L'amphithéâtre de l'IUT de Saint-Pierre rempli pendant les conférences du 22 octobre 2026",
     heroCtaReplay: 'Revoir les conférences 2026',
     heroCtaJoin: "Rejoindre l'édition 2027",
@@ -129,7 +129,7 @@ export const bilan: Record<Lang, BilanDict> = {
       "Six étapes du 20 au 30 octobre, de l'ouverture au PTU de Sainte-Clotilde à la clôture à l'EDN : quatre portées par le CLUSIR, deux par des hôtes locaux.",
     y2026Stats: [
       { value: '6', label: 'étapes' },
-      { value: '321', label: 'présences en semaine 1' },
+      { value: '388', label: 'présences sur les six étapes' },
       { value: '1 500+', label: 'vues de la vidéo, direct compris' },
       { value: '6', label: 'retombées médias' },
     ],
@@ -245,11 +245,11 @@ export const bilan: Record<Lang, BilanDict> = {
       'Cyber Tour is the free cybersecurity tour of Reunion Island, organised by CLUSIR Réunion Océan Indien: talks, a day of crisis training and a CTF, stage after stage, close to businesses, local authorities and students. In 2025 it found its audience; in 2026 it toured the island. Here is what the two editions achieved, and how we can build 2027 together.',
     heroStats: [
       { value: '2', label: 'editions, 2025 and 2026' },
-      { value: '470+', label: 'on-site attendances' },
+      { value: '530+', label: 'on-site attendances' },
       { value: '2,100+', label: 'live and replay views' },
       { value: '8', label: 'media features' },
     ],
-    heroStatsNote: 'Combined 2025 and 2026 editions. For 2026, the first week; the second is still being reviewed.',
+    heroStatsNote: 'Combined 2025 and 2026 editions.',
     heroImgAlt: 'The IUT lecture hall in Saint-Pierre full during the 22 October 2026 talks',
     heroCtaReplay: 'Watch the 2026 talks',
     heroCtaJoin: 'Join the 2027 edition',
@@ -272,7 +272,7 @@ export const bilan: Record<Lang, BilanDict> = {
       'Six stages from 20 to 30 October, from the opening at the PTU in Sainte-Clotilde to the closing at EDN: four run by CLUSIR, two by local hosts.',
     y2026Stats: [
       { value: '6', label: 'stages' },
-      { value: '321', label: 'attendances in week 1' },
+      { value: '388', label: 'attendances across the six stages' },
       { value: '1,500+', label: 'video views, live included' },
       { value: '6', label: 'media features' },
     ],

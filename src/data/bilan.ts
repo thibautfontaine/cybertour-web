@@ -3,9 +3,10 @@
  * qui ne se traduit pas. Les textes sont dans `src/i18n/bilan.ts`.
  *
  * Sources : deck et one-pager « Bilan CYBER TOUR - La Réunion 2026 »
- * (25 octobre 2026) pour la semaine 1 ; dossier partenaire pour 2025.
- * Les étapes de la semaine 2 n'ont pas encore de chiffres : elles s'affichent
- * « bilan à venir » tant que leur jour manque dans `presencesByDay`.
+ * (25 octobre 2026) pour la semaine 1, chiffres organisateurs (31 octobre 2026)
+ * pour Expernet et EDN ; dossier partenaire pour 2025.
+ * Une étape s'affiche « bilan à venir » tant que son jour manque dans
+ * `presencesByDay`.
  */
 import { getPartners, type Partner } from './partners';
 
@@ -16,7 +17,7 @@ export const REPLAY_2026_URL = 'https://www.youtube.com/watch?v=fnjLhNorXSk';
 export const BILAN_PDF = '/assets/bilan/bilan-cybertour-2026-semaine-1.pdf';
 
 /**
- * Présences comptées par journée (bilan de la semaine 1). Une personne venue
+ * Présences comptées par journée, 388 au total. Une personne venue
  * deux jours compte deux fois : ne pas les présenter comme des personnes
  * uniques, ni les comparer telles quelles aux 220 participants de 2025.
  */
@@ -25,6 +26,8 @@ export const presencesByDay: Record<string, number> = {
   '2026-10-21': 40,
   '2026-10-22': 150,
   '2026-10-23': 38,
+  '2026-10-27': 25,
+  '2026-10-30': 42,
 };
 
 export type MediaId = 'antenne' | 'la1ere' | 'quotidien' | 'imaz' | 'clicanoo' | 'podcast';
