@@ -141,7 +141,7 @@ export const bilan: Record<Lang, BilanDict> = {
       'Présences comptées par journée : une personne venue deux jours compte deux fois.',
 
     highlightsLabel: '02 // Temps forts 2026',
-    highlightsTitleHtml: 'La première semaine, <span class="text-accent">quatre formats</span>',
+    highlightsTitleHtml: 'De l\'ouverture à la clôture, <span class="text-accent">cinq temps forts</span>',
     conventionLabel: '20 octobre 2026 · Une convention signée au Cyber Tour',
     conventionText:
       "La Région Réunion, La Réunion Connectée et la Préfecture de La Réunion ont signé une convention pour accroître la sécurité numérique du territoire : actions concertées, partage d'expériences et d'informations, montée en compétences mutuelle.",
@@ -181,6 +181,15 @@ export const bilan: Record<Lang, BilanDict> = {
           'Un challenge de hacking organisé et animé par BSides Réunion, ouvert aux étudiants et aux professionnels : 62 personnes sur la journée, dont 38 au CTF répartis en 16 équipes, et cinq conférences techniques. Lots offerts par SFR Business.',
         img: '/assets/bilan/2026-ctf-bsides.webp',
         imgAlt: "Les participants du CTF réunis dans l'amphithéâtre de l'IUT, avec les lots offerts par SFR Business",
+      },
+      {
+        key: 'cloture',
+        when: 'Vendredi 30 octobre · EDN, Sainte-Clotilde',
+        title: "Clôture à l'EDN",
+        text:
+          "Un après-midi pour les entreprises accueilli par l'EDN, École du Numérique : les risques de l'IA avec Rémi Voluer (SEYES), ClickFix avec Jérémy Scion (SEKOIA), l'EDIH et le K'fé Cyber Network. 42 participants, et un premier bilan de l'édition présenté en salle.",
+        img: '/assets/bilan/2026-cloture-edn.webp',
+        imgAlt: "La clôture à l'EDN : un intervenant présente le bilan de la première semaine devant le public, dans l'amphithéâtre de la CCI",
       },
     ],
 
@@ -283,7 +292,7 @@ export const bilan: Record<Lang, BilanDict> = {
     presencesNote: 'Attendance is counted per day: someone who came on two days counts twice.',
 
     highlightsLabel: '02 // 2026 highlights',
-    highlightsTitleHtml: 'The first week, <span class="text-accent">four formats</span>',
+    highlightsTitleHtml: 'From opening to closing, <span class="text-accent">five highlights</span>',
     conventionLabel: '20 October 2026 · An agreement signed at Cyber Tour',
     conventionText:
       "The Réunion Region, La Réunion Connectée and the Prefecture of La Réunion signed an agreement to strengthen the island's digital security: joint action, shared experience and information, and mutual upskilling.",
@@ -323,6 +332,15 @@ export const bilan: Record<Lang, BilanDict> = {
           'A hacking challenge run by BSides Réunion, open to students and professionals: 62 people over the day, 38 of them in the CTF across 16 teams, plus five technical talks. Prizes from SFR Business.',
         img: '/assets/bilan/2026-ctf-bsides.webp',
         imgAlt: 'CTF participants gathered in the IUT lecture hall, with prizes from SFR Business',
+      },
+      {
+        key: 'cloture',
+        when: 'Friday 30 October · EDN, Sainte-Clotilde',
+        title: 'Closing at EDN',
+        text:
+          "An afternoon for businesses hosted by EDN, École du Numérique: AI risks with Rémi Voluer (SEYES), ClickFix with Jérémy Scion (SEKOIA), the EDIH and the K'fé Cyber Network. 42 attendees, and a first review of the edition presented on stage.",
+        img: '/assets/bilan/2026-cloture-edn.webp',
+        imgAlt: 'Closing at EDN: a speaker presents the first-week review to the audience in the CCI lecture hall',
       },
     ],
 
