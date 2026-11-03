@@ -17,7 +17,7 @@ export const REPLAY_2026_URL = 'https://www.youtube.com/watch?v=fnjLhNorXSk';
 export const BILAN_PDF = '/assets/bilan/bilan-cybertour-2026.pdf';
 
 /**
- * Présences comptées par journée, 388 au total. Une personne venue
+ * Présences comptées par journée, 412 au total. Une personne venue
  * deux jours compte deux fois : ne pas les présenter comme des personnes
  * uniques, ni les comparer telles quelles aux 220 participants de 2025.
  */
@@ -25,7 +25,7 @@ export const presencesByDay: Record<string, number> = {
   '2026-10-20': 93,
   '2026-10-21': 40,
   '2026-10-22': 150,
-  '2026-10-23': 38,
+  '2026-10-23': 62,
   '2026-10-27': 25,
   '2026-10-30': 42,
 };

@@ -147,7 +147,7 @@ export interface HomeDict {
 const fr: HomeDict = {
   metaTitle: 'Cyber Tour Réunion 2026 | 20-30 Octobre - 6 Étapes',
   metaDescription:
-    "Bilan et replays du Cyber Tour Réunion 2026 : 6 étapes du 20 au 30 octobre, 388 présences, organisé par le CLUSIR Réunion Océan Indien et des organisateurs locaux.",
+    "Bilan et replays du Cyber Tour Réunion 2026 : 6 étapes du 20 au 30 octobre, 412 présences, organisé par le CLUSIR Réunion Océan Indien et des organisateurs locaux.",
 
   heroBadge: 'Édition 2026 terminée',
   heroDates: '20 — 30 OCTOBRE 2026',
@@ -157,7 +157,7 @@ const fr: HomeDict = {
   heroCtaBilan: 'Voir le bilan',
   heroCtaReplay: 'Revoir les conférences',
   heroStats: [
-    { count: 388, suffix: '', label: 'présences en salle' },
+    { count: 412, suffix: '', label: 'présences en salle' },
     { count: 1500, suffix: '+', label: 'vues de la vidéo' },
     { count: 6, suffix: '', label: 'retombées médias' },
   ],
@@ -172,11 +172,11 @@ const fr: HomeDict = {
   aboutP1Html:
     '<strong class="text-ink font-semibold">Le Cyber Tour Réunion</strong> est la tournée gratuite de la cybersécurité à La Réunion, organisée dans le cadre du <strong class="text-accent font-semibold">Cybermois</strong> par le <strong class="text-ink font-semibold">CLUSIR Réunion Océan Indien</strong>. Il va au plus près des entreprises, des collectivités et des étudiants, avec un objectif commun : renforcer la résilience numérique du territoire.',
   aboutP2Html:
-    'Lancé en 2025 avec l\'Université de La Réunion, il a réuni <strong class="text-ink font-semibold">220 participants</strong> pour sa première édition. En 2026, il a fait le tour de l\'île : <strong class="text-ink font-semibold">6 étapes dans 5 lieux</strong>, <strong class="text-ink font-semibold">388 présences</strong> en salle et <strong class="text-ink font-semibold">1 200 personnes</strong> en direct sur YouTube.',
+    'Lancé en 2025 avec l\'Université de La Réunion, il a réuni <strong class="text-ink font-semibold">220 participants</strong> pour sa première édition. En 2026, il a fait le tour de l\'île : <strong class="text-ink font-semibold">6 étapes dans 5 lieux</strong>, <strong class="text-ink font-semibold">412 présences</strong> en salle et <strong class="text-ink font-semibold">1 200 personnes</strong> en direct sur YouTube.',
   aboutStats: [
     { value: '2', label: 'éditions' },
     { value: '6', label: 'étapes en 2026' },
-    { value: '388', label: 'présences en 2026' },
+    { value: '412', label: 'présences en 2026' },
   ],
   aboutImgAlt: "Le public dans l'amphithéâtre de l'IUT de Saint-Pierre, face à l'écran « Mettre la cyber en lumière » et à la banderole du Cyber Tour",
   aboutImgCaption: "22 octobre 2026, amphithéâtre de l'IUT, Saint-Pierre",
@@ -361,7 +361,7 @@ const fr: HomeDict = {
 const en: HomeDict = {
   metaTitle: 'Cyber Tour Réunion 2026 | 20-30 October - 6 Stages',
   metaDescription:
-    'Review and replays of Cyber Tour Réunion 2026: 6 stages from 20 to 30 October, 388 attendances, organised by CLUSIR Réunion Océan Indien and local hosts.',
+    'Review and replays of Cyber Tour Réunion 2026: 6 stages from 20 to 30 October, 412 attendances, organised by CLUSIR Réunion Océan Indien and local hosts.',
 
   heroBadge: '2026 edition complete',
   heroDates: '20 — 30 OCTOBER 2026',
@@ -371,7 +371,7 @@ const en: HomeDict = {
   heroCtaBilan: 'See the review',
   heroCtaReplay: 'Watch the talks',
   heroStats: [
-    { count: 388, suffix: '', label: 'on-site attendances' },
+    { count: 412, suffix: '', label: 'on-site attendances' },
     { count: 1500, suffix: '+', label: 'video views' },
     { count: 6, suffix: '', label: 'media features' },
   ],
@@ -386,11 +386,11 @@ const en: HomeDict = {
   aboutP1Html:
     '<strong class="text-ink font-semibold">Cyber Tour Réunion</strong> is the free cybersecurity tour of Reunion Island, held as part of <strong class="text-accent font-semibold">Cybermois</strong> (European Cybersecurity Month) by <strong class="text-ink font-semibold">CLUSIR Réunion Océan Indien</strong>. It goes out to businesses, local authorities and students, with one shared goal: strengthening the island\'s digital resilience.',
   aboutP2Html:
-    'Launched in 2025 with the University of La Réunion, its first edition brought together <strong class="text-ink font-semibold">220 attendees</strong>. In 2026 it toured the island: <strong class="text-ink font-semibold">6 stages in 5 venues</strong>, <strong class="text-ink font-semibold">388 attendances</strong> on site and <strong class="text-ink font-semibold">1,200 people</strong> watching live on YouTube.',
+    'Launched in 2025 with the University of La Réunion, its first edition brought together <strong class="text-ink font-semibold">220 attendees</strong>. In 2026 it toured the island: <strong class="text-ink font-semibold">6 stages in 5 venues</strong>, <strong class="text-ink font-semibold">412 attendances</strong> on site and <strong class="text-ink font-semibold">1,200 people</strong> watching live on YouTube.',
   aboutStats: [
     { value: '2', label: 'editions' },
     { value: '6', label: 'stages in 2026' },
-    { value: '388', label: 'attendances in 2026' },
+    { value: '412', label: 'attendances in 2026' },
   ],
   aboutImgAlt: 'The audience in the IUT lecture hall in Saint-Pierre, facing the screen and the Cyber Tour banner',
   aboutImgCaption: '22 October 2026, IUT lecture hall, Saint-Pierre',

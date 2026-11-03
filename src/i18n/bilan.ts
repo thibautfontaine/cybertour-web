@@ -96,13 +96,13 @@ export const bilan: Record<Lang, BilanDict> = {
     heroTitleHtml: 'Deux éditions,<br/><span class="text-accent">tout un territoire</span> mobilisé',
     heroIntro:
       "Le Cyber Tour est la tournée gratuite de la cybersécurité à La Réunion, organisée par le CLUSIR Réunion Océan Indien : des conférences, une journée de formation à la crise et un CTF, étape après étape, au plus près des entreprises, des collectivités et des étudiants. En 2025, il a trouvé son public ; en 2026, il a fait le tour de l'île. Voici ce que ces deux éditions ont produit, et comment construire 2027 ensemble.",
-    // Cumul 2025 + 2026 : 150 + 388 présences en salle (2025 tenait en une
+    // Cumul 2025 + 2026 : 150 + 412 présences en salle (2025 tenait en une
     // journée) ; 600 vues du replay 2025 + 1 500 vues de la vidéo 2026 (direct
     // compris, compteur YouTube « 1,5 k » au 28/10/2026) ;
     // 2 + 6 retombées. Pas de « participants » : les unités diffèrent.
     heroStats: [
       { value: '2', label: 'éditions, 2025 et 2026' },
-      { value: '530+', label: 'présences en salle' },
+      { value: '560+', label: 'présences en salle' },
       { value: '2 100+', label: 'visionnages en direct et en replay' },
       { value: '8', label: 'retombées médias' },
     ],
@@ -129,7 +129,7 @@ export const bilan: Record<Lang, BilanDict> = {
       "Six étapes du 20 au 30 octobre, de l'ouverture au PTU de Sainte-Clotilde à la clôture à l'EDN : quatre portées par le CLUSIR, deux par des hôtes locaux.",
     y2026Stats: [
       { value: '6', label: 'étapes' },
-      { value: '388', label: 'présences sur les six étapes' },
+      { value: '412', label: 'présences sur les six étapes' },
       { value: '1 500+', label: 'vues de la vidéo, direct compris' },
       { value: '6', label: 'retombées médias' },
     ],
@@ -178,7 +178,7 @@ export const bilan: Record<Lang, BilanDict> = {
         when: 'Vendredi 23 octobre · Campus de Terre-Sainte, Saint-Pierre',
         title: 'CTF avec BSides Réunion',
         text:
-          'Un challenge de hacking organisé et animé par BSides Réunion, ouvert aux étudiants et aux professionnels : 38 participants répartis en 16 équipes, et cinq conférences techniques. Lots offerts par SFR Business.',
+          'Un challenge de hacking organisé et animé par BSides Réunion, ouvert aux étudiants et aux professionnels : 62 personnes sur la journée, dont 38 au CTF répartis en 16 équipes, et cinq conférences techniques. Lots offerts par SFR Business.',
         img: '/assets/bilan/2026-ctf-bsides.webp',
         imgAlt: "Les participants du CTF réunis dans l'amphithéâtre de l'IUT, avec les lots offerts par SFR Business",
       },
@@ -245,7 +245,7 @@ export const bilan: Record<Lang, BilanDict> = {
       'Cyber Tour is the free cybersecurity tour of Reunion Island, organised by CLUSIR Réunion Océan Indien: talks, a day of crisis training and a CTF, stage after stage, close to businesses, local authorities and students. In 2025 it found its audience; in 2026 it toured the island. Here is what the two editions achieved, and how we can build 2027 together.',
     heroStats: [
       { value: '2', label: 'editions, 2025 and 2026' },
-      { value: '530+', label: 'on-site attendances' },
+      { value: '560+', label: 'on-site attendances' },
       { value: '2,100+', label: 'live and replay views' },
       { value: '8', label: 'media features' },
     ],
@@ -272,7 +272,7 @@ export const bilan: Record<Lang, BilanDict> = {
       'Six stages from 20 to 30 October, from the opening at the PTU in Sainte-Clotilde to the closing at EDN: four run by CLUSIR, two by local hosts.',
     y2026Stats: [
       { value: '6', label: 'stages' },
-      { value: '388', label: 'attendances across the six stages' },
+      { value: '412', label: 'attendances across the six stages' },
       { value: '1,500+', label: 'video views, live included' },
       { value: '6', label: 'media features' },
     ],
@@ -320,7 +320,7 @@ export const bilan: Record<Lang, BilanDict> = {
         when: 'Friday 23 October · Terre-Sainte campus, Saint-Pierre',
         title: 'CTF with BSides Réunion',
         text:
-          'A hacking challenge run by BSides Réunion, open to students and professionals: 38 participants in 16 teams, plus five technical talks. Prizes from SFR Business.',
+          'A hacking challenge run by BSides Réunion, open to students and professionals: 62 people over the day, 38 of them in the CTF across 16 teams, plus five technical talks. Prizes from SFR Business.',
         img: '/assets/bilan/2026-ctf-bsides.webp',
         imgAlt: 'CTF participants gathered in the IUT lecture hall, with prizes from SFR Business',
       },
