@@ -30,7 +30,15 @@ export const presencesByDay: Record<string, number> = {
   '2026-10-30': 42,
 };
 
-export type MediaId = 'antenne' | 'la1ere' | 'quotidien' | 'imaz' | 'clicanoo' | 'podcast';
+export type MediaId =
+  | 'antenne'
+  | 'la1ere'
+  | 'quotidien'
+  | 'imaz'
+  | 'clicanoo'
+  | 'temoignages'
+  | 'region'
+  | 'podcast';
 
 export interface MediaItem {
   id: MediaId;
@@ -60,6 +68,18 @@ export const media: MediaItem[] = [
     name: 'Clicanoo',
     logo: '/assets/bilan/media-clicanoo.png',
     url: 'https://www.clicanoo.re/article/societe/2026/10/12/cybersecurite-le-cyber-tour-reunion-fait-etape-dans-six-lieux-du-20-au-30-octobre',
+  },
+  {
+    id: 'temoignages',
+    name: 'Témoignages',
+    logo: '/assets/bilan/media-temoignages.png',
+    url: 'https://www.temoignages.re/partenaires-publireportages/actualites-et-informations-de-la-region-reunion/cyber-tour-la-region-s-engage-pour-la-cybersecurite-de-la-reunion',
+  },
+  {
+    id: 'region',
+    name: 'Région Réunion',
+    logo: '/assets/bilan/media-region-reunion.png',
+    url: 'https://www.facebook.com/share/p/1H2q3gDJpF/',
   },
   { id: 'podcast', name: 'Le monde de la cyber', logo: '/assets/bilan/media-le-monde-de-la-cyber.png' },
 ];
