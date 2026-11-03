@@ -99,12 +99,12 @@ export const bilan: Record<Lang, BilanDict> = {
     // Cumul 2025 + 2026 : 150 + 412 présences en salle (2025 tenait en une
     // journée) ; 600 vues du replay 2025 + 1 500 vues de la vidéo 2026 (direct
     // compris, compteur YouTube « 1,5 k » au 28/10/2026) ;
-    // 2 + 6 retombées. Pas de « participants » : les unités diffèrent.
+    // 2 + 8 retombées. Pas de « participants » : les unités diffèrent.
     heroStats: [
       { value: '2', label: 'éditions, 2025 et 2026' },
       { value: '560+', label: 'présences en salle' },
       { value: '2 100+', label: 'visionnages en direct et en replay' },
-      { value: '8', label: 'retombées médias' },
+      { value: '10', label: 'retombées médias' },
     ],
     heroStatsNote: 'Cumul des éditions 2025 et 2026.',
     heroImgAlt: "L'amphithéâtre de l'IUT de Saint-Pierre rempli pendant les conférences du 22 octobre 2026",
@@ -131,7 +131,7 @@ export const bilan: Record<Lang, BilanDict> = {
       { value: '6', label: 'étapes' },
       { value: '412', label: 'présences sur les six étapes' },
       { value: '1 500+', label: 'vues de la vidéo, direct compris' },
-      { value: '6', label: 'retombées médias' },
+      { value: '8', label: 'retombées médias' },
     ],
     y2026Replay: 'Revoir 2026',
     timelineHeading: 'Les étapes 2026',
@@ -194,13 +194,15 @@ export const bilan: Record<Lang, BilanDict> = {
     ],
 
     mediaLabel: '04 // Dans les médias',
-    mediaTitleHtml: 'Six médias ont <span class="text-accent">relayé l\'événement</span>',
+    mediaTitleHtml: 'L\'événement <span class="text-accent">relayé huit fois</span>',
     media: {
       antenne: 'Reportage TV · 21 octobre',
       la1ere: 'Plateau du JT de 19 h · 21 octobre',
       quotidien: 'La Une · 23 octobre',
       imaz: 'Article · 19 octobre',
       clicanoo: 'Article · 12 octobre',
+      temoignages: 'Publireportage · 2 novembre',
+      region: 'Vidéo Facebook de la Région',
       podcast: 'Podcast · enregistré sur place',
     },
 
@@ -256,7 +258,7 @@ export const bilan: Record<Lang, BilanDict> = {
       { value: '2', label: 'editions, 2025 and 2026' },
       { value: '560+', label: 'on-site attendances' },
       { value: '2,100+', label: 'live and replay views' },
-      { value: '8', label: 'media features' },
+      { value: '10', label: 'media features' },
     ],
     heroStatsNote: 'Combined 2025 and 2026 editions.',
     heroImgAlt: 'The IUT lecture hall in Saint-Pierre full during the 22 October 2026 talks',
@@ -283,7 +285,7 @@ export const bilan: Record<Lang, BilanDict> = {
       { value: '6', label: 'stages' },
       { value: '412', label: 'attendances across the six stages' },
       { value: '1,500+', label: 'video views, live included' },
-      { value: '6', label: 'media features' },
+      { value: '8', label: 'media features' },
     ],
     y2026Replay: 'Watch 2026',
     timelineHeading: 'The 2026 stages',
@@ -345,13 +347,15 @@ export const bilan: Record<Lang, BilanDict> = {
     ],
 
     mediaLabel: '04 // In the media',
-    mediaTitleHtml: 'Six media outlets <span class="text-accent">covered the event</span>',
+    mediaTitleHtml: 'The event, <span class="text-accent">covered eight times</span>',
     media: {
       antenne: 'TV report · 21 October',
-      la1ere: '7pm news studio guest · 21 October',
+      la1ere: '7pm news guest · 21 October',
       quotidien: 'Front page · 23 October',
       imaz: 'Article · 19 October',
       clicanoo: 'Article · 12 October',
+      temoignages: 'Advertorial · 2 November',
+      region: 'Région Facebook video',
       podcast: 'Podcast · recorded on site',
     },
 

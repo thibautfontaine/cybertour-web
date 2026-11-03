@@ -159,7 +159,7 @@ const fr: HomeDict = {
   heroStats: [
     { count: 412, suffix: '', label: 'présences en salle' },
     { count: 1500, suffix: '+', label: 'vues de la vidéo' },
-    { count: 6, suffix: '', label: 'retombées médias' },
+    { count: 8, suffix: '', label: 'retombées médias' },
   ],
   scroll: 'Scroll',
 
@@ -373,7 +373,7 @@ const en: HomeDict = {
   heroStats: [
     { count: 412, suffix: '', label: 'on-site attendances' },
     { count: 1500, suffix: '+', label: 'video views' },
-    { count: 6, suffix: '', label: 'media features' },
+    { count: 8, suffix: '', label: 'media features' },
   ],
   scroll: 'Scroll',
 
