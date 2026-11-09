@@ -48,6 +48,9 @@ export interface BilanDict {
   heroCtaJoin: string;
   /** Lien vers le bilan A4 (PDF en français, dans les deux langues). */
   heroPdf: string;
+  /** Liens vers le bilan en slides et les chiffres seuls (PDF en français, ouverts dans le lecteur du navigateur). */
+  heroSlides: string;
+  heroStatsPdf: string;
 
   progressLabel: string;
   progressTitleHtml: string;
@@ -111,6 +114,8 @@ export const bilan: Record<Lang, BilanDict> = {
     heroCtaReplay: 'Revoir les conférences 2026',
     heroCtaJoin: "Rejoindre l'édition 2027",
     heroPdf: 'Télécharger le bilan Cyber Tour 2026 (PDF, 1 page)',
+    heroSlides: 'Lire le bilan en slides (PDF, 12 pages)',
+    heroStatsPdf: 'Voir les chiffres clés (PDF, 1 page)',
 
     progressLabel: '03 // De 2025 à 2026',
     progressTitleHtml: 'Une première édition,<br/><span class="text-accent">puis toute l\'île</span>',
@@ -265,6 +270,8 @@ export const bilan: Record<Lang, BilanDict> = {
     heroCtaReplay: 'Watch the 2026 talks',
     heroCtaJoin: 'Join the 2027 edition',
     heroPdf: 'Download the Cyber Tour 2026 review (PDF, 1 page, in French)',
+    heroSlides: 'Read the review as slides (PDF, 12 pages, in French)',
+    heroStatsPdf: 'See the key figures (PDF, 1 page, in French)',
 
     progressLabel: '03 // From 2025 to 2026',
     progressTitleHtml: 'A first edition,<br/><span class="text-accent">then the whole island</span>',

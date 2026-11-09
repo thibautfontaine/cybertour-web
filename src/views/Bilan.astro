@@ -14,7 +14,7 @@ import Footer from '../components/Footer.astro';
 import { getLang, localizePath } from '../i18n';
 import { bilan } from '../i18n/bilan';
 import { getStages } from '../data/stages';
-import { BILAN_PDF, REPLAY_2025_URL, REPLAY_2026_URL, presencesByDay, media, wall } from '../data/bilan';
+import { BILAN_PDF, SLIDES_PDF, STATS_PDF, REPLAY_2025_URL, REPLAY_2026_URL, presencesByDay, media, wall } from '../data/bilan';
 
 const lang = getLang(Astro.currentLocale);
 const t = bilan[lang];
@@ -94,6 +94,14 @@ const doorIcons: Record<string, string> = {
       <a href={BILAN_PDF} download class="reveal delay-3 mt-6 inline-flex items-center gap-2 font-mono text-sm text-ink/70 hover:text-accent transition-colors">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
         {t.heroPdf}
+      </a>
+      <a href={SLIDES_PDF} target="_blank" rel="noopener" class="reveal delay-3 mt-3 flex w-fit items-center gap-2 font-mono text-sm text-ink/70 hover:text-accent transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+        {t.heroSlides}
+      </a>
+      <a href={STATS_PDF} target="_blank" rel="noopener" class="reveal delay-3 mt-3 flex w-fit items-center gap-2 font-mono text-sm text-ink/70 hover:text-accent transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+        {t.heroStatsPdf}
       </a>
     </div>
   </section>
