@@ -16,6 +16,9 @@ export const REPLAY_2026_URL = 'https://www.youtube.com/watch?v=fnjLhNorXSk';
 /** Bilan A4 paysage de l'édition, export du one-pager (en français seulement). */
 export const BILAN_PDF = '/assets/bilan/bilan-cybertour-2026.pdf';
 
+/** Retex en 10 slides, export du deck « Bilan CYBER TOUR - La Réunion 2026 » (en français seulement). */
+export const RETEX_PDF = '/assets/bilan/retex-cybertour-2026.pdf';
+
 /**
  * Présences comptées par journée, 412 au total. Une personne venue
  * deux jours compte deux fois : ne pas les présenter comme des personnes
