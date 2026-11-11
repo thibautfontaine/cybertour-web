@@ -114,7 +114,7 @@ export const bilan: Record<Lang, BilanDict> = {
     heroCtaReplay: 'Revoir les conférences 2026',
     heroCtaJoin: "Rejoindre l'édition 2027",
     heroPdf: 'Télécharger le bilan Cyber Tour 2026 (PDF, 1 page)',
-    heroSlides: 'Lire le bilan en slides (PDF, 12 pages)',
+    heroSlides: 'Lire le bilan en slides (PDF, 15 pages)',
     heroStatsPdf: 'Voir les chiffres clés (PDF, 1 page)',
 
     progressLabel: '03 // De 2025 à 2026',
@@ -270,7 +270,7 @@ export const bilan: Record<Lang, BilanDict> = {
     heroCtaReplay: 'Watch the 2026 talks',
     heroCtaJoin: 'Join the 2027 edition',
     heroPdf: 'Download the Cyber Tour 2026 review (PDF, 1 page, in French)',
-    heroSlides: 'Read the review as slides (PDF, 12 pages, in French)',
+    heroSlides: 'Read the review as slides (PDF, 15 pages, in French)',
     heroStatsPdf: 'See the key figures (PDF, 1 page, in French)',
 
     progressLabel: '03 // From 2025 to 2026',
